@@ -1,0 +1,104 @@
+name: Grid Visualization Security Pipeline
+
+on:
+  pull_request:
+    paths:
+      - 'grids/**'
+      - 'src/core/metrics/**'
+      - 'src/presentation/dashboard/**'
+
+jobs:
+  grid-pii-scan:
+    name: Grid Data PII Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install presidio-analyzer presidio-anonymizer
+          npm ci
+      
+      - name: Deep PII Scan on Grid Data
+        run: |
+          python scripts/pii_scanner.py \
+            --input ./grids \
+            --threshold 0.85 \
+            --output scan-report.json
+      
+      - name: Check scan results
+        run: |
+          if [ $(jq '.pii_found' scan-report.json) = "true" ]; then
+            echo "::error::PII detected in grid data"
+            jq '.violations' scan-report.json
+            exit 1
+          fi
+      
+      - name: Upload scan report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pii-scan-report
+          path: scan-report.json
+
+  grid-visualization:
+    name: Generate Secure Grid Visualization
+    needs: grid-pii-scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Generate visualizations
+        run: |
+          node scripts/generate-visualization.js \
+            --input ./grids \
+            --output ./artifacts \
+            --sandbox strict \
+            --memory 512m \
+            --timeout 30s
+      
+      - name: Upload visualizations
+        uses: actions/upload-artifact@v4
+        with:
+          name: grid-visualizations
+          path: artifacts/
+          retention-days: 7
+      
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const artifacts = fs.readdirSync('./artifacts');
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## Grid Visualization Report
+              
+              ✅ **PII Scan Status:** PASSED
+              📊 **Visualizations Generated:** ${artifacts.length}
+              
+              ### Security Checks
+              - [x] No PII detected in grid data
+              - [x] Visualizations sandboxed
+              - [x] Memory limits enforced
+              
+              View artifacts in the Actions tab.`
+            })

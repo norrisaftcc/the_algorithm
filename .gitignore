@@ -1,0 +1,94 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production
+dist/
+build/
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+.stryker-tmp/
+reports/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+.DS_Store
+Thumbs.db
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+prisma/migrations/dev/
+
+# Cache
+.cache/
+.turbo/
+.parcel-cache/
+.next/
+.nuxt/
+.svelte-kit/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Security - CRITICAL: Never commit these
+*.key
+*.pem
+*.cert
+*.p12
+*.pfx
+credentials.json
+secrets.yaml
+.npmrc
+
+# PII Protection - Grid data
+grids/*.real.json
+grids/*_pii.json
+test-data/*_real.json
+
+# Build artifacts
+*.tsbuildinfo
+.npm/
+
+# Debug
+.vscode/launch.json
+.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Package managers
+yarn.lock
+package-lock.json
+pnpm-lock.yaml

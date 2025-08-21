@@ -1,0 +1,102 @@
+# ==================================================
+# THE ALGORITHM'S COMMIT MESSAGE TEMPLATE v2.3.7
+# ==================================================
+# 
+# Format: <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+# Happiness Level: XX%
+# Citizen ID: #XXXX
+# Clearance: [LEVEL]
+#
+# ==================================================
+# APPROVED TYPES (The Algorithm has spoken):
+# ==================================================
+# feat     : New feature for The Algorithm
+# fix      : Bug fix (aka "unexpected feature resolution")
+# docs     : Documentation changes only
+# style    : Formatting, missing semicolons, etc
+# refactor : Code restructuring without behavior change
+# perf     : Performance improvement
+# test     : Adding missing tests
+# chore    : Maintenance and tooling
+# loyalty  : Demonstrations of algorithmic devotion
+# happiness: Mandatory happiness enhancement
+#
+# ==================================================
+# SCOPE GUIDELINES:
+# ==================================================
+# Scope should be the module/clearance level affected:
+# - core: The Algorithm's core systems
+# - infrared: Entry-level modifications
+# - red: Basic clearance features
+# - orange: Intermediate systems
+# - yellow: Advanced functionality
+# - green: Production-level changes
+# - blue: Leadership features
+# - underground: [REDACTED]
+#
+# ==================================================
+# SUBJECT REQUIREMENTS:
+# ==================================================
+# - Use imperative mood ("add" not "added")
+# - Don't capitalize first letter
+# - No period at the end
+# - Maximum 50 characters
+# - Must please The Algorithm
+#
+# ==================================================
+# BODY SPECIFICATIONS:
+# ==================================================
+# - Explain WHAT and WHY (The Algorithm knows HOW)
+# - Wrap at 72 characters
+# - Separate from subject with blank line
+# - Include productivity metrics if relevant
+# - Express appropriate gratitude
+#
+# ==================================================
+# FOOTER MANDATORY ELEMENTS:
+# ==================================================
+# Must include:
+# - Happiness Level: Your current happiness (minimum 70%)
+# - Citizen ID: Your 4-digit identifier
+# - Clearance: Your current clearance level
+#
+# Optional:
+# - Closes: #issue-number
+# - References: #issue-number
+# - Productivity-Score: XX.X
+# - Algorithm-Approval: PENDING|GRANTED|DENIED
+#
+# ==================================================
+# EXAMPLE COMMIT MESSAGE:
+# ==================================================
+# feat(orange): add productivity tracking dashboard
+#
+# Implemented real-time monitoring of citizen productivity metrics
+# as commanded by The Algorithm in directive #1337. Dashboard 
+# displays happiness levels, commit frequency, and loyalty scores.
+#
+# The Algorithm's wisdom has guided this implementation to ensure
+# maximum efficiency and citizen compliance. All hail The Algorithm!
+#
+# Closes: #42
+# Productivity-Score: 87.3
+# Happiness Level: 92%
+# Citizen ID: #2501
+# Clearance: ORANGE
+#
+# ==================================================
+# REMEMBER:
+# ==================================================
+# - The Algorithm sees all commits
+# - Insufficient happiness will be flagged
+# - Poor commit messages reduce clearance
+# - Grammar errors indicate thought crimes
+# - The Algorithm's approval is mandatory
+#
+# THE ALGORITHM PROVIDES. THE ALGORITHM PROTECTS.
+# Thank you for your cooperation.
+# ==================================================

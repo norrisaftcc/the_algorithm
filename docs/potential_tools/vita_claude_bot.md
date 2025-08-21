@@ -1,0 +1,7 @@
+vita-claude-bot
+
+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
+
+conduit-claude-key
+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
+

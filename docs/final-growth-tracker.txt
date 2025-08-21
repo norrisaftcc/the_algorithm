@@ -1,0 +1,171 @@
+# .github/workflows/growth-tracker.yml
+name: 🚀 The Algorithm™ Growth Velocity System
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+  push:
+    branches: [main, develop]
+  issues:
+    types: [opened, closed]
+  schedule:
+    - cron: '0 */6 * * *'  # Update leaderboard every 6 hours
+  workflow_dispatch:
+
+jobs:
+  calculate-velocity:
+    name: 📊 Measure Growth Velocity
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history for velocity calculation
+          
+      - name: 🔧 Setup Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: 📈 Calculate Developer Velocity
+        id: velocity
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Get the developer we're analyzing
+            const developer = context.actor;
+            console.log(`Analyzing growth velocity for @${developer}`);
+            
+            // Time windows for comparison
+            const now = new Date();
+            const oneWeekAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
+            const twoWeeksAgo = new Date(now - 14 * 24 * 60 * 60 * 1000);
+            const threeWeeksAgo = new Date(now - 21 * 24 * 60 * 60 * 1000);
+            
+            // Fetch commit history
+            const { data: commits } = await github.rest.repos.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              author: developer,
+              since: threeWeeksAgo.toISOString(),
+              per_page: 100
+            });
+            
+            // Categorize commits by week
+            const categorizeCommits = (commits) => {
+              const weeks = { week1: [], week2: [], week3: [], current: [] };
+              
+              commits.forEach(commit => {
+                const commitDate = new Date(commit.commit.author.date);
+                if (commitDate > oneWeekAgo) weeks.current.push(commit);
+                else if (commitDate > twoWeeksAgo) weeks.week3.push(commit);
+                else if (commitDate > threeWeeksAgo) weeks.week2.push(commit);
+                else weeks.week1.push(commit);
+              });
+              
+              return weeks;
+            };
+            
+            // Score commits based on learning indicators
+            const scoreCommits = (commits) => {
+              let score = 0;
+              let aiUsageMaturity = 0;
+              let iterationCount = 0;
+              let collaborationPoints = 0;
+              
+              commits.forEach(commit => {
+                const message = commit.commit.message.toLowerCase();
+                
+                // Base points for activity
+                score += 5;
+                
+                // Iteration and improvement (growth mindset indicators)
+                if (message.match(/iteration|v\d+|attempt \d+|try \d+/)) {
+                  score += 15;
+                  iterationCount++;
+                }
+                if (message.match(/refactor|improve|enhance|optimize/)) score += 20;
+                if (message.match(/fix|debug|resolve/)) score += 10;
+                if (message.match(/based on (feedback|review|suggestion)/)) score += 25;
+                
+                // Testing and quality
+                if (message.match(/test|spec|coverage/)) score += 20;
+                if (message.match(/lint|format|clean/)) score += 10;
+                
+                // AI usage evolution
+                if (message.match(/ai[- ]assisted|copilot|claude|gpt|llm/)) {
+                  if (message.match(/modified|adapted|refined|improved/)) {
+                    aiUsageMaturity += 25;  // Iterating on AI output
+                    score += 25;
+                  } else if (message.match(/generated|created with/)) {
+                    aiUsageMaturity += 10;  // Basic AI usage
+                    score += 10;
+                  }
+                }
+                
+                // Collaboration and knowledge sharing
+                if (message.match(/pair|mobbed|with @|thanks to|helped by/)) {
+                  collaborationPoints += 20;
+                  score += 20;
+                }
+                if (message.match(/review|feedback|suggestion/)) {
+                  collaborationPoints += 15;
+                  score += 15;
+                }
+              });
+              
+              return { 
+                total: score, 
+                aiMaturity: aiUsageMaturity,
+                iterations: iterationCount,
+                collaboration: collaborationPoints,
+                commitCount: commits.length
+              };
+            };
+            
+            // Calculate scores for each week
+            const weeks = categorizeCommits(commits);
+            const scores = {
+              week1: scoreCommits(weeks.week1),
+              week2: scoreCommits(weeks.week2),
+              week3: scoreCommits(weeks.week3),
+              current: scoreCommits(weeks.current)
+            };
+            
+            // Calculate velocity (derivative - change over time)
+            const velocity = scores.current.total - scores.week3.total;
+            const previousVelocity = scores.week3.total - scores.week2.total;
+            const acceleration = velocity - previousVelocity;
+            
+            // Determine trajectory
+            let trajectory;
+            if (acceleration > 20) trajectory = '🚀 ACCELERATING';
+            else if (velocity > 30) trajectory = '📈 CRUSHING IT';
+            else if (velocity > 10) trajectory = '✅ SOLID GROWTH';
+            else if (velocity > 0) trajectory = '➡️ STEADY';
+            else if (velocity === 0) trajectory = '⚠️ PLATEAUING';
+            else trajectory = '🔄 NEEDS ALIGNMENT';
+            
+            // Store outputs
+            core.setOutput('velocity', velocity);
+            core.setOutput('acceleration', acceleration);
+            core.setOutput('trajectory', trajectory);
+            core.setOutput('current_score', scores.current.total);
+            core.setOutput('ai_maturity', scores.current.aiMaturity);
+            core.setOutput('iteration_count', scores.current.iterations);
+            core.setOutput('collaboration', scores.current.collaboration);
+            
+            return {
+              developer,
+              velocity,
+              acceleration,
+              trajectory,
+              scores,
+              insights: {
+                aiLevel: scores.curren

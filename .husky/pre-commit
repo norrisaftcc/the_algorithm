@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged for formatting and linting
+npx lint-staged
+
+# Run type checking
+npm run typecheck
+
+# Run PII scan on staged files
+python3 scripts/pii_scanner.py --staged-only --quiet || {
+  echo "❌ PII detected in staged files. Commit blocked."
+  echo "Run 'npm run sanitize' to clean your data"
+  exit 1
+}
+
+echo "✅ Pre-commit checks passed"

@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// Future production configuration:
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+enum ClearanceLevel {
+  RED
+  ORANGE
+  YELLOW
+  GREEN
+  BLUE
+  INDIGO
+  VIOLET
+}
+
+enum EventType {
+  COMMIT_TRACKED
+  PR_CREATED
+  PR_MERGED
+  ISSUE_RESOLVED
+  TEST_PASSED
+  BUILD_SUCCEEDED
+  ACHIEVEMENT_UNLOCKED
+  LEVEL_UP
+}
+
+model Student {
+  id               String           @id @default(cuid())
+  githubUsername   String           @unique
+  hashedIdentifier String           @unique
+  clearanceLevel   ClearanceLevel   @default(RED)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  consentGiven     Boolean          @default(false)
+  
+  metrics          Metric[]
+  events           LearningEvent[]
+  achievements     Achievement[]
+  velocityHistory  VelocitySnapshot[]
+  
+  @@index([clearanceLevel])
+  @@index([createdAt])
+}
+
+model LearningEvent {
+  id          String    @id @default(cuid())
+  studentId   String
+  student     Student   @relation(fields: [studentId], references: [id], onDelete: CASCADE)
+  eventType   EventType
+  payload     Json
+  metadata    Json?
+  timestamp   DateTime  @default(now())
+  
+  @@index([studentId, timestamp])
+  @@index([eventType])
+}
+
+model Metric {
+  id                String   @id @default(cuid())
+  studentId         String
+  student           Student  @relation(fields: [studentId], references: [id], onDelete: CASCADE)
+  
+  commitsToday      Int      @default(0)
+  commitsThisWeek   Int      @default(0)
+  commitsThisMonth  Int      @default(0)
+  
+  pullRequestsOpen  Int      @default(0)
+  pullRequestsMerged Int     @default(0)
+  
+  issuesCreated     Int      @default(0)
+  issuesResolved    Int      @default(0)
+  
+  testsWritten      Int      @default(0)
+  testsPassed       Int      @default(0)
+  
+  codeReviewsGiven  Int      @default(0)
+  codeReviewsReceived Int    @default(0)
+  
+  velocityScore     Float    @default(0)
+  consistencyScore  Float    @default(0)
+  qualityScore      Float    @default(0)
+  
+  lastActive        DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@unique([studentId])
+  @@index([velocityScore])
+}
+
+model VelocitySnapshot {
+  id          String   @id @default(cuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: CASCADE)
+  
+  velocity    Float
+  timestamp   DateTime @default(now())
+  weekNumber  Int
+  yearNumber  Int
+  
+  @@index([studentId, timestamp])
+  @@index([weekNumber, yearNumber])
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: CASCADE)
+  
+  name        String
+  description String
+  iconEmoji   String
+  unlockedAt  DateTime @default(now())
+  metadata    Json?
+  
+  @@unique([studentId, name])
+  @@index([unlockedAt])
+}
+
+model GridVisualization {
+  id            String   @id @default(cuid())
+  checksum      String   @unique
+  
+  gridData      Json
+  visualization Bytes?
+  
+  piiScanResult Json
+  scanTimestamp DateTime
+  isSafe        Boolean
+  
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime
+  
+  @@index([checksum])
+  @@index([isSafe])
+  @@index([expiresAt])
+}

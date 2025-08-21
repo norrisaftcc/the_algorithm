@@ -1,0 +1,221 @@
+# .github/workflows/growth-tracker.yml
+name: 📈 Growth Velocity Tracker
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  measure-growth:
+    name: Calculate Growth Metrics
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history for growth calculation
+          
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Calculate Developer Growth
+        id: growth
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            
+            // Get author of current PR/push
+            const author = context.actor;
+            
+            // Analyze commit history for growth patterns
+            const threeWeeksAgo = new Date();
+            threeWeeksAgo.setDate(threeWeeksAgo.getDate() - 21);
+            
+            // Get commit data
+            const commits = await github.rest.repos.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              author: author,
+              since: threeWeeksAgo.toISOString(),
+              per_page: 100
+            });
+            
+            // Group by week
+            const weeks = {
+              week1: [],
+              week2: [],
+              week3: [],
+              current: []
+            };
+            
+            const now = Date.now();
+            commits.data.forEach(commit => {
+              const age = (now - new Date(commit.commit.author.date)) / (1000 * 60 * 60 * 24);
+              if (age < 7) weeks.current.push(commit);
+              else if (age < 14) weeks.week3.push(commit);
+              else if (age < 21) weeks.week2.push(commit);
+              else weeks.week1.push(commit);
+            });
+            
+            // Calculate complexity scores
+            const calculateScore = (commits) => {
+              let score = 0;
+              
+              commits.forEach(commit => {
+                const message = commit.commit.message.toLowerCase();
+                
+                // Basic commits
+                score += 5;
+                
+                // Iteration indicators (growth mindset)
+                if (message.match(/v\d|iteration|attempt|try/)) score += 10;
+                if (message.match(/fix|refactor|improve/)) score += 15;
+                if (message.match(/test|spec/)) score += 20;
+                if (message.match(/based on feedback|per review/)) score += 25;
+                
+                // Collaboration indicators
+                if (message.match(/pair|with @|thanks/)) score += 20;
+                
+                // AI usage maturity
+                if (message.match(/prompt|ai-assisted|copilot|claude|gpt/)) {
+                  if (message.match(/modified|adapted|refined/)) score += 25;
+                  else score += 10;
+                }
+              });
+              
+              return score;
+            };
+            
+            const scores = {
+              week1: calculateScore(weeks.week1),
+              week2: calculateScore(weeks.week2),
+              week3: calculateScore(weeks.week3),
+              current: calculateScore(weeks.current)
+            };
+            
+            // Calculate the derivative (weekly growth)
+            const growth = {
+              velocity: scores.current - scores.week3,
+              acceleration: (scores.current - scores.week3) - (scores.week3 - scores.week2),
+              total: scores.current,
+              trend: 'steady'
+            };
+            
+            // Determine trend
+            if (growth.acceleration > 10) growth.trend = 'accelerating';
+            else if (growth.velocity > 20) growth.trend = 'improving';
+            else if (growth.velocity > 0) growth.trend = 'steady';
+            else if (growth.velocity === 0) growth.trend = 'plateauing';
+            else growth.trend = 'declining';
+            
+            // Set outputs for other steps
+            core.setOutput('velocity', growth.velocity);
+            core.setOutput('trend', growth.trend);
+            core.setOutput('score', scores.current);
+            
+            return growth;
+            
+      - name: Post Growth Feedback
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const velocity = ${{ steps.growth.outputs.velocity }};
+            const trend = '${{ steps.growth.outputs.trend }}';
+            const score = ${{ steps.growth.outputs.score }};
+            
+            // Emoji map for trends
+            const trendEmoji = {
+              'accelerating': '🚀',
+              'improving': '📈',
+              'steady': '➡️',
+              'plateauing': '⚠️',
+              'declining': '📉'
+            };
+            
+            // Generate feedback based on velocity
+            let feedback = `## ${trendEmoji[trend]} Growth Metrics Report\n\n`;
+            
+            if (velocity > 50) {
+              feedback += `**Outstanding momentum!** Your growth velocity of **+${velocity} pts/week** is exceptional.\n\n`;
+              feedback += `The Algorithm notes you're in the top tier of continuous learners. Keep shipping! 🎉\n\n`;
+              feedback += `### Next Level Unlocked:\n`;
+              feedback += `- Consider mentoring others\n`;
+              feedback += `- Try more complex refactoring patterns\n`;
+              feedback += `- Share your learning strategies with the team\n`;
+            } else if (velocity > 20) {
+              feedback += `**Solid progress!** Growth velocity: **+${velocity} pts/week**\n\n`;
+              feedback += `You're consistently improving and that's what matters. The Algorithm is pleased. 💪\n\n`;
+              feedback += `### Suggested Challenges:\n`;
+              feedback += `- Add tests to your next PR\n`;
+              feedback += `- Try refactoring for readability\n`;
+              feedback += `- Review a teammate's code\n`;
+            } else if (velocity > 0) {
+              feedback += `**You're growing!** Velocity: **+${velocity} pts/week**\n\n`;
+              feedback += `Every iteration counts. Let's accelerate that momentum! 📊\n\n`;
+              feedback += `### Growth Accelerators:\n`;
+              feedback += `- Break PRs into smaller chunks\n`;
+              feedback += `- Ask for early feedback\n`;
+              feedback += `- Pair program this week\n`;
+            } else {
+              feedback += `**Time to shake things up!** Current velocity: **${velocity} pts/week**\n\n`;
+              feedback += `Plateaus are just launch pads in disguise. Let's find your next growth spike! 🔄\n\n`;
+              feedback += `### Recommended Actions:\n`;
+              feedback += `- Try a new approach to current problem\n`;
+              feedback += `- Schedule pairing session with senior dev\n`;
+              feedback += `- Explore a new tool or pattern\n`;
+              feedback += `- Remember: The Algorithm values attempts over perfection\n`;
+            }
+            
+            feedback += `\n---\n`;
+            feedback += `*Your current score: ${score} | Trajectory: ${trend}*\n`;
+            feedback += `*The Algorithm measures growth, not position. Keep iterating!* 🚢`;
+            
+            // Post comment on PR
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: feedback
+            });
+            
+      - name: Update Leaderboard
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Update the public metrics dashboard
+          echo "📊 Updating leaderboard with new scores..."
+          
+          VELOCITY="${{ steps.growth.outputs.velocity }}"
+          TREND="${{ steps.growth.outputs.trend }}"
+          ACTOR="${{ github.actor }}"
+          
+          # This would update a JSON file or database
+          # For now, just log it
+          echo "Developer: $ACTOR"
+          echo "Growth Velocity: +$VELOCITY pts/week"  
+          echo "Trend: $TREND"
+          
+      - name: Celebrate Milestones
+        if: steps.growth.outputs.velocity > 100
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Create an issue to celebrate exceptional growth
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🎉 @${context.actor} achieved exceptional growth velocity!`,
+              body: `## Congratulations!\n\n@${context.actor} has achieved a growth velocity of **+${{ steps.growth.outputs.velocity }} points/week**!\n\nThis exceptional momentum deserves recognition. The Algorithm is impressed! 🚀\n\nKeep shipping, keep learning, keep growing!`,
+              labels: ['achievement', 'celebration']
+            });
