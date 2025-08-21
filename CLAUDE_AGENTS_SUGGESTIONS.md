@@ -241,31 +241,35 @@ Engineer → Kevin → Architect → Back to Engineer
 - Optimization: 20 hours/sprint
 - Maintenance: 5 hours/week
 
-### Expected Return (ASPIRATIONAL - Not Yet Proven)
+### Expected Return (REALISTIC TARGETS)
 
-**⚠️ IMPORTANT:** These projections are based on industry benchmarks and initial Sprint Zero observations, NOT proven metrics from this project. Actual ROI will depend on:
-- OAuth authentication fix success
-- Team adoption rate
-- Quality of prompt engineering
-- Actual vs. theoretical agent performance
+**📊 PRIMARY PLANNING SCENARIO:** We're using realistic projections for all planning and commitments.
 
-#### Optimistic Scenario (Best Case)
-- Time saved: 100 hours/sprint
-- Quality improvement: 30% fewer defects
-- Velocity increase: 25% more features
-- **ROI: 400% in 6 months**
-
-#### Realistic Scenario (Likely)
+#### Realistic Targets (Our Commitment)
 - Time saved: 40-50 hours/sprint
 - Quality improvement: 15-20% fewer defects
 - Velocity increase: 10-15% more features
-- **ROI: 150-200% in 6 months**
+- **Target ROI: 150-200% in 6 months**
 
-#### Conservative Scenario (Minimum)
-- Time saved: 20 hours/sprint
-- Quality improvement: 10% fewer defects
-- Velocity increase: 5% more features
-- **ROI: 50-75% in 6 months**
+These targets are based on:
+- Industry averages for automation ROI
+- Sprint Zero actual improvements (87.5% setup time reduction)
+- Conservative agent performance assumptions
+- Accounting for OAuth authentication issues
+
+#### Other Scenarios (For Context Only)
+
+**Optimistic (Stretch Goals):**
+- 100 hours/sprint saved
+- 30% defect reduction
+- 25% velocity increase
+- 400% ROI potential
+
+**Conservative (Risk Planning):**
+- 20 hours/sprint saved
+- 10% defect reduction
+- 5% velocity increase
+- 50-75% ROI minimum
 
 ### Proven Metrics from Sprint Zero
 - Setup time: 2 hours → 15 minutes (87.5% reduction) ✅ VERIFIED

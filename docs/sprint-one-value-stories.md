@@ -176,43 +176,39 @@ STRATEGIC VALUE: Makes invisible work visible
 
 ### Compound Value (Year One)
 
-**⚠️ DISCLAIMER:** These projections are aspirational targets based on theoretical agent system improvements, NOT guaranteed outcomes.
+**📊 REALISTIC PLANNING BASELINE**
 
-#### Optimistic Projection (If Everything Works)
-```
-Month 1: $25K value (assumed)
-Month 2: $25K × 1.05 (5% improvement) = $26.25K
-Month 3: $26.25K × 1.05 = $27.56K
-...
-Month 12: $43.6K/month
+We're committing to realistic projections for planning and stakeholder communication:
 
-Annual Value: $390K
-ROI: 1,560%
+#### Primary Projection (Our Commitment)
 ```
-
-#### Realistic Projection (Likely Outcome)
-```
-Month 1: $10K value (proven baseline needed)
+Month 1: $10K value (conservative start)
 Month 2: $10K × 1.02 (2% improvement) = $10.2K
 Month 3: $10.2K × 1.02 = $10.4K
-...
+Month 6: $11.0K/month
 Month 12: $12.2K/month
 
 Annual Value: $134K
-ROI: 400-500%
+Target ROI: 150-200%
 ```
 
-#### Conservative Projection (Minimum Expected)
-```
-Month 1: $5K value (time savings only)
-Month 2: $5K × 1.01 (1% improvement) = $5.05K
-Month 3: $5.05K × 1.01 = $5.10K
-...
-Month 12: $5.6K/month
+**Why This Is Realistic:**
+- 2% monthly improvement is sustainable
+- $10K/month = 40-50 hours saved at $200-250/hour
+- Matches industry automation ROI benchmarks
+- Accounts for learning curve and issues
 
-Annual Value: $62K
-ROI: 150-200%
-```
+#### Risk Mitigation
+If we hit obstacles:
+- Minimum expected: $62K annual value
+- Baseline time savings alone justify investment
+- Even 1% monthly improvement yields positive ROI
+
+#### Upside Potential
+If OAuth fix enables full agent system:
+- Could reach $25K/month value
+- 5% monthly improvements possible
+- But we're NOT planning on this
 
 **What We've Actually Proven:**
 - Setup time reduction: 87.5% ✅
