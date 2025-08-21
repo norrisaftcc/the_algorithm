@@ -175,8 +175,12 @@ STRATEGIC VALUE: Makes invisible work visible
 | **TOTAL** | **50 hours** | **+95% overall** | **$25,000** |
 
 ### Compound Value (Year One)
+
+**⚠️ DISCLAIMER:** These projections are aspirational targets based on theoretical agent system improvements, NOT guaranteed outcomes.
+
+#### Optimistic Projection (If Everything Works)
 ```
-Month 1: $25K value
+Month 1: $25K value (assumed)
 Month 2: $25K × 1.05 (5% improvement) = $26.25K
 Month 3: $26.25K × 1.05 = $27.56K
 ...
@@ -185,6 +189,41 @@ Month 12: $43.6K/month
 Annual Value: $390K
 ROI: 1,560%
 ```
+
+#### Realistic Projection (Likely Outcome)
+```
+Month 1: $10K value (proven baseline needed)
+Month 2: $10K × 1.02 (2% improvement) = $10.2K
+Month 3: $10.2K × 1.02 = $10.4K
+...
+Month 12: $12.2K/month
+
+Annual Value: $134K
+ROI: 400-500%
+```
+
+#### Conservative Projection (Minimum Expected)
+```
+Month 1: $5K value (time savings only)
+Month 2: $5K × 1.01 (1% improvement) = $5.05K
+Month 3: $5.05K × 1.01 = $5.10K
+...
+Month 12: $5.6K/month
+
+Annual Value: $62K
+ROI: 150-200%
+```
+
+**What We've Actually Proven:**
+- Setup time reduction: 87.5% ✅
+- Documentation time: 80% reduction ✅
+- Agent system value: TBD (OAuth blocking)
+
+**What We Need to Measure:**
+- Actual velocity improvement
+- Real defect reduction
+- Measurable time savings
+- True learning curve impact
 
 ## Value Validation Criteria
 
