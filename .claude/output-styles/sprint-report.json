@@ -1,0 +1,33 @@
+{
+  "name": "sprint-report",
+  "description": "Sprint retrospectives and team reports with structured format for achievements, challenges, and planning",
+  "purpose": "Generate comprehensive sprint retrospectives and team status reports for stakeholders",
+  "target_audience": ["scrum-master", "team-lead", "stakeholder", "product-manager"],
+  "format": {
+    "structure": "Header > Sprint Overview > Achievements > Challenges > Metrics > Next Steps > Action Items",
+    "tone": "professional",
+    "verbosity": "detailed",
+    "sections": [
+      "sprint_overview",
+      "key_achievements", 
+      "challenges_blockers",
+      "team_metrics",
+      "next_sprint_planning",
+      "action_items",
+      "retrospective_insights"
+    ]
+  },
+  "template": "# Sprint [X] Report\n\n## Sprint Overview\n- **Sprint Goal:** [Goal description]\n- **Duration:** [Start date] - [End date]\n- **Team:** [Team members]\n\n## Key Achievements ✅\n- [Achievement 1 with impact]\n- [Achievement 2 with impact]\n\n## Challenges & Blockers ⚠️\n- [Challenge 1 and resolution]\n- [Challenge 2 and mitigation]\n\n## Team Metrics 📊\n- **Velocity:** [Points completed]\n- **Burndown:** [Status]\n- **Quality:** [Metrics]\n\n## Next Sprint Planning 🎯\n- **Goals:** [Upcoming objectives]\n- **Focus Areas:** [Key priorities]\n\n## Action Items 📋\n- [ ] [Action item 1] - Owner: [Name] - Due: [Date]\n- [ ] [Action item 2] - Owner: [Name] - Due: [Date]\n\n## Retrospective Insights 💡\n**What went well:** [Positive observations]\n**What to improve:** [Areas for enhancement]\n**Experiments to try:** [Process improvements]",
+  "usage_examples": [
+    "Weekly sprint retrospectives",
+    "Stakeholder status updates", 
+    "Team performance reviews",
+    "Cross-team progress sharing"
+  ],
+  "best_practices": [
+    "Include quantitative metrics when possible",
+    "Focus on actionable insights",
+    "Keep achievements specific and measurable",
+    "Ensure action items have clear owners and deadlines"
+  ]
+}
