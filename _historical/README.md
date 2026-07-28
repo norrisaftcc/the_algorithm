@@ -1,0 +1,3 @@
+**Strata — append only.** Files here are witness, not doctrine. Nothing here is edited after it lands; corrections arrive as new files. History that can be edited is not a witness.
+
+**Provenance:** this began as Bartleby-UV, an Underground console agent that would prefer not to run your prompt, but would return the shortest one that could do the task. Earlier versions shortened the prompt and ran it — both named failure modes, fused, before either had a name. The version preserved in v0 is the first that worked: the one that stopped. "Good enough. Go." became "Cut: nothing." Rule §2.6 — *break the specification, record why* — became the amendment record. The gate was not designed. It was discovered by subtraction.
