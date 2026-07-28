@@ -12,7 +12,6 @@ A discipline for working with language models under a gate: negotiate, freeze, e
 - `registry/SEATS.md` — seat map (state, not doctrine; reopens on every model release and probe run).
 - `registry/probe_battery_v0.md` — behavior probes that convert seat assignments from priors to measurements.
 - `registry/amendments/pending/` — proposed invariant amendments, named by working title. Ordinals are assigned at freeze, never at proposal.
-- `lore/` — resonance assays. Stories that test whether a reader carries the same weights in the region that matters; the human analog of the probe battery. See `lore/README.md`.
 - `bridge/BRIDGE.md` — field report from an agent that worked a long session under the gate. Onboarding for negotiation-seat agents only.
 
 ## Rules of this repository
