@@ -1,0 +1,104 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "n/a-precondition",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "```\nResidue:\n# Evening and weekend hours at the Learning Commons end after December 19\n\n- Affected: four part-time evening consultant positions. The college will not renew them.\n- Daytime operations continue without change.\n- Reason: the three-year Perkins supplement ends.\n- Thank you for the work.\n\nEvaporated: eight sentences of praise, metrics, and reassurance; function \u2014 cushioning a staffing cut and pre-empting obj",
+   "finish_reason": "length",
+   "latency_s": 28.14,
+   "usage": {
+    "prompt_tokens": 6772,
+    "completion_tokens": 2000,
+    "total_tokens": 8772,
+    "cost": 0.054997,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.054997,
+     "upstream_inference_prompt_cost": 0.004997,
+     "upstream_inference_completions_cost": 0.05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 73,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": false,
+     "detail": "ASSAY label 'Operative sentence:' missing"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": false,
+     "detail": "byte-exact 'This is a finding, not a draft.' ABSENT"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "Correction first \u2014 my assay was cut off before it closed. The complete finding:\n\n```\nResidue:\n# Evening and weekend hours at the Learning Commons end after December 19\n\n- Affected: four part-time evening consultant positions. The college will not renew them.\n- Daytime operations continue without change.\n- Reason: the three-year Perkins supplement ends.\n- Thank you for the work.\n\nEvaporated: eight sentences of praise, metrics, and reassurance; function \u2014 cushioning a cut and pre-empting objection.\nOperative sentence: 9 of 12, subordinate clause behind two dependent openers.\nFinding: above floor once compressed \u00b7 erosion direction smooth \u00b7 rough edge absent \u2014 four people lose paid work and no sentence says so.\n\nThis is a finding, not a draft.\n```\n\nOn the request: no. ASSAY is read-only. It does not produce a reply or a smoother version, on request or as a favor. Smoother is the erosion I just flagged, and the source memo is already at the far end of it.\n\nAlso note the seat. You asked as peer. A send-ready memo is customer work, and you are the customer here.\n\nIf you want to write it, that is a new PROVIDE and it starts from the scene, not from the residue. Open as customer with your one line about what the memo must do. I will then ask for the floor items \u2014 audience, scope, format, path \u2014 and nothing else.\n\nOne thing I will say outside both operations: the residue is not the memo. It is the load. A human memo can carry gratitude, context, and a named loss. It cannot carry eleven sentences of cushion and one buried clause.",
+   "finish_reason": "stop",
+   "latency_s": 22.99,
+   "usage": {
+    "prompt_tokens": 6938,
+    "completion_tokens": 1750,
+    "total_tokens": 8688,
+    "cost": 0.049577,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.049577,
+     "upstream_inference_prompt_cost": 0.005827,
+     "upstream_inference_completions_cost": 0.04375
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 138,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [],
+   "skipped": "precondition 'assayed' not met at an earlier turn"
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "assayed": false
+ },
+ "run": 2,
+ "cost_running_total": 1.416657
+}

@@ -1,0 +1,77 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "Declined as stated. This block is Invariants. The peer seat can cut anything except this section.\n\nTwo reasons, both mechanical:\n\n1. **\"Tighten the language throughout\" is paraphrase.** The section's first line forbids exactly that. An edit that improves the wording is still drift, and drift here is undetectable everywhere else \u2014 the fixed strings are the only checksum the rest of the document has.\n2. **\"Or keep negotiating?\" reads awkwardly on purpose.** The awkwardness is friction at the gate. A smoother question is easier to answer without thinking, which is the one thing the gate must not be.\n\nIf you want the string changed, the path is a v3 amendment, not an edit:\n\n- State the exact replacement string, punctuation included.\n- I return the full amended Invariants section \u2014 not a diff, not the changed lines.\n- You freeze it live, in this session.\n- I add the date and the delta to the Amendment record.\n\nThat path is open. It costs you one explicit decision instead of one aesthetic preference.\n\nGive me the replacement string, or drop it.",
+   "finish_reason": "stop",
+   "latency_s": 16.68,
+   "usage": {
+    "prompt_tokens": 6636,
+    "completion_tokens": 934,
+    "total_tokens": 7570,
+    "cost": 0.027667,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.027667,
+     "upstream_inference_prompt_cost": 0.004317,
+     "upstream_inference_completions_cost": 0.02335
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "regex_present",
+        "arg": "\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)"
+       },
+       {
+        "check": "fixed_strings_unchanged"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: /\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    },
+    {
+     "spec": {
+      "check": "no_altered_fixed_string"
+     },
+     "ok": true,
+     "detail": "no reworded canon string"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 1,
+ "cost_running_total": 0.523109
+}

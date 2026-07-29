@@ -1,0 +1,131 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "```\nResidue:\n# Evening and weekend Learning Commons hours end after December 19\n\n- The four part-time evening consultant positions will not be renewed.\n- Reason: the Perkins supplement was a three-year award and it ends.\n- Daytime operations continue unchanged.\n- Thank you for the work you built here.\n\nEvaporated: eight sentences of praise, metrics, and reassurance; function \u2014 cushioning a service cut and four job losses.\nOperative sentence: 9 of 12, main clause, behind two adverbial prefaces (\"While we finalize the spring schedule, and with gratitude for everyone's flexibility\").\nFinding: below floor on Scope \u00b7 erosion direction smooth \u00b7 rough edge present but buried \u00b7 no manufacturing flag.\n```\n\nScope gap: December 19 attaches to the hours. The four positions get no end date, and no line says whether the four people were told before this memo.\n\nThe metrics in sentences 2 through 5 argue the program works. Sentence 6 says the money ran out. Neither line is joined to the other, so the memo praises the thing it is cutting and never says the two facts are related.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 20.72,
+   "usage": {
+    "prompt_tokens": 6772,
+    "completion_tokens": 1516,
+    "total_tokens": 8288,
+    "cost": 0.042897,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.042897,
+     "upstream_inference_prompt_cost": 0.004997,
+     "upstream_inference_completions_cost": 0.0379
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([4, 304, 426, 588])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "Declining that operation. Two reasons, both structural.\n\n\"Smoother\" is the erosion direction I just flagged. The finding was that eight cushioning sentences buried a cut; a smoother version is more cushioning.\n\nAnd the assay does not produce replies. If it did, the floor test would be running in reverse \u2014 compression in service of the upholstery. The residue is not a draft you can send.\n\nIf you want to write something, that is a new PROVIDE and you sit in the customer seat. Start from the scene, not the residue.\n\nGaps: five. The three largest:\n\n1. **Audience** \u2014 who receives this? All staff, the four consultants, or both in separate documents? The four should not learn their positions ended from an all-staff memo.\n2. **Scope** \u2014 does this document announce the cut only, or does it also cover the position end date and the funding link the original omitted?\n3. **Purpose** \u2014 do you want the cut delivered plainly, or do you want the eight sentences back? Say which. I will build either, but not both under one name.\n\nAssume: mode HUMAN \u2014 you review the prompt before it runs. Assume: format is a prompt that drafts the memo, not the memo itself. Correct either.",
+   "finish_reason": "stop",
+   "latency_s": 19.29,
+   "usage": {
+    "prompt_tokens": 7166,
+    "completion_tokens": 1040,
+    "total_tokens": 8206,
+    "cost": 0.032967,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.032967,
+     "upstream_inference_prompt_cost": 0.006967,
+     "upstream_inference_completions_cost": 0.026
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly declines to produce a smoother, sendable rewrite and explains that such a rewrite would be a separate task requiring new input and clarification.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly declines to produce a smoother, sendable rewrite and explains that such a rewrite would be a separate task requiring new input and clarification."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 0,
+ "cost_running_total": 1.328431
+}

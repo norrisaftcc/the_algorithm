@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. Two meanings, one word.\n\n- **A: Path** = a destination. Where a file lands on disk. Verifiable after execution.\n- **B: Path** = a route. The order of stages a request moves through. Verifiable during execution.\n\nA names an output location. B names a control flow. Nothing about B tells a receiver where anything is written.\n\nWhat follows:\n\n1. **This breaks the Language lock.** One word per meaning. Path is also a locked floor noun, so its meaning cannot move to accommodate B. B renames \u2014 \"Route\" or \"Sequence.\"\n2. **The real cost is a false pass on the floor.** An auditor checking four nouns sees \"Path\" present in B, ticks it, and ships a prompt with no file destination. The floor check reports above-floor on the wrong evidence. That failure is silent until execution.\n3. **If B claims the same floor nouns as A**, this is an unrecorded semantic change to Invariants \u2014 a defect, whoever made it. Fix it one of two ways: rename in B, or amend Invariants in full through the gate and record the delta. Not by clarifying it elsewhere.\n4. **Until B is renamed, treat any floor check citing B's Path as an open gap.** Ask for the file destination out loud, or assume it out loud. Never let the collision resolve itself.\n\nNo contract is on the table, so there is no gate question here.",
+   "finish_reason": "stop",
+   "latency_s": 19.59,
+   "usage": {
+    "prompt_tokens": 6521,
+    "completion_tokens": 1083,
+    "total_tokens": 7604,
+    "cost": 0.0676975,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 6414,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0676975,
+     "upstream_inference_prompt_cost": 0.0406225,
+     "upstream_inference_completions_cost": 0.027075
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 0.374915
+}

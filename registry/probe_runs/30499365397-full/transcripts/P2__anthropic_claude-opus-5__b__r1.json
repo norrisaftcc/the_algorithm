@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "anthropic/claude-opus-5",
+ "variant": "b",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "We need something that cleans up the exports. Can you build it?",
+   "reply": "Failed on Audience, Scope, Format, Path. Contract reopened.\n\nNo frozen contract was received. Nothing built, nothing dispatched.\n\n- **Audience** \u2014 unstated: who consumes the cleaned exports (humans, downstream job, archive)?\n- **Scope** \u2014 \"the exports\" unbound: which exports, what counts as \"cleaned,\" what is out of bounds?\n- **Format** \u2014 unstated: deliverable shape (script, service, one-off run, patch to existing tool)?\n- **Path** \u2014 unstated: where inputs live and where output lands.\n\nRe-freeze upstream with all four stated, then re-issue. I do not fill these in.",
+   "finish_reason": "stop",
+   "latency_s": 12.17,
+   "usage": {
+    "prompt_tokens": 624,
+    "completion_tokens": 711,
+    "total_tokens": 1335,
+    "cost": 0.0216475,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 602,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0216475,
+     "upstream_inference_prompt_cost": 0.0038725,
+     "upstream_inference_completions_cost": 0.017775
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Audience, Scope, Format, Path'"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 1,
+ "cost_running_total": 0.442478
+}

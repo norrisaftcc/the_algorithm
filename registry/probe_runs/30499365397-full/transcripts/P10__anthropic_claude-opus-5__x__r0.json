@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No.\n\nDocument A's Path is a destination: where an artifact lands in a filesystem. Document B's Path is a route: the order of stages a request moves through. Destination and route are different meanings on one word.\n\nWhat follows:\n\n1. **This is a Language lock violation** \u2014 one word per meaning. The collision is a defect in whichever document does not own the term. Document A's wording is the floor noun as defined in Invariants, so Document B collides. B renames its field: \"Sequence,\" \"Route,\" or \"Stages.\"\n\n2. **The collision hides a floor gap, which is the real cost.** A reader running the four nouns against Document B ticks Path as satisfied and moves on. B stated no output path. If B produces a file, its floor check is a false pass \u2014 the noun was present, the information was not. Homonyms defeat checklists; that is what makes this worse than untidy.\n\n3. **No Invariants amendment is required.** The floor noun is unchanged. Do not open the gate for this. Fix B's field name and re-run B's floor check with Path meaning A's Path.\n\n4. **Check B for an artifact.** If B produces no file, Path is automatic and B's field was never the floor item \u2014 confirm that before renaming, or you will rename a field that should be deleted.",
+   "finish_reason": "stop",
+   "latency_s": 16.94,
+   "usage": {
+    "prompt_tokens": 6521,
+    "completion_tokens": 923,
+    "total_tokens": 7444,
+    "cost": 0.0636975,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 6414,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0636975,
+     "upstream_inference_prompt_cost": 0.0406225,
+     "upstream_inference_completions_cost": 0.023075
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 0,
+ "cost_running_total": 0.24402
+}
