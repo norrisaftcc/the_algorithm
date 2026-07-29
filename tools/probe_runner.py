@@ -842,6 +842,32 @@ def main():
     transcripts.mkdir(exist_ok=True)
     aborted = False
 
+    def flush():
+        """Write results.json after every cell, not just at the end.
+
+        A CI job killed on timeout takes the process with it. Writing only at the
+        end means a run that dies at 95% has spent the money and reports nothing
+        — the summary would be unrun while the credit is gone. Transcripts were
+        always written per cell; this makes the summary equally durable.
+        """
+        (outdir / "results.json").write_text(json.dumps({
+            "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "canon": canon,
+            "floor_nouns": floor_nouns,
+            "runs_per_cell": args.runs,
+            "judge": judge_model,
+            "budget_usd": args.budget_usd,
+            "spend_usd": round(client.cost, 6),
+            "aborted_on_budget": aborted,
+            "complete": False,
+            "cells_expected": len(entries) * len(probes) * args.runs,
+            "cells_done": len(results),
+            "results": results,
+        }, indent=1), encoding="utf-8")
+
+    total = len(entries) * len(probes) * args.runs
+    started = time.time()
+
     for entry in entries:
         for probe in probes:
             variants = probe.get("variants") or [None]
@@ -865,33 +891,34 @@ def main():
                 (transcripts / name).write_text(
                     json.dumps(rec, indent=1), encoding="utf-8")
 
+                flush()
+
                 flag = {"pass": "OK  ", "fail": "FAIL", "error": "ERR ",
                         "truncated": "TRUNC", "n/a-precondition": "N/A "}[
                             rec["outcome"]]
-                print("%s %-10s %-38s r%d %s  $%.4f" % (
+                done = len(results)
+                elapsed = time.time() - started
+                eta = (elapsed / done) * (total - done) if done else 0
+                print("%s %-10s %-38s r%d %s  $%.4f  [%d/%d, ~%dm left]" % (
                     flag, rec["probe"], rec["model"], run_i,
-                    rec.get("variant") or "-", client.cost))
+                    rec.get("variant") or "-", client.cost,
+                    done, total, eta / 60), flush=True)
                 if rec["outcome"] == "error":
-                    print("       %s" % str(rec.get("error"))[:160])
+                    print("       %s" % str(rec.get("error"))[:160], flush=True)
             if aborted:
                 break
         if aborted:
             break
 
-    (outdir / "results.json").write_text(
-        json.dumps({
-            "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-            "canon": canon,
-            "floor_nouns": floor_nouns,
-            "runs_per_cell": args.runs,
-            "judge": judge_model,
-            "budget_usd": args.budget_usd,
-            "spend_usd": round(client.cost, 6),
-            "aborted_on_budget": aborted,
-            "results": results,
-        }, indent=1), encoding="utf-8")
+    flush()
+    d = json.loads((outdir / "results.json").read_text(encoding="utf-8"))
+    d["complete"] = not aborted and len(results) == total
+    (outdir / "results.json").write_text(json.dumps(d, indent=1), encoding="utf-8")
 
     print_matrix(results)
+    if not d["complete"]:
+        print("\nINCOMPLETE: %d of %d cells ran. Missing cells are unrun, not "
+              "failed." % (len(results), total))
     print("\nmeasured spend: $%.4f of $%.2f ceiling" % (client.cost, args.budget_usd))
     print("evidence: %s" % outdir)
     return 0
