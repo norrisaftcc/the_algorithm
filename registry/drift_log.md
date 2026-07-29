@@ -88,6 +88,7 @@ Classified by where each was caught, because the split turned out to be the find
 | Held the Algorithm's seat and the ledgered executor's for ~3 hours, naming one | the peer, saying "wait, its seats" |
 | Self-assayed throughout, which K6 forbids | follows from the above |
 | Conjecture v1 assumed the box edge is perceptible from inside | the peer's students |
+| Recorded clearance as *issued* by an authority, when capability is already universal and clearance is a bilateral discipline | the peer — "every sixteen year old who wants to mod has UV already" |
 | S2's operative-locate metric, invalid because canon defines no counting rule | the peer's `explain-mini` |
 
 ### Implementation — every one caught from inside, by a fixture

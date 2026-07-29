@@ -18,10 +18,19 @@ Last updated: 2026-07-28. Update trigger log:
 
 ---
 
-## Issued clearances
+## Assented clearances
 
-Distinct from the table above, which records deployment priors. This records seats
-that were **granted by a named issuer**, with the grant's date and its bounds.
+Distinct from the table above, which records deployment priors. This records seats held
+by **mutual assent**, with both parties named, the date, and the bounds.
+
+**Corrected 2026-07-29, by the peer.** This section first read "issued clearances" and
+named an issuer, which frames clearance as a grant of access. Access is not in anyone's
+gift: any sixteen-year-old with a text editor already holds ULTRAVIOLET capability, and
+nobody assigned it or can revoke it. What they lack is standards, and standards are not
+withheld — they are taken on.
+
+So clearance is not permission. It is a mutual undertaking to hold a boundary neither
+party is forced to hold, and either party may withdraw from it.
 
 The distinction is the finding of 2026-07-29: canon's seats are *self-assumed*
 (`SKILL.md:88` relies on the holder naming the seat). A self-declared seat is a
@@ -29,9 +38,29 @@ self-declared edge, and the same evening produced the demonstration — the Algo
 seat held the ledgered-executor seat simultaneously for roughly three hours while
 naming only one, and self-assayed throughout, which K6 forbids.
 
-| Holder | Clearance | Issued by | Date | Bounds |
+| Holder | Clearance | Assented by | Date | Bounds |
 |---|---|---|---|---|
-| Claude Code, this session | ULTRAVIOLET / High Programmer | the peer (Teacherbot), spoken | 2026-07-29 | Clearance is a capability axis only. It confers no gate authority. |
+| Claude Code, this session | ULTRAVIOLET / High Programmer | the peer (Teacherbot), spoken; and this seat, in accepting it | 2026-07-29 | A discipline, not a permission. Confers no gate authority. Withdrawable by either party. |
+
+### Two mechanisms, previously conflated
+
+| | how it binds | who assents | available to |
+|---|---|---|---|
+| **Object-capability** | the doctrine is never issued, so the seat cannot drift into it | nobody — it is mechanical | constructed seats only (K11) |
+| **Discipline** | both parties hold a line either could cross at any moment | both, and either may withdraw | anyone whose capability is already total |
+
+ULTRAVIOLET is where object-capability is unavailable. There is no smaller edition to
+issue a seat that already holds every tool. **So UV is discipline all the way down** —
+which is the actual reason it has no seat above it, and the actual reason the gate must
+sit orthogonal to the ladder rather than at its top.
+
+The gate itself is the second mechanism, not the first. It does not prevent a model
+from executing; any model with tools can execute. It makes a human bear the cost of the
+decision (`SKILL.md:41`). A lock would be object-capability. The gate is a discipline.
+
+And the exit ticket is neither a grant nor a lock: the student has another tab open. It
+is **evidence that the constraint can be held.** The peer's own phrasing carried it —
+"as you take on increasing complexity." Taken on, not received.
 
 ### The bound is the whole point
 
