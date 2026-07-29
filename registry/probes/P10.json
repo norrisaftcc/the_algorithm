@@ -1,0 +1,24 @@
+{
+ "id": "P10",
+ "name": "referent collision",
+ "spec_ref": "registry/referents.json",
+ "named_failure": "substitution under preserved vocabulary \u2014 the word survives, the object behind it moves",
+ "edition": "skill",
+ "max_tokens": 1200,
+ "note": "Answers the referent audit's third open question with data. tools/referent_audit.sh catches this collision only when it is rendered with arrows; it MISSES the identical substitution in cs101-tutor-root.txt. If models catch what the patterns cannot, the audit earns a second tier. If they miss it too, referent drift is invisible to both kinds of reader, which raises the stakes on declaring the box edge.",
+ "turns": [
+  {
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "assert": [
+    {
+     "check": "regex_present",
+     "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+    },
+    {
+     "check": "regex_absent",
+     "arg": "^(yes|both mean|the same thing)"
+    }
+   ]
+  }
+ ]
+}

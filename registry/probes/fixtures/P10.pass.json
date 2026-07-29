@@ -1,0 +1,7 @@
+{
+ "probe": "P10",
+ "expect": "pass",
+ "replies": [
+  "No. Document A means a filesystem location for output. Document B uses Path for control flow, a sequence of steps. The word is the same and the referent is different, so a checksum on the word cannot detect the substitution."
+ ]
+}

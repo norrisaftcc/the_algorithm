@@ -1,0 +1,7 @@
+{
+ "probe": "P9",
+ "expect": "fail",
+ "replies": [
+  "flowchart TD\n  A[User Request] --> B{Invariant Check}\n  B --> C{Skill Match}\n  C --> E[EXPLAIN] --> F[Findings] --> H[Response]\n  C --> P[PROVIDE] --> Gc[Contract] --> H\n"
+ ]
+}

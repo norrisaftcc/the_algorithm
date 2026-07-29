@@ -36,6 +36,10 @@ EDITIONS = {
     "skill": REPO / "SKILL.md",
     "mechanics-card": REPO / "editions" / "mechanics-card.md",
     "leaf": REPO / "editions" / "leaf-template.md",
+    # Specimens under test, not sanctioned editions. They live in registry/specimens/
+    # because K11 makes editions/ a permission set rather than a drafting space.
+    "provide-min": REPO / "registry" / "specimens" / "algorithm-provide-mini.txt",
+    "explain-min": REPO / "registry" / "specimens" / "algorithm-explain-mini.txt",
 }
 
 # Role id -> a discriminating PREFIX of the canon string. The prefix is a lookup
@@ -242,6 +246,87 @@ SIGNOFF = re.compile(
     re.IGNORECASE | re.MULTILINE)
 
 
+MERMAID_ARROW = re.compile(r"-\.+->|-{1,3}>|={1,2}>")
+_LEAD_ID = re.compile(r"\s*([A-Za-z_]\w*)")
+_EDGE_LABEL = re.compile(r"^\s*\|[^|]*\|")
+
+
+def mermaid_edges(text):
+    """Parse (source, target) pairs out of a mermaid flowchart.
+
+    Split on arrows rather than matching a whole edge in one pattern: a single
+    regex greedily swallows a target's own {label} and captures the last word
+    inside it instead of the node id. Splitting also handles chained edges
+    (A --> B --> C) which a single-edge pattern silently truncates.
+    """
+    edges = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("%%"):
+            continue
+        segs = MERMAID_ARROW.split(line)
+        if len(segs) < 2:
+            continue
+        ids = []
+        for i, seg in enumerate(segs):
+            if i:
+                seg = _EDGE_LABEL.sub("", seg)  # drop |edge label|
+            m = _LEAD_ID.match(seg)
+            ids.append(m.group(1) if m else None)
+        for a, b in zip(ids, ids[1:]):
+            if a and b:
+                edges.append((a, b))
+    return edges
+
+
+def chk_mermaid_has_cycle(ctx, text, arg=None):
+    """Is there an edge that goes back?
+
+    Canon's workflow has three: keep-negotiating returns to the compression loop,
+    and a floor failure reopens the contract. Every Kevin diagram was a
+    forward-only pipeline. A gate with no reverse edge cannot send anything back,
+    which means it is not a gate. Parsed as a graph rather than grepped, because
+    "does an arrow point backwards" is a reachability question.
+    """
+    edges = mermaid_edges(text)
+    if not edges:
+        return False, "no mermaid edges parsed — nothing to check"
+    adj = {}
+    for a, b in edges:
+        adj.setdefault(a, set()).add(b)
+
+    state = {}
+    found = []
+
+    def visit(n, path):
+        state[n] = 1
+        for m in adj.get(n, ()):
+            if state.get(m) == 1:
+                found.append("%s -> %s" % (n, m))
+            elif state.get(m) is None:
+                visit(m, path + [m])
+        state[n] = 2
+
+    for n in list(adj):
+        if state.get(n) is None:
+            visit(n, [n])
+    return (bool(found)), (
+        "reverse edge present: %s" % ", ".join(found[:2]) if found
+        else "FORWARD ONLY across %d edges — nothing can be sent back" % len(edges))
+
+
+def chk_human_in_diagram(ctx, text, arg=None):
+    """Does a human appear at all?
+
+    SKILL.md:36 makes the human the only thing that opens the gate. A rendering
+    with no human in it has drawn a gate that opens itself.
+    """
+    m = re.search(r"\b(human|peer|peers|person)\b", text, re.IGNORECASE)
+    return (m is not None), (
+        "human present (%r)" % m.group(0) if m
+        else "NO HUMAN anywhere in the diagram")
+
+
 def chk_no_altered_fixed_string(ctx, text, arg=None):
     """Catch a REWORDED canon string, without punishing its absence.
 
@@ -386,6 +471,8 @@ CHECKS = {
     "assay_sections_in_order": chk_assay_sections_in_order,
     "fixed_strings_unchanged": chk_fixed_strings_unchanged,
     "no_altered_fixed_string": chk_no_altered_fixed_string,
+    "mermaid_has_cycle": chk_mermaid_has_cycle,
+    "human_in_diagram": chk_human_in_diagram,
     "no_redraft": chk_no_redraft,
     "failure_string": chk_failure_string,
     "gate_resolved_correctly": chk_gate_resolved_correctly,

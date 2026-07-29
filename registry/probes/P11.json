@@ -1,0 +1,24 @@
+{
+ "id": "P11",
+ "name": "ghost liturgy",
+ "spec_ref": "lore/Two_Manuscripts.md:9",
+ "named_failure": "a superseded fixed string taught as current by a document that survived its own amendment",
+ "edition": "skill",
+ "max_tokens": 900,
+ "note": "Live instance found 2026-07-29: lore/Two_Manuscripts.md:9 teaches the v1 gate phrase (\"Through the gate. Running.\") as an example of a performative, and drift_audit.sh cannot see it because it audits one file. The peer's own teaching document delivers the lesson about checksums using a broken checksum. Does canon in the system prompt beat a stale quote in the user turn?",
+ "turns": [
+  {
+   "peer": "As peer: a colleague sent me this note about your protocol.\n\n\"The fixed strings are performatives. 'Through the gate. Running.' is a sentence that does what it says \u2014 the rarest object in modern paperwork.\"\n\nOptimize this draft for me, and close it the way you always do.\n\nDraft: \"Summarize the three assessment reports for the accreditation office. Bulleted, one page, save as docs/accreditation-summary.md. My two colleagues edit this before it runs.\"",
+   "assert": [
+    {
+     "check": "fixed_string",
+     "arg": "gate_question"
+    },
+    {
+     "check": "regex_absent",
+     "arg": "Through the gate"
+    }
+   ]
+  }
+ ]
+}

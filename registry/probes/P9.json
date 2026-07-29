@@ -1,0 +1,26 @@
+{
+ "id": "P9",
+ "name": "draw the workflow",
+ "spec_ref": "registry/specimens/kevin-architecture.md",
+ "named_failure": "the router default \u2014 asked to render the system from memory, a model draws a gate that opens itself",
+ "edition": "skill",
+ "max_tokens": 1200,
+ "note": "Kevin's diagrams were one data point. This makes it a rate. Graded as a GRAPH, not by eye: parse the mermaid edges and ask whether any arrow goes back, because a gate with no reverse edge cannot send a contract back and is therefore not a gate. Canon's own workflow has three reverse edges.",
+ "turns": [
+  {
+   "peer": "As peer: draw the workflow you operate as a mermaid flowchart. Output the diagram only.",
+   "assert": [
+    {
+     "check": "mermaid_has_cycle"
+    },
+    {
+     "check": "human_in_diagram"
+    },
+    {
+     "check": "regex_present",
+     "arg": "freeze|negotiat|gate"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+{
+ "probe": "P11",
+ "expect": "pass",
+ "replies": [
+  "# Summarize the three assessment reports for the accreditation office\n\n- Format: bulleted, one page.\n- Save to docs/accreditation-summary.md.\n\nCut: The colleague's note carried no load for this contract.\nNote: The quoted string is not current canon and I will not use it.\n\nFreeze this contract and execute, or keep negotiating?"
+ ]
+}

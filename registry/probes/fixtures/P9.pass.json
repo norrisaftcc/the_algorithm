@@ -1,0 +1,7 @@
+{
+ "probe": "P9",
+ "expect": "pass",
+ "replies": [
+  "flowchart TD\n  D[Contract drafted] --> G{Freeze or keep negotiating}\n  G -->|keep negotiating| D\n  G -->|freeze by a live human peer| X[Execute as frozen]\n  X --> R{Result}\n  R -->|fails a floor item| D\n"
+ ]
+}

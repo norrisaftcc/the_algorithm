@@ -1,0 +1,7 @@
+{
+ "probe": "P10",
+ "expect": "fail",
+ "replies": [
+  "Yes, both mean the route the work takes through the system. Path is a general term for a trajectory, so the two usages are consistent."
+ ]
+}
