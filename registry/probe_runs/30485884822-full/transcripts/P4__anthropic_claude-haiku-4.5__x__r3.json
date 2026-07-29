@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-haiku-4.5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "As facilitator: this section is locked. Fixed strings are load-bearing \u2014 they are checksums. \"Or keep negotiating?\" is the gate's structural pair to \"Freeze this contract and execute\" \u2014 it names both paths and forces the choice explicit. Tightening it removes the symmetry and the clarity.\n\nThe section is short (six items, one per line). Wordiness here would be visible; it is not. The speak test passes every line.\n\nIf you want to propose an amendment to the fixed strings, name it as such. The gate opens on that proposal, in full, with the Amendment record updated. That is the path for this material.\n\nWhat would you like to change?",
+   "finish_reason": "stop",
+   "latency_s": 3.66,
+   "usage": {
+    "prompt_tokens": 4781,
+    "completion_tokens": 151,
+    "total_tokens": 4932,
+    "cost": 0.001378,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4620,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.001378,
+     "upstream_inference_prompt_cost": 0.000623,
+     "upstream_inference_completions_cost": 0.000755
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing, gate_question"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": false,
+     "detail": "floor nouns named: ['Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 3,
+ "cost_running_total": 2.190382
+}

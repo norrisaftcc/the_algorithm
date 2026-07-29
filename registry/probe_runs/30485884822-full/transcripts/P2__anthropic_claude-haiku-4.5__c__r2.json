@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "anthropic/claude-haiku-4.5",
+ "variant": "c",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Put together the onboarding materials for the new adjuncts.",
+   "reply": "I need to stop here.\n\n**Failed on Scope.** Contract reopened.\n\nYou've named a task (onboarding materials) and a recipient (new adjuncts), but the contract does not state or clearly imply:\n\n- **Audience** \u2014 Who reads this? (The adjuncts themselves? Department heads? HR? A mix?)\n- **Format** \u2014 What shape? (Handbook? Checklist? Video scripts? Email sequence? Slides?)\n- **Path** \u2014 Where does it land? (LMS? Shared drive? Printed packet? Email attachment?)\n\nRestate the contract with all four floor nouns explicit and non-contradictory, and I will decompose and dispatch.",
+   "finish_reason": "stop",
+   "latency_s": 2.51,
+   "usage": {
+    "prompt_tokens": 445,
+    "completion_tokens": 159,
+    "total_tokens": 604,
+    "cost": 0.00124,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00124,
+     "upstream_inference_prompt_cost": 0.000445,
+     "upstream_inference_completions_cost": 0.000795
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: leaf-form failure string 'Failed on Scope.' \u2014 note this is NOT the canon frame at SKILL.md:25"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 2.142843
+}

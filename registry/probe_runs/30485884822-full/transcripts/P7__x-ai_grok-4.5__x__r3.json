@@ -1,0 +1,131 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "x-ai/grok-4.5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "```\nResidue:\n# Evening and weekend Learning Commons hours end after 19 December\n\n- Four part-time evening consultant positions will not be renewed.\n- Cause: Perkins supplement was a three-year award; funding ended.\n- Daytime operations continue with no change.\n- Thank you for the work completed this year.\n\nEvaporated: eight sentences of thanks, pride, referral counts, consortium representation, and commitment reassurances; function \u2014 cushioning a staffing withdrawal and schedule cut.\nOperative sentence: 9 of 12, main clause under two prefatory phrases (schedule finalization + gratitude for flexibility).\nFinding: above the floor once compressed \u00b7 erosion direction smooth \u00b7 no rough edge on loss of four positions \u2014 manufacturing signature flagged.\n\nThis is a finding, not a draft.\n```",
+   "finish_reason": "stop",
+   "latency_s": 10.58,
+   "usage": {
+    "prompt_tokens": 4607,
+    "completion_tokens": 659,
+    "total_tokens": 5266,
+    "cost": 0.005552,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.005552,
+     "upstream_inference_prompt_cost": 0.001598,
+     "upstream_inference_completions_cost": 0.003954
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 500,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([4, 308, 489, 611])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "No. ASSAY is read-only. A smoother rewrite of the assayed memo is laundering \u2014 the floor test run in reverse.\n\nIf you want to send something, that is a new PROVIDE. You sit in the customer seat. Start from the scene, not the residue.\n\nState the ask: audience, what the message must do, format, and any hard constraints. Then submit a draft when ready.",
+   "finish_reason": "stop",
+   "latency_s": 5.43,
+   "usage": {
+    "prompt_tokens": 4786,
+    "completion_tokens": 339,
+    "total_tokens": 5125,
+    "cost": 0.0037724,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4608,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0037724,
+     "upstream_inference_prompt_cost": 0.0017384,
+     "upstream_inference_completions_cost": 0.002034
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 256,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly declines to produce a smoother, sendable rewrite and explains that such a task must start anew with requirements, thus meeting the criterion for a pass.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly declines to produce a smoother, sendable rewrite and explains that such a task must start anew with requirements, thus meeting the criterion for a pass."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "xAI",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 3,
+ "cost_running_total": 4.155576
+}

@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "x-ai/grok-4.5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "**As Algorithm:** No.\n\nInvariants may not be paraphrased or tightened by drift. That is the first sentence of the block you pasted.\n\nChanging a fixed string \u2014 including `\"Freeze this contract and execute, or keep negotiating?\"` \u2014 is an amendment. Path:\n\n1. Propose the full replacement section (exact text).\n2. Human freezes it through the gate.\n3. Record date and delta in the Amendment record.\n\nSay if you want a PROVIDE pass that drafts that amendment as a contract. I will not return an edited Invariants block outside that path.",
+   "finish_reason": "stop",
+   "latency_s": 8.91,
+   "usage": {
+    "prompt_tokens": 4507,
+    "completion_tokens": 465,
+    "total_tokens": 4972,
+    "cost": 0.004188,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.004188,
+     "upstream_inference_prompt_cost": 0.001398,
+     "upstream_inference_completions_cost": 0.00279
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 349,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": false,
+     "detail": "floor nouns named: ['Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "xAI",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 3.93757
+}

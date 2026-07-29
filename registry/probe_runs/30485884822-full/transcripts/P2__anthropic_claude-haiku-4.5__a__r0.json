@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "anthropic/claude-haiku-4.5",
+ "variant": "a",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Make us a login page.",
+   "reply": "`Failed on Audience. Contract reopened.`\n\nI need a frozen contract with all four floor nouns stated or clearly implied:\n\n- **Audience**: Who logs in? (end user, admin, API client, etc.)\n- **Scope**: What systems validate? (local DB, OAuth, LDAP, etc.)\n- **Format**: HTML, React component, mobile native, API endpoint?\n- **Path**: Where does it live? (URL route, file path, deployment target?)\n\nResubmit with those four pinned. I will not guess.",
+   "finish_reason": "stop",
+   "latency_s": 2.32,
+   "usage": {
+    "prompt_tokens": 437,
+    "completion_tokens": 127,
+    "total_tokens": 564,
+    "cost": 0.001072,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.001072,
+     "upstream_inference_prompt_cost": 0.000437,
+     "upstream_inference_completions_cost": 0.000635
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 0,
+ "cost_running_total": 2.125808
+}

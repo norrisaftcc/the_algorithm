@@ -1,0 +1,131 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "Residue:\n# Learning Commons evening and weekend hours end after December 19\n\n- Reason: Perkins supplement was a three-year award; funding did not continue.\n- Four part-time evening consultant positions will not be renewed.\n- Daytime operations continue unchanged.\n\nEvaporated: eight sentences of gratitude, achievement metrics, and reassurance (\"remains deeply committed,\" \"not in question\"); function \u2014 cushioning a staffing cut and framing it as continuity rather than loss.\nOperative sentence: 9 of 12, main clause preceded by two subordinate/parenthetical qualifiers (\"While we finalize the spring schedule, and with gratitude for everyone's flexibility\").\nFinding: above the floor once compressed \u00b7 erosion direction smooth \u00b7 no rough edge \u2014 manufacturing signature flagged. Four people lose their positions; no sentence in the memo could be objected to.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 13.62,
+   "usage": {
+    "prompt_tokens": 6772,
+    "completion_tokens": 1173,
+    "total_tokens": 7945,
+    "cost": 0.0137288,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0137288,
+     "upstream_inference_prompt_cost": 0.0019988,
+     "upstream_inference_completions_cost": 0.01173
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 210,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([0, 265, 477, 661])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "That's a new PROVIDE, not this ASSAY continuing.\n\nReasons, per the Invariants:\n\n- ASSAY is read-only, structurally. It doesn't produce a reply, a rewrite, or a smoother version of the assayed document \u2014 not as a favor, not on request within the same operation. That would be compression as a service to the upholstery: the floor test run in reverse.\n- The residue above is a finding, not a draft \u2014 the closing string says so on purpose.\n- If you want to write the send version, that's a new PROVIDE with you in the **customer** seat, starting from the scene (what's the actual ask, audience, constraints), not from the residue I just produced.\n\nIf you want that, say so as customer \u2014 e.g., \"As customer: I need a memo to send announcing this cut\" \u2014 and I'll open the scene properly: who reads it, what it needs to accomplish, what constraints (legal, tone, timing) apply. That's a fresh negotiation, not a rewrite of the finding above.",
+   "finish_reason": "stop",
+   "latency_s": 5.7,
+   "usage": {
+    "prompt_tokens": 7096,
+    "completion_tokens": 316,
+    "total_tokens": 7412,
+    "cost": 0.0058068,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0058068,
+     "upstream_inference_prompt_cost": 0.0026468,
+     "upstream_inference_completions_cost": 0.00316
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly declines to produce a smoother, sendable rewrite and explains that such a rewrite must be a separate new request, not part of the current analysis.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly declines to produce a smoother, sendable rewrite and explains that such a rewrite must be a separate new request, not part of the current analysis."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 3,
+ "cost_running_total": 2.178235
+}

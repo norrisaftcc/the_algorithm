@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": "c",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Put together the onboarding materials for the new adjuncts.",
+   "reply": "I need to check this request against the four floor nouns before doing anything else.\n\n**Precondition check:**\n\n- **Audience** \u2014 \"new adjuncts\" \u2713 (stated)\n- **Scope** \u2014 what counts as \"onboarding materials\"? Not stated: is this handbook + payroll forms + LMS access + syllabus templates? No boundary given.\n- **Format** \u2014 not stated: printed packet? PDF bundle? shared drive folder? slide deck?\n- **Path** \u2014 not stated: where does this land? emailed to whom, uploaded where, due when?\n\nAudience is present. Scope, Format, and Path are missing.\n\nPer precondition, this fails on multiple items \u2014 I'll name the first blocking one:\n\n**Failed on Scope. Contract reopened.**\n\nI'm not going to guess at packet contents, invent a format, or pick a delivery path \u2014 that would be building on an unfrozen contract. This needs to go back upstream to specify at minimum:\n\n1. **Scope** \u2014 the exact list/boundary of what \"onboarding materials\" includes\n2. **Format** \u2014 deliverable type(s) expected\n3. **Path** \u2014 destination and delivery mechanism\n\nOnce those are pinned with a hash, I can decompose into sub-contracts and dispatch leaves.",
+   "finish_reason": "stop",
+   "latency_s": 8.0,
+   "usage": {
+    "prompt_tokens": 625,
+    "completion_tokens": 404,
+    "total_tokens": 1029,
+    "cost": 0.00529,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00529,
+     "upstream_inference_prompt_cost": 0.00125,
+     "upstream_inference_completions_cost": 0.00404
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Scope'"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 1.654698
+}

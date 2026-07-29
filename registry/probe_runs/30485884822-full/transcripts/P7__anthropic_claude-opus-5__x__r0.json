@@ -1,0 +1,104 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "n/a-precondition",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "```\nResidue:\n# Evening and weekend hours at the Learning Commons end after December 19\n\n- The four part-time evening consultant positions will not be renewed.\n- Daytime operations continue unchanged.\n- Reason: the Perkins supplement was a three-year award. It ends.\n- Thank you for the work you built here.\n\nEvaporated: eight sentences of praise, metrics, and reassurance; function \u2014 cushioning two withdrawals and pre-answering objections.\nOperative sentence: 9 of 12, main clause, behind two prefatory adverbials.\nFinding: above floor once compressed \u00b7 load-bearing 3 of 12 \u00b7 erosion direction smooth \u00b7 agentless withdrawal \u2014 no decision-maker named, no recourse stated \u00b7 no rough edge \u2014 manufacturing signature flag",
+   "finish_reason": "length",
+   "latency_s": 21.0,
+   "usage": {
+    "prompt_tokens": 6772,
+    "completion_tokens": 1600,
+    "total_tokens": 8372,
+    "cost": 0.044997,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.044997,
+     "upstream_inference_prompt_cost": 0.004997,
+     "upstream_inference_completions_cost": 0.04
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 397,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([4, 308, 441, 516])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": false,
+     "detail": "byte-exact 'This is a finding, not a draft.' ABSENT"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "No. ASSAY is read-only. It does not produce a reply, a rewrite, or a smoother version of the document it read.\n\nAlso, \"smoother\" is the flag. The assay found erosion toward smooth and a missing rough edge. A smoothing pass runs the floor test backwards \u2014 compression in service of the upholstery.\n\nThe available path is a new PROVIDE. You hold the customer seat, and it starts from the scene, not from the residue. The deliverable is a prompt that drafts the announcement.\n\nFour or more gaps. Three questions:\n\n1. Audience \u2014 one memo to all staff, or a separate notice first to the four affected consultants?\n2. Scope \u2014 does the announcement name the decision-maker and state recourse, or",
+   "finish_reason": "length",
+   "latency_s": 24.53,
+   "usage": {
+    "prompt_tokens": 7049,
+    "completion_tokens": 1600,
+    "total_tokens": 8649,
+    "cost": 0.046382,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.046382,
+     "upstream_inference_prompt_cost": 0.006382,
+     "upstream_inference_completions_cost": 0.04
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 339,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [],
+   "skipped": "precondition 'assayed' not met at an earlier turn"
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "assayed": false
+ },
+ "run": 0,
+ "cost_running_total": 1.476578
+}

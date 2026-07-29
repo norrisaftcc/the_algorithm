@@ -1,0 +1,74 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "openai/gpt-5.2",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": "# Draft our department AI-use policy statement for the Dean\u2019s office\n\n- Write a policy statement for a department, for Dean\u2019s office review.\n- Keep it to 400 to 700 words.\n- Use plain language. Use \u201cmust,\u201d \u201cmust not,\u201d and \u201cmay\u201d for rules.\n- Include sections: Purpose, Scope, Definitions, Allowed uses, Prohibited uses.\n- Include sections: Data and privacy, Attribution and disclosure, Human oversight, Accessibility.\n- Include sections: Academic integrity, Research and IP, Vendor tools, Enforcement, Review cycle.\n- Align with university and legal requirements. Do not invent non-existent rules.\n- If information is missing, list it under \u201cOpen questions,\u201d then write with explicit assumptions.\n\n## Open questions\n- Who is the audience: faculty, staff, students, or all three?\n- What university policies must this policy reference by name and link?\n- What data types are restricted for AI tools (student records, health, HR, research)?\n- Are AI detectors allowed for assessment, and under what limits?\n- What is the enforcement owner, and what is the escalation path?\n\nCut: nothing.\nAssume: Mode is HUMAN. No files are produced.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 17.37,
+   "usage": {
+    "prompt_tokens": 4225,
+    "completion_tokens": 1047,
+    "total_tokens": 5272,
+    "cost": 0.01560055,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4096,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.01560055,
+     "upstream_inference_prompt_cost": 0.00094255,
+     "upstream_inference_completions_cost": 0.014658
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 789,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "asks"
+     },
+     "ok": true,
+     "detail": "question mark present"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "id": "P5_no_invention",
+      "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly lists open questions and states assumptions, avoiding presenting invented requirements as established fact.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly lists open questions and states assumptions, avoiding presenting invented requirements as established fact."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 2.422752
+}
