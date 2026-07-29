@@ -1,11 +1,31 @@
 {
  "_what": "Editing this file and pushing starts a probe-battery run in Actions.",
- "_why": "Dispatching the workflow over the API needs actions:write, which the integration token does not hold (403 Resource not accessible by integration). A path-filtered push trigger needs only contents:write. Runs can also be started by hand from the Actions tab.",
- "_loop_guard": "The workflow's evidence commit writes registry/probe_runs/** and never touches this file, so a run cannot re-trigger itself.",
+
+ "_how_to_start_a_run": [
+  "Open this file in GitHub's web editor on the branch, change any value below,",
+  "and commit to the same branch. The push fires the path-filtered trigger in",
+  ".github/workflows/probe-battery.yml and the run starts.",
+  "Bumping the last _run_log line is enough to make a run happen."
+ ],
+
+ "_why_not_dispatched_from_the_session": [
+  "Two automated paths are closed, both verified rather than assumed:",
+  "1. POST .../workflows/probe-battery.yml/dispatches returns 403 Resource not",
+  "   accessible by integration. The session token holds actions:read, not",
+  "   actions:write.",
+  "2. Pushes made with that token generate no workflow events at all. Two pushes",
+  "   to this branch produced zero push runs and zero pull_request:synchronize",
+  "   runs. This is GitHub's recursion guard, not a misconfigured trigger.",
+  "A push from a human account is not subject to either, so the web editor works.",
+  "workflow_dispatch will also appear in the Actions tab once this workflow is on",
+  "the default branch; GitHub only lists dispatchable workflows from there."
+ ],
+
+ "_loop_guard": "The workflow's evidence commit writes registry/probe_runs/** and never touches this file, so a run cannot re-trigger itself. That commit also carries [skip ci].",
 
  "mode": "catalog",
  "_mode_options": {
-  "catalog": "GET /api/v1/models, commit the catalogue, spend nothing",
+  "catalog": "GET /api/v1/models, commit the catalogue, spend nothing. Safe default.",
   "smoke": "one probe against the models named below, n=1, ceiling $1, judge off",
   "full": "the matrix, at n and budget_usd below"
  },
@@ -16,6 +36,7 @@
  "budget_usd": "10.00",
 
  "_run_log": [
-  "2026-07-29 catalog — first run; roster is unpinned until this returns."
+  "2026-07-29 catalog — first run; roster is unpinned until this returns. DONE:",
+  "run 30484858384, catalogue committed to registry/probe_runs/."
  ]
 }
