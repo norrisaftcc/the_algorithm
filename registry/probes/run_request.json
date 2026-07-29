@@ -19,7 +19,7 @@
   "the default branch; GitHub only lists dispatchable workflows from there."
  ],
  "_loop_guard": "The workflow's evidence commit writes registry/probe_runs/** and never touches this file, so a run cannot re-trigger itself. That commit also carries [skip ci].",
- "_trigger": 3,
+ "_trigger": 4,
  "_trigger_note": "Bump this number in the web editor and commit. That is the whole ritual \u2014 the push fires the run with the settings below.",
  "mode": "full",
  "_mode_options": {
