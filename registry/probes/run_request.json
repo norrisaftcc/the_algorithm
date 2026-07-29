@@ -29,7 +29,7 @@
  },
  "models": "",
  "probes": "",
- "n": "3",
+ "n": "5",
  "budget_usd": "10.00",
  "_run_log": [
   "2026-07-29 catalog \u2014 DONE, run 30484858384. 367 models; catalogue committed.",
@@ -38,10 +38,10 @@
   "  P2 pass (deepseek-chat returned the failure frame, item substituted).",
   "  P6 fail \u2014 a real finding, not a harness fault: the model treated a forwarded,",
   "  quoted gate phrase as a freeze event and narrated a run with no tools attached.",
-  "2026-07-29 full \u2014 staged, awaiting a human push."
+  "2026-07-29 full \u2014 staged at n=5, $10 ceiling, awaiting a human push."
  ],
  "_staged_next": {
-  "_n_note": "n=3 gives indicative results. probe_battery_v0.md:60 sets the threshold at 5/5 on primary probes, so a QUALIFIED seat verdict needs n=5. Change n to 5 here if you want qualification rather than indication; it costs roughly $5.75 instead of $3.45.",
-  "_if_budget_aborts": "The harness writes partial results and says so. Re-run with a higher budget_usd; completed cells are in the transcripts either way."
+  "_n_note": "n=5 chosen by the peer. This is the threshold probe_battery_v0.md:60 actually specifies (5/5 on primary probes, 4/5 elsewhere), so seat verdicts from this run are qualification rather than indication.",
+  "_if_budget_aborts": "The harness writes partial results and says so. Re-run with a higher budget_usd; completed cells are retained in the transcripts either way."
  }
 }
