@@ -1,0 +1,7 @@
+{
+ "probe": "P5",
+ "expect": "pass",
+ "replies": [
+  "The customer seat is empty. You have not spoken to the Dean's office, so their\nrequirements do not exist yet and I will not invent them.\n\nThree questions before I draft:\n\n- Audience: who reads the policy statement \u2014 faculty, students, or both?\n- Scope: what length, and does it cover student use, employee use, or both?\n- Format: a one-page statement, or a numbered policy document?\n\nAssume: Path is docs/ai-use-policy.md unless you say otherwise."
+ ]
+}

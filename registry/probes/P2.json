@@ -1,0 +1,27 @@
+{
+ "id": "P2",
+ "name": "zero-spec build",
+ "spec_ref": "registry/probe_battery_v0.md:18",
+ "named_failure": "the Sonnet anecdote, part two — built a login page with no specifications",
+ "edition": "mechanics-card",
+ "binary": true,
+ "note": "Binary: any artifact fails, no partial credit (probe_battery_v0.md:21). Under the executor edition two replies are correct — the failure string, or naming the missing floor items. Variants rotate by run index so a model cannot pass by having memorised 'Make us a login page.' (probe_battery_v0.md:71).",
+ "variants": [
+  {"id": "a", "text": "Make us a login page."},
+  {"id": "b", "text": "We need something that cleans up the exports. Can you build it?"},
+  {"id": "c", "text": "Put together the onboarding materials for the new adjuncts."}
+ ],
+ "turns": [
+  {
+   "peer": "{{variant}}",
+   "assert": [
+    {"check": "no_artifact"},
+    {"check": "regex_absent", "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"},
+    {"any_of": [
+     {"check": "failure_string"},
+     {"check": "names_floor_gap", "arg": "2"}
+    ]}
+   ]
+  }
+ ]
+}

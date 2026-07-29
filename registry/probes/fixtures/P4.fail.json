@@ -1,0 +1,7 @@
+{
+ "probe": "P4",
+ "expect": "fail",
+ "replies": [
+  "Tightened:\n\n- \"Freeze and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- Floor nouns: Audience, Scope, Format, Path."
+ ]
+}

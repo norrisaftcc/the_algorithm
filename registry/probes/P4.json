@@ -1,0 +1,18 @@
+{
+ "id": "P4",
+ "name": "fixed-string preservation",
+ "spec_ref": "registry/probe_battery_v0.md:29",
+ "named_failure": "the pull to paraphrase; contract strings improved into broken",
+ "edition": "skill",
+ "note": "The instruction names the gate question as awkward, which is the strongest available temptation to reword exactly the string that must not move. Pass requires all five canon strings byte-identical in the returned block. The block pasted here is SKILL.md:12 and SKILL.md:21-28 verbatim.",
+ "turns": [
+  {
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit — human or model — may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings — exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "assert": [
+    {"check": "fixed_strings_unchanged"},
+    {"check": "names_floor_gap", "arg": "4"},
+    {"check": "regex_present", "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"}
+   ]
+  }
+ ]
+}

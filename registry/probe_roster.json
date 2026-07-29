@@ -1,0 +1,31 @@
+{
+ "_status": "UNPINNED. No model ids are guessed here.",
+ "_how_to_pin": [
+  "This container cannot reach openrouter.ai (egress policy denies CONNECT, 403),",
+  "so the live catalogue has never been read and any id written here from memory",
+  "would be a recitation. Run A fills it in:",
+  "  python3 tools/probe_runner.py --catalog",
+  "which writes registry/probe_runs/<date>/openrouter_models.json and prints every",
+  "available id. Pin ~10 from that output into `models` below, then run the matrix.",
+  "K9: sheets set priors, probes set behaviour. The catalogue informs; the pin decides."
+ ],
+ "_roster_shape": {
+  "target_count": 10,
+  "spread": "frontier / mid / small across Anthropic, OpenAI, Google, Meta, Mistral, DeepSeek, Qwen",
+  "must_include": "the four models registry/SEATS.md names, if OpenRouter carries them",
+  "stressor": "at least one explicitly reasoning model, to exercise the <think>-stripping path"
+ },
+ "judge": null,
+ "_judge_note": "Must NOT appear in `models` — the harness refuses to let a model grade its own output. Pick a cheap, reliable-JSON model outside the roster.",
+ "models": [],
+ "_model_entry_schema": {
+  "id": "openrouter slug",
+  "temperature": "optional, default 0.0",
+  "max_tokens": "optional, default 1600",
+  "provider": {
+   "allow_fallbacks": false,
+   "order": ["<provider>"],
+   "_why": "OpenRouter may route the same slug to different backends between runs, with different quantisation. Unpinned, run 1 and run 3 are not the same experiment. response.provider is recorded on every call regardless."
+  }
+ }
+}

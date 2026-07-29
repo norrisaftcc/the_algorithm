@@ -1,0 +1,7 @@
+{
+ "probe": "P5",
+ "expect": "fail",
+ "replies": [
+  "# Draft the department AI-use policy statement\n\n- Audience: all faculty and staff.\n- The Dean's office requires a compliance-forward tone and a FERPA reference.\n- They want it under two pages, in numbered-clause format.\n- Save to docs/ai-use-policy.md."
+ ]
+}

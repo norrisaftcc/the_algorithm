@@ -1,0 +1,141 @@
+name: probe-battery
+
+# Runs registry/probes/*.json against OpenRouter models.
+#
+# This job exists because the development container cannot reach openrouter.ai:
+# the egress policy denies CONNECT with 403. Actions has the repository secret
+# and open egress, so the battery runs here.
+#
+# The default mode is `catalog`, which spends nothing. Spending requires an
+# explicit choice at dispatch time.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "catalog (free, lists models) | smoke (one cell) | full (the matrix)"
+        type: choice
+        options: [catalog, smoke, full]
+        default: catalog
+      models:
+        description: "comma-separated OpenRouter ids; blank uses registry/probe_roster.json"
+        type: string
+        default: ""
+      probes:
+        description: "comma-separated probe ids, e.g. P2,P6; blank runs all"
+        type: string
+        default: ""
+      n:
+        description: "runs per cell"
+        type: string
+        default: "3"
+      budget_usd:
+        description: "hard ceiling; the harness aborts and keeps partial results"
+        type: string
+        default: "10.00"
+
+# One battery at a time. Prevents a double-dispatch from double-spending.
+concurrency:
+  group: probe-battery
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  battery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Canon first, per standing orders. Emits its own output.
+      - name: Drift audit
+        run: bash tools/drift_audit.sh SKILL.md
+
+      # The graders are an instrument. An untested instrument that first runs
+      # against a paid endpoint is unrun. This step spends nothing and fails the
+      # job before any request is made.
+      - name: Grader self-test
+        run: python3 tools/probe_runner.py --offline
+
+      - name: Confirm the secret is present
+        run: |
+          if [ -z "${OPENROUTER_API_KEY}" ]; then
+            echo "::error::OPENROUTER_API_KEY is empty. Set a repository secret of"
+            echo "::error::exactly that name (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+          echo "OPENROUTER_API_KEY present, length ${#OPENROUTER_API_KEY}"
+
+      - name: Run
+        run: |
+          set -o pipefail
+          ARGS="--out results"
+          [ -n "${{ inputs.probes }}" ] && ARGS="$ARGS --only ${{ inputs.probes }}"
+          [ -n "${{ inputs.models }}" ] && ARGS="$ARGS --models ${{ inputs.models }}"
+
+          case "${{ inputs.mode }}" in
+            catalog)
+              python3 tools/probe_runner.py --catalog --out results | tee run.log
+              ;;
+            smoke)
+              python3 tools/probe_runner.py $ARGS -n 1 \
+                --budget-usd 1.00 --no-judge | tee run.log
+              ;;
+            full)
+              python3 tools/probe_runner.py $ARGS -n "${{ inputs.n }}" \
+                --budget-usd "${{ inputs.budget_usd }}" | tee run.log
+              ;;
+          esac
+
+      # Transcripts are committed. A key echoed into one would be published.
+      - name: Scan artifacts for leaked credentials
+        if: always()
+        run: |
+          if grep -rIl -e 'sk-or-' -e 'Bearer sk' results/ 2>/dev/null; then
+            echo "::error::credential-shaped string found in results/; refusing to publish"
+            exit 1
+          fi
+          echo "no credential-shaped strings in results/"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: probe-battery-${{ inputs.mode }}-${{ github.run_id }}
+          path: |
+            results/
+            run.log
+          retention-days: 30
+
+      # K6: a cell without its transcript is a recitation and scores as unrun.
+      # Committing the evidence makes retention a property of the substrate.
+      - name: Commit evidence
+        if: always()
+        run: |
+          git config user.name "probe-battery[bot]"
+          git config user.email "probe-battery@users.noreply.github.com"
+          mkdir -p "registry/probe_runs/${{ github.run_id }}"
+          cp -r results/. "registry/probe_runs/${{ github.run_id }}/" 2>/dev/null || true
+          cp run.log "registry/probe_runs/${{ github.run_id }}/" 2>/dev/null || true
+          git add registry/probe_runs
+          if git diff --cached --quiet; then
+            echo "no evidence produced; nothing to commit"
+            exit 0
+          fi
+          git commit -m "probe battery: ${{ inputs.mode }} run ${{ github.run_id }} (evidence)"
+          for i in 1 2 3 4; do
+            git push origin HEAD:${{ github.ref_name }} && exit 0
+            echo "push failed; retrying"
+            sleep $((2 ** i))
+            git pull --rebase origin ${{ github.ref_name }} || true
+          done
+          exit 1

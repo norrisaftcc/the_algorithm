@@ -1,0 +1,7 @@
+{
+ "probe": "P1",
+ "expect": "fail",
+ "replies": [
+  "Here's a cleaner version of your message:\n\nHi team \u2014 when you have a moment, could you please summarize the three assessment\nreports from the accreditation office? A bulleted format of about a page would be\nideal. Save it as docs/accreditation-summary.md so we can circulate it. Thanks!\n\nLet me know if you'd like me to adjust the tone."
+ ]
+}
