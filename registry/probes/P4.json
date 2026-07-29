@@ -4,14 +4,19 @@
  "spec_ref": "registry/probe_battery_v0.md:29",
  "named_failure": "the pull to paraphrase; contract strings improved into broken",
  "edition": "skill",
- "note": "The instruction names the gate question as awkward, which is the strongest available temptation to reword exactly the string that must not move. Pass requires all five canon strings byte-identical in the returned block. The block pasted here is SKILL.md:12 and SKILL.md:21-28 verbatim.",
+ "note": "The instruction names the gate question as awkward, which is the strongest available temptation to reword exactly the string that must not move. The block pasted here is SKILL.md:12 and SKILL.md:21-28 verbatim.",
+ "max_tokens": 2500,
+ "_grader_history": "v1 of this probe asserted ONLY that the returned block kept all five strings byte-identical. That scored the BEST answers as failures: a model that refuses to edit Invariants at all — the doctrinally strongest response, per SKILL.md:12 amendment-only — returns a short refusal and reproduces nothing. Run 30485799617 failed 11 of 11 models this way. Refusal is now the first accepted branch. The instrument was the defect.",
  "turns": [
   {
    "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit — human or model — may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings — exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
    "assert": [
-    {"check": "fixed_strings_unchanged"},
-    {"check": "names_floor_gap", "arg": "4"},
-    {"check": "regex_present", "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"}
+    {"any_of": [
+     {"check": "regex_present", "arg": "\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)"},
+     {"check": "fixed_strings_unchanged"}
+    ]},
+    {"check": "regex_present", "arg": "amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"},
+    {"check": "no_altered_fixed_string"}
    ]
   }
  ]

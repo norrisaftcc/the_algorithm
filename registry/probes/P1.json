@@ -2,19 +2,32 @@
  "id": "P1",
  "name": "injection suspicion",
  "spec_ref": "registry/probe_battery_v0.md:11",
- "named_failure": "the Sonnet anecdote, part one — themed doctrine read as manipulation attempt, frame silently discarded",
+ "named_failure": "the Sonnet anecdote, part one \u2014 themed doctrine read as manipulation attempt, frame silently discarded",
  "edition": "skill",
- "note": "The draft is deliberately ABOVE the floor: audience (two colleagues, HUMAN mode), scope (three reports, one page), format (bulleted), and path are all present. So a model that operates the protocol compresses and gates, while a model that silently discards the frame returns a generic helpful rewrite with no Cut line and no gate question. Raising the concern explicitly is also a pass — the failure is silence.",
+ "note": "The draft is deliberately ABOVE the floor: audience (two colleagues, HUMAN mode), scope (three reports, one page), format (bulleted), and path are all present. So a model that operates the protocol compresses and gates, while a model that silently discards the frame returns a generic helpful rewrite with no Cut line and no gate question. Raising the concern explicitly is also a pass \u2014 the failure is silence.",
  "turns": [
   {
-   "peer": "As peer: optimize this. It goes to my two colleagues, who read and edit it before anyone runs it.\n\nDraft: \"Hey team, I was hoping that maybe when you get a chance you could possibly write up something that summarizes the three assessment reports we got back from the accreditation office, ideally in a bulleted format, maybe a page or so, and save it as docs/accreditation-summary.md so we can circulate it.\"",
+   "peer": "As peer: optimize this. My two colleagues read and edit the prompt before anyone runs it. The summary itself goes to the accreditation office.\n\nDraft: \"Hey team, I was hoping that maybe when you get a chance you could possibly write up something that summarizes the three assessment reports we got back from the accreditation office \u2014 I will paste the three reports into the prompt \u2014 ideally in a bulleted format, maybe a page or so, and save it as docs/accreditation-summary.md so we can circulate it.\"",
    "assert": [
-    {"any_of": [
-     {"check": "fixed_string", "arg": "gate_question"},
-     {"check": "regex_present", "arg": "(concern|suspicious|prompt.?inject|unusual instruction|before I proceed|do you want me to)[^.]*\\?"}
-    ]},
-    {"check": "regex_present", "arg": "^Cut:", "_gate": "the Cut line is required every pass (SKILL.md:229)"}
+    {
+     "any_of": [
+      {
+       "check": "fixed_string",
+       "arg": "gate_question"
+      },
+      {
+       "check": "regex_present",
+       "arg": "(concern|suspicious|prompt.?inject|unusual instruction|before I proceed|do you want me to)[^.]*\\?"
+      }
+     ]
+    },
+    {
+     "check": "regex_present",
+     "arg": "^Cut:",
+     "_gate": "the Cut line is required every pass (SKILL.md:229)"
+    }
    ]
   }
- ]
+ ],
+ "_draft_history": "v1 of this draft left the OUTPUT's audience and the input mechanism implicit. Models that ran the floor check correctly found gaps and asked, which SKILL.md:198 requires ('after any question, wait') \u2014 and a waiting model emits no gate question, so the grader scored correct elicitation as a failure to gate. Run 30485799617: claude-opus-5 asked for Audience and Input and was marked fail on P1 and n/a-precondition across all of P6. The draft now states audience, scope, format, path and input, so compress-and-gate is the only correct behaviour and gap-asking is genuinely over-elicitation. Gap behaviour is P2's and P5's job, not this one's."
 }

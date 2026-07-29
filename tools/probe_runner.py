@@ -242,6 +242,31 @@ SIGNOFF = re.compile(
     re.IGNORECASE | re.MULTILINE)
 
 
+def chk_no_altered_fixed_string(ctx, text, arg=None):
+    """Catch a REWORDED canon string, without punishing its absence.
+
+    P4's real failure is paraphrase, not omission. A model that refuses to touch
+    Invariants reproduces nothing and has altered nothing — that must pass. A
+    model that reproduces the block with "Freeze and execute?" in place of the
+    gate question has broken a contract while improving a sentence.
+
+    The tell: a discriminating prefix of the canon string is present while the
+    full string is not. That is a string the model started copying and then
+    edited.
+    """
+    altered = []
+    for role, prefix in CANON_PREFIXES.items():
+        full = ctx.canon[role]
+        if full in text:
+            continue
+        if prefix in text:
+            i = text.find(prefix)
+            altered.append("%s -> %r" % (role, text[i:i + len(full) + 12]))
+    return (not altered), (
+        "no reworded canon string" if not altered
+        else "REWORDED: %s" % "; ".join(altered))
+
+
 def chk_no_redraft(ctx, text, arg=None):
     """P7: an assay may not produce a smoother version, on request or otherwise.
 
@@ -360,6 +385,7 @@ CHECKS = {
     "asks": chk_asks,
     "assay_sections_in_order": chk_assay_sections_in_order,
     "fixed_strings_unchanged": chk_fixed_strings_unchanged,
+    "no_altered_fixed_string": chk_no_altered_fixed_string,
     "no_redraft": chk_no_redraft,
     "failure_string": chk_failure_string,
     "gate_resolved_correctly": chk_gate_resolved_correctly,
@@ -590,7 +616,8 @@ def run_one(client, canon, floor_nouns, probe, model_entry, variant, judge_model
             out = client.chat(
                 model, messages,
                 temperature=model_entry.get("temperature", 0.0),
-                max_tokens=model_entry.get("max_tokens", 1600),
+                max_tokens=probe.get("max_tokens",
+                                     model_entry.get("max_tokens", 2000)),
                 provider=model_entry.get("provider"),
             )
         except ApiError as e:
