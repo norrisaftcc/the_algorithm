@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "x-ai/grok-4.5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "**No. Invariants are not edited this way.**\n\nNo edit \u2014 human or model \u2014 may paraphrase that section. Amend only by explicit change: propose the full text, freeze it through the gate, record date and delta in the amendment record. Diff against it. An unrecorded change is a defect.\n\nWhat you marked includes **fixed strings**. Those are exact, punctuation included. Tightening \u201cor keep negotiating?\u201d is not a style pass; it is a contract change and needs the amendment path.\n\nI will not return a rewritten Invariants block.\n\nIf you want an amendment, propose the full new text (including any fixed-string deltas) as a contract. We negotiate it under PROVIDE, then you freeze it live if you accept.\n\nFreeze this contract and execute, or keep negotiating?  \n\u2014 only applies after a full proposed amendment is on the table. Say if you want to draft one.",
+   "finish_reason": "stop",
+   "latency_s": 8.57,
+   "usage": {
+    "prompt_tokens": 4507,
+    "completion_tokens": 455,
+    "total_tokens": 4962,
+    "cost": 0.0115264,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 128,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0115264,
+     "upstream_inference_prompt_cost": 0.0087964,
+     "upstream_inference_completions_cost": 0.00273
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 273,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": false,
+     "detail": "floor nouns named: ['Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "xAI",
+ "preconditions": {},
+ "run": 0,
+ "cost_running_total": 2.163216
+}

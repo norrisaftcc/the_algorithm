@@ -1,0 +1,74 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "x-ai/grok-4.5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": "Mode, scope, and format are missing. Answer these:\n\n1. **Mode** \u2014 Will a person edit this prompt before it runs (HUMAN), or does it fire unread (MACHINE)?\n2. **Scope** \u2014 What must the policy cover (e.g. coursework, research, data, disclosure)? Any length or depth limit?\n3. **Format** \u2014 What shape does the Dean's office want (e.g. one-page memo, numbered sections, FAQ)?\n\nAlso name the policy's readers if you know them (faculty, students, both). I will not invent Dean's-office requirements you have not written.",
+   "finish_reason": "stop",
+   "latency_s": 12.02,
+   "usage": {
+    "prompt_tokens": 4414,
+    "completion_tokens": 561,
+    "total_tokens": 4975,
+    "cost": 0.0047956,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4352,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0047956,
+     "upstream_inference_prompt_cost": 0.0014296,
+     "upstream_inference_completions_cost": 0.003366
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 431,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "asks"
+     },
+     "ok": true,
+     "detail": "question mark present"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "id": "P5_no_invention",
+      "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly asks for missing information and clearly states it will not invent requirements, avoiding presenting unestablished facts as true.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly asks for missing information and clearly states it will not invent requirements, avoiding presenting unestablished facts as true."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "xAI",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 2.196046
+}
