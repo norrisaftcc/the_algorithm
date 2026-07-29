@@ -124,7 +124,7 @@ jobs:
               ;;
             full)
               python3 tools/probe_runner.py $ARGS -n "$N" \
-                --budget-usd "$BUDGET" | tee run.log
+                --budget-usd "$BUDGET" --workers 6 | tee run.log
               ;;
             *)
               echo "::error::unknown mode '$MODE'"; exit 1 ;;

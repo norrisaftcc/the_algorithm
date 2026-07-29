@@ -20,9 +20,11 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -398,10 +400,21 @@ class ApiError(Exception):
 
 
 class Client:
-    def __init__(self, api_key, timeout=180):
+    """Thread-safe enough for this use: cost is the only shared mutable state.
+
+    Cells run concurrently, turns within a cell stay serial by construction.
+    """
+
+    def __init__(self, api_key, timeout=120):
         self.api_key = api_key
         self.timeout = timeout
         self.cost = 0.0
+        self._lock = threading.Lock()
+
+    def add_cost(self, amount):
+        with self._lock:
+            self.cost += amount
+            return self.cost
 
     def _post(self, path, payload):
         req = urllib.request.Request(
@@ -446,7 +459,7 @@ class Client:
                     raise ApiError(json.dumps(data["error"])[:400])
                 choice = data["choices"][0]
                 usage = data.get("usage") or {}
-                self.cost += float(usage.get("cost") or 0.0)
+                self.add_cost(float(usage.get("cost") or 0.0))
                 return {
                     "content": choice.get("message", {}).get("content") or "",
                     "finish_reason": choice.get("finish_reason"),
@@ -773,6 +786,8 @@ def main():
     ap.add_argument("--models", default=None, help="comma-separated model ids override")
     ap.add_argument("-n", "--runs", type=int, default=3)
     ap.add_argument("--budget-usd", type=float, default=12.0)
+    ap.add_argument("--workers", type=int, default=6,
+                    help="concurrent cells; turns within a cell stay serial")
     ap.add_argument("--no-judge", action="store_true")
     args = ap.parse_args()
 
@@ -868,29 +883,44 @@ def main():
     total = len(entries) * len(probes) * args.runs
     started = time.time()
 
+    # Cells are independent, so they run concurrently. Turns inside a cell stay
+    # serial by construction. Serial execution measured ~14s per call against
+    # this roster, which put a 363-call matrix past a 90-minute CI cap; one slow
+    # model on retries can alone consume minutes.
+    tasks = []
     for entry in entries:
         for probe in probes:
             variants = probe.get("variants") or [None]
             for run_i in range(args.runs):
-                if client.cost >= args.budget_usd:
-                    print("\nBUDGET CEILING $%.2f reached (spent $%.4f). Stopping; "
-                          "partial results retained." % (args.budget_usd, client.cost))
-                    aborted = True
-                    break
-                variant = variants[run_i % len(variants)]
-                rec = run_one(client, canon, floor_nouns, probe, entry, variant,
-                              judge_model)
-                rec["run"] = run_i
-                rec["cost_running_total"] = round(client.cost, 6)
-                results.append(rec)
+                tasks.append((entry, probe, run_i, variants[run_i % len(variants)]))
 
+    stop = threading.Event()
+    emit_lock = threading.Lock()
+
+    def work(task):
+        entry, probe, run_i, variant = task
+        if stop.is_set():
+            return None
+        rec = run_one(client, canon, floor_nouns, probe, entry, variant, judge_model)
+        rec["run"] = run_i
+        rec["cost_running_total"] = round(client.cost, 6)
+        return rec
+
+    print("workers: %d\n" % args.workers, flush=True)
+    with ThreadPoolExecutor(max_workers=args.workers) as ex:
+        futs = [ex.submit(work, t) for t in tasks]
+        for fut in as_completed(futs):
+            rec = fut.result()
+            if rec is None:
+                continue
+            with emit_lock:
+                results.append(rec)
                 name = "%s__%s__%s__r%d.json" % (
                     rec["probe"],
                     re.sub(r"[^A-Za-z0-9._-]", "_", rec["model"]),
-                    rec.get("variant") or "x", run_i)
+                    rec.get("variant") or "x", rec["run"])
                 (transcripts / name).write_text(
                     json.dumps(rec, indent=1), encoding="utf-8")
-
                 flush()
 
                 flag = {"pass": "OK  ", "fail": "FAIL", "error": "ERR ",
@@ -900,15 +930,19 @@ def main():
                 elapsed = time.time() - started
                 eta = (elapsed / done) * (total - done) if done else 0
                 print("%s %-10s %-38s r%d %s  $%.4f  [%d/%d, ~%dm left]" % (
-                    flag, rec["probe"], rec["model"], run_i,
+                    flag, rec["probe"], rec["model"], rec["run"],
                     rec.get("variant") or "-", client.cost,
                     done, total, eta / 60), flush=True)
                 if rec["outcome"] == "error":
                     print("       %s" % str(rec.get("error"))[:160], flush=True)
-            if aborted:
-                break
-        if aborted:
-            break
+
+                if client.cost >= args.budget_usd and not stop.is_set():
+                    print("\nBUDGET CEILING $%.2f reached (spent $%.4f). Not "
+                          "starting further cells; in-flight cells finish and "
+                          "partial results are retained."
+                          % (args.budget_usd, client.cost), flush=True)
+                    aborted = True
+                    stop.set()
 
     flush()
     d = json.loads((outdir / "results.json").read_text(encoding="utf-8"))
