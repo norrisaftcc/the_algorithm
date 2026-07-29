@@ -95,8 +95,9 @@ jobs:
         id: collect
         env:
           GH_TOKEN: ${{ github.token }}
+          CANDIDATE_LIMIT: ${{ steps.validate-limit.outputs.limit }}
         run: |
-          LIMIT="${{ steps.validate-limit.outputs.limit }}"
+          LIMIT="$CANDIDATE_LIMIT"
           REPO="norrisaftcc/the_algorithm"
 
           echo "Collecting open issues from $REPO (limit: $LIMIT)..."
@@ -117,6 +118,7 @@ jobs:
 
           python3 - <<'PYEOF'
           import json
+          import os
           import sys
 
           def normalize(items, item_type, repo):
@@ -133,13 +135,14 @@ jobs:
               return out
 
           repo = "norrisaftcc/the_algorithm"
+          limit = int(os.environ.get("CANDIDATE_LIMIT", "25"))
           issues = json.load(open("/tmp/issues_raw.json"))
           prs = json.load(open("/tmp/prs_raw.json"))
 
-          candidates = normalize(issues, "issue", repo) + normalize(prs, "pull_request", repo)
+          candidates = (normalize(issues, "issue", repo) + normalize(prs, "pull_request", repo))[:limit]
           json.dump(candidates, open("/tmp/candidates.json", "w"), indent=2)
 
-          print(f"Collected {len(issues)} issue(s) and {len(prs)} PR(s) = {len(candidates)} total candidate(s).")
+          print(f"Collected {len(issues)} issue(s) and {len(prs)} PR(s); {len(candidates)} candidate(s) after cap of {limit}.")
           PYEOF
 
       # ------------------------------------------------------------------

@@ -236,6 +236,23 @@ class TestValidateConfig(unittest.TestCase):
         with self.assertRaises(RouterError):
             validate_config(cfg)
 
+    def test_missing_individual_safety_key_fails(self):
+        """Each required safety key, when absent, must cause validate_config to raise RouterError."""
+        required_keys = [
+            "dry_run",
+            "allow_delete",
+            "allow_archive",
+            "allow_cross_repository_items",
+            "allow_project_writes",
+        ]
+        for key in required_keys:
+            with self.subTest(key=key):
+                cfg = _make_config()
+                del cfg["safety"][key]
+                with self.assertRaises(RouterError) as ctx:
+                    validate_config(cfg)
+                self.assertIn(key, str(ctx.exception))
+
     def test_missing_routing_section_fails(self):
         cfg = _make_config()
         del cfg["routing"]

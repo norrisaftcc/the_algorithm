@@ -23,11 +23,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print(
-        "ERROR: pyyaml is required. Install with: pip install pyyaml",
-        file=sys.stderr,
-    )
-    sys.exit(1)
+    yaml = None  # type: ignore[assignment]
 
 PILOT_REPO = "norrisaftcc/the_algorithm"
 SCHEMA_VERSION = 1
@@ -46,6 +42,11 @@ class RouterError(Exception):
 
 def load_config(config_path: Path) -> dict:
     """Load YAML configuration from file. Fail closed on any error."""
+    if yaml is None:
+        raise RouterError(
+            "pyyaml is required for config loading. "
+            "Install with: pip install pyyaml"
+        )
     if not config_path.exists():
         raise RouterError(f"Configuration file not found: {config_path}")
     try:
@@ -92,19 +93,21 @@ def validate_config(cfg: object) -> dict:
     if not isinstance(safety, dict):
         errors.append("safety section is required and must be a mapping.")
     else:
-        if not safety.get("dry_run", False):
+        if safety.get("dry_run") is not True:
             errors.append(
                 "safety.dry_run must be true; "
                 "live mode is not available in this pilot."
             )
-        if safety.get("allow_delete", False):
-            errors.append("safety.allow_delete must be false.")
-        if safety.get("allow_archive", False):
-            errors.append("safety.allow_archive must be false.")
-        if safety.get("allow_cross_repository_items", False):
-            errors.append("safety.allow_cross_repository_items must be false.")
-        if safety.get("allow_project_writes", False):
-            errors.append("safety.allow_project_writes must be false.")
+        for flag in (
+            "allow_delete",
+            "allow_archive",
+            "allow_cross_repository_items",
+            "allow_project_writes",
+        ):
+            if flag not in safety:
+                errors.append(f"safety.{flag} is required and must be false.")
+            elif safety[flag] is not False:
+                errors.append(f"safety.{flag} must be false.")
 
     if errors:
         raise RouterError(
@@ -133,6 +136,9 @@ def evaluate_candidate(candidate: dict, cfg: dict) -> tuple:
     excluded_labels = set(routing.get("excluded_labels", []))
     allowed_types = set(routing.get("item_types", []))
     repo_name = cfg["repository"]["name"]
+
+    if not isinstance(candidate, dict):
+        return RESULT_ERROR, "candidate is not a mapping"
 
     # Validate required candidate fields.
     for field in ("number", "type", "state", "labels", "repository"):
