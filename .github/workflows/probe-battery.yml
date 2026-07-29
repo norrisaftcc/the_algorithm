@@ -55,9 +55,15 @@ jobs:
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
     steps:
+      # Pin to the triggering commit, NOT the branch tip. With ref: github.ref_name
+      # a queued run checks out whatever happens to be on the branch when its
+      # runner starts, so its code is unpredictable and two runs of "the same"
+      # matrix are not the same experiment. Run 30485884822 proved this: queued at
+      # 19:46, it started at 21:09 and silently picked up a concurrency change
+      # pushed at 21:04 while missing probe fixes pushed at 21:29.
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.sha }}
 
       - uses: actions/setup-python@v5
         with:
