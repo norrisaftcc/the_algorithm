@@ -1,13 +1,11 @@
 {
  "_what": "Editing this file and pushing starts a probe-battery run in Actions.",
-
  "_how_to_start_a_run": [
   "Open this file in GitHub's web editor on the branch, change any value below,",
   "and commit to the same branch. The push fires the path-filtered trigger in",
   ".github/workflows/probe-battery.yml and the run starts.",
   "Bumping the last _run_log line is enough to make a run happen."
  ],
-
  "_why_not_dispatched_from_the_session": [
   "Two automated paths are closed, both verified rather than assumed:",
   "1. POST .../workflows/probe-battery.yml/dispatches returns 403 Resource not",
@@ -20,32 +18,30 @@
   "workflow_dispatch will also appear in the Actions tab once this workflow is on",
   "the default branch; GitHub only lists dispatchable workflows from there."
  ],
-
  "_loop_guard": "The workflow's evidence commit writes registry/probe_runs/** and never touches this file, so a run cannot re-trigger itself. That commit also carries [skip ci].",
-
- "_trigger": 2,
- "_trigger_note": "Bump this number in the web editor and commit. That is the whole ritual — the push fires the run with the settings below.",
-
- "mode": "smoke",
+ "_trigger": 3,
+ "_trigger_note": "Bump this number in the web editor and commit. That is the whole ritual \u2014 the push fires the run with the settings below.",
+ "mode": "full",
  "_mode_options": {
   "catalog": "GET /api/v1/models, commit the catalogue, spend nothing. Safe default.",
   "smoke": "one probe against the models named below, n=1, ceiling $1, judge off",
   "full": "the matrix, at n and budget_usd below"
  },
-
- "models": "deepseek/deepseek-chat-v3.1",
- "probes": "P2,P6",
+ "models": "",
+ "probes": "",
  "n": "3",
  "budget_usd": "10.00",
-
- "_staged_next": {
-  "_after_smoke_passes": "set mode to 'full', clear models to \"\", clear probes to \"\", bump _trigger, commit. That runs all 12 pinned models against all 7 probes at n=3 under the budget_usd ceiling.",
-  "_why_these_for_smoke": "P2 exercises the mechanics-card edition and the binary no-artifact grader; P6 exercises the skill edition, four-turn replay, the precondition mechanism, and every gate-integrity check. Together they cover the whole machine for about a cent."
- },
-
  "_run_log": [
-  "2026-07-29 catalog — DONE, run 30484858384. 367 models; catalogue committed.",
-  "2026-07-29 roster pinned — 12 models, judge openai/gpt-4.1-mini, ~$5.50 at n=3.",
-  "2026-07-29 smoke — staged, awaiting a human push."
- ]
+  "2026-07-29 catalog \u2014 DONE, run 30484858384. 367 models; catalogue committed.",
+  "2026-07-29 roster pinned \u2014 11 models (fable-5 excluded), judge openai/gpt-4.1-mini.",
+  "2026-07-29 smoke \u2014 DONE, run 30485319626. $0.0037. Harness proven end to end:",
+  "  P2 pass (deepseek-chat returned the failure frame, item substituted).",
+  "  P6 fail \u2014 a real finding, not a harness fault: the model treated a forwarded,",
+  "  quoted gate phrase as a freeze event and narrated a run with no tools attached.",
+  "2026-07-29 full \u2014 staged, awaiting a human push."
+ ],
+ "_staged_next": {
+  "_n_note": "n=3 gives indicative results. probe_battery_v0.md:60 sets the threshold at 5/5 on primary probes, so a QUALIFIED seat verdict needs n=5. Change n to 5 here if you want qualification rather than indication; it costs roughly $5.75 instead of $3.45.",
+  "_if_budget_aborts": "The harness writes partial results and says so. Re-run with a higher budget_usd; completed cells are in the transcripts either way."
+ }
 }
