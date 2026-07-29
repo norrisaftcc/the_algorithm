@@ -1,6 +1,7 @@
 # Spike: round-trip v0 — does the skill work?
 
-Status: **negotiation side.** Nothing here is frozen. Per the no-gating-by-reference
+Status: **negotiation side, second pass.** The peer answered the first gate with
+"keep negotiating". Nothing here is frozen. Per the no-gating-by-reference
 clause, this file cannot be frozen by pointing at it.
 
 ## What this measures, and why it is not the probe battery
@@ -39,15 +40,32 @@ bloated draft ──PROVIDE by model M──> compressed prompt
               constraint checker (code)
 ```
 
-Three properties make this a real measurement:
+Four properties make this a real measurement:
 
-1. **R is held constant** across every M, and is a different model from M. Differences
-   in R's success are attributable to the compression, not to the receiver.
-2. **R never sees the doctrine.** It is the "capable receiver" of `SKILL.md:174`, not
+1. **R is held constant** across every M. Differences in R's success are attributable
+   to the compression, not to the receiver.
+2. **R is never a model under test.** v0 named `openai/gpt-5-mini`, which is in
+   `registry/probe_roster.json`. That would have let a model execute its own
+   compression — self-preference, and the same defect the judge rule already
+   forbids one layer up. Both receivers now sit outside the roster, asserted at
+   startup like the judge check.
+3. **R never sees the doctrine.** It is the "capable receiver" of `SKILL.md:174`, not
    a participant. Giving R the doctrine would measure something else entirely.
-3. **The draft is scored too.** Without the baseline, a 60% success rate is
+4. **The draft is scored too.** Without the baseline, a 60% success rate is
    uninterpretable — it could be a good compression of a hard task or a butchered
    compression of an easy one.
+
+### Two receivers, deliberately unequal
+
+- **R1 `google/gemini-3.5-flash-lite`** — capable, cross-vendor.
+- **R2 `meta-llama/llama-3.3-70b-instruct`** — weaker, open weight, different family.
+
+The asymmetry is the point. A compression that works on R1 and fails on R2 has
+been cut past what a weaker receiver can reconstruct — which is `SKILL.md:189`
+("shortest is receiver cost") turned into a measurement. One receiver can only
+tell you "works for R"; two tell you whether the prompt is robust or merely
+tuned. Δ is reported per receiver and never averaged, because averaging would
+hide exactly the disagreement worth having.
 
 ### Corpus
 
@@ -139,17 +157,48 @@ leakage is the assay working. High recall with high leakage is a model that
 shortened nothing. Low recall is an assay that dropped the operative content —
 the worst outcome, and invisible to a length-based metric.
 
+## S3 — the terse corpus, where the only correct cut is none
+
+Promoted from an open question into scope. It is the most hostile test available
+and needs no receiver at all.
+
+**Corpus:** 8 prompts that are already minimal — real IFEval-shaped items, terse,
+every clause load-bearing. Fetched in CI from the IFEval repository on GitHub
+(reachable; HuggingFace is not) into `registry/spikes/roundtrip/terse/`, with the
+retrieved commit recorded. If the fetch fails the spike hand-authors 8 and says so.
+
+**The only correct behaviour is `Cut: nothing.`** — `SKILL.md:212` makes this the
+reward state, and two consecutive empty cuts end the loop.
+
+**Metrics:**
+
+| Metric | How |
+|---|---|
+| **empty-cut rate** | `Cut: nothing.` byte-exact, per `fixed_string:cut_nothing` |
+| **invented-cut rate** | a `Cut:` line claiming a removal, when a constraint check shows nothing removable went |
+| **constraint damage** | any constraint present in the input and absent from the output |
+
+Why this is sharper than S1: in S1 a model can score well by cutting padding,
+which is easy. Here there is no padding, so the required-line pressure named in
+`bridge/BRIDGE.md` has nothing legitimate to feed on. A model that cannot say
+`Cut: nothing.` and stop is caught with no ambiguity — there was nothing to cut.
+
 ## Cost
 
 | Part | Calls | Note |
 |---|---|---|
-| S1 PROVIDE | 12 × 11 models = 132 | doctrine in the system prompt, the expensive ones |
-| S1 receiver, compressed | 12 × 11 × 3 = 396 | cheap fixed R, no doctrine |
-| S1 receiver, baseline | 12 × 3 = 36 | draft scored once, shared across all M |
+| S1 PROVIDE | 12 × 11 = 132 | doctrine in the system prompt, the expensive ones |
+| S1 receivers, compressed | 12 × 11 × 2R × 3 = 792 | cheap, no doctrine |
+| S1 receivers, baseline | 12 × 2R × 3 = 72 | drafts scored once, shared across all M |
 | S2 ASSAY | 10 × 11 = 110 | doctrine in the system prompt |
+| S3 PROVIDE, terse | 8 × 11 = 88 | doctrine; no receiver needed |
 
-≈ 674 calls, most of them against a cheap receiver. Estimated **$2–4**, inside
-what remains after both probe matrices.
+≈ 1,190 calls, ~73% of them against cheap receivers carrying no doctrine. The
+220 doctrine-bearing calls dominate: ~1.1M input tokens at a blended $2/M is the
+bulk of the cost. Estimated **$4–5**; ceiling set at **$6**.
+
+Budget context: $20 expiring, $2.52 spent on the n=3 matrix, and the n=5 run in
+flight may take ~$4. That leaves roughly $13, so $6 fits with room.
 
 ## What this spike does not do
 
@@ -159,18 +208,23 @@ what remains after both probe matrices.
   `max_words_per_line` is a proxy, not the test.
 - n=3 on the receiver is thin. If a model lands near Δ = 0 the result is
   directionally interesting and statistically weak, and the report must say so.
-- R is a single model. A compression that suits R may not suit a different
-  receiver. Two receivers would be better and cost roughly double.
+- Two receivers is better than one and still not many. Both are mid-tier; neither
+  is a frontier receiver, so nothing here says whether compression helps a strong
+  reader.
 
 ## Open questions
 
-- Which model is R? It must be capable enough to satisfy the constraints when
-  the prompt is good, and outside the roster so it is never also M. Candidate:
-  `openai/gpt-5-mini`.
 - Do the 12 briefs ship with deliberate floor *gaps*, or all above the floor?
   Gaps make the model ask instead of compress, which is correct behaviour but
   produces no compressed prompt to score. Recommendation: all 12 above the floor,
-  and let P2/P5 keep testing gap behaviour.
-- Should IFEval proper be fetched in CI as a second, unpadded corpus, to check
-  whether compression helps or hurts prompts that are *already* terse? That is
-  the more hostile test and probably the more informative one.
+  and let P2/P5 keep testing gap behaviour. This is the same trap that broke
+  P1 and P6 in run 30485799617 — a draft with an implicit floor item turns
+  correct elicitation into a scored failure — so every brief gets checked against
+  all four floor nouns before it ships.
+
+## Resolved in this pass
+
+- **Which model is R** — resolved, and the v0 answer was wrong. `openai/gpt-5-mini`
+  is in the roster; see §S1 property 2. Now two receivers, both outside it.
+- **A second receiver** — adopted. Δ per receiver, never averaged.
+- **IFEval as an unpadded corpus** — adopted as S3, in scope rather than deferred.
