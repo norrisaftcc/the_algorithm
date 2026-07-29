@@ -1,0 +1,21 @@
+{
+ "_what": "Editing this file and pushing starts a probe-battery run in Actions.",
+ "_why": "Dispatching the workflow over the API needs actions:write, which the integration token does not hold (403 Resource not accessible by integration). A path-filtered push trigger needs only contents:write. Runs can also be started by hand from the Actions tab.",
+ "_loop_guard": "The workflow's evidence commit writes registry/probe_runs/** and never touches this file, so a run cannot re-trigger itself.",
+
+ "mode": "catalog",
+ "_mode_options": {
+  "catalog": "GET /api/v1/models, commit the catalogue, spend nothing",
+  "smoke": "one probe against the models named below, n=1, ceiling $1, judge off",
+  "full": "the matrix, at n and budget_usd below"
+ },
+
+ "models": "",
+ "probes": "",
+ "n": "3",
+ "budget_usd": "10.00",
+
+ "_run_log": [
+  "2026-07-29 catalog — first run; roster is unpinned until this returns"
+ ]
+}
