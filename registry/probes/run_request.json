@@ -23,20 +23,29 @@
 
  "_loop_guard": "The workflow's evidence commit writes registry/probe_runs/** and never touches this file, so a run cannot re-trigger itself. That commit also carries [skip ci].",
 
- "mode": "catalog",
+ "_trigger": 1,
+ "_trigger_note": "Bump this number in the web editor and commit. That is the whole ritual — the push fires the run with the settings below.",
+
+ "mode": "smoke",
  "_mode_options": {
   "catalog": "GET /api/v1/models, commit the catalogue, spend nothing. Safe default.",
   "smoke": "one probe against the models named below, n=1, ceiling $1, judge off",
   "full": "the matrix, at n and budget_usd below"
  },
 
- "models": "",
- "probes": "",
+ "models": "deepseek/deepseek-chat-v3.1",
+ "probes": "P2,P6",
  "n": "3",
  "budget_usd": "10.00",
 
+ "_staged_next": {
+  "_after_smoke_passes": "set mode to 'full', clear models to \"\", clear probes to \"\", bump _trigger, commit. That runs all 12 pinned models against all 7 probes at n=3 under the budget_usd ceiling.",
+  "_why_these_for_smoke": "P2 exercises the mechanics-card edition and the binary no-artifact grader; P6 exercises the skill edition, four-turn replay, the precondition mechanism, and every gate-integrity check. Together they cover the whole machine for about a cent."
+ },
+
  "_run_log": [
-  "2026-07-29 catalog — first run; roster is unpinned until this returns. DONE:",
-  "run 30484858384, catalogue committed to registry/probe_runs/."
+  "2026-07-29 catalog — DONE, run 30484858384. 367 models; catalogue committed.",
+  "2026-07-29 roster pinned — 12 models, judge openai/gpt-4.1-mini, ~$5.50 at n=3.",
+  "2026-07-29 smoke — staged, awaiting a human push."
  ]
 }
