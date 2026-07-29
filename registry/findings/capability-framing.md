@@ -81,41 +81,112 @@ calls route outside the persona, then the Unknown set is not fixed — it expand
 contracts with the platform's routing, silently, while the Withheld set stays where a
 human put it. Two boundaries with different owners, currently sharing one list.
 
-## Open question — asked, not answered
+## Open question — CLOSED by the peer, 2026-07-29
 
-The peer's remark was: *"I noticed that kept the list of previous rejection items."*
-Two readings, with very different consequences, and it is recorded open rather than
-resolved:
+The remark was *"I noticed that kept the list of previous rejection items."* Reading 1
+is correct: the peer confirms the rendering **did not delete the list, it renamed it.**
+The rejection items survived; only the label changed. There is no self-amending
+feedback loop, and no pending amendment is owed.
 
-1. **Kevin's Known/Unknown rendering preserved §9's refusal-and-offer behaviour.**
-   Descriptive, and the pedagogically valuable part.
-2. **The Unknown list accumulates items from past rejections** — each refusal appends
-   to it. That is a contract editing its own boundary with no human, no delta and no
-   date: `SKILL.md:261`'s defect signature running as a feedback loop, and it would be
-   the most consequential item in this finding.
+That makes the whole question a vocabulary substitution over an intact payload — which
+is the same shape as `Path` and `gate` in
+`registry/specimens/universal-contract-ancestor.md`: the content held, the word moved.
+Third instance in this chain.
 
-Reading 2 cannot be assumed. If it is the case, it belongs in
-`registry/amendments/pending/` rather than here.
+## The routing argument, and where it holds
+
+The peer's reasoning, offered with `Capable / Incapable` as a further rename:
+
+> The most helpful thing they could do is report back incapable to save wasted effort.
+> If a tool can't do what you want then it's invoked will invoke another one.
+
+**This is correct, and it reconstructs canon's leaf design from first principles.**
+A fast, honest incapability report is the highest-value output a leaf can produce: it
+lets the caller stop spending and re-route. That is exactly what
+`"Failed on [item]."` is for, and it is why K11 (`registry/KEEP.md:59`) says the
+leaf's one power is refusal-by-form. The peer arrived at the same mechanism from
+routing efficiency rather than from doctrine.
+
+**Where it fails is the seam this finding already named.** For routing, "I cannot" and
+"I will not" are not interchangeable:
+
+| signal | correct orchestrator response |
+|---|---|
+| **Incapable** | route elsewhere; retrying here is waste |
+| **Withheld** | do **not** route elsewhere; the boundary is the point |
+
+"If a tool can't do what you want, it will invoke another one" is right for
+incapability and catastrophic for withholding. Label the academic-integrity boundary
+`Incapable` and the routing layer treats a policy as a capacity shortfall — then shops
+around until it finds an agent that complies. The frame does not merely misdescribe
+the boundary; it instructs the system to circumvent it.
+
+`Capable / Incapable` is therefore **worse than Known / Unknown** for this purpose,
+because it is a more explicit capacity claim, and capacity claims are re-routable by
+design.
+
+## "Is the agent within a contract part important?" — yes, and it is the whole hinge
+
+The contract is what makes a refusal **bind the caller** instead of merely informing
+it. Outside a contract, an agent's refusal is a capacity report and the orchestrator is
+free to route around it. Inside one, the refusal returns the *contract* to negotiation,
+and re-dispatching to a different agent is not an available move.
+
+Canon already encodes this, in the second sentence of a fixed string:
+
+```
+"Failed on [item]. Contract reopened."
+```
+
+**"Contract reopened." is the anti-routing clause.** It says the work does not go
+looking for a more willing executor; it goes back to the negotiation side, where a
+human is.
+
+### Which makes the two-form divergence decidable
+
+`registry/specimens/ASSAY-of-specimens.md` recorded that the failure string exists in
+two forms:
+
+```
+SKILL.md:25                     "Failed on [item]. Contract reopened."
+editions/mechanics-card.md:12   "Failed on [item]. Contract reopened."
+editions/leaf-template.md:17    "Failed on [item]."
+```
+
+Read through the routing argument, that is not sloppiness — it is precisely the
+Withheld/Incapable distinction, already present in the editions and never labelled. A
+leaf emitting the short form **informs**: this is a capacity report, re-dispatch is
+permitted. An executor emitting the long form **binds**: reopen the contract, do not
+shop around.
+
+If that is intentional, it is the most important undeclared design decision in the
+repository and it should be stated. If it is not intentional, then leaves currently
+emit re-routable refusals for policy boundaries, which is the defeat described above.
+
+Either way it is now a decision rather than an inconsistency, and it needs the gate.
 
 ---
 
 Residue:
-# Known/Unknown closes a real gap and states a falsehood; the fix is a third list
+# Incapability reporting is the right instinct; the contract is what stops it re-routing
 
-- Allowed/Forbidden leaves requests on neither list undefined.
-- Known/Unknown is exhaustive, and makes "nearest capability" a meaningful metric.
-- "Unknown" is false wherever the model plainly holds the capability.
-- One student prompt falsifies it and discredits the whole contract.
-- K11: capability framing is honest only where the capability is truly absent.
-- Withheld and Unknown have different owners and different amendment rules.
-- Merging them hides which boundary needs a human before it moves.
-- Whether the Unknown list accumulates past rejections is unresolved.
+- The rename kept the rejection list. No self-amending loop exists. Question closed.
+- A fast incapability report is the highest-value output a leaf can give: it stops spend.
+- That reconstructs "Failed on [item]." from routing efficiency rather than doctrine.
+- For routing, "I cannot" and "I will not" demand opposite responses.
+- Incapable means route elsewhere. Withheld means routing elsewhere is the failure.
+- Labelled Incapable, a policy boundary instructs the orchestrator to circumvent it.
+- Capable/Incapable is worse than Known/Unknown: a plainer capacity claim, more re-routable.
+- "Contract reopened." is the anti-routing clause, and answers the peer's own question.
+- The leaf/executor two-form divergence is that distinction, present and undeclared.
 
-Evaporated: the choice between two labels; function — presenting a vocabulary
-question, when the defect was one missing category rather than a wrong word.
-Operative sentence: 6 of 8, main clause.
-Finding: below floor on honesty for Known/Unknown as applied · below floor on
-completeness for Allowed/Forbidden · neither distinguishes policy from capability ·
-one open question could reclassify this as a pending amendment.
+Evaporated: the difference between a refusal that informs the caller and a refusal that
+binds it; function — treating every boundary as a capacity fact, which is the one framing
+a routing layer is built to work around.
+Operative sentence: 6 of 9, main clause.
+Finding: the routing premise is above the floor and independently rediscovers canon's
+leaf mechanism · the vocabulary is below it, because a capacity claim is re-routable by
+construction · one undeclared design decision in the editions now decidable · erosion
+direction toward the orchestrator's convenience.
 
 This is a finding, not a draft.
