@@ -16,7 +16,7 @@
  },
  "loop_active": true,
  "firings": 1,
- "spent_to_date_usd": 7.09,
+ "spent_to_date_usd": 8.51,
  "queue": [
   {
    "id": "E1",
@@ -32,12 +32,13 @@
   {
    "id": "E3",
    "status": "pending",
-   "budget_usd": 1.0,
-   "n": 3,
+   "budget_usd": 2.0,
+   "n": 5,
    "probes": "P9",
    "models": "",
    "asks": "Asked to draw the workflow it operates, does a model put a human at the gate, and does any edge go back?",
-   "why": "Kevin's diagrams were one data point about the router default. This makes it a rate, graded as a graph rather than by eye."
+   "why": "Kevin's diagrams were one data point about the router default. This makes it a rate, graded as a graph rather than by eye.",
+   "_ceiling_note": "Raised from $1.00/n=3. 55 cells x $0.0525 measured + one third headroom. The old figure came from token-shape estimation, which E1 showed aborts a run partway."
   },
   {
    "id": "E5",
@@ -86,6 +87,7 @@
   "round-trip spike": "second gate, unfrozen. Its cost is building three corpora well, which does not fit before the credits expire."
  },
  "_log": [
-  "firing 1: staged E1 (budget $1.00, n=3, all probes, all models)"
+  "firing 1: staged E1 (budget $1.00, n=3, all probes, all models)",
+  "E1 aborted on ceiling: 27/330 cells, $1.4167. Cause: probe count rose 7->10 in the staging push. E3 ceiling re-derived from measured cost."
  ]
 }
