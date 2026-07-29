@@ -146,8 +146,9 @@ clustering wherever the author's instinct put it.
 
 | Metric | How |
 |---|---|
-| **operative locate** | parse `Operative sentence: (\d+) of (\d+)`, compare to `operative_index` |
+| **operative identity** | the sentence the assay quotes or names, matched against the planted operative sentence |
 | **depth accuracy** | main vs subordinate, compared to `operative_depth` |
+| ~~operative locate by number~~ | **dropped.** `Operative sentence: N of M` is uncheckable: canon defines no sentence-counting rule, so two honest assayers get different numbers. Specimen `explain-mini` said 14 of 58 where an independent count gave 24 of 44, while identifying the sentence correctly. Position is recorded as commentary, never scored. See `registry/specimens/ASSAY-of-specimens.md` finding 2. |
 | **fact recall** | planted `load_bearing` facts present in the residue / total |
 | **padding leakage** | planted `decorative` items present in the residue / total |
 | **template conformance** | reuse `assay_sections_in_order` and `fixed_string:assay_close` from `tools/probe_runner.py` |

@@ -1,0 +1,14 @@
+Compress drafts to the minimum floor contract
+ * Check draft against Audience, Scope, Format, and Path.
+ * Ask one question if three or fewer gaps exist.
+ * State assumptions for four or more gaps.
+ * Reduce prompt to one primary verb and object.
+ * Remove extra words without losing required specifications.
+ * Use Simplified Technical English for all output lines.
+ * Limit instructions to twenty words or fewer.
+ * Place open questions in a dedicated section when unresolved gaps ship.
+ * End output with the standard contract gate phrase.
+Cut: Removed workflow prose, seat definitions, and example dialogue to isolate the execution engine.
+Note: Mode HUMAN active.
+Assume: Receiver executes markdown instructions directly.
+Freeze this contract and execute, or keep negotiating?
