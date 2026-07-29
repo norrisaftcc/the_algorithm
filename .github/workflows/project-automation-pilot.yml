@@ -1,0 +1,174 @@
+name: project-automation-pilot
+
+# Manually triggered only. No automatic event triggers in this pilot.
+# To trigger: Actions tab > project-automation-pilot > Run workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run_confirm:
+        description: >
+          Confirm dry-run mode. Must be 'true'.
+          Live mode is not available in this pilot.
+          Any other value aborts the run immediately.
+        required: true
+        default: "true"
+        type: string
+      candidate_limit:
+        description: >
+          Maximum candidates to evaluate (integer, 1-25).
+          Defaults to 25 (the configured maximum).
+        required: false
+        default: "25"
+        type: string
+
+# Minimum read-only permissions. No write access is requested or needed.
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  pilot-dry-run:
+    name: "Project Automation Pilot (dry-run only)"
+    runs-on: ubuntu-latest
+
+    steps:
+      # ------------------------------------------------------------------
+      # 1. Enforce dry-run. Abort immediately if confirmation is wrong.
+      # ------------------------------------------------------------------
+      - name: Enforce dry-run mode
+        run: |
+          if [ "${{ inputs.dry_run_confirm }}" != "true" ]; then
+            echo "ERROR: dry_run_confirm must be 'true'."
+            echo "Live mode is not available in this pilot. No changes were made."
+            exit 1
+          fi
+          echo "Dry-run mode confirmed."
+
+      # ------------------------------------------------------------------
+      # 2. Check out the repository.
+      # ------------------------------------------------------------------
+      - uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      # 3. Set up Python and install dependencies.
+      # ------------------------------------------------------------------
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      # ------------------------------------------------------------------
+      # 4. Run automated tests.
+      # ------------------------------------------------------------------
+      - name: Run automated tests
+        run: python -m unittest tests.test_project_router -v
+
+      # ------------------------------------------------------------------
+      # 5. Validate candidate limit input.
+      # ------------------------------------------------------------------
+      - name: Validate candidate limit
+        id: validate-limit
+        run: |
+          LIMIT="${{ inputs.candidate_limit }}"
+          if ! echo "$LIMIT" | grep -qE '^[0-9]+$'; then
+            echo "ERROR: candidate_limit must be a positive integer."
+            exit 1
+          fi
+          if [ "$LIMIT" -lt 1 ] || [ "$LIMIT" -gt 25 ]; then
+            echo "ERROR: candidate_limit must be between 1 and 25."
+            exit 1
+          fi
+          echo "limit=$LIMIT" >> "$GITHUB_OUTPUT"
+          echo "Candidate limit: $LIMIT"
+
+      # ------------------------------------------------------------------
+      # 6. Collect open issues and pull requests (read-only).
+      #    gh issue list excludes pull requests; gh pr list excludes issues.
+      #    Candidates are normalized to a common JSON schema.
+      # ------------------------------------------------------------------
+      - name: Collect open issues and pull requests
+        id: collect
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          LIMIT="${{ steps.validate-limit.outputs.limit }}"
+          REPO="norrisaftcc/the_algorithm"
+
+          echo "Collecting open issues from $REPO (limit: $LIMIT)..."
+          gh issue list \
+            --repo "$REPO" \
+            --state open \
+            --limit "$LIMIT" \
+            --json number,title,labels,state \
+            > /tmp/issues_raw.json
+
+          echo "Collecting open pull requests from $REPO (limit: $LIMIT)..."
+          gh pr list \
+            --repo "$REPO" \
+            --state open \
+            --limit "$LIMIT" \
+            --json number,title,labels,state \
+            > /tmp/prs_raw.json
+
+          python3 - <<'PYEOF'
+          import json, sys
+
+          def normalize(items, item_type, repo):
+              out = []
+              for item in items:
+                  out.append({
+                      "number": item["number"],
+                      "type": item_type,
+                      "state": item["state"].lower(),
+                      "labels": [l["name"] for l in item.get("labels", [])],
+                      "repository": repo,
+                      "already_in_project": False,
+                  })
+              return out
+
+          repo = "norrisaftcc/the_algorithm"
+          issues = json.load(open("/tmp/issues_raw.json"))
+          prs = json.load(open("/tmp/prs_raw.json"))
+
+          candidates = normalize(issues, "issue", repo) + normalize(prs, "pull_request", repo)
+          json.dump(candidates, open("/tmp/candidates.json", "w"), indent=2)
+
+          print(f"Collected {len(issues)} issue(s) and {len(prs)} PR(s) = {len(candidates)} total candidate(s).")
+          PYEOF
+
+      # ------------------------------------------------------------------
+      # 7. Run the routing evaluator (dry-run).
+      #    Exits nonzero if any candidate has an error result.
+      # ------------------------------------------------------------------
+      - name: Run routing evaluator
+        run: |
+          python scripts/project_router.py \
+            --config .github/project-automation.yml \
+            --candidates /tmp/candidates.json \
+            --limit "${{ steps.validate-limit.outputs.limit }}" \
+            --output /tmp/dry-run-report.json
+
+      # ------------------------------------------------------------------
+      # 8. Print the machine-readable report in workflow logs.
+      # ------------------------------------------------------------------
+      - name: Print dry-run report
+        run: |
+          echo "=== dry-run-report.json ==="
+          cat /tmp/dry-run-report.json
+
+      # ------------------------------------------------------------------
+      # 9. Upload the report as a workflow artifact (7-day retention).
+      #    'if: always()' preserves the artifact on evaluator failure too.
+      # ------------------------------------------------------------------
+      - name: Upload dry-run report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dry-run-report
+          path: /tmp/dry-run-report.json
+          retention-days: 7

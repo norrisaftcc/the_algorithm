@@ -1,0 +1,39 @@
+# .github/project-automation.yml
+# GitHub Projects dry-run automation pilot.
+# Scope: norrisaftcc/the_algorithm only.
+# This file is reviewed. Do not edit without review.
+# The evaluator fails closed if any safety constraint is absent or disabled.
+
+schema_version: 1
+
+repository:
+  name: norrisaftcc/the_algorithm
+
+project:
+  # owner and number are placeholders.
+  # Live Project lookup and validation are NOT performed in this pilot.
+  owner: null
+  number: null
+
+routing:
+  required_labels:
+    - "project:track"
+  excluded_labels:
+    - "project:ignore"
+  item_types:
+    - issue
+    - pull_request
+
+backfill:
+  enabled: false
+  maximum_items: 25
+
+safety:
+  # dry_run must remain true.
+  # Setting it to false causes the evaluator to fail closed.
+  # Live mode is not available in this pilot.
+  dry_run: true
+  allow_delete: false
+  allow_archive: false
+  allow_cross_repository_items: false
+  allow_project_writes: false
