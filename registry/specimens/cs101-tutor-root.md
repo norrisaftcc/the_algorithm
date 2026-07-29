@@ -69,24 +69,32 @@ The pressure applies to Path identically, and canon did not notice.
 The leaf edition carries the affordance; canon's own template does not. Candidate
 amendment: give the PROVIDE template the same escape the leaf template already has.
 
-## The open question that decides the earlier findings
+## The open question — CLOSED by the peer, 2026-07-29
 
-Is this document's gate phrase original, or paraphrased from canon?
+Was this document's gate phrase original, or paraphrased from canon? **Paraphrased.**
+Recorded by the peer, unprompted, and entered as `registry/drift_log.md` D1:
 
-> Would the user like to amend the order, or enter execution mode?
+> through the gate drift was my human error
+>
+> Not a voice print but a quick copy paste of something I was *trying*
 
-- **If it predates the peer's exposure to canon's gate phrase**, there was no
-  paraphrase event. It is an independently authored gate phrase for a capability
-  gate, and a reasonable one for that job. The "drift toward the smooth" reading in
-  `ASSAY-of-specimens.md` finding 3 would then be wrong — parallel invention read as
-  corruption.
-- **If it postdates canon**, the earlier reading holds.
+So a paraphrase event exists, it was singular, and it was human — not a delegated
+model, not a voiceprint, not machine paraphrase at any hop. The reading in
+`ASSAY-of-specimens.md` finding 3 was therefore right about direction and wrong about
+agent: the drift toward the smooth was real, and a person introduced it while
+experimenting.
 
-Unresolvable from the artifacts. Recorded as open rather than assumed, because it
-determines whether a paraphrase event exists anywhere in this chain.
+That leaves the substitution and the promotion as **two separate events** in one
+document, which is worth keeping distinct:
 
-What survives either way: the Universal Contract dropped §6 and §7 while keeping §8,
-and every later artifact rendered that faithfully.
+| | event | origin |
+|---|---|---|
+| gate phrase | a phrasing under trial, pasted in | human, self-reported |
+| §8 kept while §6/§7 dropped | generalising a tutoring contract past its domain | structural, in the promotion |
+
+Only the first is confessed. The second is not an error anyone made in a moment; it is
+what happens when a capability gate is lifted away from the capability list that gave
+it meaning. That finding stands unchanged.
 
 ## Stronger than canon, and to be imported rather than lost
 
