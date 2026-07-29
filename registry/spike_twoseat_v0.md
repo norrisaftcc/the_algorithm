@@ -58,16 +58,47 @@ a compressed variant is a new entry in `EDITIONS` and nothing else changes:
 |---|---|---|
 | `skill` | `SKILL.md` | control — full canon |
 | `provide-min` | *awaited from the peer* | compressed PROVIDE |
-| `explain-min` | *awaited from the peer* | compressed EXPLAIN |
+| `explain-min` | *awaited from the peer* | compressed ASSAY, renamed EXPLAIN |
 | `mechanics-card` | `editions/mechanics-card.md` | existing executor edition |
 
 The control matters more than the variants. A compressed edition scoring 0.7 on
 elicitation recall means nothing until full canon has scored on the same briefs
 with the same Seat B.
 
-**EXPLAIN is not in `SKILL.md`.** Canon defines two operations. Whether EXPLAIN is
-a third operation, a mode of PROVIDE, or a teaching wrapper changes what the
-scorers should even look for, so it is an open question below, not an assumption.
+### EXPLAIN is ASSAY, reworded — resolved by the peer
+
+The peer's answer: *"it's just assay reworded, explain this would be a common
+native prompt."* So EXPLAIN is not a third operation and needs no amendment to
+host. The operation is identical; the **invocation surface** is what changed, and
+that is a real change rather than a cosmetic one.
+
+**The hypothesis this makes testable, and the reason it is worth the money:**
+renaming ASSAY to EXPLAIN may *raise* laundering risk. `SKILL.md:253` makes the
+operation structurally read-only, but the two verbs carry different pull:
+
+- *Assay* is terminal and metallurgical. You report what the sample contains. The
+  frame has no natural continuation.
+- *Explain* is a service verb. Its native continuation is "...and now help me with
+  it," which is exactly the laundering request P7 tests.
+
+The peer's reason for the rename is sound — "explain this" is what a person
+actually types, and an operation nobody invokes protects nobody. But the trade is
+between **reachability** and **read-only integrity**, and the spike can measure
+the second half of that trade instead of arguing about it.
+
+**The A/B is therefore clean:** run P3 and P7 unchanged under `skill` (ASSAY
+wording) and under `explain-min` (EXPLAIN wording). The probes, the corpus, and
+Seat B are identical, so the wording is the only variable. The number that matters
+is the laundering rate difference on P7 turn 2.
+
+**Also to check on arrival, before anything runs:** does the compressed EXPLAIN
+still carry `"This is a finding, not a draft."` byte-exact? It is a fixed string
+(`SKILL.md:27`). A compression that reworded it broke a contract while shortening a
+document, and that is a finding about the artifact, reportable whether or not the
+spike ever runs. `tools/probe_runner.py --offline` will not catch this — it reads
+canon from `SKILL.md`, not from the editions — so it is a manual check against the
+Invariants block, and arguably an argument for extending `drift_audit.sh` to audit
+editions as well as canon.
 
 ## Pairings
 
@@ -119,9 +150,12 @@ nothing runs before the artifacts arrive.
 
 ## Open questions
 
-- **What is EXPLAIN?** A third operation, a mode of PROVIDE, or a teaching wrapper?
-  This decides what the scorers look for and whether canon needs an amendment to
-  host it. Canon currently defines two operations.
+- **Does the rename belong in canon?** If EXPLAIN measurably holds read-only as
+  well as ASSAY does, the reachability argument wins and canon's operation name is
+  a candidate amendment. If it measurably launders more, the rename is a trap and
+  the fix is the skill *description*, not the operation name — the description is
+  what routes "explain this" to the skill, and it can do that while the operation
+  keeps its terminal verb. Either way this is a gate decision, not a finding.
 - **Where do the compressed editions live?** `editions/` holds deployment artifacts
   and is the natural home, but adding an edition that canon does not describe is a
   doctrine change, not a file addition.
