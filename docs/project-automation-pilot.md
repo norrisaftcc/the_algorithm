@@ -61,7 +61,7 @@ Setting any safety flag incorrectly causes the evaluator to fail closed with exi
 
 ## How to run locally
 
-Requirements: Python 3.11 or later, `pyyaml`.
+Requirements: Python 3.9 or later, `pyyaml`.
 
 ```bash
 pip install pyyaml

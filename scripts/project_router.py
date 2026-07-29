@@ -3,9 +3,18 @@
 project_router.py — dry-run GitHub Projects routing evaluator.
 Pilot scope: norrisaftcc/the_algorithm only.
 No writes are performed. No live Project lookup is attempted.
+
+Requires Python 3.9 or later (for built-in generic type hints).
 """
 
 import sys
+
+if sys.version_info < (3, 9):
+    print(
+        "ERROR: Python 3.9 or later is required.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
 import json
 import argparse
 from pathlib import Path
@@ -21,6 +30,7 @@ except ImportError:
 
 PILOT_REPO = "norrisaftcc/the_algorithm"
 SCHEMA_VERSION = 1
+DEFAULT_MAXIMUM_ITEMS = 25
 
 # Valid routing results.
 RESULT_WOULD_ADD = "would_add"
@@ -173,7 +183,7 @@ def route_candidates(candidates: list, cfg: dict, limit: int) -> dict:
     The report always carries dry_run=True; no writes are performed.
     """
     if len(candidates) > limit:
-        max_allowed = cfg.get("backfill", {}).get("maximum_items", 25)
+        max_allowed = cfg.get("backfill", {}).get("maximum_items", DEFAULT_MAXIMUM_ITEMS)
         raise RouterError(
             f"Candidate count {len(candidates)} exceeds limit {limit} "
             f"(configured maximum: {max_allowed}). "
@@ -306,7 +316,7 @@ def main() -> None:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)
 
-    max_configured = cfg.get("backfill", {}).get("maximum_items", 25)
+    max_configured = cfg.get("backfill", {}).get("maximum_items", DEFAULT_MAXIMUM_ITEMS)
     effective_limit = max_configured
     if args.limit is not None:
         if args.limit > max_configured:

@@ -16,14 +16,10 @@ Covers:
   - real config file is valid      => integration test (skipped if pyyaml unavailable)
 """
 
-import sys
 import unittest
 from pathlib import Path
 
-# Make the scripts directory importable regardless of where tests are run from.
-sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
-
-from project_router import (  # noqa: E402
+from scripts.project_router import (  # noqa: E402
     RouterError,
     PILOT_REPO,
     RESULT_WOULD_ADD,
@@ -368,7 +364,7 @@ class TestRealConfigFile(unittest.TestCase):
         if not config_path.exists():
             self.skipTest(f"Config file not found: {config_path}")
 
-        from project_router import load_config
+        from scripts.project_router import load_config
 
         cfg = load_config(config_path)
         self.assertEqual(cfg["repository"]["name"], PILOT_REPO)
