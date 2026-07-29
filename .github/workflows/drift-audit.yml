@@ -12,3 +12,12 @@ jobs:
           fetch-depth: 2
       - name: Run the mechanized archivist
         run: bash tools/drift_audit.sh SKILL.md
+
+      # Reports, does not block. The tool exits nonzero on a collision — that is
+      # the tool's contract — but this step is non-blocking by the peer's frozen
+      # decision: a new instrument with no measured false-positive rate has not
+      # earned a gate, and it cannot catch the general class of referent drift.
+      # Blocking on a partial instrument manufactures confidence.
+      - name: Run the referent audit (reports, does not block)
+        continue-on-error: true
+        run: bash tools/referent_audit.sh SKILL.md editions/*.md bridge/BRIDGE.md
