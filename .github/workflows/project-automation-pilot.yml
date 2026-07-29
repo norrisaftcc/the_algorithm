@@ -116,7 +116,8 @@ jobs:
             > /tmp/prs_raw.json
 
           python3 - <<'PYEOF'
-          import json, sys
+          import json
+          import sys
 
           def normalize(items, item_type, repo):
               out = []

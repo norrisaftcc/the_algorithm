@@ -15,6 +15,7 @@ if sys.version_info < (3, 9):
         file=sys.stderr,
     )
     sys.exit(1)
+
 import json
 import argparse
 from pathlib import Path

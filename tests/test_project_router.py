@@ -19,7 +19,7 @@ Covers:
 import unittest
 from pathlib import Path
 
-from scripts.project_router import (  # noqa: E402
+from scripts.project_router import (
     RouterError,
     PILOT_REPO,
     RESULT_WOULD_ADD,
@@ -356,7 +356,7 @@ class TestRealConfigFile(unittest.TestCase):
 
     def test_real_config_is_valid(self):
         try:
-            import yaml  # noqa: F401
+            import yaml  # availability check only; pyyaml is required by load_config
         except ImportError:
             self.skipTest("pyyaml not installed")
 
