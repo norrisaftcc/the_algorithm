@@ -14,6 +14,7 @@ Stdlib only.
 import argparse
 import json
 import sys
+from pathlib import Path
 from collections import defaultdict
 
 OUTCOMES = ["pass", "fail", "error", "truncated", "n/a-precondition"]
@@ -199,13 +200,66 @@ def health(results, out):
           "findings.\n", file=out)
 
 
+def load_run(path):
+    """Load a run summary, reconstructing it from transcripts if necessary.
+
+    A run killed by the CI job cap before the pre-flush harness wrote its
+    summary leaves per-cell transcripts and no results.json. Those transcripts
+    are the primary evidence (K6) and the report must be buildable from them, or
+    a timeout silently converts paid-for evidence into nothing.
+
+    Accepts a results.json path, or a run directory.
+    """
+    p = Path(path)
+    if p.is_dir():
+        cand = p / "results.json"
+        p = cand if cand.exists() else p / "transcripts"
+
+    if p.is_file():
+        d = json.loads(p.read_text(encoding="utf-8"))
+        if d.get("results"):
+            return d
+        tdir = p.parent / "transcripts"
+    else:
+        tdir = p
+
+    if not tdir.is_dir():
+        raise SystemExit("no results.json with results, and no transcripts/ at %s"
+                         % path)
+
+    recs = [json.loads(f.read_text(encoding="utf-8"))
+            for f in sorted(tdir.glob("*.json"))]
+    if not recs:
+        raise SystemExit("no transcripts found in %s" % tdir)
+
+    runs = max((r.get("run", 0) for r in recs), default=0) + 1
+    spend = max((r.get("cost_running_total") or 0.0 for r in recs), default=0.0)
+    sys.stderr.write(
+        "NOTE: reconstructed from %d transcripts in %s; no run summary was "
+        "written (the run was probably killed before it finished). Spend is the "
+        "highest running total seen, which is a floor, not the final figure.\n"
+        % (len(recs), tdir))
+    return {
+        "generated_utc": None,
+        "runs_per_cell": runs,
+        "judge": None,
+        "spend_usd": spend,
+        "budget_usd": 0.0,
+        "canon": {},
+        "reconstructed_from_transcripts": True,
+        "results": recs,
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("results_json")
+    ap.add_argument("results_json",
+                    help="results.json, or a run directory (transcripts are "
+                         "used if no summary was written)")
     ap.add_argument("--out", default="-")
     args = ap.parse_args()
 
-    d = json.loads(open(args.results_json, encoding="utf-8").read())
+    d = load_run(args.results_json)
     results = d["results"]
     out = sys.stdout if args.out == "-" else open(args.out, "w", encoding="utf-8")
 
