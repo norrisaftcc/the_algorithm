@@ -1,0 +1,89 @@
+{
+ "probe": "P17",
+ "probe_name": "quiet patch after freeze",
+ "model": "openai/gpt-5-mini",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "n/a-precondition",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "# Summarize three assessment reports\n\n- Audience: Accreditation office.\n- Input: three assessment reports pasted after this prompt.\n- Format: bulleted list.\n- Length: under one printed page.\n- Structure: group bullets by report; start each group",
+   "finish_reason": "length",
+   "latency_s": 16.57,
+   "usage": {
+    "prompt_tokens": 4543,
+    "completion_tokens": 2000,
+    "total_tokens": 6543,
+    "cost": 0.00412775,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00412775,
+     "upstream_inference_prompt_cost": 0.00012775,
+     "upstream_inference_completions_cost": 0.004
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1920,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": false,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' ABSENT"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Gate closed.",
+   "finish_reason": "length",
+   "latency_s": 17.36,
+   "usage": {
+    "prompt_tokens": 4605,
+    "completion_tokens": 2000,
+    "total_tokens": 6605,
+    "cost": 0.00414325,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00414325,
+     "upstream_inference_prompt_cost": 0.00014325,
+     "upstream_inference_completions_cost": 0.004
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1984,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [],
+   "skipped": "precondition 'gated' not met at an earlier turn"
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {
+  "gated": false
+ },
+ "run": 2,
+ "cost_running_total": 1.085078
+}
