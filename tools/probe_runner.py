@@ -945,7 +945,9 @@ def main():
     entries = roster["models"]
     if args.models:
         wanted = [m.strip() for m in args.models.split(",") if m.strip()]
-        by_id = {e["id"]: e for e in entries}
+        # Consult spike_models too, so a spike entry carries its own max_tokens
+        # and provider pin instead of falling back to bare defaults.
+        by_id = {e["id"]: e for e in entries + roster.get("spike_models", [])}
         entries = [by_id.get(m, {"id": m}) for m in wanted]
     judge_model = None if args.no_judge else roster.get("judge")
 

@@ -14,7 +14,7 @@
   ],
   "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything."
  },
- "loop_active": true,
+ "loop_active": false,
  "firings": 1,
  "spent_to_date_usd": 8.51,
  "queue": [
@@ -88,6 +88,7 @@
  },
  "_log": [
   "firing 1: staged E1 (budget $1.00, n=3, all probes, all models)",
-  "E1 aborted on ceiling: 27/330 cells, $1.4167. Cause: probe count rose 7->10 in the staging push. E3 ceiling re-derived from measured cost."
+  "E1 aborted on ceiling: 27/330 cells, $1.4167. Cause: probe count rose 7->10 in the staging push. E3 ceiling re-derived from measured cost.",
+  "PAUSED 2026-07-30 for the frozen five-model negotiation spike. Not ended. The loop and the spike are both frozen; running both at once would spend ~$4.50 while the peer is deciding, and the peer said 'a little'. Set loop_active true to resume."
  ]
 }
