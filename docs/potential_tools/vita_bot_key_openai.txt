@@ -1,3 +1,4 @@
 openai
 
-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
+# OpenAI API key removed for security. Use environment variables or a secret manager to provide your API key.
+OPENAI_API_KEY_GOES_HERE
