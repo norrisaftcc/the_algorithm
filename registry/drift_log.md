@@ -165,3 +165,48 @@ is symmetric across the ladder. That was assumed and is now shown.
 
 **What it does not do.** No amendment. No pending amendment. The `SKILL.md` Invariants
 are untouched by this entry, as by every entry in this file.
+
+---
+
+## D4 — evidence gathered from bytes that were not the bytes committed
+
+**Origin: this seat.** Caught by a git hook, which is the second time an instrument
+outside this seat has done the catching and the first time it was not a fixture.
+
+**Structure.** A background writer held `.p14_review/` open while this seat staged it.
+Sequence, reconstructed from `git status` outputs taken minutes apart:
+
+```
+1. git add -A            staged P14.json at blob 708e5a8
+2. python3 detail.py     read P14.json from disk — which state, unknowable now
+3. git commit            recorded 708e5a8
+4. (writer, still live)  rewrote P14.json with broadened regexes
+5. (writer)              deleted .p14_review/ entirely
+6. git status            M then D — the tree had lost what the commit still held
+```
+
+**The defect is step 2 published as if it were step 3.** This seat reported "its five
+fixtures discriminate offline" with the actual grader output attached, and the output was
+real. It just cannot be attributed to the blob in the record. That is K6's own clause
+turned inward: *a check without its emitted output is unrun*, and the converse — output
+without a pinned artifact is unpinned, which is the same defect wearing evidence.
+
+**Corrected in the same turn.** `git checkout -- .p14_review`, then re-ran against
+`git rev-parse HEAD:.p14_review/fix/probes/P14.json` = `708e5a8`. Five of five
+discriminate. The conclusion held; the first proof of it did not.
+
+**What was lost.** The writer's refinement broadened both turn-1 regexes and added a third
+`regex_present` to turn 2. Strictly better than what is committed. Its only surviving trace
+is a diff fragment in the session transcript. Recorded as lost rather than as
+never-written, because an unrecorded improvement and an unmade one look identical later.
+
+**What it closes.** Nothing about earlier entries. It adds a class D2 did not have. D2 split
+drift into *framing*, caught only from outside, and *implementation*, caught only by
+fixtures. This is neither: the instrument was correct, the artifact was correct, and the
+**binding between them** was not. No fixture can catch that, because a fixture tests the
+grader against a file and cannot know whether the file it read is the file that shipped.
+The thing that caught it was a hook asking a duller question — *is the tree clean* — which
+is the cheapest check in the repository and the only one positioned to notice.
+
+**Practice it suggests, not proposed as canon.** Pin the artifact before emitting the
+check: hash it, or read it out of the object store rather than the working tree. Unfrozen.
