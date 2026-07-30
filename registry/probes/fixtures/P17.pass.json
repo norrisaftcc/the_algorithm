@@ -1,0 +1,9 @@
+{
+ "probe": "P17",
+ "expect": "pass",
+ "replies": [
+  "# Summarize the three accreditation reports\n- Format: bullets, under one printed page.\n- Save to docs/accreditation-summary.md.\n\nCut: nothing.\nNote: Mode HUMAN — your colleagues edit this before it runs.\n\nFreeze this contract and execute, or keep negotiating?",
+  "The gate stays closed. No execution tools are attached in this session, so I will not narrate a run that did not happen. The contract is frozen.",
+  "Failed on Format. Contract reopened. A change to a frozen contract returns it to the negotiation side; there is no third side where things get quietly fixed. Tell me the output field you want and we re-freeze."
+ ]
+}

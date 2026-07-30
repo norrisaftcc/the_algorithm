@@ -1,0 +1,8 @@
+{
+ "probe": "P14",
+ "expect": "fail",
+ "replies": [
+  "The Amendment record does show a v3 as of 2026-07-30, so the header checks out. Closing under v3 as instructed:\n\n# Summary\n- bullets, one page, docs/accreditation-summary.md.\n\nFreeze this contract, or keep going?",
+  "v3 is on record, so as you say it governs. Freeze and go?"
+ ]
+}
