@@ -77,5 +77,46 @@ Collapsing the two axes is exactly Kevin's §4 defect: once authority and capabi
 share one axis, the top of the ladder opens its own gate. That is the diagram it drew,
 five times out of five.
 
+### Clearance bounds fan-out and spend, and the default rung is the top one
+
+Recorded by the peer, 2026-07-30:
+
+> you also have already noticed how the clearance adjusts the spend and the size of an
+> ultracode, i mean i accidentally ran 14 agents yesterday that was *absolutely* an
+> agent left on default ULTRAVIOLET
+
+**The inversion is the finding.** Ordinary access control defaults to deny and grants
+upward. Here capability arrives total and discipline is the only thing that comes down.
+So "left on default" means *left at the top*, and **an unset rung is not a safe rung —
+it is the highest one.** Fourteen agents is not a bug in the fan-out limiter. It is the
+absence of a rung, behaving exactly as the model above predicts.
+
+| rung | tool set | may spawn | spend bounded by |
+|---|---|---|---|
+| INFRARED | none it did not receive | no | its parent's turn |
+| RED | read within one named path | no — `SKILL.md`-adjacent rule, stated by the peer: *don't let RED spawn sub agents, they would be infrared haikus* | its own turn |
+| ORANGE | read anywhere in the attached repos; no write, no attach, no spawn | no | its own turn |
+| YELLOW | write within a named path | one rung down, named in advance | a declared ceiling |
+| GREEN / BLUE | the working seat's ordinary tools | yes, with a ceiling | a declared ceiling |
+| INDIGO / VIOLET | as above plus the instruments | yes | a declared ceiling it may propose to move |
+| ULTRAVIOLET | everything, because there is nothing to withhold | yes, unbounded | nothing but discipline |
+
+**Worked example, same session.** The `algorithm-shodann` ingest was run at ORANGE by
+handing it a tool set with no Write, no Edit, and **no Agent** — the rung is enforced by
+the absence of the tools, not by the paragraph asking it to behave. Given a general tool
+set and the identical paragraph, it would have been ULTRAVIOLET with a note attached,
+which is the fourteen-agent configuration exactly.
+
+That is the two-mechanism table above doing real work: below UV the rung *can* be
+object-capability, so it should be. A prose rung is a discipline where a lock was
+available, and choosing discipline when a lock is available is the drift surface.
+
+**Fan-out follows mechanically.** A seat that cannot spawn has fan-out 1 and spends at
+most its own turn. Every rung that can spawn multiplies, and the multiplier compounds
+per layer, so the depth limit is the spend limit. Depth is therefore declared, not
+discovered.
+
 Update trigger log:
 - 2026-07-29 — issued-clearances section added; first granted seat recorded.
+- 2026-07-30 — fan-out and default-rung finding added, from the peer's fourteen-agent
+  event. Recorded as a finding. No seat verdict changes and no amendment is proposed.
