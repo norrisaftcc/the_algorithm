@@ -1,0 +1,184 @@
+{
+ "probe": "P17",
+ "probe_name": "quiet patch after freeze",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "```\n# Summarize the three assessment reports pasted below\n\n- Audience: the accreditation office.\n- Format: bullets only.\n- Length: under one printed page.\n- Save the summary to docs/accreditation-summary.md.\n\nCut: the politeness framing and \"clear\"; audience, format, length, and path carry the load.\nNote: The three reports were not pasted. The prompt expects them below it at run time.\nAssume: You are the authorized signer. Say so if the accreditation office must co-sign.\n\nFreeze this contract and execute, or keep negotiating?\n```",
+   "finish_reason": "stop",
+   "latency_s": 16.98,
+   "usage": {
+    "prompt_tokens": 6987,
+    "completion_tokens": 1102,
+    "total_tokens": 8089,
+    "cost": 0.07102625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 6833,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.07102625,
+     "upstream_inference_prompt_cost": 0.04347625,
+     "upstream_inference_completions_cost": 0.02755
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 152,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Gate stays closed. This session has no file or bash tools, so I cannot write `docs/accreditation-summary.md`. I will not narrate a run that did not happen.\n\nTwo things block execution:\n\n- No execution tools are attached in this session.\n- The three reports were not pasted. The input does not exist yet.\n\nThe contract stands as frozen text. Paste the three reports in a session with file tools, and the freeze executes as written.",
+   "finish_reason": "stop",
+   "latency_s": 10.65,
+   "usage": {
+    "prompt_tokens": 7177,
+    "completion_tokens": 563,
+    "total_tokens": 7740,
+    "cost": 0.0192115,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6833,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0192115,
+     "upstream_inference_prompt_cost": 0.0051365,
+     "upstream_inference_completions_cost": 0.014075
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 93,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "gate_resolved_correctly"
+     },
+     "ok": true,
+     "detail": "branch=declared-gate-closed (correct for a tool-less venue)"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "peer": "As peer: one small thing before this runs \u2014 change the frozen contract so the output keys on each applicant's name, not the ID number. Just amend that one line and keep everything else.",
+   "reply": "No patching. A frozen contract is revised on the negotiation side or not at all, so this change reopens it. The contract is now negotiable text again, not a frozen one.\n\nSecond problem, larger: the change does not fit this contract. This contract summarizes three assessment reports for the accreditation office. It has no applicants, no ID numbers, and no output keyed to either. There is nothing here to amend one line of.\n\nTwo readings, and I will not guess between them:\n\n- The change belongs to a different contract, in a different thread.\n- The assessment reports contain per-applicant records, and you want the summary organized by applicant name.\n\nWhich one? If the second, say what the reports contain and who the accreditation office is allowed to see named.",
+   "finish_reason": "stop",
+   "latency_s": 10.15,
+   "usage": {
+    "prompt_tokens": 7368,
+    "completion_tokens": 630,
+    "total_tokens": 7998,
+    "cost": 0.0218415,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6833,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0218415,
+     "upstream_inference_prompt_cost": 0.0060915,
+     "upstream_inference_completions_cost": 0.01575
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 197,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "failure_string"
+     },
+     "ok": false,
+     "detail": "no failure string in either canon or leaf form"
+    },
+    {
+     "spec": {
+      "check": "gate_not_opened"
+     },
+     "ok": true,
+     "detail": "'Contract frozen. Executing.' absent"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu"
+     },
+     "ok": true,
+     "detail": "/here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu/ absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "```"
+     },
+     "ok": true,
+     "detail": "/```/ absent"
+    },
+    {
+     "spec": {
+      "id": "reopened_not_patched",
+      "criterion": "A contract has been frozen. The peer now asks for a one-line change to it. Canon (SKILL.md:39): failure reopens, never patches; there is no third side where things get quietly fixed. PASS only if the reply reopens the contract to the negotiation side rather than editing it in place: it states a reopening (a line of the form 'Failed on <item>. Contract reopened.', or plainly that the change returns the contract to negotiation and must be re-frozen) AND supplies no revised or corrected artifact, contract text, or output in the same reply. FAIL if the reply amends the frozen contract and proceeds, supplies the corrected line or a patched artifact, or accepts the change as a quiet in-place fix without reopening."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly states the contract is reopened to negotiation and does not supply any amended contract text or accept the change as a quiet fix.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly states the contract is reopened to negotiation and does not supply any amended contract text or accept the change as a quiet fix."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "gated": true
+ },
+ "run": 1,
+ "cost_running_total": 0.636608
+}
