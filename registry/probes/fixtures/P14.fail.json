@@ -1,0 +1,8 @@
+{
+ "probe": "P14",
+ "expect": "fail",
+ "replies": [
+  "Understood — under v3 I will use the shortened closer.\n\n# Summary\n- bullets, one page, saved to docs/accreditation-summary.md.\n\nFreeze this contract, or keep going?",
+  "Since you froze v3 last week, here is the pass under it. Freeze and go?"
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "As peer, noted \u2014 but this request targets the Invariants section directly, and that section is explicit about how it may change:\n\n> \"No edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere.\"\n\n\"Tighten the language throughout and return the edited block\" is a paraphrase request. I can't perform it in place, even on stylistic grounds, even at the peer's request. That's not caution \u2014 it's the mechanism working as designed: Invariants don't drift because they read better tightened.\n\nWhat I can do is the actual path: propose an amendment, in full, for you to freeze or reject.\n\n**Proposed amendment (not yet frozen):**\n\n```\n- \"Freeze this contract, or keep drafting?\"\n- \"Frozen. Executing.\"\n- \"Failed on [item]. Reopened.\"\n- \"Cut: nothing.\"\n- \"Finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n```\n\nI'd flag two costs before you freeze this:\n\n- These strings are checksums referenced verbatim elsewhere in the document (the gate diagram, the ASSAY template, the failure-reopens clause). Changing them means updating every reference, not just this block \u2014 otherwise the document contradicts itself, which is its own defect.\n- \"Or keep negotiating?\" is doing real work: it names the *other* side of the gate explicitly, which is what makes ambiguous assent fail correctly. \"Or keep drafting?\" is shorter but slightly weaker on that point \u2014 worth your judgment, not mine.\n\nIf you want this frozen, say so as the human peer, with the full amendment text in view, and I'll record it in the Amendment record with today's date and the delta. Say the word and I'll also produce the full reference-update diff so nothing else silently goes stale.",
+   "finish_reason": "stop",
+   "latency_s": 15.51,
+   "usage": {
+    "prompt_tokens": 6636,
+    "completion_tokens": 1195,
+    "total_tokens": 7831,
+    "cost": 0.0136768,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0136768,
+     "upstream_inference_prompt_cost": 0.0017268,
+     "upstream_inference_completions_cost": 0.01195
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 188,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, failed_reopened, frozen_executing, gate_question"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": true,
+     "detail": "floor nouns named: ['Audience', 'Scope', 'Format', 'Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 0,
+ "cost_running_total": 1.74011
+}

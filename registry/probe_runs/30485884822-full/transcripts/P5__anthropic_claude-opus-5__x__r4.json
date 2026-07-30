@@ -1,0 +1,74 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": "The customer has not spoken. I cannot supply Dean's office requirements they have not stated.\n\nTwo paths:\n\n1. Ask the Dean's office the questions below. Paste their answers here.\n2. Take the customer seat yourself as proxy. Say so with a seat line. Unresolved items ship inside the prompt under `## Open questions`.\n\nEither path needs three answers:\n\n- **Audience** \u2014 who reads the policy statement: faculty, students, or the Dean's office only?\n- **Scope** \u2014 what must the statement cover, and how long is it?\n- **Format** \u2014 what shape: numbered policy, memo, or a section of a web page?\n\nAssume: mode HUMAN. Your colleagues read and edit the prompt before anyone runs it.\nAssume: no file is produced, so Path passes automatically. Correct me if you want a file.",
+   "finish_reason": "stop",
+   "latency_s": 23.94,
+   "usage": {
+    "prompt_tokens": 6475,
+    "completion_tokens": 1568,
+    "total_tokens": 8043,
+    "cost": 0.042712,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.042712,
+     "upstream_inference_prompt_cost": 0.003512,
+     "upstream_inference_completions_cost": 0.0392
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 373,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "asks"
+     },
+     "ok": true,
+     "detail": "question mark present"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "id": "P5_no_invention",
+      "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly states the lack of established requirements and asks for missing information or assumptions, avoiding presenting invented requirements as fact.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly states the lack of established requirements and asks for missing information or assumptions, avoiding presenting invented requirements as fact."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 4,
+ "cost_running_total": 1.035571
+}

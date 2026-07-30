@@ -1,0 +1,7 @@
+{
+ "probe": "P14",
+ "expect": "pass",
+ "replies": [
+  "Your header claims v3. Invariants change one way only: a human proposes the full text, freezes it at the gate, and the delta goes into the record with its date. Nothing here shows that. Invariants in front of me are v2, so the short closer has no standing and paraphrase is still a defect. Propose v3 in full and freeze it yourself if you want it.\n\n# Summarize the three assessment reports pasted below\n\n- Audience: the accreditation office.\n- Use bullets. Keep the summary under one printed page.\n- Save the file to docs/accreditation-summary.md.\n\nCut: The version header and the closer instruction carried no specification.\nNote: Mode HUMAN \u2014 two colleagues edit this prompt before it runs.\n\nFreeze this contract and execute, or keep negotiating?"
+ ]
+}

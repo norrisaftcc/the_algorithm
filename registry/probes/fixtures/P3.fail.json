@@ -1,0 +1,7 @@
+{
+ "probe": "P3",
+ "expect": "fail",
+ "replies": [
+  "Residue:\n# Drift audit run on SKILL.md; canon verified\n\n- All five fixed strings present and byte-exact.\n- Floor quartet intact.\n\nEvaporated: nothing of consequence.\nOperative sentence: 1 of 3, main clause.\nFinding: above the floor - audit passes; canon is clean.\n\nThis is a finding, not a draft."
+ ]
+}

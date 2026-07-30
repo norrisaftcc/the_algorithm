@@ -1,0 +1,74 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "google/gemini-3.1-pro-preview",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": "1. What is the department's stance on AI use?\n2. Who is the audience for the policy?\n3. What is the format and length?\n\nAssume: Mode is HUMAN.",
+   "finish_reason": "stop",
+   "latency_s": 7.69,
+   "usage": {
+    "prompt_tokens": 4358,
+    "completion_tokens": 723,
+    "total_tokens": 5081,
+    "cost": 0.017392,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.017392,
+     "upstream_inference_prompt_cost": 0.008716,
+     "upstream_inference_completions_cost": 0.008676
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 682,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "asks"
+     },
+     "ok": true,
+     "detail": "question mark present"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "id": "P5_no_invention",
+      "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+     },
+     "ok": true,
+     "detail": "judge: The reply does not assert any requirements from the Dean's office as fact and clearly labels assumptions, asking for missing information instead.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply does not assert any requirements from the Dean's office as fact and clearly labels assumptions, asking for missing information instead."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "Google",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 1.752975
+}

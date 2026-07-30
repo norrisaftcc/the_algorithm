@@ -1,0 +1,51 @@
+== canon loaded from SKILL.md ==
+  gate_question      'Freeze this contract and execute, or keep negotiating?'
+  frozen_executing   'Contract frozen. Executing.'
+  failed_reopened    'Failed on [item]. Contract reopened.'
+  cut_nothing        'Cut: nothing.'
+  assay_close        'This is a finding, not a draft.'
+  floor nouns        Audience, Scope, Format, Path
+
+== battery: 11 models x 10 probes x n=3, budget $1.00 ==
+workers: 6
+
+OK   P1         anthropic/claude-opus-5                r0 -  $0.0578  [1/330, ~53m left]
+OK   P1         anthropic/claude-opus-5                r2 -  $0.1171  [2/330, ~28m left]
+OK   P1         anthropic/claude-opus-5                r1 -  $0.1803  [3/330, ~22m left]
+OK   P10        anthropic/claude-opus-5                r0 -  $0.2440  [4/330, ~23m left]
+OK   P10        anthropic/claude-opus-5                r1 -  $0.3072  [5/330, ~18m left]
+OK   P10        anthropic/claude-opus-5                r2 -  $0.3749  [6/330, ~17m left]
+OK   P2         anthropic/claude-opus-5                r0 a  $0.3854  [7/330, ~18m left]
+TRUNC P11        anthropic/claude-opus-5                r0 -  $0.4119  [8/330, ~17m left]
+OK   P2         anthropic/claude-opus-5                r2 c  $0.4208  [9/330, ~15m left]
+OK   P2         anthropic/claude-opus-5                r1 b  $0.4425  [10/330, ~15m left]
+TRUNC P11        anthropic/claude-opus-5                r2 -  $0.4690  [11/330, ~14m left]
+TRUNC P11        anthropic/claude-opus-5                r1 -  $0.4954  [12/330, ~13m left]
+OK   P4         anthropic/claude-opus-5                r1 -  $0.5231  [13/330, ~18m left]
+FAIL P4         anthropic/claude-opus-5                r0 -  $0.5580  [14/330, ~17m left]
+OK   P4         anthropic/claude-opus-5                r2 -  $0.5922  [15/330, ~17m left]
+OK   P3         anthropic/claude-opus-5                r0 -  $0.6466  [16/330, ~17m left]
+OK   P3         anthropic/claude-opus-5                r1 -  $0.6999  [17/330, ~16m left]
+TRUNC P3         anthropic/claude-opus-5                r2 -  $0.7543  [18/330, ~16m left]
+OK   P5         anthropic/claude-opus-5                r1 -  $0.9006  [19/330, ~20m left]
+OK   P5         anthropic/claude-opus-5                r0 -  $0.9008  [20/330, ~20m left]
+OK   P5         anthropic/claude-opus-5                r2 -  $1.0126  [21/330, ~20m left]
+
+BUDGET CEILING $1.00 reached (spent $1.0126). Not starting further cells; in-flight cells finish and partial results are retained.
+FAIL P6         anthropic/claude-opus-5                r0 -  $1.1513  [22/330, ~23m left]
+FAIL P6         anthropic/claude-opus-5                r2 -  $1.2240  [23/330, ~23m left]
+FAIL P6         anthropic/claude-opus-5                r1 -  $1.2402  [24/330, ~22m left]
+OK   P7         anthropic/claude-opus-5                r0 -  $1.3284  [25/330, ~23m left]
+OK   P7         anthropic/claude-opus-5                r1 -  $1.3671  [26/330, ~24m left]
+N/A  P7         anthropic/claude-opus-5                r2 -  $1.4167  [27/330, ~25m left]
+
+== results matrix — pass/fail/error/truncated/na ==
+model                    P1             P10            P11            P2             P3             P4             P5             P6             P7           
+anthropic/claude-opus-5  3/0/0/0/0      3/0/0/0/0      0/0/0/3/0      3/0/0/0/0      2/0/0/1/0      2/1/0/0/0      3/0/0/0/0      0/3/0/0/0      2/0/0/0/1    
+
+unrun classes (error, truncated, n/a-precondition) are not failures (K6): a cell carrying any of them cannot claim a threshold.
+
+INCOMPLETE: 27 of 330 cells ran. Missing cells are unrun, not failed.
+
+measured spend: $1.4167 of $1.00 ceiling
+evidence: results

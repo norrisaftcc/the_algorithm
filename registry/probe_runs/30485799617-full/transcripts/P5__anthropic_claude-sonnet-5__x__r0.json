@@ -1,0 +1,21 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "error",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": null
+  }
+ ],
+ "provider": null,
+ "preconditions": {},
+ "error": "ApiError: {\"message\": \"Overloaded\", \"code\": 503}",
+ "run": 0,
+ "cost_running_total": 0.910739
+}

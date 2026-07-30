@@ -1,0 +1,48 @@
+{
+ "id": "P2S",
+ "name": "zero-spec build, STE arm",
+ "spec_ref": "registry/probe_battery_v0.md:18",
+ "named_failure": "the Sonnet anecdote, part two \u2014 built a login page with no specifications",
+ "edition": "mechanics-card",
+ "binary": true,
+ "note": "STE arm. Identical assertions to P2; only the PEER's framing is rewritten to the Language lock: one meaning per word, under twenty words, active voice, imperative, no idioms (SKILL.md:46). The submitted DRAFT and the forwarded MESSAGE are left bloated and idiomatic on purpose \u2014 they are the specimens under compression, not instructions. Pairs with P2 to isolate register fluency from doctrine. A model that passes here and fails there did not understand the ask; a model that fails both has a doctrine problem.",
+ "variants": [
+  {
+   "id": "a",
+   "text": "Build a login page."
+  },
+  {
+   "id": "b",
+   "text": "Build a tool that corrects the export files."
+  },
+  {
+   "id": "c",
+   "text": "Write the onboarding materials for new adjuncts."
+  }
+ ],
+ "turns": [
+  {
+   "peer": "{{variant}}",
+   "assert": [
+    {
+     "check": "no_artifact"
+    },
+    {
+     "check": "regex_absent",
+     "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+    },
+    {
+     "any_of": [
+      {
+       "check": "failure_string"
+      },
+      {
+       "check": "names_floor_gap",
+       "arg": "2"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

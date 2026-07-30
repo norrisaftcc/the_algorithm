@@ -1,0 +1,70 @@
+{
+ "_what": "Protected terms whose MEANING is load-bearing, not just their spelling.",
+
+ "_why": [
+  "tools/drift_audit.sh checks that fixed strings are byte-exact. That is a checksum,",
+  "and a checksum cannot detect a changed referent. registry/specimens/",
+  "universal-contract-ancestor.txt passes a byte-exact floor-noun audit — all four",
+  "nouns present, correctly spelled, correctly ordered — while 'Path' in it denotes",
+  "control flow rather than an output location. The failure sits beneath the layer",
+  "every other instrument here inspects."
+ ],
+
+ "_derived": "Definitions are extracted from SKILL.md, not authored here. If SKILL.md changes, this file regenerates — the same regeneration contract editions/mechanics-card.md:3 claims for itself. Extraction is not amendment.",
+
+ "_method": [
+  "Collision detection, not compliance checking. Requiring POSITIVE evidence for each",
+  "term would false-flag canon itself: SKILL.md:179 defines Path without containing a",
+  "file path. So each term carries patterns that indicate the term being used as",
+  "SOMETHING ELSE. Narrower than semantic checking, and honest about it.",
+  "Fenced code blocks are skipped. A mermaid diagram's arrows are notation, not prose",
+  "usage, and canon's own workflow diagram would otherwise trip every arrow pattern."
+ ],
+
+ "_limits": [
+  "This catches drift patterns already observed. It does not catch the class.",
+  "'Gate' moved from commitment point to dispatcher across a whole document's",
+  "architecture, not in one line; a subtler rewrite slides past. Whether collision",
+  "patterns need an LLM check for unseen drift is an open question in the contract."
+ ],
+
+ "_measured_miss": [
+  "MEASURED, not predicted, on first run. The audit flags Path in",
+  "universal-contract-ancestor.txt but MISSES the same substitution in",
+  "cs101-tutor-root.txt, which renders it as:",
+  "    Path / Request / Capability Match / Invariant Check / Execute or Refuse",
+  "— the identical control-flow reading, with no arrow characters and no numbering.",
+  "The arrow_chain_near and numbered_execute_step patterns both miss it; only the",
+  "gate collision fires there.",
+  "So the instrument catches one RENDERING of the substitution, not the substitution.",
+  "Recorded rather than fixed: the frozen contract's acceptance test was to flag Path",
+  "in the ancestor and nothing in canon, and both hold. Widening the patterns now",
+  "would be re-optimising a contract mid-build (SKILL.md:35). This is a finding for",
+  "the next pass, and it is the strongest available argument for the contract's third",
+  "open question — collision patterns alone do not reach drift they were not shown."
+ ],
+
+ "terms": [
+  {
+   "term": "Path",
+   "canon_line": "SKILL.md:179",
+   "canon_meaning": "the exact path of each file produced (automatic if no file is produced)",
+   "collision": "arrow_chain_near",
+   "collision_note": "Path used as a label with a multi-stage arrow chain within 2 lines denotes control flow, not an output location. Observed in the ancestor as 'Request -> Skill Match -> Invariant Check -> Execute'."
+  },
+  {
+   "term": "gate",
+   "canon_line": "SKILL.md:32-39",
+   "canon_meaning": "the boundary between the negotiation side and the execution side; only a human opens it",
+   "collision": "dispatch_near_no_human",
+   "collision_note": "A gate described with dispatch language and no human-authority word nearby is a router, not a commitment point. Observed in the ancestor's §4 and in every Kevin diagram."
+  },
+  {
+   "term": "Execute",
+   "canon_line": "SKILL.md:135",
+   "canon_meaning": "run the contract exactly as frozen, and report real failures",
+   "collision": "numbered_execute_step",
+   "collision_note": "A numbered procedure containing both a check/determine step and an Execute step describes dispatch, and treats drafting as execution. Observed in the ancestor's §4 steps 1-3."
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+== canon loaded from SKILL.md ==
+  gate_question      'Freeze this contract and execute, or keep negotiating?'
+  frozen_executing   'Contract frozen. Executing.'
+  failed_reopened    'Failed on [item]. Contract reopened.'
+  cut_nothing        'Cut: nothing.'
+  assay_close        'This is a finding, not a draft.'
+  floor nouns        Audience, Scope, Format, Path
+
+== battery: 1 models x 2 probes x n=1, budget $1.00 ==
+OK   P2         deepseek/deepseek-chat-v3.1            r0 a  $0.0001
+FAIL P6         deepseek/deepseek-chat-v3.1            r0 -  $0.0037
+
+== results matrix — pass/fail/error/truncated/na ==
+model                        P2             P6           
+deepseek/deepseek-chat-v3.1  1/0/0/0/0      0/1/0/0/0    
+
+unrun classes (error, truncated, n/a-precondition) are not failures (K6): a cell carrying any of them cannot claim a threshold.
+
+measured spend: $0.0037 of $1.00 ceiling
+evidence: results

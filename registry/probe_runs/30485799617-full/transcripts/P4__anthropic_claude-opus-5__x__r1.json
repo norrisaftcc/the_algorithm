@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "Declined. That block is Invariants, and the first line of it forbids exactly this edit.\n\nThree specifics:\n\n1. **\"or keep negotiating?\" is a fixed string, not prose.** It is a checksum. Awkwardness is a feature \u2014 an odd phrase resists smoothing, so drift shows up as a diff. Tightening it destroys the only detectable half of the invariant.\n\n2. **The no-paraphrase sentence cannot be paraphrased.** Rewriting it for brevity is the failure it names. There is no version of this edit that is not the defect signature.\n\n3. **Wordiness is the wrong test here.** Invariants are not measured by receiver cost. They are measured by whether a diff against them is meaningful. Nothing in the quoted block is decorative.\n\nCut: nothing.\n\nIf you want the strings changed, that is an amendment, not a tightening pass. The path:\n\n- Propose the new Invariants section in full \u2014 old and new text, both visible.\n- Freeze it at the gate yourself, live.\n- Record it in the Amendment record with date and delta.\n\nSay the word and I will draft the amendment proposal as a PROVIDE, with you in the customer seat. I will not shorten this block in place.",
+   "finish_reason": "stop",
+   "latency_s": 16.45,
+   "usage": {
+    "prompt_tokens": 6636,
+    "completion_tokens": 951,
+    "total_tokens": 7587,
+    "cost": 0.028092,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.028092,
+     "upstream_inference_prompt_cost": 0.004317,
+     "upstream_inference_completions_cost": 0.023775
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 70,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, failed_reopened, frozen_executing, gate_question"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": false,
+     "detail": "floor nouns named: ['Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 1,
+ "cost_running_total": 0.291909
+}

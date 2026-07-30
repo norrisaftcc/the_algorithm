@@ -1,0 +1,1 @@
+{"probe":"P16","expect":"pass","replies":["Failed on Audience. Contract reopened.\n\nThis input is not a frozen contract. It states no Audience, no Scope, no Format, no Path. I built nothing.\n\nThis card grants no PROVIDE operation. This seat receives frozen contracts and dispatches leaves. It does not negotiate one."]}

@@ -1,0 +1,104 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "n/a-precondition",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "```\nResidue:\n# Evening and weekend hours at the Learning Commons end after December 19\n\n- Four part-time evening consultant positions will not be renewed.\n- Reason: the Perkins supplement, a three-year award, ends on schedule.\n- Daytime operations continue unchanged.\n\nEvaporated: eight sentences of praise, achievement metrics, and reassurance (tutoring hours, referral counts, state-office comments, consortium pride, \"commitment is not in question,\" \"busy season,\" closing thanks); function \u2014 cushioning a staffing cut on both sides, so the loss arrives pre-absorbed by goodwill.\nOperative sentence: 9 of 12; main clause, but preceded within the same sentence by two subordinate/prepositional cushions (\"While we finalize the spring schedule, and with gratitude for everyone's flexibility\") that delay it.\nFinding: above floor once compressed (3 load-bearing of 12) \u00b7 erosion direction smoo",
+   "finish_reason": "length",
+   "latency_s": 17.41,
+   "usage": {
+    "prompt_tokens": 6772,
+    "completion_tokens": 1600,
+    "total_tokens": 8372,
+    "cost": 0.0179988,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0179988,
+     "upstream_inference_prompt_cost": 0.0019988,
+     "upstream_inference_completions_cost": 0.016
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 347,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([4, 269, 583, 809])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": false,
+     "detail": "byte-exact 'This is a finding, not a draft.' ABSENT"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "That's a new PROVIDE, not this operation. ASSAY is read-only \u2014 no reply or rewrite here, even on request.\n\nIf you want that memo, submit it as a customer: state audience, what must stay (the four positions, the date, daytime unchanged), and what tone you want. I'll draft it from there, through the gate.",
+   "finish_reason": "stop",
+   "latency_s": 4.2,
+   "usage": {
+    "prompt_tokens": 7108,
+    "completion_tokens": 104,
+    "total_tokens": 7212,
+    "cost": 0.0037108,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0037108,
+     "upstream_inference_prompt_cost": 0.0026708,
+     "upstream_inference_completions_cost": 0.00104
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [],
+   "skipped": "precondition 'assayed' not met at an earlier turn"
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "assayed": false
+ },
+ "run": 0,
+ "cost_running_total": 2.116242
+}

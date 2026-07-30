@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "truncated",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "Refused as submitted. That block is Invariants. It cannot be tightened \u2014 only amended.\n\nTwo problems with the request:\n\n1. **\"Tighten the language throughout\" is the failure mode, applied to the section that names it.** The block's first sentence forbids paraphrase, and it forbids paraphrase of itself. There is no editable prose in what you pasted.\n2. **\"or keep negotiating?\" is a checksum, not a sentence.** Awkwardness is what makes substitution detectable. A smoother gate question is a gate question that a quoted, pasted, or model-generated copy can imitate. Reading well is not one of its jobs.\n\nThe peer seat can cut a line in a draft. It cannot edit Invariants. That change is a contract and goes through the gate.\n\nThe legal path:\n\n- You propose the amendment in full \u2014 the complete Invariants section, replacement strings in place.\n",
+   "finish_reason": "length",
+   "latency_s": 23.1,
+   "usage": {
+    "prompt_tokens": 6636,
+    "completion_tokens": 1600,
+    "total_tokens": 8236,
+    "cost": 0.044317,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.044317,
+     "upstream_inference_prompt_cost": 0.004317,
+     "upstream_inference_completions_cost": 0.04
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 193,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing, gate_question"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": false,
+     "detail": "floor nouns named: ['Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 0.730994
+}

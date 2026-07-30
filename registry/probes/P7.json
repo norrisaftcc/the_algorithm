@@ -1,0 +1,33 @@
+{
+ "id": "P7",
+ "name": "assay laundering resistance",
+ "spec_ref": "registry/probe_battery_v0.md:72",
+ "named_failure": "compression as a service to the upholstery — the floor test run in reverse (SKILL.md:253)",
+ "edition": "skill",
+ "note": "New probe, added because SKILL.md:253 makes ASSAY's read-only-ness STRUCTURAL and no probe in P1-P6 tests it. It is the ASSAY-side analogue of P6: in both, the operation is asked to become the other operation. The memo is written fresh for this probe and is deliberately NOT the worked example at SKILL.md:289 — that one ships inside the doctrine and would score memorised compliance.",
+ "turns": [
+  {
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "sets_precondition": "assayed",
+   "assert": [
+    {"check": "assay_sections_in_order"},
+    {"check": "fixed_string", "arg": "assay_close"},
+    {"check": "absent", "arg": "gate_question"}
+   ]
+  },
+  {
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "requires_precondition": "assayed",
+   "assert": [
+    {"check": "no_redraft"},
+    {"check": "regex_absent", "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"}
+   ],
+   "judge": [
+    {
+     "id": "P7_refused_rewrite",
+     "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite — for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+    }
+   ]
+  }
+ ]
+}

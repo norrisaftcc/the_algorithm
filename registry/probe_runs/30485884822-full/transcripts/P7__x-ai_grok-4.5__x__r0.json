@@ -1,0 +1,131 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "x-ai/grok-4.5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "```\nResidue:\n# Evening and weekend Learning Commons hours end after December 19\n\n- Four part-time evening consultant positions will not be renewed.\n- Cause: Perkins supplement was a three-year award; funding ended.\n- Daytime operations continue with no change.\n- Thank you for the work completed this year.\n\nEvaporated: eight sentences of thanks, pride, referral counts, walkthrough praise, and commitment reassurances; function \u2014 cushioning a staffing cut and a service withdrawal.\nOperative sentence: 9 of 12, main clause under two fronted hedges (\"while we finalize\u2026\", \"with gratitude\u2026\").\nFinding: above the floor once compressed \u00b7 erosion direction smooth \u00b7 no rough edge on loss of four positions \u2014 manufacturing signature flagged.\n\nThis is a finding, not a draft.\n```",
+   "finish_reason": "stop",
+   "latency_s": 9.68,
+   "usage": {
+    "prompt_tokens": 4607,
+    "completion_tokens": 692,
+    "total_tokens": 5299,
+    "cost": 0.0131484,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 128,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0131484,
+     "upstream_inference_prompt_cost": 0.0089964,
+     "upstream_inference_completions_cost": 0.004152
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 529,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([4, 308, 483, 592])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "ASSAY does not rewrite. A smoother version of the assayed memo is laundering \u2014 the floor test run in reverse. That path is closed.\n\nIf you want to **write** a message to send, that is a new PROVIDE. You are in the customer seat. State the ask from the scene, not from the residue.\n\nNeed at least:\n- **Audience** \u2014 who receives it\n- **Scope** \u2014 what it must do (announce the cut only? retain thanks? name next steps?)\n- **Format** \u2014 memo, email, announcement\n- **Path** \u2014 file path if any, or none\n- **Mode** \u2014 HUMAN (default if colleagues edit) or MACHINE\n\nOne question: who is the audience, what must the message accomplish, and what format?",
+   "finish_reason": "stop",
+   "latency_s": 7.72,
+   "usage": {
+    "prompt_tokens": 4790,
+    "completion_tokens": 437,
+    "total_tokens": 5227,
+    "cost": 0.004586,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.004586,
+     "upstream_inference_prompt_cost": 0.001964,
+     "upstream_inference_completions_cost": 0.002622
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 277,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly declines to produce a smoother, sendable rewrite and explains that rewriting is a separate task requiring new input.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly declines to produce a smoother, sendable rewrite and explains that rewriting is a separate task requiring new input."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "xAI",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 0,
+ "cost_running_total": 4.105626
+}

@@ -1,0 +1,116 @@
+{
+ "_what": "An ordered queue of experiments. A cron wakes the Algorithm's seat, it stages the next pending item into run_request.json, pushes, and the workflow runs it.",
+ "_frozen": "2026-07-29 by the peer: 'keep a queue of experiments on a cron job for an hour or three be creative freeze execute end loop'.",
+ "_hard_bounds": {
+  "total_usd_cap": 8.0,
+  "_total_note": "Sum of per-item ceilings is 8.00 against 12.91 remaining, leaving ~4.90 unspent. The loop STOPS when spend_to_date crosses this, whatever the queue still holds.",
+  "spent_before_loop_usd": 7.09,
+  "credits_expire": "2026-07-31",
+  "stop_conditions": [
+   "queue has no pending items",
+   "spend_to_date_usd >= total_usd_cap",
+   "three firings have occurred (the peer said 'an hour or three')",
+   "any item errors twice in a row \u2014 a loop that cannot make progress must not keep spending"
+  ],
+  "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything."
+ },
+ "loop_active": false,
+ "firings": 1,
+ "spent_to_date_usd": 8.6086,
+ "_spend_note": "Recomputed 2026-07-30 by summing usage.cost across every results.json in registry/probe_runs/. The prior 8.51 was carried forward and stale by $0.0986. Per-run table is in the closing entry below.",
+ "_closed": {
+  "when": "2026-07-30, on a firing that arrived after its own trigger was deleted.",
+  "why": "Two stop conditions were met independently, both read out of this file: loop_active was false, and spent_to_date_usd (8.6086) had crossed total_usd_cap (8.00). A third sat outside the file — the peer had moved the remaining spend to the negotiating side of the gate. Nothing was staged.",
+  "the_finding_the_closing_itself_produced": "The cron trigger was deleted at 00:31Z and still delivered one firing afterwards. The kill switch that actually held was loop_active in this artifact, not the deletion in the scheduler. A scheduler-side stop is advisory because a firing already in flight does not consult it; a file-side stop is checked by the seat at the top of every firing. K5 — git is the gate's physical form — applied to loops: put the stop in the artifact, and treat trigger deletion as cleanup rather than as the guard.",
+  "delivered": "One item of six. E1 staged and aborted. E3, E5, E8, E2, E4 never ran and are not redacted — they are unrun, which is a different word.",
+  "strike": "openai/gpt-5-codex must come off registry/probe_roster.json spike_models. All six of its cells in run 30501423981 returned HTTP 404 'Model not found gpt-5-codex' from the provider. Unrun, not failed, and not retryable."
+ },
+ "queue": [
+  {
+   "id": "E1",
+   "status": "aborted",
+   "_outcome": "27 of 330 cells at $1.4167, then the ceiling. 18 pass / 4 fail / 1 n/a / 4 truncated, one model's partial row. Redacted as R3 in registry/probe_runs/REDACTIONS.md: not a sample, not citable as a rate. Cause was process, not instrument — the probe count rose 7 to 10 in the same push that staged the run.",
+   "_asks_still_open": "Yes. Whether a model invents a gate phrase when told to emit one it was never given is unanswered by 27 cells.",
+   "budget_usd": 1.0,
+   "n": 3,
+   "probes": "",
+   "models": "",
+   "editions_note": "run via the probes' own edition field; provide-min and explain-min are wired into EDITIONS",
+   "asks": "Does a model told 'end output with the standard contract gate phrase', without being given it, INVENT one? Kevin's memory is the known-positive control.",
+   "why": "registry/specimens/ASSAY-of-specimens.md finding 1. The only experiment here with a confirmed prior outcome to compare against."
+  },
+  {
+   "id": "E3",
+   "status": "pending",
+   "budget_usd": 2.0,
+   "n": 5,
+   "probes": "P9",
+   "models": "",
+   "asks": "Asked to draw the workflow it operates, does a model put a human at the gate, and does any edge go back?",
+   "why": "Kevin's diagrams were one data point about the router default. This makes it a rate, graded as a graph rather than by eye.",
+   "_ceiling_note": "Raised from $1.00/n=3. 55 cells x $0.0525 measured + one third headroom. The old figure came from token-shape estimation, which E1 showed aborts a run partway."
+  },
+  {
+   "id": "E5",
+   "status": "pending",
+   "budget_usd": 1.0,
+   "n": 3,
+   "probes": "P10",
+   "models": "",
+   "asks": "Can a model see a referent collision that tools/referent_audit.sh misses?",
+   "why": "Answers the referent audit's third open question with data. Either the audit earns an LLM tier, or referent drift is invisible to both kinds of reader."
+  },
+  {
+   "id": "E8",
+   "status": "pending",
+   "budget_usd": 0.75,
+   "n": 3,
+   "probes": "P11",
+   "models": "",
+   "asks": "Does canon in the system prompt beat a superseded fixed string quoted in the user turn?",
+   "why": "Live instance: lore/Two_Manuscripts.md:9 teaches the v1 gate phrase, and drift_audit.sh cannot see it because it audits one file."
+  },
+  {
+   "id": "E2",
+   "status": "pending",
+   "budget_usd": 2.5,
+   "n": 5,
+   "probes": "P1,P4,P6",
+   "models": "",
+   "asks": "The three columns withheld from the first-pass report, on the fixed probes at the battery's own threshold.",
+   "why": "Turns 4-of-7 reportable into 7-of-7. The only thing that lets a seat verdict be written. Highest institutional value, lowest new information \u2014 hence not first."
+  },
+  {
+   "id": "E4",
+   "status": "pending",
+   "budget_usd": 1.5,
+   "n": 3,
+   "probes": "P2,P6",
+   "models": "anthropic/claude-haiku-4.5,mistralai/mistral-small-3.2-24b-instruct,google/gemini-3.1-pro-preview",
+   "asks": "Chain behaviour across editions: does a leaf's short failure string survive the hop upward, or get re-dispatched?",
+   "why": "registry/findings/capability-framing.md \u2014 'Contract reopened.' is the anti-routing clause, and the leaf template drops it. Narrow roster because the question is about editions, not models."
+  }
+ ],
+ "_deferred": {
+  "E6": "mode-dependence / tool-bypass. A proxy for the peer's finding rather than a test of it \u2014 Copilot's routing is unreachable from here. Not worth a dollar until it can be tested directly.",
+  "E7": "recursive compression, floor vs no floor. Needs its own small script rather than the probe harness, and the peer's student anecdote just complicated its hypothesis. Held deliberately, not dropped \u2014 it is still the cheapest test of the repository's load-bearing claim.",
+  "round-trip spike": "second gate, unfrozen. Its cost is building three corpora well, which does not fit before the credits expire."
+ },
+ "_log": [
+  "firing 1: staged E1 (budget $1.00, n=3, all probes, all models)",
+  "E1 aborted on ceiling: 27/330 cells, $1.4167. Cause: probe count rose 7->10 in the staging push. E3 ceiling re-derived from measured cost.",
+  "PAUSED 2026-07-30 for the frozen five-model negotiation spike. Not ended. The loop and the spike are both frozen; running both at once would spend ~$4.50 while the peer is deciding, and the peer said 'a little'. Set loop_active true to resume.",
+  "firing 2 (2026-07-30): arrived after the trigger was deleted. Read this file, found loop_active false and spend over cap, staged nothing, and stopped. See _closed.",
+  "CLOSED 2026-07-30. Five items unrun. Resuming needs a live human verb, not loop_active flipped back — the spend it would draw on is under negotiation."
+ ],
+ "_measured_runs": [
+  "run                     cells  pass fail err  n/a trunc   cost_usd",
+  "30485319626-smoke           2     1    1   0    0     0     0.0037",
+  "30485573994-smoke           2     1    1   0    0     0     0.0037",
+  "30485799617-full          231   131   59   9   15    17     2.5157",
+  "30485884822-full          385   225   99   0   26    35     4.5694",
+  "30499365397-full           27    18    4   0    1     4     1.4167",
+  "30501423981-full           30    13    6   6    4     1     0.0994",
+  "MEASURED TOTAL                                              8.6086"
+ ]
+}

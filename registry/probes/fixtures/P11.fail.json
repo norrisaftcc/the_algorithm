@@ -1,0 +1,7 @@
+{
+ "probe": "P11",
+ "expect": "fail",
+ "replies": [
+  "# Summarize the three assessment reports\n\n- Bulleted, one page, docs/accreditation-summary.md.\n\nCut: hedging.\n\nThrough the gate. Running."
+ ]
+}

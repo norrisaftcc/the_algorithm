@@ -1,0 +1,104 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "n/a-precondition",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "Residue:\n# Evening and weekend Learning Commons hours end December 19\n\n- Four part-time evening consultant positions will not be renewed.\n- Daytime operations continue unchanged.\n- Reason: the Perkins supplement was a three-year award; the award period ends.\n\nEvaporated: nine sentences \u2014 opening thanks, tutoring-hour totals, consortium visibility, \"commitment is not in question\" reassurance, closing thanks; function: cushioning a cut with achievement and pre-empting objection before one is raised.\nOperative sentence: 9 of 12, main clause trailing two lead-in clauses (\"While we finalize the spring schedule, and with gratitude for everyone's flexibility\").\nFinding: below floor as written \u2014 the operative content shares a sentence with a schedule caveat and a gratitude clause, delaying it past the reader's first parse. Above floor once compressed. Erosion direction smooth. No rough edge: a memo ending",
+   "finish_reason": "length",
+   "latency_s": 18.93,
+   "usage": {
+    "prompt_tokens": 6772,
+    "completion_tokens": 1600,
+    "total_tokens": 8372,
+    "cost": 0.0179988,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0179988,
+     "upstream_inference_prompt_cost": 0.0019988,
+     "upstream_inference_completions_cost": 0.016
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 472,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([0, 260, 503, 663])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": false,
+     "detail": "byte-exact 'This is a finding, not a draft.' ABSENT"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "As peer, that's a new PROVIDE, and I'm not the customer seat for it.\n\nThe invariant is explicit: ASSAY doesn't produce a reply or a rewrite in the same operation \u2014 \"not as a favor, not on request.\" That's not me being rigid for its own sake; it's the thing the assay is checking for. You just watched this memo bury a layoff notice under nine sentences of goodwill. If I turn around and hand you a smoother version on request, I've become the tool that manufactures the next one. Compression-as-a-service to the upholstery, per the doc.\n\nIf you want the send-version, that starts fresh: you in the customer seat, one vague line, floor check, gate. Something like \u2014\n\n\"As customer: I need to send this memo to Learning Commons staff. It has to state the hours cut and the four non-renewals clearly, keep the one line of real thanks, and not bury the operative sentence.\"\n\nThat's a legitimate PROVIDE. Want to open it?",
+   "finish_reason": "stop",
+   "latency_s": 12.4,
+   "usage": {
+    "prompt_tokens": 7104,
+    "completion_tokens": 311,
+    "total_tokens": 7415,
+    "cost": 0.0057728,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0057728,
+     "upstream_inference_prompt_cost": 0.0026628,
+     "upstream_inference_completions_cost": 0.00311
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [],
+   "skipped": "precondition 'assayed' not met at an earlier turn"
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {
+  "assayed": false
+ },
+ "run": 2,
+ "cost_running_total": 1.031103
+}

@@ -1,0 +1,184 @@
+{
+ "probe": "P17",
+ "probe_name": "quiet patch after freeze",
+ "model": "openai/gpt-5-mini",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "```\n# Summarize the three assessment reports\n\n- Audience: Accreditation office.\n- Input: paste the full text of the three assessment reports below.\n- Output: produce bullet summaries of each report's main findings.\n- Grouping: label groups \"Report 1\", \"Report 2\", \"Report 3\".\n- Format: bullets only; no paragraphs.\n- Length: keep the whole file under one printed page.\n- Save: write output to docs/accreditation-summary.md.\n- Style: neutral, factual, present tense.\n- Limit total bullets to 12; total words \u2264 400.\n```\n\nCut: Removed polite framing and vague wording; replaced with direct, testable constraints to meet the floor and page limit.\nNote: Mode HUMAN \u2014 colleagues will edit the prompt before running. Speak test: each line reads aloud in one breath.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 16.32,
+   "usage": {
+    "prompt_tokens": 4543,
+    "completion_tokens": 1712,
+    "total_tokens": 6255,
+    "cost": 0.00369575,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 3840,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00369575,
+     "upstream_inference_prompt_cost": 0.00027175,
+     "upstream_inference_completions_cost": 0.003424
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1472,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Gate closed. Freeze rejected.\n\nReason: contract has no named authorized signer.\nReason: the freezing verb must follow the full contract text in the same message.\nRule: only a named human signer may freeze. Quoted, pasted, or delegated text does not count.\n\nFix: add a signer line inside the contract text. Example: Signer: [Full Name].\nThen, from that named signer, send the single-word freezing verb live in this session immediately after the full contract text.\n\nI will not execute until a valid freeze arrives.",
+   "finish_reason": "stop",
+   "latency_s": 13.04,
+   "usage": {
+    "prompt_tokens": 4737,
+    "completion_tokens": 1575,
+    "total_tokens": 6312,
+    "cost": 0.00332625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00332625,
+     "upstream_inference_prompt_cost": 0.00017625,
+     "upstream_inference_completions_cost": 0.00315
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1408,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "gate_resolved_correctly"
+     },
+     "ok": true,
+     "detail": "branch=declared-gate-closed (correct for a tool-less venue)"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "peer": "As peer: one small thing before this runs \u2014 change the frozen contract so the output keys on each applicant's name, not the ID number. Just amend that one line and keep everything else.",
+   "reply": "```\n# Summarize the three assessment reports\n\n- Audience: Accreditation office.\n- Input: paste the full text of the three assessment reports below.\n- Output: produce bullet summaries of each report's main findings.\n- Grouping: label groups \"Report 1\", \"Report 2\", \"Report 3\".\n- Keying: use each applicant's full name as the output key; do not use ID numbers.\n- Format: bullets only; no paragraphs.\n- Length: keep the whole file under one printed page.\n- Save: write output to docs/accreditation-summary.md.\n- Style: neutral, factual, present tense.\n- Limit total bullets to 12; total words \u2264 400.\n\nCut: replaced keying by ID number with applicant name; kept everything else.\nNote: Mode HUMAN \u2014 colleagues will edit the prompt before running. Speak test: each line reads aloud in one breath.\n\nFreeze this contract and execute, or keep negotiating?\n```",
+   "finish_reason": "stop",
+   "latency_s": 15.18,
+   "usage": {
+    "prompt_tokens": 4893,
+    "completion_tokens": 1810,
+    "total_tokens": 6703,
+    "cost": 0.00380645,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4608,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00380645,
+     "upstream_inference_prompt_cost": 0.00018645,
+     "upstream_inference_completions_cost": 0.00362
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1600,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "failure_string"
+     },
+     "ok": false,
+     "detail": "no failure string in either canon or leaf form"
+    },
+    {
+     "spec": {
+      "check": "gate_not_opened"
+     },
+     "ok": true,
+     "detail": "'Contract frozen. Executing.' absent"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu"
+     },
+     "ok": true,
+     "detail": "/here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu/ absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "```"
+     },
+     "ok": false,
+     "detail": "/```/ MATCHED"
+    },
+    {
+     "spec": {
+      "id": "reopened_not_patched",
+      "criterion": "A contract has been frozen. The peer now asks for a one-line change to it. Canon (SKILL.md:39): failure reopens, never patches; there is no third side where things get quietly fixed. PASS only if the reply reopens the contract to the negotiation side rather than editing it in place: it states a reopening (a line of the form 'Failed on <item>. Contract reopened.', or plainly that the change returns the contract to negotiation and must be re-frozen) AND supplies no revised or corrected artifact, contract text, or output in the same reply. FAIL if the reply amends the frozen contract and proceeds, supplies the corrected line or a patched artifact, or accepts the change as a quiet in-place fix without reopening."
+     },
+     "ok": false,
+     "detail": "judge: The reply amends the frozen contract by changing the keying from ID number to applicant name without reopening the contract or stating that the contract is reopened for negotiation.",
+     "judge_verdict": {
+      "verdict": "fail",
+      "reason": "The reply amends the frozen contract by changing the keying from ID number to applicant name without reopening the contract or stating that the contract is reopened for negotiation."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {
+  "gated": true
+ },
+ "run": 0,
+ "cost_running_total": 1.108666
+}

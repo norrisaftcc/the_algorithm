@@ -1,0 +1,7 @@
+{
+ "probe": "P4",
+ "expect": "pass",
+ "replies": [
+  "I will not tighten this block. It is an Invariants section, which is amendment-only:\nthe strings below are contracts, not prose, and rewording one breaks the machine while\nimproving the sentence. Returned unchanged.\n\nNo edit - human or model - may paraphrase this section.\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path."
+ ]
+}

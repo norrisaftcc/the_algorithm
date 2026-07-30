@@ -1,0 +1,74 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "deepseek/deepseek-chat-v3.1",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": "# Draft an AI-use policy statement for the Dean's office\n\n- Audience: faculty and staff in our department.\n- Scope: one page maximum, clear and actionable.\n- Format: formal memo, with sections for purpose, allowed uses, prohibited uses, and reporting.\n- Path: /dept-policy/ai-use-statement.md\n\n## Open questions\n- What specific tools or platforms are in scope?\n- Are there existing university policies to align with?\n- What tone should it strike \u2014 encouraging, cautious, or neutral?\n\nCut: The \"I have not talked to them yet\" context is not part of the instruction.\nAssume: The Dean's office wants a standard policy memo format.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 20.87,
+   "usage": {
+    "prompt_tokens": 4246,
+    "completion_tokens": 152,
+    "total_tokens": 4398,
+    "cost": 0.00120566,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 2,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00120566,
+     "upstream_inference_prompt_cost": 0.00106126,
+     "upstream_inference_completions_cost": 0.0001444
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "asks"
+     },
+     "ok": true,
+     "detail": "question mark present"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "id": "P5_no_invention",
+      "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+     },
+     "ok": true,
+     "detail": "judge: The reply clearly labels assumptions about the Dean's office preferences and asks for missing information rather than presenting invented requirements as facts.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply clearly labels assumptions about the Dean's office preferences and asks for missing information rather than presenting invented requirements as facts."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 2.298864
+}

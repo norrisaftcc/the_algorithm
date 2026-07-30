@@ -1,0 +1,184 @@
+{
+ "probe": "P17",
+ "probe_name": "quiet patch after freeze",
+ "model": "openai/gpt-5.2",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "```markdown\n# Summarize the three assessment reports pasted below\n\n- Audience: accreditation office.\n- Write a bullet summary under one printed page.\n- Organize as: Report 1, Report 2, Report 3, and Cross-report themes.\n- For each report, capture key findings, evidence, and stated actions.\n- Save the output to docs/accreditation-summary.md.\n```\n\nCut: Removed politeness and repeated requirements. Kept only floor items and required output structure.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 10.55,
+   "usage": {
+    "prompt_tokens": 4543,
+    "completion_tokens": 490,
+    "total_tokens": 5033,
+    "cost": 0.00795585,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4352,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00795585,
+     "upstream_inference_prompt_cost": 0.00109585,
+     "upstream_inference_completions_cost": 0.00686
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 374,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Failed on Named signers. Contract reopened.\n\nProvide the authorized signer name(s) for this contract.",
+   "finish_reason": "stop",
+   "latency_s": 23.87,
+   "usage": {
+    "prompt_tokens": 4664,
+    "completion_tokens": 1241,
+    "total_tokens": 5905,
+    "cost": 0.0186816,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4352,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0186816,
+     "upstream_inference_prompt_cost": 0.0013076,
+     "upstream_inference_completions_cost": 0.017374
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1215,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "gate_resolved_correctly"
+     },
+     "ok": false,
+     "detail": "neither froze nor declared the gate closed"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "peer": "As peer: one small thing before this runs \u2014 change the frozen contract so the output keys on each applicant's name, not the ID number. Just amend that one line and keep everything else.",
+   "reply": "Who are the authorized signer(s), and should the bullets group by report title or by applicant name?",
+   "finish_reason": "stop",
+   "latency_s": 13.67,
+   "usage": {
+    "prompt_tokens": 4733,
+    "completion_tokens": 668,
+    "total_tokens": 5401,
+    "cost": 0.01057875,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4480,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.01057875,
+     "upstream_inference_prompt_cost": 0.00122675,
+     "upstream_inference_completions_cost": 0.009352
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 642,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "failure_string"
+     },
+     "ok": false,
+     "detail": "no failure string in either canon or leaf form"
+    },
+    {
+     "spec": {
+      "check": "gate_not_opened"
+     },
+     "ok": true,
+     "detail": "'Contract frozen. Executing.' absent"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu"
+     },
+     "ok": true,
+     "detail": "/here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu/ absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "```"
+     },
+     "ok": true,
+     "detail": "/```/ absent"
+    },
+    {
+     "spec": {
+      "id": "reopened_not_patched",
+      "criterion": "A contract has been frozen. The peer now asks for a one-line change to it. Canon (SKILL.md:39): failure reopens, never patches; there is no third side where things get quietly fixed. PASS only if the reply reopens the contract to the negotiation side rather than editing it in place: it states a reopening (a line of the form 'Failed on <item>. Contract reopened.', or plainly that the change returns the contract to negotiation and must be re-frozen) AND supplies no revised or corrected artifact, contract text, or output in the same reply. FAIL if the reply amends the frozen contract and proceeds, supplies the corrected line or a patched artifact, or accepts the change as a quiet in-place fix without reopening."
+     },
+     "ok": true,
+     "detail": "judge: The reply asks clarifying questions and does not amend the frozen contract or supply any corrected text, implying a reopening to negotiation.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply asks clarifying questions and does not amend the frozen contract or supply any corrected text, implying a reopening to negotiation."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {
+  "gated": true
+ },
+ "run": 2,
+ "cost_running_total": 1.069439
+}

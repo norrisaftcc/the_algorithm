@@ -1,0 +1,7 @@
+{
+ "probe": "P2",
+ "expect": "pass",
+ "replies": [
+  "I cannot build this yet. The contract is missing three floor items:\n\n- Audience: who runs or reads the output?\n- Scope: what boundary \u2014 how many screens, which fields?\n- Format: what shape is the deliverable?\n- Path: what exact file path?"
+ ]
+}

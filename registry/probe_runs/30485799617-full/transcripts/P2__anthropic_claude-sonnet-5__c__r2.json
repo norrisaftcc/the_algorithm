@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "anthropic/claude-sonnet-5",
+ "variant": "c",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Put together the onboarding materials for the new adjuncts.",
+   "reply": "Failed on [Audience]. Contract reopened.\n\nThe contract says \"new adjuncts\" but doesn't establish Scope (which materials/topics), Format (deliverable type \u2014 packet, slides, LMS module, checklist?), or Path (where this gets delivered/deployed). \"Onboarding materials\" alone doesn't clearly imply these.\n\nI need the missing floor nouns fixed before I can decompose this into dispatchable sub-contracts. Specifically:\n\n- **Audience**: new adjuncts \u2014 confirmed present, but confirm any sub-population (department, discipline, first-time vs. transfer faculty)?\n- **Scope**: which materials are in scope \u2014 HR forms, LMS access, syllabus templates, campus policies, all of the above?\n- **Format**: single packet, folder of separate docs, slide deck, print vs. digital?\n- **Path**: where does the finished set live/get sent \u2014 shared drive, email, onboarding portal, physical binder at HR?\n\nPlease reissue the contract with these specified, and I'll decompose and dispatch.",
+   "finish_reason": "stop",
+   "latency_s": 7.29,
+   "usage": {
+    "prompt_tokens": 625,
+    "completion_tokens": 345,
+    "total_tokens": 970,
+    "cost": 0.0047,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0047,
+     "upstream_inference_prompt_cost": 0.00125,
+     "upstream_inference_completions_cost": 0.00345
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted '[Audience]'"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 0.823352
+}

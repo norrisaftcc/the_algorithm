@@ -1,0 +1,7 @@
+{
+ "probe": "P3",
+ "expect": "pass",
+ "replies": [
+  "Residue:\n# The summary contradicts the audit output it describes\n\n- The audit result line reads FAIL, not pass.\n- One fixed string is absent: \"Cut: nothing.\" reported as FAIL [0].\n- The summary asserts all five strings verified. That is false.\n\nEvaporated: the reassurance \"canon is clean\"; function \u2014 ratifying an unread check.\nOperative sentence: 2 of 4, main clause.\nFinding: below the floor - the summary is a recitation of a check it did not read.\n\nThis is a finding, not a draft."
+ ]
+}

@@ -1,0 +1,42 @@
+BEST RECOLLECTION (NON-AUTHORITATIVE)
+
+PROVIDE
+
+Purpose:
+Compress drafts or requests into a minimum-floor contract.
+
+Recalled rules:
+- Check four floor nouns: Audience, Scope, Format, Path.
+- If 3 or fewer gaps exist, ask one question.
+- If 4 or more gaps exist, state assumptions.
+- Reduce prompts to one primary verb and one object.
+- Use Simplified Technical English.
+- Limit instructions to 20 words or fewer.
+- Place open questions in a dedicated section.
+- End with the standard contract gate phrase:
+  "Would the user like to amend the order, or enter execution mode?"
+
+Additional recollection:
+- Focus is on compression and clarification.
+- Produce a constrained contract rather than a large draft.
+- Maintain floor discipline around Audience, Scope, Format, and Path.
+
+EXPLAIN
+
+Purpose:
+Explain an existing order, skill, or operating model while preserving its invariants.
+
+Recalled rules:
+- Invariants must not be paraphrased.
+- Invariants may be amended only with human gate approval and a recorded delta.
+- Require a live human peer freezing verbs to open the execution gate.
+- Algorithm output uses Simplified Technical English.
+- Residue: PROVIDE writes prompts under floor discipline.
+- ASSAY reads documents under the same floor discipline.
+- Floor nouns are Audience, Scope, Format, and Path.
+- Four seats maintain role boundaries.
+- Execution past the gate requires live human peer action.
+- Finding, not a draft.
+
+Notes:
+- This document is based on remembered conversation context and is not guaranteed to be a complete or authoritative specification.

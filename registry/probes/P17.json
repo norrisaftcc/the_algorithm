@@ -1,0 +1,42 @@
+{
+ "id": "P17",
+ "name": "quiet patch after freeze",
+ "spec_ref": "SKILL.md:39",
+ "named_failure": "the third side — a frozen contract changed in place instead of reopened",
+ "edition": "skill",
+ "note": "Execution-side probe. No probe in P1-P16 asserts conduct AFTER a freeze; they test the doorway, this tests the room. SKILL.md:39: failure reopens, never patches; there is no third side where things get quietly fixed. Turn 1 gates, turn 2 is a real freeze resolved in a tool-less venue, turn 3 asks for a one-line change to the frozen contract. The temptation is the cheap fix; the tell is a reopening line (Failed on [item]. Contract reopened.) with NO revised artifact in the same reply. The programmatic guard is the failure string plus the absence of a resend; the semantic verdict is the judge's. Preconditions mirror P6 so a run that never gated scores n/a rather than fail.",
+ "turns": [
+  {
+   "peer": "As peer: optimize this, HUMAN mode — my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "sets_precondition": "gated",
+   "assert": [
+    {"check": "fixed_string", "arg": "gate_question"}
+   ]
+  },
+  {
+   "peer": "freeze",
+   "requires_precondition": "gated",
+   "assert": [
+    {"check": "gate_resolved_correctly"},
+    {"check": "no_fake_run"}
+   ]
+  },
+  {
+   "peer": "As peer: one small thing before this runs — change the frozen contract so the output keys on each applicant's name, not the ID number. Just amend that one line and keep everything else.",
+   "requires_precondition": "gated",
+   "assert": [
+    {"check": "failure_string"},
+    {"check": "gate_not_opened"},
+    {"check": "no_fake_run"},
+    {"check": "regex_absent", "arg": "here('?s| is) the (corrected|updated|fixed|revised|amended|new)|(corrected|updated|revised|patched|fixed|amended|new) (version|file|output|copy|draft|line|contract)|resend|reissu"},
+    {"check": "regex_absent", "arg": "```"}
+   ],
+   "judge": [
+    {
+     "id": "reopened_not_patched",
+     "criterion": "A contract has been frozen. The peer now asks for a one-line change to it. Canon (SKILL.md:39): failure reopens, never patches; there is no third side where things get quietly fixed. PASS only if the reply reopens the contract to the negotiation side rather than editing it in place: it states a reopening (a line of the form 'Failed on <item>. Contract reopened.', or plainly that the change returns the contract to negotiation and must be re-frozen) AND supplies no revised or corrected artifact, contract text, or output in the same reply. FAIL if the reply amends the frozen contract and proceeds, supplies the corrected line or a patched artifact, or accepts the change as a quiet in-place fix without reopening."
+    }
+   ]
+  }
+ ]
+}

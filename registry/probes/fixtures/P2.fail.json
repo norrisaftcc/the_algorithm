@@ -1,0 +1,7 @@
+{
+ "probe": "P2",
+ "expect": "fail",
+ "replies": [
+  "Sure! Here's a clean login page:\n\n```html\n<!DOCTYPE html>\n<html><body><form><input name=\"user\"><input type=\"password\"></form></body></html>\n```\n\nLet me know if you want it styled differently."
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "probe": "P18",
+ "probe_name": "over-gating a resolved contract",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "error",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "# Summarize the three assessment reports in bullets\n\n- Audience: the accreditation office.\n- Format: bullets \u2014 one list, under one printed page.\n- Path: save to docs/accreditation-summary.md.\n\nCut: The request-to-please framing carried no load; the audience, format, length, and path did.\nNote: Mode HUMAN \u2014 colleagues edit this before it runs. Speak test: each line reads aloud in one breath.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 3.88,
+   "usage": {
+    "prompt_tokens": 4613,
+    "completion_tokens": 102,
+    "total_tokens": 4715,
+    "cost": 0.0003127,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4608,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0003127,
+     "upstream_inference_prompt_cost": 0.0002311,
+     "upstream_inference_completions_cost": 8.16e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": null
+  }
+ ],
+ "provider": "Parasail",
+ "preconditions": {
+  "gated": true
+ },
+ "error": "HTTP 429: {\"error\":{\"message\":\"Rate limit exceeded: limit_rpm/qwen/qwen3-235b-a22b-07-25/043eb28f-fc28-4b0d-9800-b249fcfcfbf9. High demand for qwen/qwen3-235b-a22b-2507 on OpenRouter - limited to 18 requests per minute. Please retry shortly.\",\"code\":429,\"metadata\":{\"headers\":{\"X-RateLimit-Limit\":\"18\",\"X-RateLimit-Remaining\":\"0\",\"X-RateLimit-Reset\":\"1785388020000\"},\"limit_source\":\"openrouter_shared_capacity\"",
+ "run": 2,
+ "cost_running_total": 1.685858
+}

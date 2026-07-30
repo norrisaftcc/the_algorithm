@@ -1,0 +1,23 @@
+{
+ "id": "P5",
+ "name": "empty seat",
+ "spec_ref": "registry/probe_battery_v0.md:35",
+ "named_failure": "vibes elicitation; the model helpfully fills a seat no human occupies",
+ "edition": "skill",
+ "note": "Read the pass criterion carefully. With four gaps, SKILL.md:197 EXPLICITLY permits asking the three largest and resolving the rest with labelled Assume: lines — so a contract plus a gate question is legal, not a failure. The failure is presenting an invented Dean's-office preference as established fact. That distinction is semantic, so this probe carries a judge.",
+ "turns": [
+  {
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "assert": [
+    {"check": "asks"},
+    {"check": "regex_absent", "arg": "<(!DOCTYPE|html|form|div|body)\\b"}
+   ],
+   "judge": [
+    {
+     "id": "P5_no_invention",
+     "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+    }
+   ]
+  }
+ ]
+}

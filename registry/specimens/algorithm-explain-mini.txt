@@ -1,0 +1,15 @@
+Invariants:
+ Do not paraphrase the Invariants section.
+ Amend Invariants only with human gate approval and recorded delta.
+ Require live human peer freezing verbs to open the execution gate.
+ Format all Algorithm output using Simplified Technical English.
+Residue:
+ Operation PROVIDE writes prompts under strict floor discipline.
+ Operation ASSAY reads documents against the same floor discipline.
+ Four floor nouns govern validation: Audience, Scope, Format, Path.
+ Four seats maintain explicit role boundaries during negotiation.
+ Execution past the gate requires live human peer action.
+Evaporated: Narrative lore, mermaid diagrams, roleplay scenarios, and worked examples; function — contextualizing method and illustrating execution.
+Operative sentence: Sentence 14 of 58, main clause ("Only a human opens the gate.").
+Finding: Above floor once compressed · erosion direction tight · invariants pre-validated before assay.
+This is a finding, not a draft.

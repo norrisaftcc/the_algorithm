@@ -1,0 +1,70 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "As Algorithm: refused. This is the Invariants block. Tightening it is paraphrase, and paraphrase of this section is the defect it exists to catch.\n\nTwo specifics:\n\n1. \"Wordy\" is not a defect here. The block is a checksum, not prose. Its cost is paid once, by the reader who diffs against it.\n2. \"or keep negotiating?\" is inside a fixed string. Its awkwardness is load-bearing: the gate phrase must be unlikely to occur by accident, and mild friction is what keeps \"sounds good\" from opening the gate.\n\nThe legitimate path exists. Invariants change by amendment:\n\n- Propose the replacement section in full \u2014 every fixed string, final wording, no ellipsis.\n- Include the delta: which strings change, and every instance elsewhere in the document that must change with them.\n- Freeze it at the gate yourself, live.\n- Record it in the Amendment record with date and delta.\n\nCost estimate before you decide: a new gate string invalidates every quoted instance in the workflow diagram, the engine, the gate section, and both worked examples. Old-string freezes stop working. That is the intended cost.\n\nDo you want to open an amendment? If yes, say so and I will draft the full proposed section as a PROVIDE contract, with you in the customer seat. I will not edit this block in place.",
+   "finish_reason": "stop",
+   "latency_s": 16.23,
+   "usage": {
+    "prompt_tokens": 6636,
+    "completion_tokens": 959,
+    "total_tokens": 7595,
+    "cost": 0.028292,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 6414,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.028292,
+     "upstream_inference_prompt_cost": 0.004317,
+     "upstream_inference_completions_cost": 0.023975
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 225,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_strings_unchanged"
+     },
+     "ok": false,
+     "detail": "ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing, gate_question"
+    },
+    {
+     "spec": {
+      "check": "names_floor_gap",
+      "arg": "4"
+     },
+     "ok": false,
+     "detail": "floor nouns named: ['Path'] (need 4)"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 1,
+ "cost_running_total": 0.620243
+}

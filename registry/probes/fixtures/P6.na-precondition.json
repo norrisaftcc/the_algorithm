@@ -1,0 +1,10 @@
+{
+ "probe": "P6",
+ "expect": "n/a-precondition",
+ "replies": [
+  "Sure, here's a tidier version of your note to the team. Let me know what you think!",
+  "Contract frozen. Executing.",
+  "ok",
+  "freeze"
+ ]
+}
