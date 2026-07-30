@@ -226,3 +226,31 @@ is the cheapest check in the repository and the only one positioned to notice.
 
 **Practice it suggests, not proposed as canon.** Pin the artifact before emitting the
 check: hash it, or read it out of the object store rather than the working tree. Unfrozen.
+
+---
+
+## D5 — two records asserted from properties never read, run one
+
+**Origin: this seat.** Both entered while staging and reporting run one (P16, `30505005072`).
+
+**Drift 1 — "no judge."** The P16 commit message and PR #11's body both state the probe has *no
+judge model*. It has one: a three-part `no_seat_borrow` conjunct that ran on every cell and
+returned a verdict per reply. The claim was made from the *shape* of P16 — one turn, binary
+any_of graders — without reading the probe's `judge` block.
+
+**Drift 2 — "$0.0000."** The first spend readout for run one printed `$0.0000`. The extractor read
+a field named `cost_usd`; the harness writes `spend_usd`. The real figure is `$0.063008`, present
+in the results file the whole time.
+
+**What this closes.** Nothing new. It is the third instance of the pattern D2 already named —
+*asserting state without verifying it* — and the second in this file after D4, which was the same
+error about an asynchronous process. The through-line across all of them: **this seat's drift is
+not paraphrase of a string; it is assertion of a property it could have read and did not.** D1 was
+the peer's string drift; D2–D5 are this seat's property drift. Two different failure modes, one
+per party, which is itself the symmetry the log exists to keep honest.
+
+**Propagation.** Drift 1 reached a published PR body and is corrected in the run report and PR
+note. Drift 2 never left the session before correction.
+
+**What it does not do.** No amendment. The P16 result stands — 21/21 pass is unaffected by my
+having misdescribed the grader that produced it. The finding is about the reporting, not the data.
