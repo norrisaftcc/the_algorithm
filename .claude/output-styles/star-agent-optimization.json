@@ -1,0 +1,38 @@
+{
+  "name": "star-agent-optimization",
+  "description": "AI agent performance optimization reports with metrics, tuning strategies, and implementation guidelines",
+  "purpose": "Document AI agent optimization efforts with performance metrics, configuration changes, and improvement strategies",
+  "target_audience": ["ai-engineer", "ml-engineer", "performance-engineer", "devops", "data-scientist"],
+  "format": {
+    "structure": "Performance Summary > Baseline Metrics > Optimization Strategy > Implementation > Results > Recommendations",
+    "tone": "technical",
+    "verbosity": "detailed",
+    "sections": [
+      "performance_summary",
+      "baseline_metrics",
+      "optimization_objectives",
+      "strategy_analysis",
+      "implementation_details",
+      "results_analysis",
+      "performance_comparison",
+      "recommendations",
+      "monitoring_setup"
+    ]
+  },
+  "template": "# Agent Optimization Report: [Agent Name/Type]\n\n## Performance Summary\n**Agent:** [Agent identifier]\n**Optimization Period:** [Start date] - [End date]\n**Overall Improvement:** [Percentage improvement]\n**Key Achievement:** [Primary performance gain]\n\n## Baseline Metrics\n\n### Performance Indicators\n- **Response Time:** [Average/P95/P99]\n- **Accuracy:** [Success rate percentage]\n- **Resource Usage:** [CPU/Memory/GPU utilization]\n- **Throughput:** [Requests/operations per unit time]\n- **Cost:** [Cost per operation/request]\n\n### Baseline Configuration\n```json\n{\n  \"model_parameters\": {\n    \"temperature\": [value],\n    \"max_tokens\": [value],\n    \"top_p\": [value]\n  },\n  \"system_settings\": {\n    \"batch_size\": [value],\n    \"timeout\": [value],\n    \"retry_policy\": [configuration]\n  }\n}\n```\n\n## Optimization Objectives\n\n### Primary Goals\n1. **[Objective 1]:** [Target improvement and success criteria]\n2. **[Objective 2]:** [Target improvement and success criteria]\n\n### Constraints\n- **Budget:** [Cost limitations]\n- **Latency:** [Maximum acceptable response time]\n- **Accuracy:** [Minimum required accuracy threshold]\n\n## Strategy Analysis\n\n### Optimization Approaches Evaluated\n\n#### Approach 1: [Strategy Name]\n**Method:** [Detailed description]\n**Expected Impact:** [Predicted improvement]\n**Implementation Effort:** [High/Medium/Low]\n**Risk Assessment:** [Potential issues]\n\n#### Approach 2: [Strategy Name]\n[Same structure as Approach 1]\n\n### Selected Strategy\n**Chosen Approach:** [Selected optimization method]\n**Justification:** [Why this approach was selected]\n\n## Implementation Details\n\n### Configuration Changes\n```json\n{\n  \"optimized_parameters\": {\n    \"temperature\": [new_value],\n    \"max_tokens\": [new_value],\n    \"top_p\": [new_value]\n  },\n  \"system_optimizations\": {\n    \"batch_size\": [new_value],\n    \"caching_strategy\": [configuration],\n    \"request_routing\": [optimization]\n  }\n}\n```\n\n### Tuning Process\n1. **[Step 1]:** [Description and outcome]\n2. **[Step 2]:** [Description and outcome]\n3. **[Step 3]:** [Description and outcome]\n\n### A/B Testing Setup\n- **Control Group:** [Baseline configuration]\n- **Test Group:** [Optimized configuration]\n- **Traffic Split:** [Percentage allocation]\n- **Duration:** [Testing period]\n\n## Results Analysis\n\n### Performance Improvements\n\n| Metric | Baseline | Optimized | Improvement |\n|--------|----------|-----------|-------------|\n| Response Time (avg) | [value] | [value] | [percentage] |\n| Response Time (P95) | [value] | [value] | [percentage] |\n| Accuracy | [value] | [value] | [percentage] |\n| Throughput | [value] | [value] | [percentage] |\n| Cost per Operation | [value] | [value] | [percentage] |\n\n### Statistical Significance\n- **Sample Size:** [Number of requests/operations]\n- **Confidence Level:** [95%/99%]\n- **P-value:** [Statistical significance]\n\n### Unexpected Outcomes\n- [Observation 1 and analysis]\n- [Observation 2 and analysis]\n\n## Performance Comparison\n\n### Before vs After Charts\n[Description of performance trends and visualizations]\n\n### Resource Utilization\n- **CPU Usage:** [Before] → [After] ([Change])\n- **Memory Usage:** [Before] → [After] ([Change])\n- **GPU Usage:** [Before] → [After] ([Change])\n\n## Recommendations\n\n### Immediate Actions\n1. **Deploy Optimizations:** [Specific configurations to implement]\n2. **Monitor Metrics:** [Key indicators to watch]\n3. **Gradual Rollout:** [Deployment strategy]\n\n### Future Optimization Opportunities\n- **[Opportunity 1]:** [Description and potential impact]\n- **[Opportunity 2]:** [Description and potential impact]\n\n### Risk Mitigation\n- **[Risk 1]:** [Mitigation strategy]\n- **[Risk 2]:** [Mitigation strategy]\n\n## Monitoring Setup\n\n### Key Metrics to Track\n- [Metric 1] - Threshold: [value] - Alert: [condition]\n- [Metric 2] - Threshold: [value] - Alert: [condition]\n\n### Dashboard Configuration\n```json\n{\n  \"metrics\": [\n    {\n      \"name\": \"response_time\",\n      \"aggregation\": \"percentile\",\n      \"percentile\": 95,\n      \"alert_threshold\": [value]\n    }\n  ]\n}\n```\n\n### Automated Optimization\n- **Auto-scaling Rules:** [Configuration]\n- **Performance Triggers:** [Conditions for automatic adjustments]\n\n## Appendix\n\n### Detailed Logs\n[Sample of optimization process logs]\n\n### Configuration History\n[Change log of parameter modifications]\n\n### References\n- [Research papers or documentation used]\n- [Tools and frameworks utilized]",
+  "usage_examples": [
+    "AI agent performance tuning reports",
+    "ML model optimization documentation",
+    "System performance improvement analysis",
+    "Agent configuration change tracking",
+    "Performance benchmark comparisons"
+  ],
+  "best_practices": [
+    "Include statistical significance testing",
+    "Document all configuration changes",
+    "Provide before/after performance comparisons",
+    "Set up comprehensive monitoring",
+    "Consider resource utilization impacts",
+    "Plan for gradual optimization rollouts"
+  ]
+}

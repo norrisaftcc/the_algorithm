@@ -1,0 +1,38 @@
+{
+  "name": "bug-report",
+  "description": "Structured bug reporting with clear reproduction steps, environment details, and severity assessment",
+  "purpose": "Standardize bug reporting to ensure consistent information capture and faster resolution",
+  "target_audience": ["qa-engineer", "developer", "support-team", "product-manager", "end-user"],
+  "format": {
+    "structure": "Summary > Environment > Steps to Reproduce > Expected vs Actual > Severity > Additional Info",
+    "tone": "precise",
+    "verbosity": "detailed",
+    "sections": [
+      "bug_summary",
+      "severity_assessment",
+      "environment_details",
+      "reproduction_steps",
+      "expected_behavior",
+      "actual_behavior",
+      "impact_analysis",
+      "attachments",
+      "workaround"
+    ]
+  },
+  "template": "# Bug Report: [Brief Description]\n\n## Summary\n**Issue:** [Clear, concise description of the problem]\n**Severity:** [Critical/High/Medium/Low]\n**Priority:** [P1/P2/P3/P4]\n**Status:** [New/In Progress/Resolved/Closed]\n\n## Environment Details\n- **Application Version:** [Version number]\n- **Operating System:** [OS and version]\n- **Browser/Client:** [Browser/app and version]\n- **Device:** [Desktop/Mobile/Tablet specifications]\n- **Network:** [Connection type if relevant]\n\n## Steps to Reproduce\n1. [First step with specific details]\n2. [Second step with specific details]\n3. [Continue with numbered steps]\n4. [Final step that triggers the bug]\n\n**Prerequisites:** [Any setup or conditions needed]\n\n## Expected Behavior\n[Describe what should happen normally]\n\n## Actual Behavior\n[Describe what actually happens - the bug]\n\n## Impact Analysis\n\n### User Impact\n- **Affected Users:** [Number or percentage of users]\n- **User Experience:** [How this affects user workflow]\n- **Business Impact:** [Revenue/productivity/reputation impact]\n\n### Technical Impact\n- **System Performance:** [Any performance degradation]\n- **Data Integrity:** [Risk to data consistency]\n- **Security:** [Any security implications]\n\n## Evidence\n\n### Screenshots/Videos\n- [Attach visual evidence of the issue]\n\n### Log Files\n```\n[Relevant log entries or error messages]\n```\n\n### Error Messages\n```\n[Exact error text or codes]\n```\n\n## Additional Information\n\n### Frequency\n- **Occurrence:** [Always/Sometimes/Rarely]\n- **Pattern:** [Specific conditions when it occurs]\n\n### Related Issues\n- [Link to related bugs or feature requests]\n\n### Workaround\n[Temporary solution if available, or \"None known\"]\n\n## Investigation Notes\n\n### Potential Causes\n- [Hypothesis 1 about root cause]\n- [Hypothesis 2 about root cause]\n\n### Areas to Investigate\n- [Code modules or components to check]\n- [Configuration settings to verify]\n\n## Triage Information\n\n### Assignment\n- **Assigned To:** [Developer/team]\n- **Reporter:** [Who reported the issue]\n- **Date Reported:** [Date and time]\n\n### Labels/Tags\n- [Relevant labels for categorization]\n\n---\n\n**Reporter Contact:** [Email or username for follow-up questions]",
+  "usage_examples": [
+    "QA testing bug reports",
+    "Customer support issue documentation",
+    "Developer self-reported bugs",
+    "Security vulnerability reports",
+    "Performance issue documentation"
+  ],
+  "best_practices": [
+    "Include exact steps to reproduce",
+    "Provide specific environment details",
+    "Attach visual evidence when possible",
+    "Assess user and business impact",
+    "Include relevant log entries",
+    "Suggest workarounds if available"
+  ]
+}

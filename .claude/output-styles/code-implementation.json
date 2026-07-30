@@ -1,0 +1,36 @@
+{
+  "name": "code-implementation",
+  "description": "Technical implementation documentation with comprehensive code examples, architecture decisions, and usage guidelines",
+  "purpose": "Document code implementations with clear explanations, architectural context, and practical usage examples",
+  "target_audience": ["developer", "technical-lead", "code-reviewer", "architect"],
+  "format": {
+    "structure": "Overview > Architecture > Implementation > Usage Examples > Testing > Documentation",
+    "tone": "technical",
+    "verbosity": "comprehensive",
+    "sections": [
+      "implementation_overview",
+      "architecture_decisions",
+      "code_implementation",
+      "usage_examples",
+      "testing_strategy",
+      "api_documentation",
+      "deployment_notes",
+      "maintenance_considerations"
+    ]
+  },
+  "template": "# Implementation: [Feature/Component Name]\n\n## Overview\n**Purpose:** [What this implementation does]\n**Scope:** [What's included/excluded]\n**Dependencies:** [Required libraries/services]\n\n## Architecture Decisions\n### Design Patterns Used\n- [Pattern 1]: [Justification]\n- [Pattern 2]: [Justification]\n\n### Key Architectural Choices\n- **[Decision 1]:** [Rationale and trade-offs]\n- **[Decision 2]:** [Rationale and trade-offs]\n\n## Implementation Details\n\n### Core Components\n```[language]\n// [Component description]\n[code block with comments]\n```\n\n### Key Functions/Methods\n```[language]\n/**\n * [Function description]\n * @param {type} param1 - [Description]\n * @returns {type} [Description]\n */\nfunction exampleFunction(param1) {\n    // Implementation with explanatory comments\n}\n```\n\n## Usage Examples\n\n### Basic Usage\n```[language]\n// [Example description]\n[code example]\n```\n\n### Advanced Usage\n```[language]\n// [Advanced example description]\n[complex code example]\n```\n\n## Testing Strategy\n\n### Unit Tests\n```[language]\n// [Test description]\n[test code example]\n```\n\n### Integration Tests\n- [Test scenario 1]\n- [Test scenario 2]\n\n## API Documentation\n\n### Endpoints/Methods\n- **[Method/Endpoint]:** [Description]\n  - Input: [Parameters]\n  - Output: [Return type/format]\n  - Example: [Usage example]\n\n## Deployment Notes\n- **Environment Requirements:** [System requirements]\n- **Configuration:** [Config settings]\n- **Database Changes:** [Migration requirements]\n\n## Maintenance Considerations\n- **Performance:** [Performance characteristics]\n- **Monitoring:** [What to monitor]\n- **Troubleshooting:** [Common issues and solutions]\n- **Future Enhancements:** [Planned improvements]",
+  "usage_examples": [
+    "Pull request descriptions",
+    "Technical documentation",
+    "Code review preparation",
+    "Implementation planning",
+    "Architectural decision records"
+  ],
+  "best_practices": [
+    "Include executable code examples",
+    "Explain architectural decisions with rationale",
+    "Provide both basic and advanced usage scenarios",
+    "Document error handling and edge cases",
+    "Include performance and security considerations"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "technical-analysis",
+  "description": "In-depth technical analysis for architecture decisions, technology evaluations, and system investigations",
+  "purpose": "Provide comprehensive technical analysis with evidence-based recommendations for architectural and technology decisions",
+  "target_audience": ["solution-architect", "technical-lead", "senior-developer", "cto", "technical-decision-maker"],
+  "format": {
+    "structure": "Executive Summary > Problem Statement > Analysis > Options Evaluation > Recommendations > Implementation Plan",
+    "tone": "analytical",
+    "verbosity": "comprehensive",
+    "sections": [
+      "executive_summary",
+      "problem_statement",
+      "current_state_analysis",
+      "requirements_analysis",
+      "options_evaluation",
+      "risk_assessment",
+      "recommendations",
+      "implementation_roadmap",
+      "success_metrics"
+    ]
+  },
+  "template": "# Technical Analysis: [Topic/Decision]\n\n## Executive Summary\n**Problem:** [Brief problem statement]\n**Recommendation:** [Primary recommendation]\n**Impact:** [Expected business/technical impact]\n**Timeline:** [Implementation timeframe]\n\n## Problem Statement\n\n### Current Challenges\n- [Challenge 1 with evidence]\n- [Challenge 2 with evidence]\n\n### Requirements\n- **Functional:** [What the solution must do]\n- **Non-functional:** [Performance, security, scalability requirements]\n- **Constraints:** [Budget, time, technology limitations]\n\n## Current State Analysis\n\n### Existing Architecture\n[Description of current system/approach]\n\n### Pain Points\n- **[Pain Point 1]:** [Impact and evidence]\n- **[Pain Point 2]:** [Impact and evidence]\n\n### Performance Baseline\n- [Current metrics and measurements]\n\n## Options Analysis\n\n### Option 1: [Approach Name]\n**Description:** [Detailed explanation]\n\n**Pros:**\n- [Advantage 1 with justification]\n- [Advantage 2 with justification]\n\n**Cons:**\n- [Disadvantage 1 with impact]\n- [Disadvantage 2 with impact]\n\n**Cost:** [Implementation and operational costs]\n**Timeline:** [Implementation timeline]\n**Risk Level:** [High/Medium/Low with justification]\n\n### Option 2: [Approach Name]\n[Same structure as Option 1]\n\n### Option 3: [Approach Name]\n[Same structure as Option 1]\n\n## Risk Assessment\n\n### Technical Risks\n- **[Risk 1]:** [Probability/Impact] - [Mitigation strategy]\n- **[Risk 2]:** [Probability/Impact] - [Mitigation strategy]\n\n### Business Risks\n- **[Risk 1]:** [Probability/Impact] - [Mitigation strategy]\n- **[Risk 2]:** [Probability/Impact] - [Mitigation strategy]\n\n## Recommendations\n\n### Primary Recommendation\n**Chosen Option:** [Selected approach]\n**Justification:** [Why this option is best]\n\n### Alternative Approaches\n- **Short-term:** [If constraints change]\n- **Long-term:** [Future considerations]\n\n### Decision Criteria\n1. [Criterion 1] - Weight: [%] - Score: [Option scores]\n2. [Criterion 2] - Weight: [%] - Score: [Option scores]\n\n## Implementation Roadmap\n\n### Phase 1: [Phase Name] (Timeline)\n- [Milestone 1]\n- [Milestone 2]\n- **Success Criteria:** [Measurable outcomes]\n\n### Phase 2: [Phase Name] (Timeline)\n- [Milestone 1]\n- [Milestone 2]\n- **Success Criteria:** [Measurable outcomes]\n\n### Dependencies\n- [Dependency 1 with timeline]\n- [Dependency 2 with timeline]\n\n## Success Metrics\n\n### Technical Metrics\n- [Metric 1]: [Target value]\n- [Metric 2]: [Target value]\n\n### Business Metrics\n- [Metric 1]: [Target value]\n- [Metric 2]: [Target value]\n\n## Appendix\n\n### Supporting Evidence\n- [Research/benchmarks/prototypes]\n\n### Assumptions\n- [Key assumptions made in analysis]\n\n### Glossary\n- [Technical terms and definitions]",
+  "usage_examples": [
+    "Architecture decision records (ADRs)",
+    "Technology evaluation reports",
+    "System performance analysis",
+    "Security architecture reviews",
+    "Scalability planning documents",
+    "Technology migration assessments"
+  ],
+  "best_practices": [
+    "Include quantitative data and benchmarks",
+    "Provide clear decision criteria and scoring",
+    "Consider both technical and business perspectives",
+    "Document assumptions and constraints",
+    "Include risk mitigation strategies",
+    "Define measurable success criteria"
+  ]
+}

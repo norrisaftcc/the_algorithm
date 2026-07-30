@@ -1,0 +1,38 @@
+{
+  "name": "test-plan",
+  "description": "Comprehensive test planning documentation with test cases, coverage analysis, and execution strategy",
+  "purpose": "Create detailed test plans that ensure thorough coverage and systematic testing approach",
+  "target_audience": ["qa-engineer", "test-lead", "developer", "product-manager", "release-manager"],
+  "format": {
+    "structure": "Overview > Scope > Strategy > Test Cases > Execution Plan > Criteria",
+    "tone": "systematic",
+    "verbosity": "comprehensive",
+    "sections": [
+      "test_overview",
+      "scope_definition",
+      "test_strategy",
+      "test_cases",
+      "execution_plan",
+      "entry_exit_criteria",
+      "risk_assessment",
+      "resource_requirements",
+      "schedule"
+    ]
+  },
+  "template": "# Test Plan: [Feature/Release Name]\n\n## Test Overview\n\n### Purpose\n**Feature:** [Feature or system being tested]\n**Version:** [Version number or release]\n**Test Objective:** [Primary testing goals]\n**Scope:** [What will and won't be tested]\n\n### Test Summary\n- **Total Test Cases:** [Number]\n- **Estimated Effort:** [Person-hours]\n- **Timeline:** [Start date] - [End date]\n- **Risk Level:** [High/Medium/Low]\n\n## Scope Definition\n\n### In Scope\n- [Feature/functionality 1]\n- [Feature/functionality 2]\n- [Integration points]\n- [Performance requirements]\n\n### Out of Scope\n- [Excluded features/functionality]\n- [Known limitations]\n- [Dependencies handled elsewhere]\n\n### Test Levels\n- **Unit Testing:** [Coverage and responsibility]\n- **Integration Testing:** [Components and interfaces]\n- **System Testing:** [End-to-end scenarios]\n- **Acceptance Testing:** [Business validation]\n\n## Test Strategy\n\n### Testing Approach\n- **Manual Testing:** [Scenarios requiring manual verification]\n- **Automated Testing:** [Test cases for automation]\n- **Exploratory Testing:** [Areas for ad-hoc investigation]\n\n### Test Types\n- **Functional Testing:** [Business logic validation]\n- **Non-Functional Testing:** [Performance, security, usability]\n- **Regression Testing:** [Existing functionality verification]\n- **Compatibility Testing:** [Cross-platform/browser support]\n\n### Test Environment\n- **Hardware:** [Required hardware specifications]\n- **Software:** [OS, browsers, dependencies]\n- **Data:** [Test data requirements]\n- **Network:** [Network configuration needs]\n\n## Test Cases\n\n### Test Case Template\n```\nTest Case ID: TC-[XXX]\nTitle: [Descriptive test case name]\nPriority: [High/Medium/Low]\nTest Type: [Functional/Performance/Security/etc.]\n\nPreconditions:\n- [Setup requirement 1]\n- [Setup requirement 2]\n\nTest Steps:\n1. [Action step 1]\n2. [Action step 2]\n3. [Verification step]\n\nExpected Result:\n[What should happen]\n\nActual Result:\n[To be filled during execution]\n\nStatus:\n[Pass/Fail/Blocked/Not Executed]\n```\n\n### High Priority Test Cases\n\n#### TC-001: [Core Functionality Test]\n**Priority:** High\n**Description:** [Test the primary feature functionality]\n**Steps:**\n1. [Step 1]\n2. [Step 2]\n3. [Verification]\n**Expected:** [Expected outcome]\n\n#### TC-002: [Error Handling Test]\n**Priority:** High\n**Description:** [Test error conditions and recovery]\n**Steps:**\n1. [Step 1]\n2. [Step 2]\n3. [Verification]\n**Expected:** [Expected error handling]\n\n### Medium Priority Test Cases\n[Additional test cases following same format]\n\n### Low Priority Test Cases\n[Additional test cases following same format]\n\n## Test Execution Plan\n\n### Phase 1: Core Functionality (Days 1-3)\n- Execute high priority test cases\n- Focus on critical business flows\n- **Entry Criteria:** [Requirements]\n- **Exit Criteria:** [Success conditions]\n\n### Phase 2: Integration Testing (Days 4-6)\n- Test component interactions\n- Verify data flow between systems\n- **Entry Criteria:** [Requirements]\n- **Exit Criteria:** [Success conditions]\n\n### Phase 3: End-to-End Testing (Days 7-9)\n- Complete user workflows\n- Cross-browser/platform testing\n- **Entry Criteria:** [Requirements]\n- **Exit Criteria:** [Success conditions]\n\n### Phase 4: Regression Testing (Days 10-12)\n- Verify existing functionality\n- Performance validation\n- **Entry Criteria:** [Requirements]\n- **Exit Criteria:** [Success conditions]\n\n## Entry and Exit Criteria\n\n### Entry Criteria\n- [ ] Test environment setup complete\n- [ ] Test data prepared\n- [ ] Application deployed to test environment\n- [ ] Unit testing completed with >90% pass rate\n- [ ] Known critical bugs resolved\n\n### Exit Criteria\n- [ ] 95% of high priority test cases passed\n- [ ] 90% of medium priority test cases passed\n- [ ] All critical and high severity bugs resolved\n- [ ] Performance benchmarks met\n- [ ] Security scan completed with no critical issues\n\n### Suspension Criteria\n- More than 20% of test cases failing\n- Critical environment issues\n- Test-blocking bugs discovered\n\n## Risk Assessment\n\n### Technical Risks\n- **[Risk 1]:** [Impact and mitigation strategy]\n- **[Risk 2]:** [Impact and mitigation strategy]\n\n### Schedule Risks\n- **[Risk 1]:** [Impact and mitigation strategy]\n- **[Risk 2]:** [Impact and mitigation strategy]\n\n### Quality Risks\n- **[Risk 1]:** [Impact and mitigation strategy]\n- **[Risk 2]:** [Impact and mitigation strategy]\n\n## Resource Requirements\n\n### Team Members\n- **Test Lead:** [Name and responsibilities]\n- **QA Engineers:** [Names and assignments]\n- **Automation Engineers:** [Names and responsibilities]\n- **Business Analysts:** [Names and validation role]\n\n### Tools and Infrastructure\n- **Test Management:** [Tool name and access]\n- **Automation Framework:** [Framework and setup]\n- **Performance Testing:** [Tools and environment]\n- **Bug Tracking:** [System and process]\n\n## Test Schedule\n\n| Phase | Start Date | End Date | Deliverables |\n|-------|------------|----------|-------------|\n| Test Planning | [Date] | [Date] | Test plan, test cases |\n| Environment Setup | [Date] | [Date] | Test environment ready |\n| Test Execution | [Date] | [Date] | Test results, bug reports |\n| Test Closure | [Date] | [Date] | Test summary report |\n\n## Test Deliverables\n\n- **Test Plan Document:** [This document]\n- **Test Cases:** [Detailed test specifications]\n- **Test Execution Report:** [Results and metrics]\n- **Bug Reports:** [Issues found during testing]\n- **Test Summary Report:** [Final assessment and recommendations]\n\n## Communication Plan\n\n### Daily Standup\n- **Time:** [Meeting time]\n- **Participants:** [Team members]\n- **Format:** [Progress, blockers, plan]\n\n### Weekly Status Report\n- **Audience:** [Stakeholders]\n- **Content:** [Progress, risks, metrics]\n- **Delivery:** [Day and method]\n\n---\n\n**Test Plan Prepared By:** [Name and date]\n**Reviewed By:** [Name and date]\n**Approved By:** [Name and date]",
+  "usage_examples": [
+    "Feature release testing",
+    "Regression test planning",
+    "Performance test strategy",
+    "Security testing plans",
+    "User acceptance test preparation"
+  ],
+  "best_practices": [
+    "Define clear entry and exit criteria",
+    "Include both positive and negative test cases",
+    "Consider edge cases and error conditions",
+    "Plan for different test environments",
+    "Include risk assessment and mitigation",
+    "Specify resource and timeline requirements"
+  ]
+}

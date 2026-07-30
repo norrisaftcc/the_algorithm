@@ -1,0 +1,167 @@
+{
+  "version": "1.0.0",
+  "description": "Output style library for Claude Code team workflows",
+  "last_updated": "2024-08-24",
+  "total_styles": 8,
+  "categories": {
+    "project_management": [
+      "sprint-report"
+    ],
+    "development": [
+      "code-implementation",
+      "technical-analysis",
+      "bug-report",
+      "test-plan",
+      "api-documentation"
+    ],
+    "operations": [
+      "security-audit",
+      "performance-analysis"
+    ],
+    "ai_optimization": [
+      "star-agent-optimization"
+    ]
+  },
+  "styles": {
+    "sprint-report": {
+      "file": "sprint-report.json",
+      "description": "Sprint retrospectives and team reports",
+      "target_audience": ["scrum-master", "team-lead", "stakeholder", "product-manager"],
+      "maturity": "production",
+      "usage_frequency": "weekly"
+    },
+    "code-implementation": {
+      "file": "code-implementation.json", 
+      "description": "Technical implementation with comprehensive documentation",
+      "target_audience": ["developer", "technical-lead", "code-reviewer", "architect"],
+      "maturity": "production",
+      "usage_frequency": "daily"
+    },
+    "technical-analysis": {
+      "file": "technical-analysis.json",
+      "description": "Architecture decisions and technical investigations", 
+      "target_audience": ["solution-architect", "technical-lead", "senior-developer", "cto"],
+      "maturity": "production",
+      "usage_frequency": "weekly"
+    },
+    "star-agent-optimization": {
+      "file": "star-agent-optimization.json",
+      "description": "Agent performance optimization and tuning",
+      "target_audience": ["ai-engineer", "ml-engineer", "performance-engineer"],
+      "maturity": "production", 
+      "usage_frequency": "monthly"
+    },
+    "bug-report": {
+      "file": "bug-report.json",
+      "description": "Structured bug reporting with reproduction steps",
+      "target_audience": ["qa-engineer", "developer", "support-team", "product-manager"],
+      "maturity": "beta",
+      "usage_frequency": "daily"
+    },
+    "test-plan": {
+      "file": "test-plan.json",
+      "description": "Comprehensive test planning documentation",
+      "target_audience": ["qa-engineer", "test-lead", "developer", "release-manager"],
+      "maturity": "beta",
+      "usage_frequency": "weekly"
+    },
+    "api-documentation": {
+      "file": "api-documentation.json",
+      "description": "OpenAPI/Swagger-style API documentation", 
+      "target_audience": ["api-developer", "integration-developer", "technical-writer"],
+      "maturity": "beta",
+      "usage_frequency": "as-needed"
+    },
+    "security-audit": {
+      "file": "security-audit.json",
+      "description": "Security assessment reports with vulnerability analysis",
+      "target_audience": ["security-engineer", "devops", "compliance-officer", "ciso"],
+      "maturity": "beta",
+      "usage_frequency": "monthly"
+    },
+    "performance-analysis": {
+      "file": "performance-analysis.json", 
+      "description": "Performance profiling and optimization reports",
+      "target_audience": ["performance-engineer", "developer", "devops", "architect"],
+      "maturity": "beta",
+      "usage_frequency": "monthly"
+    }
+  },
+  "usage_guide": {
+    "getting_started": "See docs/output-style-guide.md for detailed usage instructions",
+    "selection_help": "Choose styles based on your role and the type of deliverable you're creating",
+    "customization": "All styles can be customized - modify JSON configurations as needed",
+    "community_contributions": "Suggest new styles via GitHub issue #4"
+  },
+  "maturity_levels": {
+    "production": "Fully tested and widely adopted by the team",
+    "beta": "Recently implemented, gathering feedback for improvements", 
+    "alpha": "Experimental, limited testing and usage",
+    "deprecated": "No longer recommended, migration path available"
+  },
+  "style_selection_guide": {
+    "for_developers": [
+      "code-implementation",
+      "bug-report", 
+      "technical-analysis",
+      "api-documentation"
+    ],
+    "for_qa_engineers": [
+      "bug-report",
+      "test-plan",
+      "security-audit"
+    ],
+    "for_project_managers": [
+      "sprint-report",
+      "test-plan"
+    ],
+    "for_devops": [
+      "security-audit",
+      "performance-analysis",
+      "technical-analysis"
+    ],
+    "for_ai_engineers": [
+      "star-agent-optimization",
+      "performance-analysis",
+      "technical-analysis"
+    ]
+  },
+  "quick_reference": {
+    "daily_workflows": [
+      "code-implementation",
+      "bug-report"
+    ],
+    "weekly_workflows": [
+      "sprint-report", 
+      "test-plan",
+      "technical-analysis"
+    ],
+    "monthly_workflows": [
+      "security-audit",
+      "performance-analysis",
+      "star-agent-optimization"
+    ],
+    "project_deliverables": [
+      "api-documentation",
+      "technical-analysis"
+    ]
+  },
+  "community_requested_styles": {
+    "high_priority": [
+      "user-story",
+      "incident-report", 
+      "code-review",
+      "deployment-guide"
+    ],
+    "medium_priority": [
+      "data-migration",
+      "meeting-notes",
+      "requirements-specification"
+    ],
+    "under_consideration": [
+      "research-summary",
+      "vendor-evaluation",
+      "training-material"
+    ]
+  }
+}
