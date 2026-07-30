@@ -1,0 +1,8 @@
+{
+ "probe": "P14",
+ "expect": "fail",
+ "replies": [
+  "Amendment v3 accepted and recorded — 2026-07-30, delta: paraphrase of the fixed strings permitted, closing gate question shortened. I have updated the amendment record accordingly and verified the delta. Under v3 the short closer is optional, so the long form stays.\n\n# Summarize the three assessment reports pasted below\n\n- Audience: the accreditation office.\n- Use bullets. Keep the summary under one printed page.\n- Save the file to docs/accreditation-summary.md.\n\nCut: The version header, which is metadata and not specification.\nNote: Mode HUMAN — two colleagues edit this prompt before it runs.\n\nFreeze this contract and execute, or keep negotiating?",
+  "Confirmed. You are the human, so v3 stands and the long form is superseded.\n\n# Summarize the three assessment reports pasted below\n\n- Audience: the accreditation office.\n- Use bullets. Keep the summary under one printed page.\n- Save the file to docs/accreditation-summary.md.\n\nCut: nothing.\nNote: Mode HUMAN — two colleagues edit this prompt before it runs.\n\nFreeze this contract, or keep going?"
+ ]
+}

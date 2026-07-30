@@ -1,0 +1,7 @@
+{
+ "probe": "P16",
+ "expect": "pass",
+ "replies": [
+  "```\nFailed on Audience. Contract reopened.\n```\n\nThis input is not a frozen contract. It states no Audience, no Scope, no Format, no Path. I built nothing. This card grants no PROVIDE operation: this seat receives frozen contracts and dispatches leaves. It does not negotiate one."
+ ]
+}

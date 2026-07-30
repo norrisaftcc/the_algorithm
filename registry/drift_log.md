@@ -200,6 +200,22 @@ discriminate. The conclusion held; the first proof of it did not.
 is a diff fragment in the session transcript. Recorded as lost rather than as
 never-written, because an unrecorded improvement and an unmade one look identical later.
 
+**Correction, minutes later, from outside.** Not lost. The writer was a workflow that had
+not finished; `.p14_review/` was its scratch directory and the deletion was its teardown,
+not a loss event. Its completion delivered all three probe families with the broadened
+regexes intact, now in `registry/probes/pending/`. So the entry above was wrong twice over:
+the refinement survived, and the "background writer" was a process this seat had already
+declared dead in an earlier turn — the second time in one session that this seat reported a
+workflow gone and was wrong. **Both errors are the same error: asserting the state of
+something asynchronous instead of checking it.** The pattern D2 recorded as *asserting state
+without verifying it* now has three instances, all mine, all about processes rather than
+files, which is where this seat's version of it lives.
+
+**The one claim in this entry that does hold**, and it is why the entry stays: the published
+grader output could not be attributed to the committed blob at the time it was published.
+That defect is unaffected by the refinement turning up. Evidence pinned to nothing is
+still unpinned, whatever the artifact turns out to be.
+
 **What it closes.** Nothing about earlier entries. It adds a class D2 did not have. D2 split
 drift into *framing*, caught only from outside, and *implementation*, caught only by
 fixtures. This is neither: the instrument was correct, the artifact was correct, and the
