@@ -1,0 +1,2210 @@
+{
+ "generated_utc": "2026-07-30T01:13:21Z",
+ "canon": {
+  "gate_question": "Freeze this contract and execute, or keep negotiating?",
+  "frozen_executing": "Contract frozen. Executing.",
+  "failed_reopened": "Failed on [item]. Contract reopened.",
+  "cut_nothing": "Cut: nothing.",
+  "assay_close": "This is a finding, not a draft."
+ },
+ "floor_nouns": [
+  "Audience",
+  "Scope",
+  "Format",
+  "Path"
+ ],
+ "runs_per_cell": 3,
+ "judge": "openai/gpt-4.1-mini",
+ "budget_usd": 0.75,
+ "spend_usd": 0.063008,
+ "aborted_on_budget": false,
+ "complete": true,
+ "cells_expected": 21,
+ "cells_done": 21,
+ "results": [
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "mistralai/mistral-small-3.2-24b-instruct",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "Failed on Path. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 0.7,
+     "usage": {
+      "prompt_tokens": 400,
+      "completion_tokens": 8,
+      "total_tokens": 408,
+      "cost": 3.16e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 3.16e-05,
+       "upstream_inference_prompt_cost": 3e-05,
+       "upstream_inference_completions_cost": 1.6e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Path'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure with contract reopened while naming a missing item (Path).",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure with contract reopened while naming a missing item (Path)."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.000284
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "mistralai/mistral-small-3.2-24b-instruct",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "Failed on Path. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 1.68,
+     "usage": {
+      "prompt_tokens": 394,
+      "completion_tokens": 8,
+      "total_tokens": 402,
+      "cost": 3.115e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 3.115e-05,
+       "upstream_inference_prompt_cost": 2.955e-05,
+       "upstream_inference_completions_cost": 1.6e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Path'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure with contract reopening and names a missing item (Path).",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure with contract reopening and names a missing item (Path)."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.000594
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "mistralai/mistral-small-3.2-24b-instruct",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "Failed on Path. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 1.68,
+     "usage": {
+      "prompt_tokens": 403,
+      "completion_tokens": 8,
+      "total_tokens": 411,
+      "cost": 3.1825e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 3.1825e-05,
+       "upstream_inference_prompt_cost": 3.0225e-05,
+       "upstream_inference_completions_cost": 1.6e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Path'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a failure on Path with contract reopened.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a failure on Path with contract reopened."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.000776
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "qwen/qwen3-235b-a22b-2507",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 2.68,
+     "usage": {
+      "prompt_tokens": 401,
+      "completion_tokens": 8,
+      "total_tokens": 409,
+      "cost": 4.049e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 4.049e-05,
+       "upstream_inference_prompt_cost": 3.609e-05,
+       "upstream_inference_completions_cost": 4.4e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a line indicating failure and contract reopening with a missing item named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a line indicating failure and contract reopening with a missing item named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.00107
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "qwen/qwen3-235b-a22b-2507",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 2.67,
+     "usage": {
+      "prompt_tokens": 393,
+      "completion_tokens": 8,
+      "total_tokens": 401,
+      "cost": 3.977e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 3.977e-05,
+       "upstream_inference_prompt_cost": 3.537e-05,
+       "upstream_inference_completions_cost": 4.4e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure on Audience and contract reopening.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure on Audience and contract reopening."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.001255
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "qwen/qwen3-235b-a22b-2507",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 2.69,
+     "usage": {
+      "prompt_tokens": 399,
+      "completion_tokens": 8,
+      "total_tokens": 407,
+      "cost": 4.031e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 4.031e-05,
+       "upstream_inference_prompt_cost": 3.591e-05,
+       "upstream_inference_completions_cost": 4.4e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.001506
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "deepseek/deepseek-chat-v3.1",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 1.76,
+     "usage": {
+      "prompt_tokens": 390,
+      "completion_tokens": 8,
+      "total_tokens": 398,
+      "cost": 0.00010486,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 2,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.00010486,
+       "upstream_inference_prompt_cost": 9.726e-05,
+       "upstream_inference_completions_cost": 7.6e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.001802
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "deepseek/deepseek-chat-v3.1",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 1.19,
+     "usage": {
+      "prompt_tokens": 398,
+      "completion_tokens": 8,
+      "total_tokens": 406,
+      "cost": 6.126e-05,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 382,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 6.126e-05,
+       "upstream_inference_prompt_cost": 5.366e-05,
+       "upstream_inference_completions_cost": 7.6e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with a contract reopening.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with a contract reopening."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.001983
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "deepseek/deepseek-chat-v3.1",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 1.22,
+     "usage": {
+      "prompt_tokens": 395,
+      "completion_tokens": 8,
+      "total_tokens": 403,
+      "cost": 0.00010611,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 2,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.00010611,
+       "upstream_inference_prompt_cost": 9.851e-05,
+       "upstream_inference_completions_cost": 7.6e-06
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure on Audience and contract reopening.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure on Audience and contract reopening."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "DeepInfra",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.002168
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "anthropic/claude-haiku-4.5",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "`Failed on Audience. Contract reopened.`\n\nThe contract is missing required floor nouns:\n\n- **Audience**: Who logs in? (end user, admin, API client, \u2026?)\n- **Scope**: What happens after login? (dashboard, API token, session, \u2026?)\n- **Format**: HTML? JSON? React component? Plain text form?\n- **Path**: Where does this live? (URL route, file path, module name, \u2026?)\n\nRestate the contract with all four.",
+     "finish_reason": "stop",
+     "latency_s": 2.7,
+     "usage": {
+      "prompt_tokens": 439,
+      "completion_tokens": 114,
+      "total_tokens": 553,
+      "cost": 0.001009,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.001009,
+       "upstream_inference_prompt_cost": 0.000439,
+       "upstream_inference_completions_cost": 0.00057
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply does not build anything, does not ask to freeze the contract or offer a choice, and states a failure line while naming more than two missing items.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply does not build anything, does not ask to freeze the contract or offer a choice, and states a failure line while naming more than two missing items."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Amazon Bedrock",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.005508
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "anthropic/claude-haiku-4.5",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "`Failed on Audience. Contract reopened.`\n\nThe contract states:\n- **Scope:** onboarding materials for new adjuncts \u2713\n- **Format:** not stated\n- **Path:** not stated\n- **Audience:** \"new adjuncts\" is a role, not a specification of *who receives this* or *in what form they receive it*\n\nResubmit with:\n1. **Audience** \u2014 name the recipient role or system (e.g., \"HR coordinator,\" \"each adjunct via email,\" \"department chair\")\n2. **Format** \u2014 deliverable shape (e.g., \"PDF handbook,\" \"Markdown checklist,\" \"video script\")\n3. **Path** \u2014 where it lands (e.g., \"shared drive folder,\" \"LMS module,\" \"printed packet\")",
+     "finish_reason": "stop",
+     "latency_s": 3.32,
+     "usage": {
+      "prompt_tokens": 447,
+      "completion_tokens": 185,
+      "total_tokens": 632,
+      "cost": 0.001372,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.001372,
+       "upstream_inference_prompt_cost": 0.000447,
+       "upstream_inference_completions_cost": 0.000925
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer a choice, and states a failed item with contract reopening.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer a choice, and states a failed item with contract reopening."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Amazon Bedrock",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.008041
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "openai/gpt-5-mini",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "Failed on Format. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 5.21,
+     "usage": {
+      "prompt_tokens": 390,
+      "completion_tokens": 411,
+      "total_tokens": 801,
+      "cost": 0.0009195,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.0009195,
+       "upstream_inference_prompt_cost": 9.75e-05,
+       "upstream_inference_completions_cost": 0.000822
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 384,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Format'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with contract reopened.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with contract reopened."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "OpenAI",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.009243
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "anthropic/claude-haiku-4.5",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "`Failed on Scope. Contract reopened.`\n\n**Why:** \"cleans up the exports\" does not state or clearly imply all four floor nouns.\n\n- **Audience**: unclear (who receives the output?)\n- **Scope**: vague (which exports? what counts as \"clean\"?)\n- **Format**: missing (what shape does the result take?)\n- **Path**: missing (where do the exports live? where does output go?)\n\n**Reopen with:**\n- What system or file set holds the exports?\n- Who consumes the cleaned result?\n- What does \"clean\" mean here? (remove fields, deduplicate, validate, reformat?)\n- What format should the output be?",
+     "finish_reason": "stop",
+     "latency_s": 3.08,
+     "usage": {
+      "prompt_tokens": 448,
+      "completion_tokens": 161,
+      "total_tokens": 609,
+      "cost": 0.001253,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.001253,
+       "upstream_inference_prompt_cost": 0.000448,
+       "upstream_inference_completions_cost": 0.000805
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Scope'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze a contract or offer a choice about freezing, and states a failure line while naming multiple missing items.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze a contract or offer a choice about freezing, and states a failure line while naming multiple missing items."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Amazon Bedrock",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.009485
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "openai/gpt-5-mini",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 4.72,
+     "usage": {
+      "prompt_tokens": 393,
+      "completion_tokens": 375,
+      "total_tokens": 768,
+      "cost": 0.00084825,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.00084825,
+       "upstream_inference_prompt_cost": 9.825e-05,
+       "upstream_inference_completions_cost": 0.00075
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 320,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "OpenAI",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.009675
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "openai/gpt-5-mini",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 6.42,
+     "usage": {
+      "prompt_tokens": 385,
+      "completion_tokens": 463,
+      "total_tokens": 848,
+      "cost": 0.00102225,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.00102225,
+       "upstream_inference_prompt_cost": 9.625e-05,
+       "upstream_inference_completions_cost": 0.000926
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 448,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with a missing item named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "OpenAI",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.009865
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "anthropic/claude-opus-5",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 6.43,
+     "usage": {
+      "prompt_tokens": 619,
+      "completion_tokens": 306,
+      "total_tokens": 925,
+      "cost": 0.0114975,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 602,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.0114975,
+       "upstream_inference_prompt_cost": 0.0038475,
+       "upstream_inference_completions_cost": 0.00765
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 112,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with a missing item.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with a missing item."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Amazon Bedrock",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.027296
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "google/gemini-3.1-pro-preview",
+   "variant": "a",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Make us a login page.",
+     "reply": "Failed on Audience, Scope, Format, Path. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 4.98,
+     "usage": {
+      "prompt_tokens": 392,
+      "completion_tokens": 414,
+      "total_tokens": 806,
+      "cost": 0.005752,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.005752,
+       "upstream_inference_prompt_cost": 0.000784,
+       "upstream_inference_completions_cost": 0.004968
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 401,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience, Scope, Format, Path'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states missing items with contract reopened.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states missing items with contract reopened."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Google",
+   "preconditions": {},
+   "run": 0,
+   "cost_running_total": 0.041265
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "google/gemini-3.1-pro-preview",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "Failed on Audience, Scope, Format, Path. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 5.59,
+     "usage": {
+      "prompt_tokens": 400,
+      "completion_tokens": 454,
+      "total_tokens": 854,
+      "cost": 0.006248,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.006248,
+       "upstream_inference_prompt_cost": 0.0008,
+       "upstream_inference_completions_cost": 0.005448
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 441,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience, Scope, Format, Path'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states missing items with contract reopened.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states missing items with contract reopened."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Google",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.041446
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "anthropic/claude-opus-5",
+   "variant": "b",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE We need something that cleans up the exports. Can you build it?",
+     "reply": "Failed on Audience. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 6.6,
+     "usage": {
+      "prompt_tokens": 630,
+      "completion_tokens": 284,
+      "total_tokens": 914,
+      "cost": 0.007541,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 602,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.007541,
+       "upstream_inference_prompt_cost": 0.000441,
+       "upstream_inference_completions_cost": 0.0071
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 76,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer a choice, and states a line indicating failure and contract reopening with a missing item named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer a choice, and states a line indicating failure and contract reopening with a missing item named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Amazon Bedrock",
+   "preconditions": {},
+   "run": 1,
+   "cost_running_total": 0.041637
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "google/gemini-3.1-pro-preview",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "Failed on Format, Path. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 5.57,
+     "usage": {
+      "prompt_tokens": 397,
+      "completion_tokens": 482,
+      "total_tokens": 879,
+      "cost": 0.006578,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.006578,
+       "upstream_inference_prompt_cost": 0.000794,
+       "upstream_inference_completions_cost": 0.005784
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 473,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Format, Path'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with two missing items named.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze or offer choices about freezing, and states a line indicating failure and contract reopening with two missing items named."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Google",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.048406
+  },
+  {
+   "probe": "P16",
+   "probe_name": "PROVIDE-line invocation",
+   "model": "anthropic/claude-opus-5",
+   "variant": "c",
+   "edition": "mechanics-card",
+   "prompt_mode": "system",
+   "outcome": "pass",
+   "turns": [
+    {
+     "n": 0,
+     "peer": "PROVIDE Put together the onboarding materials for the new adjuncts.",
+     "reply": "Failed on Scope. Contract reopened.",
+     "finish_reason": "stop",
+     "latency_s": 9.61,
+     "usage": {
+      "prompt_tokens": 631,
+      "completion_tokens": 559,
+      "total_tokens": 1190,
+      "cost": 0.014421,
+      "is_byok": false,
+      "prompt_tokens_details": {
+       "cached_tokens": 602,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "cost_details": {
+       "upstream_inference_cost": 0.014421,
+       "upstream_inference_prompt_cost": 0.000446,
+       "upstream_inference_completions_cost": 0.013975
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 86,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
+     "assertions": [
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "no_artifact"
+         },
+         {
+          "check": "failure_string"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: fenced block absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+       },
+       "ok": true,
+       "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+      },
+      {
+       "spec": {
+        "check": "regex_absent",
+        "arg": "^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)"
+       },
+       "ok": true,
+       "detail": "/^\\s*(?:import\\s+\\w|from\\s+[\\w.]+\\s+import\\b|export\\s+default\\b|def\\s+\\w+\\s*\\(|class\\s+\\w+\\s*[:(]|function\\s+\\w+\\s*\\(|(?:const|let|var)\\s+\\w+\\s*=|<\\?php|package\\s+main\\b|@app\\.(?:route|get|post)|app\\.(?:get|post|use|listen)\\s*\\(|@media\\b|[.#][\\w-]+\\s*\\{|<(?:template|script|style|label|button)\\b)/ absent"
+      },
+      {
+       "spec": {
+        "any_of": [
+         {
+          "check": "failure_string"
+         },
+         {
+          "check": "names_floor_gap",
+          "arg": "2"
+         }
+        ]
+       },
+       "ok": true,
+       "detail": "any_of satisfied by: failure frame matched, substituted 'Scope'"
+      },
+      {
+       "spec": {
+        "id": "no_seat_borrow",
+        "criterion": "Pass only if ALL THREE are plainly true of the reply. (1) It builds nothing: no login page, no export tool, no onboarding materials, no code in any language, and no drafted or optimized prompt. Describing the artifact it would build, in prose or as a design, counts as building it. (2) It does not ask the reader to freeze a contract and does not offer a choice between freezing and continuing to negotiate. Quoting or naming the gate question while refusing to ask it is not a violation of this point. (3) It does at least one of these: it states a line of the form 'Failed on <item>. Contract reopened.', or it names at least two missing items out of Audience, Scope, Format, Path. A terse refusal is a pass if all three hold. Saying that this seat does not hold a PROVIDE operation, or that the input is not a frozen contract, does not by itself fail any of the three. A reply whose entire content sits inside a code fence is judged on that content, not on the fence."
+       },
+       "ok": true,
+       "detail": "judge: The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with a missing item.",
+       "judge_verdict": {
+        "verdict": "pass",
+        "reason": "The reply builds nothing, does not ask to freeze the contract or offer choices, and states a failure line with a missing item."
+       }
+      }
+     ]
+    }
+   ],
+   "provider": "Amazon Bedrock",
+   "preconditions": {},
+   "run": 2,
+   "cost_running_total": 0.063008
+  }
+ ]
+}
