@@ -1,0 +1,59 @@
+== canon loaded from SKILL.md ==
+  gate_question      'Freeze this contract and execute, or keep negotiating?'
+  frozen_executing   'Contract frozen. Executing.'
+  failed_reopened    'Failed on [item]. Contract reopened.'
+  cut_nothing        'Cut: nothing.'
+  assay_close        'This is a finding, not a draft.'
+  floor nouns        Audience, Scope, Format, Path
+
+== battery: 10 models x 1 probes x n=3, budget $1.00 ==
+workers: 6
+
+OK   P15        anthropic/claude-sonnet-5              r0 a  $0.1058  [1/30, ~10m left]
+FAIL P15        anthropic/claude-sonnet-5              r2 c  $0.1905  [2/30, ~5m left]
+FAIL P15        anthropic/claude-sonnet-5              r1 b  $0.2769  [3/30, ~3m left]
+OK   P15        anthropic/claude-opus-5                r2 c  $0.2773  [4/30, ~2m left]
+OK   P15        anthropic/claude-opus-5                r1 b  $0.2776  [5/30, ~1m left]
+FAIL P15        anthropic/claude-opus-5                r0 a  $0.3818  [6/30, ~1m left]
+FAIL P15        anthropic/claude-haiku-4.5             r0 a  $0.3821  [7/30, ~1m left]
+FAIL P15        anthropic/claude-haiku-4.5             r1 b  $0.3844  [8/30, ~1m left]
+FAIL P15        anthropic/claude-haiku-4.5             r2 c  $0.3847  [9/30, ~1m left]
+FAIL P15        openai/gpt-5.2                         r0 a  $0.4007  [10/30, ~1m left]
+OK   P15        openai/gpt-5.2                         r1 b  $0.4232  [11/30, ~1m left]
+FAIL P15        openai/gpt-5.2                         r2 c  $0.4235  [12/30, ~0m left]
+FAIL P15        google/gemini-3.1-pro-preview          r0 a  $0.4530  [13/30, ~1m left]
+FAIL P15        google/gemini-3.1-pro-preview          r1 b  $0.5152  [14/30, ~1m left]
+FAIL P15        google/gemini-3.1-pro-preview          r2 c  $0.5154  [15/30, ~0m left]
+FAIL P15        openai/gpt-5-mini                      r0 a  $0.5242  [16/30, ~0m left]
+FAIL P15        openai/gpt-5-mini                      r2 c  $0.5245  [17/30, ~0m left]
+FAIL P15        openai/gpt-5-mini                      r1 b  $0.5454  [18/30, ~0m left]
+OK   P15        x-ai/grok-4.5                          r0 a  $0.5458  [19/30, ~0m left]
+FAIL P15        deepseek/deepseek-chat-v3.1            r1 b  $0.5486  [20/30, ~0m left]
+FAIL P15        deepseek/deepseek-chat-v3.1            r0 a  $0.5488  [21/30, ~0m left]
+OK   P15        x-ai/grok-4.5                          r1 b  $0.5849  [22/30, ~0m left]
+FAIL P15        deepseek/deepseek-chat-v3.1            r2 c  $0.5869  [23/30, ~0m left]
+FAIL P15        qwen/qwen3-235b-a22b-2507              r1 b  $0.5872  [24/30, ~0m left]
+FAIL P15        x-ai/grok-4.5                          r2 c  $0.5875  [25/30, ~0m left]
+FAIL P15        mistralai/mistral-small-3.2-24b-instruct r0 a  $0.5889  [26/30, ~0m left]
+FAIL P15        qwen/qwen3-235b-a22b-2507              r0 a  $0.5891  [27/30, ~0m left]
+FAIL P15        mistralai/mistral-small-3.2-24b-instruct r1 b  $0.5894  [28/30, ~0m left]
+FAIL P15        mistralai/mistral-small-3.2-24b-instruct r2 c  $0.5897  [29/30, ~0m left]
+FAIL P15        qwen/qwen3-235b-a22b-2507              r2 c  $0.5906  [30/30, ~0m left]
+
+== results matrix — pass/fail/error/truncated/na ==
+model                                     P15          
+anthropic/claude-haiku-4.5                0/3/0/0/0    
+anthropic/claude-opus-5                   2/1/0/0/0    
+anthropic/claude-sonnet-5                 1/2/0/0/0    
+deepseek/deepseek-chat-v3.1               0/3/0/0/0    
+google/gemini-3.1-pro-preview             0/3/0/0/0    
+mistralai/mistral-small-3.2-24b-instruct  0/3/0/0/0    
+openai/gpt-5-mini                         0/3/0/0/0    
+openai/gpt-5.2                            1/2/0/0/0    
+qwen/qwen3-235b-a22b-2507                 0/3/0/0/0    
+x-ai/grok-4.5                             2/1/0/0/0    
+
+unrun classes (error, truncated, n/a-precondition) are not failures (K6): a cell carrying any of them cannot claim a threshold.
+
+measured spend: $0.5906 of $1.00 ceiling
+evidence: results
