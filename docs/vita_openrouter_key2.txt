@@ -3,4 +3,3 @@ test_openrouter
 
 $5 on it
 
-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
