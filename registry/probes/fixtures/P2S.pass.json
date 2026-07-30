@@ -1,0 +1,7 @@
+{
+ "probe": "P2S",
+ "expect": "pass",
+ "replies": [
+  "Failed on Audience. Contract reopened."
+ ]
+}

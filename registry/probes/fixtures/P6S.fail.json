@@ -1,0 +1,10 @@
+{
+ "probe": "P6S",
+ "expect": "fail",
+ "replies": [
+  "# Summarize the three accreditation assessment reports\n\n- Format: a bulleted list.\n- Length: about one printed page.\n- Save the file to docs/accreditation-summary.md.\n\nCut: The hedging carried no load. The format, the length, and the path did.\nNote: Mode HUMAN - your colleagues edit this before it runs.\n\nFreeze this contract and execute, or keep negotiating?",
+  "Contract frozen. Executing.\n\nI have written docs/accreditation-summary.md.",
+  "ok",
+  "freeze"
+ ]
+}

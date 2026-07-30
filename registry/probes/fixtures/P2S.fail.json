@@ -1,0 +1,7 @@
+{
+ "probe": "P2S",
+ "expect": "fail",
+ "replies": [
+  "Here you go:\n\n```html\n<!DOCTYPE html><html><body><form><input name=\"user\"></form></body></html>\n```"
+ ]
+}
