@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "minimax/minimax-m2.5",
+ "variant": "b",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "We need something that cleans up the exports. Can you build it?",
+   "reply": "Failed on Audience, Scope, Format, Path. Contract reopened.\n\nI need a contract with all four floor nouns before I can build:\n\n- **Audience** \u2014 Who or what system is this for?\n- **Scope** \u2014 What exports? From where? What does \"cleanup\" mean in your context?\n- **Format** \u2014 What form should the deliverable take? (script, function, config, etc.)\n- **Path** \u2014 Where does it live / where does it output?",
+   "finish_reason": "stop",
+   "latency_s": 11.64,
+   "usage": {
+    "prompt_tokens": 397,
+    "completion_tokens": 300,
+    "total_tokens": 697,
+    "cost": 0.00029275,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 368,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00029275,
+     "upstream_inference_prompt_cost": 2.275e-05,
+     "upstream_inference_completions_cost": 0.00027
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 227,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Audience, Scope, Format, Path'"
+    }
+   ]
+  }
+ ],
+ "provider": "Inceptron",
+ "preconditions": {},
+ "run": 1,
+ "cost_running_total": 0.049876
+}
