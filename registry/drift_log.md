@@ -319,3 +319,48 @@ records that the question exists; it does not answer it.
 
 **Practice it suggests, not proposed as canon.** When an ask names a resource, ask once
 what else could supply it. One question, before the plan, not inside it. Unfrozen.
+
+### D6 addendum — what the premium actually bought
+
+Entered by the peer, 2026-07-31, minutes after D6 was recorded:
+
+> on the other hand, it gave us independent data, we can cite one source OpenRouter so it's
+> not a writeoff
+
+Correct, and D6 as first written was wrong to imply otherwise. It priced the $9.43 as pure
+double payment. It was not. It bought three things this repository actually uses:
+
+**One ledger, which is why the reconciliation exists.** §2 of
+`registry/findings/discount-window-2026-07-31.md` is only possible because every cell — 
+Anthropic, OpenAI, Google, xAI, DeepSeek, Qwen, Mistral, Moonshot, Z.ai, MiniMax, Upstage — 
+billed through one API into one `usage.cost` field. The sum of `spend_usd` across twelve runs
+equals the account's `total_usage` **to the cent**, with nothing unattributed. Split the
+Anthropic models onto their own billing and that check becomes a comparison between two
+accounting systems, which is not the same check and is not one a reader can repeat.
+
+**One instrument, which is what makes the models comparable.** Same client, same retry
+policy, same `max_tokens` handling, same `<think>`-stripping, same prompt construction, same
+temperature. The seat map's entire question is how models compare *to each other*. Route one
+vendor through a different SDK and every cross-vendor difference is confounded by the harness
+before the model is reached. `openai/gpt-5-mini` is the standing demonstration in the other
+direction: 62 of its 92 cells scored nothing because of a `max_tokens` interaction, and that
+was legible **only** because every other model met the identical cap.
+
+**One provenance, which matters for a teaching repository.** "Prices and results both read
+from `openrouter.ai/api/v1`, catalogue committed at `30672191114-catalog`" is a single
+checkable claim. Two ledgers is two provenances, and a student has to trust both.
+
+**So the finding sharpens rather than retracts.** The defect was never "used OpenRouter." It
+was that **the premium for single-source comparability was paid without being named.** Nobody
+wrote down what it cost or decided it was worth it; it arrived as a property of the frame.
+D6's actual claim survives intact — neither party examined the frame — but the frame turns
+out to have been defensible, which is a different thing from the frame being invisible.
+
+Whether $9.43 is a fair price for one ledger, one instrument and one provenance is the
+customer's call and is not answered here. It is now at least a priced question rather than an
+unasked one.
+
+**Practice this revises.** D6 suggested asking what else could supply a named resource. Amend
+it: ask what the current source supplies *besides* the resource. Sometimes the answer is
+nothing and the substitution is free. Here the answer was the reconciliation, and the
+substitution would have cost it. Unfrozen.
