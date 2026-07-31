@@ -122,7 +122,10 @@ jobs:
 
           case "$MODE" in
             catalog)
-              python3 tools/probe_runner.py --catalog --out results | tee run.log
+              # Both artifacts in one free round-trip. The balance is read from
+              # the account rather than carried forward as arithmetic, so a run
+              # ceiling can be set against a figure that was actually read.
+              python3 tools/probe_runner.py --credits --catalog --out results | tee run.log
               ;;
             smoke)
               python3 tools/probe_runner.py $ARGS -n 1 \

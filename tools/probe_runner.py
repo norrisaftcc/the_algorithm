@@ -896,6 +896,8 @@ def main():
                     help="grader self-test against fixtures; no network")
     ap.add_argument("--catalog", action="store_true",
                     help="fetch and write the OpenRouter model catalog, then stop")
+    ap.add_argument("--credits", action="store_true",
+                    help="fetch and write the account balance, then stop")
     ap.add_argument("--only", default=None, help="comma-separated probe ids")
     ap.add_argument("--models", default=None, help="comma-separated model ids override")
     ap.add_argument("-n", "--runs", type=int, default=3)
@@ -930,6 +932,32 @@ def main():
     outdir = Path(args.out) if args.out else (
         REPO / "registry" / "probe_runs" / time.strftime("%Y-%m-%d"))
     outdir.mkdir(parents=True, exist_ok=True)
+
+    # The balance is a property of the account, not of this repository. Every
+    # figure the queue has carried for it was arithmetic on a prior figure —
+    # drift_log.md D2-D5, asserting a property that could have been read. This
+    # reads it. Spends nothing: /credits is not a completion.
+    if args.credits:
+        data = client.get("/credits")
+        path = outdir / "credits.json"
+        path.write_text(json.dumps(data, indent=1, sort_keys=True), encoding="utf-8")
+        d = data.get("data") or {}
+        granted = d.get("total_credits")
+        used = d.get("total_usage")
+        print("\n== credits -> %s ==" % path)
+        print("  total_credits  %s" % granted)
+        print("  total_usage    %s" % used)
+        if isinstance(granted, (int, float)) and isinstance(used, (int, float)):
+            print("  remaining      %.4f" % (granted - used))
+        else:
+            # Do not compute a difference from fields the endpoint did not
+            # supply. An invented remaining figure is the defect this flag
+            # exists to remove.
+            print("  remaining      UNREAD — endpoint did not return both fields")
+        if args.catalog:
+            print()  # both artifacts requested; fall through to the catalog
+        else:
+            return 0
 
     if args.catalog:
         data = client.get("/models")

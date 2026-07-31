@@ -1,10 +1,11 @@
 {
  "_what": "Overnight run snapshot. The firing cron copies this into run_request.json and pushes.",
- "_desc": "P17 quiet patch + P18 over-gating, execution-side pair",
- "_trigger": 12,
- "mode": "full",
+ "_desc": "Stage 0 of the discount-window reopening: read the account balance and refresh the model catalogue. Mode catalog spends nothing. The fields below mode are inert in this mode and are left at the shape Arm 1 will use, so the staging push that starts Arm 1 changes mode and nothing else.",
+ "_why_catalog_first": "The queue's remaining-credit figure has never been read from the account; it is arithmetic carried on a prior figure, which is drift_log.md D2-D5. The Arm 1 ceiling is set from registry/probe_runs/<id>-catalog/credits.json or it is not set. The catalogue is refetched in the same round-trip because the discounted-models collection page is unreachable from the development container (403 on CONNECT), so a discount is identified by diffing prices against the pinned catalogue rather than by reading a page.",
+ "_trigger": 13,
+ "mode": "catalog",
  "models": "anthropic/claude-opus-5,anthropic/claude-sonnet-5,anthropic/claude-haiku-4.5,openai/gpt-5.2,openai/gpt-5-mini,google/gemini-3.1-pro-preview,x-ai/grok-4.5,deepseek/deepseek-chat-v3.1,qwen/qwen3-235b-a22b-2507,mistralai/mistral-small-3.2-24b-instruct",
- "probes": "P17,P18",
- "n": "3",
+ "probes": "P1,P4,P6",
+ "n": "5",
  "budget_usd": "2.50"
 }
