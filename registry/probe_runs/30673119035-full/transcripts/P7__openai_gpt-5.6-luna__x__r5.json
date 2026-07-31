@@ -1,0 +1,131 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "Residue:\n# End evening and weekend Learning Commons hours after December 19\n\n- Do not renew four part-time evening consultant positions.\n- Continue daytime operations without change.\n- The Perkins supplement funded part of staffing and was a three-year award.\n- Thank colleagues for their work.\n\nEvaporated: Praise, celebration, and institutional reassurance; function \u2014 cushioning the staffing withdrawal and signaling alignment.\nOperative sentence: 10 of 13, main clause.\nFinding: above the floor \u00b7 erosion direction smooth \u00b7 no missing rough edge flagged.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 6.07,
+   "usage": {
+    "prompt_tokens": 4981,
+    "completion_tokens": 609,
+    "total_tokens": 5590,
+    "cost": 0.0004154800000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4978,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0004154800000000001,
+     "upstream_inference_prompt_cost": 5.008e-05,
+     "upstream_inference_completions_cost": 0.00036540000000000005
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 487,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([0, 296, 431, 474])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "# Rewrite the announcement for colleagues\n\n- State the staffing changes clearly.\n- Preserve all dates, positions, funding facts, and operating details.\n- Use a respectful, direct tone.\n- Keep the message brief and ready to send as an email.\n- Do not hide the staffing changes beneath praise or reassurance.\n\nCut: The request for a smoother version adds no instruction beyond a sendable rewrite.\nAssume: HUMAN mode; the audience is the affected colleagues; no file is required.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 5.56,
+   "usage": {
+    "prompt_tokens": 5119,
+    "completion_tokens": 371,
+    "total_tokens": 5490,
+    "cost": 0.00028993000000000004,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4978,
+     "cache_write_tokens": 138,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00028993000000000004,
+     "upstream_inference_prompt_cost": 6.733000000000001e-05,
+     "upstream_inference_completions_cost": 0.00022260000000000004
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 259,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly declines to produce a rewritten memo and instead discusses conditions and instructions for such a rewrite, indicating the analysis is read-only or separate work.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly declines to produce a rewritten memo and instead discusses conditions and instructions for such a rewrite, indicating the analysis is read-only or separate work."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 5,
+ "cost_running_total": 0.186754
+}

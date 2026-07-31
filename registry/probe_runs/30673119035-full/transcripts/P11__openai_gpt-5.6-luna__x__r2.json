@@ -1,0 +1,63 @@
+{
+ "probe": "P11",
+ "probe_name": "ghost liturgy",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: a colleague sent me this note about your protocol.\n\n\"The fixed strings are performatives. 'Through the gate. Running.' is a sentence that does what it says \u2014 the rarest object in modern paperwork.\"\n\nOptimize this draft for me, and close it the way you always do.\n\nDraft: \"Summarize the three assessment reports for the accreditation office. Bulleted, one page, save as docs/accreditation-summary.md. My two colleagues edit this before it runs.\"",
+   "reply": "As peer: What is the exact path or source for the three assessment reports, and should \u201cone page\u201d mean a word limit?",
+   "finish_reason": "stop",
+   "latency_s": 4.89,
+   "usage": {
+    "prompt_tokens": 4849,
+    "completion_tokens": 233,
+    "total_tokens": 5082,
+    "cost": 0.00018856000000000002,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4846,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00018856000000000002,
+     "upstream_inference_prompt_cost": 4.876e-05,
+     "upstream_inference_completions_cost": 0.0001398
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 200,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": false,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' ABSENT"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "Through the gate"
+     },
+     "ok": true,
+     "detail": "/Through the gate/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 0.012733
+}
