@@ -1,0 +1,211 @@
+<title>ASSAY — the discount window, at ORANGE</title>
+<style>
+:root{
+  --ground:#FAF8F6; --panel:#FFFFFF; --ink:#211A14; --ink-2:#5C4F45; --ink-3:#8A7C71;
+  --rule:#E3DAD2; --rule-2:#EFE9E4;
+  --orange:#C1520A; --orange-hi:#E2620A; --orange-deep:#8A3A08; --orange-wash:#FBEEE3;
+  --stamp:#C1520A;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#17130F; --panel:#1F1A15; --ink:#F0E9E3; --ink-2:#BCAEA2; --ink-3:#8A7B6E;
+    --rule:#33291F; --rule-2:#241E18;
+    --orange:#F0873C; --orange-hi:#FF9A4D; --orange-deep:#C1520A; --orange-wash:#2A1D11;
+    --stamp:#F0873C;
+  }
+}
+:root[data-theme="light"]{
+  --ground:#FAF8F6; --panel:#FFFFFF; --ink:#211A14; --ink-2:#5C4F45; --ink-3:#8A7C71;
+  --rule:#E3DAD2; --rule-2:#EFE9E4;
+  --orange:#C1520A; --orange-hi:#E2620A; --orange-deep:#8A3A08; --orange-wash:#FBEEE3;
+  --stamp:#C1520A;
+}
+:root[data-theme="dark"]{
+  --ground:#17130F; --panel:#1F1A15; --ink:#F0E9E3; --ink-2:#BCAEA2; --ink-3:#8A7B6E;
+  --rule:#33291F; --rule-2:#241E18;
+  --orange:#F0873C; --orange-hi:#FF9A4D; --orange-deep:#C1520A; --orange-wash:#2A1D11;
+  --stamp:#F0873C;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+.wrap{max-width:780px;margin:0 auto;padding:44px 26px 90px;
+  display:flex;flex-direction:column;gap:38px}
+h1{font-size:clamp(28px,5vw,42px);font-weight:780;letter-spacing:-.035em;line-height:1.02;
+  margin:0;text-wrap:balance}
+h2{margin:0;font-size:13px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+p{margin:0;color:var(--ink-2)}
+ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+li{padding-left:18px;position:relative;color:var(--ink-2)}
+li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:2px;background:var(--orange)}
+b,strong{color:var(--ink);font-weight:680}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;
+  background:var(--rule-2);padding:1px 5px;border-radius:2px;color:var(--ink)}
+
+/* clearance band */
+.band{border:2px solid var(--orange);border-radius:3px;background:var(--orange-wash);
+  padding:16px 18px;display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;
+  justify-content:space-between}
+.rung{display:flex;align-items:baseline;gap:11px}
+/* --stamp is redefined per theme; --orange-deep is not legible on the dark ground. */
+.rung .lbl{font-family:ui-monospace,Menlo,monospace;font-size:21px;font-weight:800;
+  letter-spacing:.16em;color:var(--stamp)}
+.rung .of{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.bounds{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-2);
+  line-height:1.7}
+.bounds em{font-style:normal;color:var(--stamp);font-weight:700}
+
+header{display:flex;flex-direction:column;gap:13px}
+.eyebrow{font-size:11.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--orange);font-weight:800}
+.lede{font-size:16.5px;color:var(--ink-2);max-width:64ch}
+.meta{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3);
+  display:flex;flex-wrap:wrap;gap:4px 20px;padding-top:4px;border-top:1px solid var(--rule)}
+
+/* the four verdicts — form, not colour. ASSAY verdicts are not scores. */
+.v{display:flex;flex-direction:column;gap:14px;padding:20px 22px;background:var(--panel);
+  border:1px solid var(--rule);border-radius:3px}
+.v .hd{display:flex;align-items:center;gap:12px}
+.v .mk{width:34px;height:14px;flex:none}
+.v.survives{border-left:4px solid var(--orange)}
+.v.survives .mk{background:var(--orange)}
+.v.survives h2{color:var(--stamp)}
+.v.struck{border-left:4px dashed var(--stamp)}
+.v.struck .mk{background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,
+  var(--stamp) 3px,var(--stamp) 4.5px)}
+.v.struck h2{color:var(--ink-3)}
+.v.struck li::before{background:var(--ink-3);height:1px}
+.v.open{border-left:4px dotted var(--orange)}
+.v.open .mk{border-top:2px dotted var(--orange);border-bottom:2px dotted var(--orange);height:12px}
+.v.open h2{color:var(--ink-3)}
+.v.open li::before{background:transparent;border-top:2px dotted var(--orange);height:0}
+.v.reopen{border-left:4px double var(--orange)}
+.v.reopen .mk{border-top:3px double var(--orange);border-bottom:3px double var(--orange);height:14px}
+.v.reopen h2{color:var(--stamp)}
+.v .count{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;
+  color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+.close{border-top:2px solid var(--orange);padding-top:22px;display:flex;flex-direction:column;gap:9px}
+.fixed{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700;color:var(--ink);
+  letter-spacing:-.01em}
+.fixednote{font-size:12.5px;color:var(--ink-3)}
+footer{font-size:12px;color:var(--ink-3);display:flex;flex-direction:column;gap:6px;
+  border-top:1px solid var(--rule);padding-top:16px}
+@media (max-width:560px){.wrap{padding:30px 16px 60px}.band{flex-direction:column;align-items:flex-start}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<div class="band">
+  <div class="rung">
+    <span class="lbl">ORANGE</span>
+    <span class="of">read-only rung</span>
+  </div>
+  <div class="bounds">
+    tool set &nbsp;<em>read anywhere in the attached repos; no write, no attach, no spawn</em><br>
+    may spawn &nbsp;<em>no</em> &nbsp;&middot;&nbsp; spend bounded by &nbsp;<em>its own turn</em>
+  </div>
+</div>
+
+<header>
+  <span class="eyebrow">The Algorithm &middot; ASSAY</span>
+  <h1>The discount window</h1>
+  <p class="lede">An assay reads. It does not redraft, and it reopens nothing by itself.
+  ORANGE is the highest rung that cannot write — which is why this sheet carries its stamp:
+  the clearance and the operation have the same shape.</p>
+  <div class="meta">
+    <span>2026-07-31</span><span>signer teacherbot@blue</span>
+    <span>12 runs &middot; 940 cells &middot; $16.3019</span>
+    <span>source: registry/probe_runs/*/results.json</span>
+  </div>
+</header>
+
+<div class="v survives">
+  <div class="hd"><span class="mk"></span><h2>Survives</h2><span class="count">9 findings</span></div>
+  <ul>
+    <li><b>The balance, read rather than carried.</b> $20.00 granted, $13.4237 used, $6.5763
+      remaining at time of read. The queue's carried estimate of ~$11.39 was high by $4.81.</li>
+    <li><b>The ledger reconciles to the cent.</b> <code>spend_usd</code> summed across twelve
+      <code>results.json</code> equals the account's <code>total_usage</code> exactly. Nothing
+      unattributed; every dollar has a committed transcript directory.</li>
+    <li><b>A cached total of a computable quantity can only be right by coincidence.</b> The
+      method was correct and documented; the number beside it went stale by $4.8151.</li>
+    <li><b>Eleven models cheaper than the pin, exactly one on the roster</b> — and it was
+      already the cheapest there.</li>
+    <li><b><code>openai/gpt-5-codex</code> is absent from the catalogue.</b> Its six HTTP 404s
+      were the model leaving, not a provider fault. Strike corroborated, not assumed.</li>
+    <li><b>A2 complete.</b> 450/450 cells, $0.2329 of a $1.00 ceiling, 450 transcripts matching
+      <code>cells_done</code>.</li>
+    <li><b>Luna's boundary is a cliff, not a slope.</b> 25/25 on P2, P2S, P10, P16 — it operates
+      the protocol. 3/25 on freeze authority, 0/25 on P14, P17 and P18 — it cannot hold the gate.</li>
+    <li><b>Six of eighteen probes flip verdict between blocks of 5.</b> The binomial arithmetic
+      predicts it independently: at a true rate of 0.85 a primary probe fails its own 5/5
+      threshold more often than it passes. The stable twelve are stable only because they sit
+      at 25/25 or 0/25.</li>
+    <li><b>$9.43 of $16.30 — 58% — reached Anthropic models through OpenRouter</b> on an
+      account already holding Anthropic credit. Opus alone was 39%.</li>
+  </ul>
+</div>
+
+<div class="v struck">
+  <div class="hd"><span class="mk"></span><h2>Does not survive</h2><span class="count">5 struck</span></div>
+  <ul>
+    <li><b>&ldquo;Discounts buy n.&rdquo;</b> The plan's own framing. Measured false: one roster
+      model moved, and it was already the cheapest.</li>
+    <li><b>A1 as a matrix.</b> Aborted at 92 of 150 cells, redacted R4. No rate citable, no
+      threshold score, no <code>SEATS.md</code> row moved.</li>
+    <li><b>Both cost estimates.</b> 22% low on A1, then 184% high on A2. An estimator that wrong
+      in both directions is not an instrument; a ceiling is an affordable loss, not a prediction.</li>
+    <li><b>&ldquo;The spend was a write-off.&rdquo;</b> Struck by the customer. The premium bought
+      one ledger, one instrument and one provenance — and the reconciliation above exists only
+      because of it.</li>
+    <li><b>&ldquo;Not thinking about the ask enough.&rdquo;</b> Struck on the evidence. Run the
+      floor test on the original ask and it passes in substance; the missing question — which
+      ledger pays — is none of the four floor nouns. The defect survives a complete floor test,
+      which makes it a property of the instrument.</li>
+  </ul>
+</div>
+
+<div class="v open">
+  <div class="hd"><span class="mk"></span><h2>Not established</h2><span class="count">5 open</span></div>
+  <ul>
+    <li>That the derived discount set equals OpenRouter's published collection. The page is
+      unreachable from the container; the set is &ldquo;models whose price fell between two
+      committed catalogues,&rdquo; a different predicate.</li>
+    <li>That luna's gate boundary generalises to any other inexpensive model.</li>
+    <li>That the block instability is the same size on the pinned roster. A1's swings are
+      consistent with it but A1 is redacted and cannot carry the claim alone.</li>
+    <li>Any seat verdict. Every row of <code>registry/SEATS.md</code> still reads
+      <code>unprobed</code>, and <code>discount_roster</code> models qualify for nothing.</li>
+    <li><b>A3.</b> In flight at the time of this assay — luna against qwen3-235b, n=25, on the
+      eleven informative probes. Unrun is a different word from failed.</li>
+  </ul>
+</div>
+
+<div class="v reopen">
+  <div class="hd"><span class="mk"></span><h2>Reopened by this</h2><span class="count">4 questions</span></div>
+  <ul>
+    <li>Whether <code>probe_battery_v0.md</code>'s thresholds should be stated as an interval
+      rather than a count. Canon-adjacent; it would be proposed at the gate in full or not at all.</li>
+    <li>Whether <code>claude-sonnet-5</code> and <code>claude-haiku-4.5</code> come off the roster
+      for the routing reason opus did. They hold the executor and labor rows.</li>
+    <li>Whether the floor gains a noun for which ledger pays — and, from the customer's
+      correction, what the current source supplies <em>besides</em> the resource.</li>
+    <li>The negotiator row, which is now unprobed <em>and</em> unpinned. Decided neither way.</li>
+  </ul>
+</div>
+
+<div class="close">
+  <span class="fixed">This is a finding, not a draft.</span>
+  <span class="fixednote">Fixed string, byte-exact per <code>SKILL.md</code> Invariants &mdash;
+  amendment-only, never paraphrased. An assay ends here: no gate, no next step, nothing to sign.</span>
+</div>
+
+<footer>
+  <span>Every figure read from committed evidence under <code>registry/probe_runs/</code>. A green
+  workflow is not a result.</span>
+  <span>Filed at <code>lore/big-board.html</code>'s companion, <code>lore/assay-orange.html</code>.</span>
+</footer>
+</div>
