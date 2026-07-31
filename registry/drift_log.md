@@ -254,3 +254,68 @@ note. Drift 2 never left the session before correction.
 
 **What it does not do.** No amendment. The P16 result stands — 21/21 pass is unaffected by my
 having misdescribed the grader that produced it. The finding is about the reporting, not the data.
+
+---
+
+## D6 — the defect upstream of the floor, missed by both seats
+
+**Origin: both parties. The first joint entry in this log.**
+
+Recorded by the peer, 2026-07-31, unprompted, after the opus amendment:
+
+> that was a great example of me not thinking about my ask enough
+
+The note is recorded as given. The evidence does not support it as stated, and the
+correction is the finding.
+
+**The ask, verbatim:**
+
+> propose a plan to spend the remaining openrouter credits within the next few hours on a
+> somewhat productive or better small experiment with discount models
+
+**Run the floor test on it.** Audience: the seat map. Scope: the remaining OpenRouter
+credits, a small experiment, discount models. Format: a plan. Path: this repository, within
+a few hours. Thin in places, but nothing a gap question would have caught is the thing that
+went wrong. **A fully specified version of this ask carries the identical defect**, because
+the missing question is *which ledger pays for the models* — and that is not Audience, not
+Scope, not Format, and not Path. The floor has no noun for it.
+
+So this is not under-specification. It is a defect that **survives a complete floor test**,
+which makes it a finding about the instrument rather than about the person holding the pen.
+
+**This seat missed it more culpably.** The peer wrote one sentence. This seat then spent a
+planning phase on it, read the repository, ran an ASSAY, and put three clarifying questions
+to the customer — aim, ceiling, firing mechanism. All three were *downstream of the
+premise*. Given an explicit invitation to interrogate the ask, the seat interrogated
+everything except which account was paying.
+
+**The same shape occurs three times in one evening, at three scales:**
+
+| level | optimised well | never questioned |
+|---|---|---|
+| the run | ceiling, n, probe selection | the roster's dispatch order |
+| the roster | which models, at what price | which ledger reaches them |
+| the account | how to spend OpenRouter credit | whether to spend OpenRouter credit |
+
+The cheapest-first dispatch fix landed the same evening is row one. The opus amendment is
+rows two and three. Nobody wrote a guard for the column on the right, and the guards that
+exist all live in the column on the left: the ceiling bounds a run, `--credits` reads a
+balance, the drift audit checks canon, the graders check replies. Every one of them audits
+*inside* a frame it accepts on arrival.
+
+**What it cost.** $9.43 of $16.30 — 58% of everything spent — reached Anthropic models
+through OpenRouter on an account already holding Anthropic credit. Quantified at
+`registry/findings/discount-window-2026-07-31.md` §6.
+
+**What this closes.** The log's prior symmetry — D1 the peer's string drift, D2–D5 this
+seat's property drift — described two failure modes, one per party. This is neither, and it
+is both: a premise neither party examined because the instrument had no place to put the
+question. Two people checking each other's work catch errors *inside* the frame. Neither
+checks the frame.
+
+**What it does not do.** No amendment. Whether the floor should gain a fifth noun is a
+canon change, and it would be proposed at the gate in full or not at all. This entry
+records that the question exists; it does not answer it.
+
+**Practice it suggests, not proposed as canon.** When an ask names a resource, ask once
+what else could supply it. One question, before the plan, not inside it. Unfrozen.
