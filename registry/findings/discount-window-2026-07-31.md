@@ -155,3 +155,58 @@ collection; that any `discount_roster` model can hold any seat; that a promotion
 persists past this window.
 
 This is a finding, not a draft.
+
+---
+
+## 6. The largest finding was an aside, and it is about the wrong ledger
+
+Recorded 2026-07-31, on the signer's amendment dropping opus. The reason, verbatim:
+
+> i really never should have spent openrouter credits when i have anthropic credits
+
+This seat had put opus's removal to the gate on *value* — 53% pass at a 6.538 blend, the
+lowest rate in the frontier tier at 52× qwen's price. That argument was correct and small.
+The signer's is neither.
+
+Apportioning each run's `spend_usd` across its cells by count × blended price:
+
+| model | est. spend | share | |
+|---|---|---|---|
+| `anthropic/claude-opus-5` | $6.431 | 39.5% | **Anthropic** |
+| `google/gemini-3.1-pro-preview` | $2.124 | 13.0% | |
+| `openai/gpt-5.2` | $2.050 | 12.6% | |
+| `anthropic/claude-sonnet-5` | $1.992 | 12.2% | **Anthropic** |
+| `x-ai/grok-4.5` | $1.439 | 8.8% | |
+| `anthropic/claude-haiku-4.5` | $1.003 | 6.2% | **Anthropic** |
+| everything else (11 models) | $1.263 | 7.7% | |
+| **total** | **$16.302** | | |
+
+**$9.43 of $16.30 — 58% of every credit this repository has spent — bought Anthropic models
+through OpenRouter, on an account that already holds Anthropic credit.** Opus alone is 39%.
+
+That is not a bad price. It is the same price, paid from the wrong pocket, twice.
+
+**Why no instrument here would ever have caught it.** Every guard this repository has built
+watches the inside of a run: the ceiling bounds a run's spend, `--credits` reads the balance,
+the drift audit checks canon, the graders check replies. All of them take the *routing* as
+given and audit what happens downstream of it. The question "should this request have gone
+to this vendor at all?" sits upstream of every probe, and no probe has an upstream.
+
+The cheapest-first dispatch fix landed the same evening is the same shape of error, one level
+down: the harness optimised *within* an order it never questioned. This is that pattern at
+the level of the account.
+
+**Practice it suggests, not proposed as canon.** Before a roster is pinned, record for each
+model which ledger pays for it. A model reachable on two ledgers is a routing decision, not a
+pricing one, and the seat map has never had a column for it. Unfrozen — and it belongs to the
+customer, since it is a question about their accounts and not about the probes.
+
+**Scope actually executed.** opus only. `anthropic/claude-sonnet-5` and
+`anthropic/claude-haiku-4.5` are the same double payment by this logic and **remain pinned**,
+because the amendment said opus. They hold the decomposer/executor and labor-unit rows of
+`SEATS.md`, so removing them would leave those rows with no incumbent under probe. Widening a
+customer's amendment on inference is the seat answering as the customer. It is an open
+question in `probe_roster.json:_opus_dropped`, not a change.
+
+The negotiator row now has no pinned incumbent. It was already unprobed; it is unpinned as
+well, and must not be reported as decided either way.
