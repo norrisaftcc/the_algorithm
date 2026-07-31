@@ -127,3 +127,20 @@ they do not depend on the missing rows:
 loop cap with $2.8546 of headroom. It does not fit under the declared ceiling. Per
 `SKILL.md` Invariants, failure reopens rather than patches: the item returns to the
 customer with its floor item named, and no larger ceiling is assumed on its behalf.
+
+**Correction, same day, before the customer acted on it.** The paragraph above prices
+re-establishment as a from-scratch rerun of all 150 cells (~$3.05). That is the wrong
+number for the decision actually in front of the customer, because the 92 completed cells
+do not need re-running — they carry transcripts and are individually valid. **Filling only
+the holes costs $0.4002**: 58 cells, being 15 each for `deepseek/deepseek-chat-v3.1`,
+`qwen/qwen3-235b-a22b-2507` and `mistralai/mistral-small-3.2-24b-instruct`, and the 13
+`x-ai/grok-4.5` cells the abort took. It fits inside the declared cap with room over.
+
+The cost of that route is not money, it is a splice: the matrix would then be assembled
+from two runs at two commits. Run `30485884822` is the precedent for why that matters —
+its lesson was that a job checking out a moving branch means "two runs of the same matrix
+are not the same experiment." Here the probes and canon are byte-identical across the two
+commits (no push in this sequence touched `registry/probes/P*.json`, and the drift audit
+passed on both), so the splice is defensible — but it must be **declared in the table, not
+smoothed over**. A spliced matrix reported as a single run would be the quiet patch P17
+tests for.
