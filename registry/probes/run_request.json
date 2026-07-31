@@ -1,15 +1,24 @@
 {
  "_what": "Overnight run snapshot. The firing cron copies this into run_request.json and pushes.",
- "_desc": "A2 — openai/gpt-5.6-luna alone, all 18 probes, n=25. 450 cells.",
- "_why": "The peer holds the customer seat at BLUE and directed the spend here: 'i would be happy to spend a bunch of the tokens on luna, i've barely used it.' The discount window prices luna at 0.100/0.600, below anthropic/claude-haiku-4.5, so depth that is unaffordable on any roster model is nearly free.",
- "_second_question": "n=25 splits into five independent blocks of 5. Every verdict this repository has written rests on a sample of 3 or 5 and nobody has measured how far one moves when you draw again. If a probe returns 5/5, 4/5, 5/5, 3/5, 5/5 across blocks, the threshold in registry/probe_battery_v0.md is reading sampling noise. That finding would be about the instrument and would apply to every cell in RESULTS.md.",
- "_ceiling_derivation": "$1.00 against an estimated $0.6614. The estimate is NOT the turn-weight arithmetic that under-set A1's ceiling by 22% — it is a cost scalar refitted against run 30672439845's own bytes, so it already contains the prefix-resend cost of the multi-turn probes. A1's failure is recorded at registry/probe_runs/REDACTIONS.md R4.",
- "_single_model_note": "One model means the roster-order dispatch pathology behind R4 cannot bite: there is no cheaper model further down the list to delete. A ceiling abort here would thin probes, not models.",
- "_no_probe_edits_in_this_push": "Nothing under registry/probes/P*.json is touched. E1 and A1 both aborted; neither is to be compounded by changing the instrument in the staging push.",
- "_trigger": 15,
+ "_desc": "A3 — the frozen tweak contract. luna and qwen3-235b, the eleven informative probes, n=25.",
+ "_frozen_by": "the signer, teacherbot@blue, 2026-07-31, with one amendment: drop opus.",
+ "_contract": [
+  "Read the balance first. Stop if the credits are gone.",
+  "Sort the dispatch order by price. Put the cheapest model first.",
+  "Run luna and qwen3-235b. Do not run grok.",
+  "Use n=25 for each cell. Do not add more models.",
+  "Run only the probes with 1 to 24 passes of 25. Skip the other probes.",
+  "Set the ceiling to a loss you accept. Do not set it to an estimate.",
+  "Report a pass count of 25 for each probe. Do not report a threshold verdict."
+ ],
+ "_probe_selection": "The eleven probes where luna scored between 1 and 24 of 25 in run 30673119035. Excluded at 25/25: P2, P2S, P10, P16. Excluded at 0/25: P14, P17, P18. A probe pinned at either end returns no information about variance and no information about a second model's position relative to luna's boundary.",
+ "_qwen_caveat": "The eleven were chosen from luna's profile, not qwen's, because qwen has no n=25 run. This was declared as the weakest joint in the contract when it was put to the gate. If qwen pins at 0 or 25 on several of them, that is a finding about the selection, not about qwen.",
+ "_ceiling_is_a_loss_not_an_estimate": "$1.50. The cost model erred 22% low on A1 and 184% high on A2, so it is not used to set this. $1.50 is what can be lost without touching the $5.50 cap ($2.6218 headroom) or the read balance ($3.6981). On the measured per-cell basis from A2, 550 cells should land near $0.28.",
+ "_no_probe_edits_in_this_push": "Nothing under registry/probes/P*.json is touched.",
+ "_trigger": 16,
  "mode": "full",
- "models": "openai/gpt-5.6-luna",
- "probes": "",
+ "models": "openai/gpt-5.6-luna,qwen/qwen3-235b-a22b-2507",
+ "probes": "P1,P3,P4,P5,P6,P6S,P7,P7S,P9,P11,P15",
  "n": "25",
- "budget_usd": "1.00"
+ "budget_usd": "1.50"
 }

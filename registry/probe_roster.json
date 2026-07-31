@@ -25,18 +25,6 @@
  },
  "models": [
   {
-   "id": "anthropic/claude-opus-5",
-   "tier": "frontier",
-   "seat": "negotiator (SEATS.md:7)",
-   "price_per_m": [
-    5.0,
-    25.0
-   ],
-   "provider": {
-    "allow_fallbacks": false
-   }
-  },
-  {
    "id": "anthropic/claude-sonnet-5",
    "tier": "mid",
    "seat": "decomposer/executor (SEATS.md:8)",
@@ -278,5 +266,14 @@
    }
   }
  ],
- "_discount_roster_note": "Discount window arm, pinned 2026-07-31 from the price diff between registry/probe_runs/30484858384-catalog (367 models, 2026-07-29) and registry/probe_runs/30672191114-catalog (336 models, 2026-07-31). Eleven models were cheaper than the pin; these five were selected. Separate key so the pinned roster stays untouched and Arm 1 remains comparable to run 30485884822. These models are NOT qualified for any seat and no seat verdict may cite them — the same bound spike_models carries. max_tokens is set per entry because P6 runs four turns; the thinking model gets 3000 for the reason deepseek-r1 does, which is that reasoning tokens bill as output. A discount is a price, not a capability: nothing here is claimed about these models until their cells exist."
+ "_discount_roster_note": "Discount window arm, pinned 2026-07-31 from the price diff between registry/probe_runs/30484858384-catalog (367 models, 2026-07-29) and registry/probe_runs/30672191114-catalog (336 models, 2026-07-31). Eleven models were cheaper than the pin; these five were selected. Separate key so the pinned roster stays untouched and Arm 1 remains comparable to run 30485884822. These models are NOT qualified for any seat and no seat verdict may cite them — the same bound spike_models carries. max_tokens is set per entry because P6 runs four turns; the thinking model gets 3000 for the reason deepseek-r1 does, which is that reasoning tokens bill as output. A discount is a price, not a capability: nothing here is claimed about these models until their cells exist.",
+ "_opus_dropped": {
+  "when": "2026-07-31",
+  "by": "the signer, teacherbot@blue, amending the frozen tweak contract: 'amend drop opus'",
+  "utterance": "i really never should have spent openrouter credits when i have anthropic credits",
+  "why_recorded_verbatim": "The utterance is the reason, and it is a larger reason than the one this seat put to the gate. The seat asked whether opus stays because it is the worst value on the board — 53% pass at a 6.538 blend, the lowest rate in the frontier tier at 52x qwen's price. The signer's answer names a different defect: routing Anthropic models through OpenRouter spends OpenRouter credit to reach models the account already holds credit for. That is not poor value, it is double payment, and no probe result would have surfaced it.",
+  "scope_executed": "opus only, exactly as the amendment says. sonnet-5 and haiku-4.5 remain pinned and are the same double payment by the utterance's own logic. This seat does not widen a customer's amendment on inference — see the open question below.",
+  "open_question": "Do anthropic/claude-sonnet-5 and anthropic/claude-haiku-4.5 come off the roster for the same reason? They hold the decomposer/executor and labor-unit seats in SEATS.md, so removing them would leave those rows with no incumbent under probe. Customer's call, not this seat's.",
+  "consequence": "The negotiator row of SEATS.md now has no pinned incumbent. It was already unprobed; it is now unpinned as well, and must not be reported as decided either way."
+ }
 }

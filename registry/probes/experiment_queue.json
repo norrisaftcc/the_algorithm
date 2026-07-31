@@ -19,7 +19,7 @@
   ],
   "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything. Deleting the trigger is cleanup, not the guard — see _closed.the_finding_the_closing_itself_produced."
  },
- "loop_active": true,
+ "loop_active": false,
  "firings": 2,
  "spent_to_date_usd": 16.3019,
  "_spend_note": "Recomputed 2026-07-30 by summing usage.cost across every results.json in registry/probe_runs/. The prior 8.51 was carried forward and stale by $0.0986. Per-run table is in the closing entry below.",
@@ -170,7 +170,8 @@
   "A2 COMPLETE (run 30673119035): 450/450, $0.2329 of $1.00. Reported in RESULTS.md with ASSAY.",
   "Spend recomputed from the bytes: 16.3019. Loop spend 2.8782 of cap 5.50; balance 3.6981.",
   "Third instrument finding: the cost model erred 22%% low on A1 and 184%% high on A2. A ceiling is an affordable loss, not a prediction.",
-  "Nothing staged this firing. A1-fill and A5 were put to the gate and are UNFROZEN; the seat does not stage what the customer has not frozen. Expiry is 2026-07-31 and it is 23:42Z."
+  "Nothing staged this firing. A1-fill and A5 were put to the gate and are UNFROZEN; the seat does not stage what the customer has not frozen. Expiry is 2026-07-31 and it is 23:42Z.",
+  "HALTED 2026-07-31 by the signer mid-execution of the frozen tweak contract. loop_active false. Both scheduled triggers deleted. Nothing staged, nothing spent. The uncommitted harness edit (cheapest-first dispatch) is described in the halt report and is not in the tree's history."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
@@ -187,5 +188,11 @@
   "by": "the peer, in session: 'propose a plan to spend the remaining openrouter credits within the next few hours on a somewhat productive or better small experiment with discount models', then approving the plan that answered it. _closed required a live human verb rather than loop_active flipped back; this is it, and it is recorded here rather than asserted.",
   "what_changed_since_closing": "The cap is derived from a read balance. Five runs that post-date the closing entry are now in the ledger. openai/gpt-5-codex is struck. A discount_roster is pinned from a fresh catalogue.",
   "scope": "Two new arms first (A1, A2), then the surviving pending items in file order. E1 stays aborted and E4 stays pending; neither is revived by this reopening."
+ },
+ "_halted": {
+  "when": "2026-07-31, mid-execution",
+  "by": "the signer, teacherbot@blue, with the word 'halt'",
+  "state": "The frozen tweak contract was in execution. One harness edit was written to the working tree and NOT committed. No run was staged, nothing was pushed, and no credit was spent after A2.",
+  "kill_switch_used": "loop_active false here, committed. Per _closed.the_finding_the_closing_itself_produced this is the stop that actually holds; the trigger deletions below are cleanup, not the guard."
  }
 }

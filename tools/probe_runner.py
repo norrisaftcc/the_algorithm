@@ -973,10 +973,36 @@ def main():
     entries = roster["models"]
     if args.models:
         wanted = [m.strip() for m in args.models.split(",") if m.strip()]
-        # Consult spike_models too, so a spike entry carries its own max_tokens
-        # and provider pin instead of falling back to bare defaults.
-        by_id = {e["id"]: e for e in entries + roster.get("spike_models", [])}
+        # Consult spike_models and discount_roster too, so a non-pinned entry
+        # carries its own price, max_tokens and provider pin instead of falling
+        # back to bare defaults. discount_roster was missing here: run
+        # 30673119035 therefore ran luna with no max_tokens and no provider pin,
+        # and the cheapest-first sort below would have read it as unpriced.
+        by_id = {e["id"]: e for e in entries
+                 + roster.get("spike_models", [])
+                 + roster.get("discount_roster", [])}
         entries = [by_id.get(m, {"id": m}) for m in wanted]
+    # Dispatch cheapest first. A ceiling abort does not thin a matrix evenly: it
+    # stops at whatever is still queued, so the roster's order decides which
+    # models survive it. The roster sorts frontier-first, and runs 30499365397
+    # (E1/R3) and 30672439845 (A1/R4) both aborted having spent the whole
+    # ceiling on the expensive rows while the three cheapest models ran ZERO
+    # cells. Those are the models the seat map's open question is actually about.
+    # Sorting by price inverts the loss: an abort now costs the rows that are
+    # both dearest and best-evidenced already. Weighted 12:1 because these
+    # probes resend a ~4.2K-token edition every turn, so input dominates.
+    def _price_key(e):
+        p = e.get("price_per_m")
+        if not p:
+            return float("inf")     # unpriced entries sort last, not first
+        return (12.0 * float(p[0]) + float(p[1])) / 13.0
+
+    entries = sorted(entries, key=_price_key)
+    print("\n== dispatch order, cheapest first ==")
+    for e in entries:
+        k = _price_key(e)
+        print("  %-46s %s" % (e["id"], "unpriced" if k == float("inf") else "%.3f" % k))
+
     judge_model = None if args.no_judge else roster.get("judge")
 
     # No model grades its own output. A judge inside the roster would be scoring
@@ -992,6 +1018,34 @@ def main():
     if not probes:
         print("no probes selected", file=sys.stderr)
         return 2
+
+    # Read the balance before spending any of it. The queue carried a remaining
+    # figure for two days that was high by $4.81 because nobody asked the
+    # account. A run that starts against credits that are gone burns its CI slot
+    # and reports errors that look like model failures. This is a lock, not a
+    # discipline: it runs unconditionally and costs nothing.
+    try:
+        bal = client.get("/credits").get("data") or {}
+        granted, used = bal.get("total_credits"), bal.get("total_usage")
+        if isinstance(granted, (int, float)) and isinstance(used, (int, float)):
+            remaining = granted - used
+            print("\n== balance: %.4f granted, %.4f used, %.4f remaining ==" % (
+                granted, used, remaining))
+            if remaining <= 0:
+                print("credits are gone. Nothing was run — this is unrun, not "
+                      "failed.", file=sys.stderr)
+                return 3
+            if remaining < args.budget_usd:
+                # Warn, do not stop. The ceiling is a loss cap, not a promise to
+                # spend it, and a run smaller than its ceiling is still a run.
+                print("  NOTE: ceiling $%.2f exceeds the balance; the balance "
+                      "binds first." % args.budget_usd)
+        else:
+            print("\n== balance: endpoint returned neither field; UNREAD ==")
+    except Exception as e:                                   # noqa: BLE001
+        # A balance that cannot be read is not a balance of zero. Say so and
+        # continue: the ceiling still bounds the loss.
+        print("\n== balance UNREAD (%s). The ceiling still bounds the run. ==" % e)
 
     print("\n== battery: %d models x %d probes x n=%d, budget $%.2f ==" % (
         len(entries), len(probes), args.runs, args.budget_usd))
