@@ -20,8 +20,8 @@
   "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything. Deleting the trigger is cleanup, not the guard — see _closed.the_finding_the_closing_itself_produced."
  },
  "loop_active": true,
- "firings": 0,
- "spent_to_date_usd": 13.4237,
+ "firings": 1,
+ "spent_to_date_usd": 16.0691,
  "_spend_note": "Recomputed 2026-07-30 by summing usage.cost across every results.json in registry/probe_runs/. The prior 8.51 was carried forward and stale by $0.0986. Per-run table is in the closing entry below.",
  "_closed": {
   "when": "2026-07-30, on a firing that arrived after its own trigger was deleted.",
@@ -33,7 +33,7 @@
  "queue": [
   {
    "id": "A1",
-   "status": "pending",
+   "status": "aborted",
    "budget_usd": 2.5,
    "n": 5,
    "probes": "P1,P4,P6",
@@ -42,7 +42,10 @@
    "why": "registry/probe_battery_v0.md sets 5/5 on primary probes and 4/5 elsewhere. Every reported battery ran n=3, so no cell in this repository has ever been scored against that threshold and every SEATS.md row still reads unprobed. This is queue item E2 unchanged in shape; it is restated as A1 only because the reopening renumbers.",
    "_baseline": "registry/probe_runs/30485884822-full/ ran P1-P7 at n=5 across 11 models for $4.5694. Same n, same roster minus deepseek-r1, so the delta isolates the probe fixes made after that run.",
    "_ceiling_note": "P1+P4+P6 carry turn-weight 6 of the 11 that P1-P7 carry (P6 is 4 turns). 6/11 x $4.5694 = $2.49. E2's frozen $2.50 was derived this way and is kept. NOT lowered for the discount: exactly one pinned model got cheaper and it was already the cheapest on the roster.",
-   "_supersedes": "E2"
+   "_supersedes": "E2",
+   "_outcome": "92 of 150 cells at $2.6454 against a $2.50 ceiling, then the abort. Redacted as R4 in registry/probe_runs/REDACTIONS.md: not a sample, not citable as a rate. The three cheapest models ran zero cells because the harness dispatches in roster order and the roster sorts frontier-first — a ceiling abort deletes whichever models sort last. Cause was the ceiling, and the ceiling was this seat's arithmetic: turn-weight scaling ignored that P6's four turns each resend the ~4.2K-token prefix. Refitted against this run's bytes, the full matrix is ~$3.05.",
+   "_asks_still_open": "Yes. No threshold score exists for P1, P4 or P6, and no SEATS.md row moves.",
+   "_reopened_to": "the customer seat (BLUE). Completing A1 needs ~$3.05, which exceeds the headroom under the declared cap. Failure reopens; it does not get a bigger ceiling by assumption."
   },
   {
    "id": "A2",
@@ -159,7 +162,10 @@
   "Stage 0 fired first and spent nothing: run 30672191114, mode catalog, produced credits.json and a 336-model catalogue. tools/probe_runner.py gained --credits to make it possible.",
   "A1 and A2 prepended. A1 supersedes E2 in shape; E2 is left in the queue below and must be marked superseded rather than run twice.",
   "2026-07-31, mid-flight, on the peer's instruction: the A2 seat is reassigned to a luna depth arm (all 18 probes, n=25, luna alone, ceiling $1.00). The five-model discount sweep that held the seat is parked as A4 pending tightening, and is now blocked by A2 because A2 measures the resampling stability that should set A4's n.",
-  "Cap unchanged at 5.50. A1 2.50 + A2 1.00 = 3.50 committed, leaving 2.00 under the cap and 3.0763 under the read balance of 6.5763."
+  "Cap unchanged at 5.50. A1 2.50 + A2 1.00 = 3.50 committed, leaving 2.00 under the cap and 3.0763 under the read balance of 6.5763.",
+  "A1 (run 30672439845) ABORTED on ceiling: 92/150 cells, $2.6454 of a $2.50 ceiling. Redacted as R4. Instrument finding recorded: dispatch is in roster order, so a ceiling abort deletes the cheapest models first — the second instance of this shape after E1/R3.",
+  "Spend recomputed from the bytes: 16.0691 across all results.json. Loop spend 2.6454 of cap 5.50; read balance now 3.9309.",
+  "A2 (luna) staged next. Its ceiling is unchanged at $1.00: refitting the cost scalar against A1's own bytes puts luna at 18 probes x n=25 = 450 cells at ~$0.66, which fits. That scalar already contains the prefix-resend cost the A1 estimate dropped."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",

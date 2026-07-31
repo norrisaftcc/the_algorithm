@@ -81,3 +81,49 @@ reader would otherwise expect data.
 
 Blank rows are permitted by the peer, 2026-07-30. A blank row that names why it is blank
 is a finding. A blank row presented as coverage is not.
+
+---
+
+## R4 — A1, run `30672439845`: aborted on ceiling at 92 of 150 cells
+
+**Status:** partial matrix. Not a sample. **Not citable as a rate.**
+
+`results.json` reports `aborted_on_budget: true`, `complete: false`, `cells_done: 92`
+against `cells_expected: 150`, and `spend_usd: 2.645418` against a `budget_usd` of
+`2.50`. All 92 cells that ran carry transcripts, so they are evidence — of themselves,
+and of nothing wider.
+
+**Coverage is not missing at random, and that is the finding.** The four most expensive
+models on the roster completed 15/15 cells each. The three cheapest — `deepseek/deepseek-chat-v3.1`,
+`qwen/qwen3-235b-a22b-2507`, `mistralai/mistral-small-3.2-24b-instruct` — ran **zero**.
+`x-ai/grok-4.5` got 2 of 15 before the ceiling closed.
+
+The harness dispatches in roster order, so a ceiling abort does not thin the matrix
+evenly: it **deletes whichever models sort last, and the roster sorts frontier-first.**
+Every model a cost-constrained seat map actually cares about is the one that vanishes.
+E1's abort (R3) had the same shape and it was read then as a probe-count accident; two
+instances make it a property of the instrument, not an accident.
+
+**The ceiling was mine and it was wrong.** $2.50 came from scaling the baseline run
+`30485884822-full` by turn-weight — P1+P4+P6 carry 6 of the 11 turns that P1–P7 carry, so
+6/11 × $4.5694 ≈ $2.49. Refitting a cost scalar against this run's own bytes puts the full
+150 cells at **~$3.05**. The derivation was low by about 22%, because turn-weight is not
+proportional to cost when the extra turns resend their prefix: P6's four turns each carry
+the ~4.2K-token skill edition again. `probe_roster.json:_cost_estimate._method` says
+"both resending their prefix" in as many words. The arithmetic did not use it.
+
+**What may and may not be said from these 92 cells.** No pass rate, no seat verdict, no
+threshold score — the battery grades at 5/5 and 4/5 and a matrix missing three models
+cannot support either. Two observations are about the *instrument* and survive, because
+they do not depend on the missing rows:
+
+- `openai/gpt-5-mini` returned `truncated` on 12 of its 15 cells and `n/a-precondition` on
+  3. It scored nothing in either direction. A truncation is not a failure, and a model
+  that cannot finish a reply inside its cap is being measured on its cap.
+- P6 cells that did complete cluster hard at one end. Whether that is the probe, the
+  models, or the edition is exactly what the missing rows would have disambiguated.
+
+**Re-establishing the full matrix** costs ~$3.05 against a read balance of $3.9309 and a
+loop cap with $2.8546 of headroom. It does not fit under the declared ceiling. Per
+`SKILL.md` Invariants, failure reopens rather than patches: the item returns to the
+customer with its floor item named, and no larger ceiling is assumed on its behalf.

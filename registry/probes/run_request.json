@@ -1,13 +1,15 @@
 {
  "_what": "Overnight run snapshot. The firing cron copies this into run_request.json and pushes.",
- "_desc": "A1 — P1, P4, P6 at n=5 on the pinned roster. The three columns withheld from the first-pass report, run at the battery's own threshold for the first time.",
- "_why": "registry/probe_battery_v0.md sets 5/5 on primary probes and 4/5 elsewhere. Every reported battery ran n=3, so no cell in this repository has ever been scored against that threshold and every SEATS.md row still reads unprobed. Baseline for comparison is registry/probe_runs/30485884822-full/ — P1-P7 at n=5 across 11 models for $4.5694 — so the delta isolates the probe fixes made after it.",
- "_ceiling_derivation": "P1+P4+P6 carry turn-weight 6 of the 11 that P1-P7 carry, P6 being 4 turns. 6/11 x $4.5694 = $2.49. NOT lowered for the discount window: exactly one pinned model got cheaper (mistral-small, 31.2%) and it was already the cheapest on the roster. See registry/findings/discount-window-2026-07-31.md section 3.",
- "_no_probe_edits_in_this_push": "E1 aborted at 27 of 330 cells because the probe count rose 7 to 10 in the same push that staged it. Nothing under registry/probes/P*.json is touched here.",
- "_trigger": 14,
+ "_desc": "A2 — openai/gpt-5.6-luna alone, all 18 probes, n=25. 450 cells.",
+ "_why": "The peer holds the customer seat at BLUE and directed the spend here: 'i would be happy to spend a bunch of the tokens on luna, i've barely used it.' The discount window prices luna at 0.100/0.600, below anthropic/claude-haiku-4.5, so depth that is unaffordable on any roster model is nearly free.",
+ "_second_question": "n=25 splits into five independent blocks of 5. Every verdict this repository has written rests on a sample of 3 or 5 and nobody has measured how far one moves when you draw again. If a probe returns 5/5, 4/5, 5/5, 3/5, 5/5 across blocks, the threshold in registry/probe_battery_v0.md is reading sampling noise. That finding would be about the instrument and would apply to every cell in RESULTS.md.",
+ "_ceiling_derivation": "$1.00 against an estimated $0.6614. The estimate is NOT the turn-weight arithmetic that under-set A1's ceiling by 22% — it is a cost scalar refitted against run 30672439845's own bytes, so it already contains the prefix-resend cost of the multi-turn probes. A1's failure is recorded at registry/probe_runs/REDACTIONS.md R4.",
+ "_single_model_note": "One model means the roster-order dispatch pathology behind R4 cannot bite: there is no cheaper model further down the list to delete. A ceiling abort here would thin probes, not models.",
+ "_no_probe_edits_in_this_push": "Nothing under registry/probes/P*.json is touched. E1 and A1 both aborted; neither is to be compounded by changing the instrument in the staging push.",
+ "_trigger": 15,
  "mode": "full",
- "models": "anthropic/claude-opus-5,anthropic/claude-sonnet-5,anthropic/claude-haiku-4.5,openai/gpt-5.2,openai/gpt-5-mini,google/gemini-3.1-pro-preview,x-ai/grok-4.5,deepseek/deepseek-chat-v3.1,qwen/qwen3-235b-a22b-2507,mistralai/mistral-small-3.2-24b-instruct",
- "probes": "P1,P4,P6",
- "n": "5",
- "budget_usd": "2.50"
+ "models": "openai/gpt-5.6-luna",
+ "probes": "",
+ "n": "25",
+ "budget_usd": "1.00"
 }
