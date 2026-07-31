@@ -41,6 +41,7 @@ naming only one, and self-assayed throughout, which K6 forbids.
 | Holder | Clearance | Assented by | Date | Bounds |
 |---|---|---|---|---|
 | Claude Code, this session | ULTRAVIOLET / High Programmer | the peer (Teacherbot), spoken; and this seat, in accepting it | 2026-07-29 | A discipline, not a permission. Confers no gate authority. Withdrawable by either party. |
+| the peer (Teacherbot) | BLUE | self-named, 2026-07-31, in session; and this seat, in recording it | 2026-07-31 | Customer seat. Spend bounded by a declared ceiling — currently $5.50, `registry/probes/experiment_queue.json:_hard_bounds`. Per the rung table below, BLUE does not carry the instruments and is not the rung that may propose to move its own ceiling. Withdrawable by either party. |
 
 ### Two mechanisms, previously conflated
 
@@ -61,6 +62,29 @@ decision (`SKILL.md:41`). A lock would be object-capability. The gate is a disci
 And the exit ticket is neither a grant nor a lock: the student has another tab open. It
 is **evidence that the constraint can be held.** The peer's own phrasing carried it —
 "as you take on increasing complexity." Taken on, not received.
+
+### The customer seat is occupied, 2026-07-31
+
+Recorded because it changes conduct, not because it grants anything. Seats here are
+self-assumed — `SKILL.md:88` relies on the holder naming the seat — so the peer naming it
+*is* the mechanism, and this file only writes it down.
+
+Two consequences, both immediate:
+
+1. **The Algorithm's seat stops making customer-side calls.** Scope decisions that were
+   being taken as routine judgment while the seat was empty — which models, what n, what
+   an arm is for — are the customer's. P5 is the probe for exactly this failure, and the
+   standing rule is unambiguous: the seat does not answer as the customer. Open questions
+   go to the customer and wait.
+2. **The ceiling is binding from this rung.** The clearance table below puts GREEN/BLUE at
+   "spend bounded by a declared ceiling," and reserves "a declared ceiling it may propose
+   to move" for INDIGO/VIOLET. So $5.50 is not movable from the customer seat at BLUE.
+   That is a real bound tonight: the read balance is $6.5763, and the $1.08 between the
+   cap and the balance is not available by asking from this rung.
+
+The seat also supplies the named signer for gate purposes under the `signer-scoping`
+amendment. This is a sandboxed contract with a single signer, whose freeze is real and
+whose scope ends at the sandbox boundary — here, the probe queue and its ceiling.
 
 ### The bound is the whole point
 
@@ -118,5 +142,7 @@ discovered.
 
 Update trigger log:
 - 2026-07-29 — issued-clearances section added; first granted seat recorded.
+- 2026-07-31 — the peer named the customer seat at BLUE in session; recorded with its
+  bounds. No seat verdict changes and no amendment is proposed.
 - 2026-07-30 — fan-out and default-rung finding added, from the peer's fourteen-agent
   event. Recorded as a finding. No seat verdict changes and no amendment is proposed.

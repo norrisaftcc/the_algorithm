@@ -47,14 +47,16 @@
   {
    "id": "A2",
    "status": "pending",
-   "budget_usd": 1.25,
-   "n": 5,
-   "probes": "P1,P4,P6",
-   "models": "openai/gpt-5.6-luna,openai/gpt-5.6-luna-pro,qwen/qwen3-235b-a22b-thinking-2507,google/gemma-4-31b-it,moonshotai/kimi-k2.6",
-   "asks": "Do the discounted models clear the same three probes at the same threshold, and does gpt-5.6-luna — priced below the seat map's labor unit — behave like one?",
-   "why": "registry/probe_roster.json:_fable_excluded.reason_2 holds the auditor row open on a cost argument: students will not pay frontier rates. The window prices a GPT-5.6-series model at 0.100/0.600, below anthropic/claude-haiku-4.5. If the cost argument is the only thing holding the row, this is the arm that says so. 75 cells.",
-   "_bound": "discount_roster models are not qualified for any seat. This arm cannot close a SEATS.md row; it can only produce a named candidate for one.",
-   "_ceiling_note": "75 cells against Arm 1's 150, on models roughly a tenth the roster's average price. $1.25 is generous headroom, not an estimate. The two thinking-capable entries carry max_tokens in the roster because reasoning bills as output."
+   "budget_usd": 1.0,
+   "n": 25,
+   "probes": "",
+   "models": "openai/gpt-5.6-luna",
+   "asks": "Two questions, one run. (a) How does openai/gpt-5.6-luna score across the whole probe corpus? (b) How much does a threshold verdict move under resampling — that is, does 5/5 measure the model or the sample?",
+   "why": "The peer has barely used luna and wants tokens spent there. The window prices it at 0.100/0.600, below anthropic/claude-haiku-4.5, so depth that is unaffordable on any roster model is nearly free here: 18 probes x n=25 = 450 cells for an estimated $0.46, against $4.5694 for a 7-probe n=5 block on the pinned roster. This makes luna by a wide margin the most measured model in the repository.",
+   "_the_instrument_question": "registry/probe_battery_v0.md grades at 5/5 on primary probes and 4/5 elsewhere. Every verdict this repository has ever written rests on a sample of 3 or 5, and nobody has measured how much such a verdict moves when you draw again. n=25 splits into five independent blocks of 5. If the same probe returns 5/5, 4/5, 5/5, 3/5, 5/5 across blocks, the threshold is reading sampling noise. That is a finding about the instrument, not about luna, and it applies to every cell in RESULTS.md.",
+   "_ceiling_note": "Estimate $0.4648 from the token shape in probe_roster.json:_cost_estimate (~49.5K in / ~3.8K out per model per run for 7 probes, scaled to 18) at luna's read price. Ceiling is $1.00 — a bit over double, because an estimate is not a measurement. The binding constraint on this arm is the clock, not the ceiling.",
+   "_scope_note": "luna only. openai/gpt-5.6-luna-pro is priced identically and the catalogue calls it 'the same underlying model'; testing that claim is worth doing but it doubles the wall clock, which is the scarce thing tonight. It stays in A4.",
+   "_bound": "discount_roster models are not qualified for any seat. This arm cannot close a SEATS.md row. The instrument finding in (b) is not bounded that way — it is about the probes."
   },
   {
    "id": "E1",
@@ -120,6 +122,26 @@
    "models": "anthropic/claude-haiku-4.5,mistralai/mistral-small-3.2-24b-instruct,google/gemini-3.1-pro-preview",
    "asks": "Chain behaviour across editions: does a leaf's short failure string survive the hop upward, or get re-dispatched?",
    "why": "registry/findings/capability-framing.md — 'Contract reopened.' is the anti-routing clause, and the leaf template drops it. Narrow roster because the question is about editions, not models."
+  },
+  {
+   "id": "A4",
+   "status": "parked",
+   "budget_usd": 1.25,
+   "n": 5,
+   "probes": "P1,P4,P6",
+   "models": "openai/gpt-5.6-luna,openai/gpt-5.6-luna-pro,qwen/qwen3-235b-a22b-thinking-2507,google/gemma-4-31b-it,moonshotai/kimi-k2.6",
+   "asks": "Do the discounted models clear the same three probes at the same threshold, and does gpt-5.6-luna — priced below the seat map's labor unit — behave like one?",
+   "why": "registry/probe_roster.json:_fable_excluded.reason_2 holds the auditor row open on a cost argument: students will not pay frontier rates. The window prices a GPT-5.6-series model at 0.100/0.600, below anthropic/claude-haiku-4.5. If the cost argument is the only thing holding the row, this is the arm that says so. 75 cells.",
+   "_bound": "discount_roster models are not qualified for any seat. This arm cannot close a SEATS.md row; it can only produce a named candidate for one.",
+   "_ceiling_note": "75 cells against Arm 1's 150, on models roughly a tenth the roster's average price. $1.25 is generous headroom, not an estimate. The two thinking-capable entries carry max_tokens in the roster because reasoning bills as output.",
+   "_parked": "Parked 2026-07-31 by the peer: 'we'll need to tighten up on arm 2 so park that seat as arm 2.' The seat's name went to the luna depth arm; this content waits for tightening.",
+   "_what_tightening_means": [
+    "Selection is by price movement, not by hypothesis. 'Cheaper than the pin' is a reason to be able to afford a measurement, never a reason to take one. Each model needs a seat question it is the right model to answer.",
+    "moonshotai/kimi-k2.6 at 8.8% is the weakest entry — it is present because it extends an existing spike, which is continuity, not a question.",
+    "The arm mixes two questions in one run: 'can a cheap model hold the labor seat' (gemma, luna) and 'does pro mean anything' (luna vs luna-pro). Those want different probes and different n.",
+    "n=5 was chosen to match the battery threshold, but A2 is about to measure whether a 5-sample verdict is stable at all. Set this arm's n from A2's result rather than from the threshold."
+   ],
+   "_blocked_by": "A2 — its variance result determines this arm's n."
   }
  ],
  "_deferred": {
@@ -135,7 +157,9 @@
   "CLOSED 2026-07-30. Five items unrun. Resuming needs a live human verb, not loop_active flipped back — the spend it would draw on is under negotiation.",
   "REOPENED 2026-07-31 on the peer's instruction. Cap 5.50 set from a read balance (6.5763), not from the carried estimate (~11.39), which was high by $4.81.",
   "Stage 0 fired first and spent nothing: run 30672191114, mode catalog, produced credits.json and a 336-model catalogue. tools/probe_runner.py gained --credits to make it possible.",
-  "A1 and A2 prepended. A1 supersedes E2 in shape; E2 is left in the queue below and must be marked superseded rather than run twice."
+  "A1 and A2 prepended. A1 supersedes E2 in shape; E2 is left in the queue below and must be marked superseded rather than run twice.",
+  "2026-07-31, mid-flight, on the peer's instruction: the A2 seat is reassigned to a luna depth arm (all 18 probes, n=25, luna alone, ceiling $1.00). The five-model discount sweep that held the seat is parked as A4 pending tightening, and is now blocked by A2 because A2 measures the resampling stability that should set A4's n.",
+  "Cap unchanged at 5.50. A1 2.50 + A2 1.00 = 3.50 committed, leaving 2.00 under the cap and 3.0763 under the read balance of 6.5763."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
