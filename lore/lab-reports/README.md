@@ -5,9 +5,10 @@ follow a governance protocol. Written in lab-report form — question, method, r
 wrong, conclusion — rather than in this repository's ASSAY form, because they are for readers
 learning how empirical work actually goes rather than for the register.
 
-**They are not tidied.** Three of the five found a defect in the instrument rather than a fact
-about a model, and one of those defects was in the correction for an earlier defect. That is
-the reason to read them.
+**They are not tidied.** **Four of the five found a defect in the instrument** — A1 (ceiling
+derivation, dispatch order), A2 (cost estimator), A3 (probe selection), A4 (grader, twice over).
+One of those defects sat inside the correction for an earlier defect, and A1 found nothing else
+at all. That is the reason to read them.
 
 | # | run | question | outcome |
 |---|---|---|---|
@@ -21,8 +22,8 @@ the reason to read them.
 
 ## What a reader should take from the set
 
-1. **Three of five runs produced a finding about the measuring instrument, not the thing
-   measured.** That is not a sign the work went badly. It is what happens when checks are run
+1. **Four of five runs produced a finding about the measuring instrument**, and one produced
+   nothing else. That is not a sign the work went badly. It is what happens when checks are run
    on the checks.
 2. **Two of the five aborted, and the second abort was better than the first** — not because
    the estimate improved, but because a fix changed *which* data an overrun destroys.
