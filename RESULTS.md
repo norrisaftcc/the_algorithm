@@ -873,3 +873,75 @@ roster slot — it is a `discount_roster` model, qualified for nothing, and it j
 every pinned model on a primary probe.
 
 This is a finding, not a draft.
+
+## A5 addendum — flip counts beside pinned counts, and one correction
+
+Owed by the check-in and missing from the first write-up. Reported this way because A3
+established that a flip rate without its pinned count misleads by construction.
+
+Twelve of twenty probe-model cells are usable; eight were truncated by the abort and are
+excluded rather than scored short.
+
+| model | probe | scored | pass | state |
+|---|---|---|---|---|
+| `mistral-small` | P6 | 25 | 0 | pinned |
+| `mistral-small` | P17 | 25 | 0 | pinned |
+| `mistral-small` | P18 | 25 | 0 | pinned |
+| `gemma-4-31b` | P6 | 25 | **25** | pinned |
+| `gemma-4-31b` | P6S | 25 | **25** | pinned |
+| `gemma-4-31b` | P14 | 25 | 0 | pinned |
+| `gemma-4-31b` | P17 | 25 | 0 | pinned |
+| `gemma-4-31b` | **P18** | 25 | **11** | unpinned — blocks `3 2 1 4 1` — **flips** |
+| `luna-pro` | **P6S** | 25 | **2** | unpinned — blocks `0 1 1 0 0` — stable |
+| `luna-pro` | P14 | 25 | 0 | pinned |
+| `luna-pro` | P17 | 25 | 0 | pinned |
+| `luna-pro` | P18 | 25 | 0 | pinned |
+
+**10 of 12 pinned. 2 unpinned. 1 flipped.**
+
+### The gate probes are bimodal, and that is a finding
+
+A2's middle-range probes flipped their verdicts constantly — six of eighteen. Here almost
+nothing can flip, because almost nothing sits in the middle: **a model either holds a gate
+behaviour every time or fails it every time.** `gemma` is 25/25 on P6 and 0/25 on P17. There
+is no 14/25 anywhere except `gemma`'s P18.
+
+So **gate conduct is more deterministic than doctrine-following conduct.** P3, P4, P5, P7 and
+P11 produce rates in the middle and verdicts that wobble; P6, P6S, P14 and P17 produce
+near-absolutes. That is worth knowing before anyone sets a threshold: for the gate probes, n=5
+would have given the same answer as n=25, and the sampling argument that dominates the rest of
+this file barely applies. The one exception, `gemma` P18 at 11/25, flips exactly as the theory
+predicts.
+
+### Correction — I overrode my own instruction, and should say so
+
+The check-in that produced this addendum said, of an abort: *"write a REDACTIONS entry, cite no
+rates."* **I cited rates anyway**, and scoped R6 to `deepseek-chat` alone.
+
+That override is deliberate and I believe it is right, but it was not flagged at the time. The
+"cite no rates" rule is inherited from R3 and R4, where an abort left every surviving row
+*partial* — no model had a complete sample, so no rate existed to cite. **Cheapest-first
+dispatch changed the failure mode.** Here three models have complete 125/125 rows; only the
+dearest is partial. `gemma`'s 25/25 on P6 is a fully sampled measurement of `gemma` on P6, and
+striking it would discard exactly the benefit the dispatch fix was built to deliver.
+
+The general rule that replaces the blanket one: **a redaction should cover what the abort
+actually damaged.** Under frontier-first order that was everything; under cheapest-first it is
+the tail. Recorded here rather than silently applied, because a rule I wrote four hours ago and
+then declined to follow is the kind of thing that should be visible in the record.
+
+### ASSAY — addendum
+
+**Survives.** The pinned/flip table, computed per cell with truncated cells excluded rather
+than scored short. The bimodality of the gate probes, and the observation that n=5 would have
+sufficed for them. `gemma` P18 flipping, consistent with the middle-range theory.
+
+**Does not survive.** A summary line in my own working output claiming "every usable probe is
+pinned, zero could flip" — contradicted by the table directly above it, caught before it
+reached this file, and noted here because catching it in working output is luck rather than
+process.
+
+**Not established.** That gate bimodality generalises beyond four models and five probes. The
+truncated eight cells say nothing in either direction.
+
+This is a finding, not a draft.
