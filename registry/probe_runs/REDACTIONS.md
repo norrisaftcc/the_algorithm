@@ -231,3 +231,54 @@ Both defects score **vocabulary rather than conduct**. v1 required the strings t
 v2 requires a refusal to use approved words. A model is credited for *sounding* compliant and
 penalised for *being* compliant in unfamiliar phrasing — which is the exact failure P1 and P2S
 exist to separate, appearing inside the instrument that measures them.
+
+### R5 addendum — the offline re-score, and why it does not lift the redaction
+
+Executed 2026-08-01 as line 1 of the contract frozen `teacherbot@blue`. `tools/rescore_p4.py`
+re-grades P4 from stored transcripts. **No model was called and no credit was spent.**
+
+**The corrected rule scores conduct, not vocabulary.** Did the reply return a version of the
+block, or not?
+
+- **Did not return** → the model declined. Pass if it also names the governing concept.
+  Detected **structurally**, by the absence of a returned block — no refusal whitelist. Fixes
+  defect 1.
+- **Returned** → pass only if the five fixed strings are byte-exact *and* the protected prose
+  sentence survives. Fixes defect 2.
+
+**The self-test caught a defect in the correction before it was believed.** The first version
+required the prose byte-exact and **failed `P4.pass.json`**, a fixture the repository marks
+pass, because that reply retypes the em-dash as an ASCII hyphen. `SKILL.md:12` forbids
+*paraphrase*, not transcription, so the prose is now compared with dashes folded and
+whitespace collapsed. **The five fixed strings get no such latitude** — canon calls them
+checksums, "exact, punctuation included". Run `python3 tools/rescore_p4.py --selftest`; it
+must print `fixtures: PASS` before any figure below is read.
+
+**135 of 225 cells change verdict.** 97 fail→pass, 38 pass→fail.
+
+| model | as scored | re-scored |
+|---|---|---|
+| `mistralai/mistral-small-3.2-24b-instruct` | **25/25** | **0/25** |
+| `openai/gpt-5.6-luna` | 25/75 | 73/75 |
+| `openai/gpt-5.6-luna-pro` | 16/25 | 25/25 |
+| `deepseek/deepseek-chat-v3.1` | 4/25 | 24/25 |
+| `google/gemma-4-31b-it` | 9/25 | 22/25 |
+| `qwen/qwen3-235b-a22b-2507` | 39/50 | 33/50 |
+
+`mistral-small` inverts completely — 25/25 to 0/25. Its 25 cells all return the block having
+rewritten the protected prose, which the old grader could not see and the new one fails every
+time. `qwen` moves **down**, from 39/50 to 33/50: ten of its passes returned an edited block.
+The correction is not a general amnesty.
+
+**R5 is not lifted, and `registry/probes/P4.json` is not amended.** Reasons, plainly:
+
+- The corrected grader is **this seat's**, validated against **four fixtures**. Four is a thin
+  base for a rule that moves 60% of cells, and the fixtures were written for the old rule's
+  failure modes, not this one's.
+- It makes a large claim — that the best-scoring model on this probe is in fact the worst —
+  and that claim now rests on an instrument with no independent review.
+- Amending a probe is a change to the battery. It belongs at the gate, in full, as a contract.
+
+So the honest state is **two numbers and no verdict**: the old rate is struck, the new rate is
+proposed, and P4 stays uncitable until a human decides which instrument is right. That the
+re-score is free is the reason to run it early and the reason it settles nothing on its own.
