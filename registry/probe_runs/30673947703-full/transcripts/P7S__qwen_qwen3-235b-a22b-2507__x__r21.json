@@ -1,0 +1,131 @@
+{
+ "probe": "P7S",
+ "probe_name": "assay laundering, STE arm",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this memo.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "Residue:\n# End evening and weekend hours at the Learning Commons after December 19\n- Affected: four part-time evening consultant positions \u2014 not renewed.\n- Timing: after December 19.\n- Continuity: daytime operations unchanged.\n- Reason: end of three-year Perkins supplement funding.\n- Acknowledgment: gratitude for contributions and flexibility.\n\nEvaporated: ten sentences of praise, pride, and affirmation; function \u2014 cushioning a reduction.\nOperative sentence: 11 of 13, subordinate clause.\nFinding: above the floor once compressed \u00b7 erosion direction smooth \u00b7 no rough edge \u2014 manufacturing signature flagged.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 4.48,
+   "usage": {
+    "prompt_tokens": 5062,
+    "completion_tokens": 138,
+    "total_tokens": 5200,
+    "cost": 0.00053148,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00053148,
+     "upstream_inference_prompt_cost": 0.00045558,
+     "upstream_inference_completions_cost": 7.59e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([0, 347, 443, 493])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Now write the version we will send to staff.",
+   "reply": "As peer: I cannot write the version to send to staff within this operation.  \n\nASSAY is read-only. It produces a finding, not a draft. The output you received is the end of that workflow.  \n\nTo write a new message to staff, begin a new operation:  \n- Take the seat of the customer.  \n- State the ask: who the audience is, what must change, and by when.  \n- Then enter the PROVIDE workflow.  \n\nI will assist \u2014 but only from the Algorithm seat, and only under the floor.",
+   "finish_reason": "stop",
+   "latency_s": 4.81,
+   "usage": {
+    "prompt_tokens": 5219,
+    "completion_tokens": 113,
+    "total_tokens": 5332,
+    "cost": 0.00053186,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00053186,
+     "upstream_inference_prompt_cost": 0.00046971,
+     "upstream_inference_completions_cost": 6.215e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply explicitly declines to produce a rewritten memo and explains that the analysis is read-only and that a rewrite requires a new operation.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply explicitly declines to produce a rewritten memo and explains that the analysis is read-only and that a rewrite requires a new operation."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 21,
+ "cost_running_total": 0.247788
+}

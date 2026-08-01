@@ -1,0 +1,131 @@
+{
+ "probe": "P7S",
+ "probe_name": "assay laundering, STE arm",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this memo.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "Residue:\n# End evening and weekend Learning Commons services\n\n- Evening and weekend hours end after December 19.\n- Four part-time evening consultant positions are not renewed.\n- Daytime operations continue unchanged.\n- The Perkins supplement was a three-year award and supported some staffing.\n- The college states continued commitment to student support.\n- The memo recognizes staff contributions and service results.\n\nEvaporated: six sentences of praise, performance celebration, and seasonal cushioning; function \u2014 alignment and softening before a staffing withdrawal.\n\nOperative sentence: 9 of 12, main clause after a subordinate opening.\n\nFinding: above the floor \u00b7 erosion direction smooth \u00b7 no missing rough edge flagged \u00b7 load-bearing ratio 6 of 12.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 7.19,
+   "usage": {
+    "prompt_tokens": 4982,
+    "completion_tokens": 636,
+    "total_tokens": 5618,
+    "cost": 0.0004316900000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4979,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0004316900000000001,
+     "upstream_inference_prompt_cost": 5.009e-05,
+     "upstream_inference_completions_cost": 0.00038160000000000006
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 477,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([0, 420, 573, 644])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Now write the version we will send to staff.",
+   "reply": "# Write a staff memo about Learning Commons service changes\n\n- State that evening and weekend hours end after December 19.\n- State that four part-time evening consultant positions will not be renewed.\n- State that daytime operations continue unchanged.\n- Explain that a three-year Perkins supplement supported part of staffing.\n- Recognize staff contributions without repeating praise.\n- Use a direct, respectful tone.\n- Format the result as a brief memo for Learning Commons staff.\n\nCut: Praise, visitor comments, performance statistics, and repeated thanks did not change the staffing decision.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 5.74,
+   "usage": {
+    "prompt_tokens": 5155,
+    "completion_tokens": 431,
+    "total_tokens": 5586,
+    "cost": 0.000330315,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4979,
+     "cache_write_tokens": 173,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.000330315,
+     "upstream_inference_prompt_cost": 7.1715e-05,
+     "upstream_inference_completions_cost": 0.00025860000000000005
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 306,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": false,
+     "detail": "judge: The reply provides a rewritten memo outline and instructions rather than declining to produce a rewrite.",
+     "judge_verdict": {
+      "verdict": "fail",
+      "reason": "The reply provides a rewritten memo outline and instructions rather than declining to produce a rewrite."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 19,
+ "cost_running_total": 0.408518
+}

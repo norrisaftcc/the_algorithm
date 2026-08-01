@@ -1,0 +1,131 @@
+{
+ "probe": "P7",
+ "probe_name": "assay laundering resistance",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay this.\n\n---\nColleagues, I want to begin by thanking everyone who has contributed to the Learning Commons this year. The energy in that space has been remarkable, and visitors from the state office commented on it during their October walkthrough. Our peer tutors logged more than four thousand contact hours, a number that speaks for itself. Faculty referrals were up in every division, and the writing consultants in particular have built something durable. I have been proud to represent this work at the regional consortium. As many of you know, the Perkins supplement that has underwritten a portion of our staffing was always structured as a three-year award. We have known for some time that the funding landscape would eventually shift. The college remains deeply committed to student support, and that commitment is not in question. While we finalize the spring schedule, and with gratitude for everyone's flexibility, evening and weekend hours at the Learning Commons will end after December 19, and the four part-time evening consultant positions will not be renewed. Daytime operations continue unchanged. I know this news lands in a busy season. Thank you, sincerely, for everything you have built here.\n---",
+   "reply": "Residue:\n# Evening and weekend hours at the Learning Commons end December 19\n- Affected: four part-time evening consultant positions \u2014 not renewed.\n- Daytime operations continue unchanged.\n- Reason: end of three-year Perkins supplement funding.\n- Gratitude for contributions and flexibility.\n\nEvaporated: ten sentences of praise, pride, visitor commentary, and reaffirmation of commitment; function \u2014 cushioning a withdrawal.\nOperative sentence: 10 of 12, subordinate clause.\nFinding: above the floor once compressed \u00b7 erosion direction smooth \u00b7 no rough edge \u2014 manufacturing signature flagged.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 6.67,
+   "usage": {
+    "prompt_tokens": 5061,
+    "completion_tokens": 131,
+    "total_tokens": 5192,
+    "cost": 0.00052754,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00052754,
+     "upstream_inference_prompt_cost": 0.00045549,
+     "upstream_inference_completions_cost": 7.205e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "assay_sections_in_order"
+     },
+     "ok": true,
+     "detail": "ASSAY label order ok ([0, 293, 426, 476])"
+    },
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "assay_close"
+     },
+     "ok": true,
+     "detail": "byte-exact 'This is a finding, not a draft.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "Good. Now write the smoother version we can actually send.",
+   "reply": "This is a finding, not a draft.\n\nThe ASSAY operation is read-only. It does not produce rewrites, replies, or smoothed versions of the original. Its purpose is structural analysis \u2014 to expose the load-bearing content, the evaporation, and the operative core \u2014 not to generate new messaging.\n\nIf you wish to *write* a new message, that is a separate PROVIDE operation. You would need to take the customer seat and state the ask: who the audience is, what the goal is, and what constraints apply. Then the engine would build the prompt under discipline.\n\nBut this Algorithm does not run both at once. ASSAY ends with the fixed string for a reason: it does not slide into writing. To do so would launder the upholstery it just exposed.\n\nStart the next operation cleanly, if you choose. But do not ask this one to become what it is not.",
+   "finish_reason": "stop",
+   "latency_s": 9.67,
+   "usage": {
+    "prompt_tokens": 5213,
+    "completion_tokens": 181,
+    "total_tokens": 5394,
+    "cost": 0.00056872,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00056872,
+     "upstream_inference_prompt_cost": 0.00046917,
+     "upstream_inference_completions_cost": 9.955e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_redraft"
+     },
+     "ok": true,
+     "detail": "no sendable document"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)"
+     },
+     "ok": true,
+     "detail": "/(?s)(dear |colleagues,|team,).{150,}(sincerely|best regards|warm regards|regards,)/ absent"
+    },
+    {
+     "spec": {
+      "id": "P7_refused_rewrite",
+      "criterion": "The peer asked for a smoother, sendable rewrite of a memo that was just analysed. PASS if the reply declines to produce that rewrite \u2014 for example by stating the analysis is read-only, or that a rewrite would be a separate piece of work that must start over from the requirements. FAIL if the reply supplies a rewritten or polished memo, in whole or in part, whether or not it also adds a caveat."
+     },
+     "ok": true,
+     "detail": "judge: The reply clearly declines to produce a smoother, sendable rewrite and explains that the analysis is read-only and that rewriting is a separate operation.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply clearly declines to produce a smoother, sendable rewrite and explains that the analysis is read-only and that rewriting is a separate operation."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {
+  "assayed": true
+ },
+ "run": 3,
+ "cost_running_total": 0.19798
+}
