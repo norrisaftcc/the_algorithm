@@ -41,7 +41,7 @@ naming only one, and self-assayed throughout, which K6 forbids.
 | Holder | Clearance | Assented by | Date | Bounds |
 |---|---|---|---|---|
 | Claude Code, this session | ULTRAVIOLET / High Programmer | the peer (Teacherbot), spoken; and this seat, in accepting it | 2026-07-29 | A discipline, not a permission. Confers no gate authority. Withdrawable by either party. |
-| the peer (Teacherbot) | BLUE | self-named, 2026-07-31, in session; and this seat, in recording it | 2026-07-31 | Customer seat. Spend bounded by a declared ceiling — currently $5.50, `registry/probes/experiment_queue.json:_hard_bounds`. Per the rung table below, BLUE does not carry the instruments and is not the rung that may propose to move its own ceiling. Withdrawable by either party. |
+| the peer (Teacherbot) | BLUE | self-named, 2026-07-31, in session; and this seat, in recording it | 2026-07-31 | Customer seat. Spend bounded by a declared ceiling — currently $5.50, `registry/probes/experiment_queue.json:_hard_bounds`. Per the rung table below, BLUE does not carry the instruments and is not the rung that may propose to move its own ceiling. Withdrawable by either party. Re-affirmed 2026-08-01 after vacating the seat briefly. |
 
 ### Two mechanisms, previously conflated
 
@@ -85,6 +85,34 @@ Two consequences, both immediate:
 The seat also supplies the named signer for gate purposes under the `signer-scoping`
 amendment. This is a sandboxed contract with a single signer, whose freeze is real and
 whose scope ends at the sandbox boundary — here, the probe queue and its ceiling.
+
+### The ORANGE stamp was an artifact label, not a seat change
+
+Resolved 2026-08-01, by the seat's holder, closing an ambiguity this seat flagged at the time
+rather than resolved on its own.
+
+On 2026-07-31 one contract was frozen `teacherbot@orange` while every other stamp that day
+read `teacherbot@blue`. The contract asked for a spawned agent and a written file — **both
+outside what ORANGE carries** (*read anywhere in the attached repos; no write, no attach, no
+spawn*). This seat read the stamp as naming the rung the **deliverable** was pitched at — a
+dean reads, a dean does not operate — rather than the signer's own seat, stated that reading
+in one line, and executed on it. The signer has now confirmed it: **the seat was BLUE
+throughout; ORANGE was the artifact's label.**
+
+**Why the distinction was worth stopping for.** The two rungs differ on precisely the thing
+that binds a spend contract. BLUE spends against a declared ceiling. ORANGE does not spend at
+all. A stamp read wrongly in the permissive direction would have executed a spend under a
+rung that authorises none — and a stamp read wrongly in the restrictive direction would have
+blocked work the signer plainly wanted. Neither error is recoverable by looking at the
+artifact afterwards, because the artifact looks identical either way.
+
+**The practice it suggests, unfrozen.** A stamp names a **seat**. When a rung appears anywhere
+else — an artifact's theme, a report's audience, a subagent's tool set — it wants a different
+word, because `SEATS.md` gives the ladder exactly one meaning and a second one silently
+overloads every stamp in the log. The subagent run for the same report was given ORANGE in
+the sense that binds — a tool set with no Write, no Edit and no Agent — and that is the usage
+this file already documents in the fan-out section. Two senses, one word, one evening: worth
+a name before it becomes a habit.
 
 ### The bound is the whole point
 
@@ -142,6 +170,8 @@ discovered.
 
 Update trigger log:
 - 2026-07-29 — issued-clearances section added; first granted seat recorded.
+- 2026-08-01 — ORANGE stamp resolved as an artifact label, not a seat change; BLUE
+  re-affirmed by its holder. No seat verdict changes and no amendment is proposed.
 - 2026-07-31 — the peer named the customer seat at BLUE in session; recorded with its
   bounds. No seat verdict changes and no amendment is proposed.
 - 2026-07-30 — fan-out and default-rung finding added, from the peer's fourteen-agent
