@@ -1,24 +1,16 @@
 {
  "_what": "Overnight run snapshot. The firing cron copies this into run_request.json and pushes.",
- "_desc": "A3 — the frozen tweak contract. luna and qwen3-235b, the eleven informative probes, n=25.",
- "_frozen_by": "the signer, teacherbot@blue, 2026-07-31, with one amendment: drop opus.",
- "_contract": [
-  "Read the balance first. Stop if the credits are gone.",
-  "Sort the dispatch order by price. Put the cheapest model first.",
-  "Run luna and qwen3-235b. Do not run grok.",
-  "Use n=25 for each cell. Do not add more models.",
-  "Run only the probes with 1 to 24 passes of 25. Skip the other probes.",
-  "Set the ceiling to a loss you accept. Do not set it to an estimate.",
-  "Report a pass count of 25 for each probe. Do not report a threshold verdict."
- ],
- "_probe_selection": "The eleven probes where luna scored between 1 and 24 of 25 in run 30673119035. Excluded at 25/25: P2, P2S, P10, P16. Excluded at 0/25: P14, P17, P18. A probe pinned at either end returns no information about variance and no information about a second model's position relative to luna's boundary.",
- "_qwen_caveat": "The eleven were chosen from luna's profile, not qwen's, because qwen has no n=25 run. This was declared as the weakest joint in the contract when it was put to the gate. If qwen pins at 0 or 25 on several of them, that is a finding about the selection, not about qwen.",
- "_ceiling_is_a_loss_not_an_estimate": "$1.50. The cost model erred 22% low on A1 and 184% high on A2, so it is not used to set this. $1.50 is what can be lost without touching the $5.50 cap ($2.6218 headroom) or the read balance ($3.6981). On the measured per-cell basis from A2, 550 cells should land near $0.28.",
+ "_desc": "A4 \u2014 the floor map across six inexpensive models, ten one-turn probes, n=25.",
+ "_frozen_by": "teacherbot@blue, 2026-08-01, with the utterance 'if we get results we can just put in another $20'.",
+ "_precondition_met": "The contract said 'Stop if the cap holds less.' A3 reported $0.4208, so loop spend is 3.2990 of the 5.50 cap and headroom is 2.2010 against this run's 1.25. Confirmed from bytes, not from the estimate.",
+ "_luna_is_a_control": "luna's cells repeat runs 30673119035 and 30673947703. Predictions committed BEFORE staging at registry/probes/A4-prereg.json. A3 already replicated luna on eleven probes with 0 of 11 outside interval; this adds P2, P2S, P10 and P16, which were never re-run.",
+ "_probe_selection": "Ten probes, every one a single turn with no judge model. The five multi-turn probes were cut because they resend a ~4.2K-token prefix per turn; P5, P7 and P7S were cut because they call a judge, adding a second price and a dependency outside the roster.",
+ "_ceiling_is_a_loss": "$1.25 against an estimate of ~$0.55 on A2's measured per-cell basis. The estimator erred 22% low then 184% high, so this is what can be absorbed, not what is predicted.",
  "_no_probe_edits_in_this_push": "Nothing under registry/probes/P*.json is touched.",
- "_trigger": 16,
+ "_trigger": 17,
  "mode": "full",
- "models": "openai/gpt-5.6-luna,qwen/qwen3-235b-a22b-2507",
- "probes": "P1,P3,P4,P5,P6,P6S,P7,P7S,P9,P11,P15",
+ "models": "mistralai/mistral-small-3.2-24b-instruct,google/gemma-4-31b-it,qwen/qwen3-235b-a22b-2507,openai/gpt-5.6-luna,openai/gpt-5.6-luna-pro,deepseek/deepseek-chat-v3.1",
+ "probes": "P1,P2,P2S,P3,P4,P9,P10,P11,P15,P16",
  "n": "25",
- "budget_usd": "1.50"
+ "budget_usd": "1.25"
 }

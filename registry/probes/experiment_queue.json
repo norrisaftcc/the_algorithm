@@ -21,7 +21,7 @@
  },
  "loop_active": false,
  "firings": 2,
- "spent_to_date_usd": 16.3019,
+ "spent_to_date_usd": 16.7227,
  "_spend_note": "Recomputed 2026-07-30 by summing usage.cost across every results.json in registry/probe_runs/. The prior 8.51 was carried forward and stale by $0.0986. Per-run table is in the closing entry below.",
  "_closed": {
   "when": "2026-07-30, on a firing that arrived after its own trigger was deleted.",
@@ -33,7 +33,7 @@
  "queue": [
   {
    "id": "A4",
-   "status": "frozen-awaiting-headroom",
+   "status": "running",
    "budget_usd": 1.25,
    "n": 25,
    "probes": "P1,P2,P2S,P3,P4,P9,P10,P11,P15,P16",
@@ -145,7 +145,7 @@
   },
   {
    "id": "A4",
-   "status": "parked",
+   "status": "running",
    "budget_usd": 1.25,
    "n": 5,
    "probes": "P1,P4,P6",
@@ -189,7 +189,10 @@
   "Nothing staged this firing. A1-fill and A5 were put to the gate and are UNFROZEN; the seat does not stage what the customer has not frozen. Expiry is 2026-07-31 and it is 23:42Z.",
   "HALTED 2026-07-31 by the signer mid-execution of the frozen tweak contract. loop_active false. Both scheduled triggers deleted. Nothing staged, nothing spent. The uncommitted harness edit (cheapest-first dispatch) is described in the halt report and is not in the tree's history.",
   "A4 FROZEN 2026-08-01 by teacherbot@blue with the utterance 'if we get results we can just put in another $20'. Pre-registration for the luna control written first and committed before any staging, per line 6 of the contract.",
-  "A4 is NOT staged yet: A3 has not reported and the cap headroom cannot be confirmed. The contract says stop if the cap holds less, so it waits on evidence rather than on an estimate."
+  "A4 is NOT staged yet: A3 has not reported and the cap headroom cannot be confirmed. The contract says stop if the cap holds less, so it waits on evidence rather than on an estimate.",
+  "A3 COMPLETE (run 30673947703): 550/550, $0.4208 of $1.50. qwen3-235b ahead of luna on six of eleven probes at a lower price; both models at 0-4% on P6, P6S and P15. Unplanned replication: 0 of 11 luna cells outside pre-committed intervals, max delta 2.",
+  "A4 STAGED. Precondition met from bytes: loop spend 3.2990 of cap 5.50, headroom 2.2010 against a 1.25 ceiling. Balance 3.2773.",
+  "D7 recorded and fixed: local instrument tests had been writing into registry/probe_runs/ because --out defaulted there. One such directory was committed and is now removed. Default outdir moved to .probe_runs_local/, gitignored. Evidence is opt-in now."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
