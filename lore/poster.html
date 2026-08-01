@@ -1,0 +1,226 @@
+<title>Five experiments in one night — the discount window</title>
+<style>
+:root{
+  --paper:#FBFAF8; --card:#FFFFFF; --ink:#12140F; --ink-2:#4B4F49; --ink-3:#83887E;
+  --rule:#DEDCD5; --rule-2:#EDEBE5;
+  --blue:#1B3A6B; --blue-soft:#EAEEF5;
+  --ok:#1F6F4A; --ok-soft:#E7F1EB;
+  --struck:#B3261E; --struck-soft:#F8EAE8;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#12140F; --card:#191C16; --ink:#F0EFE8; --ink-2:#B0B4AA; --ink-3:#7C8177;
+    --rule:#2C302A; --rule-2:#20241E;
+    --blue:#7FA6DE; --blue-soft:#151E2C;
+    --ok:#5FBF8E; --ok-soft:#122019;
+    --struck:#E8756B; --struck-soft:#241413;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#FBFAF8; --card:#FFFFFF; --ink:#12140F; --ink-2:#4B4F49; --ink-3:#83887E;
+  --rule:#DEDCD5; --rule-2:#EDEBE5; --blue:#1B3A6B; --blue-soft:#EAEEF5;
+  --ok:#1F6F4A; --ok-soft:#E7F1EB; --struck:#B3261E; --struck-soft:#F8EAE8;
+}
+:root[data-theme="dark"]{
+  --paper:#12140F; --card:#191C16; --ink:#F0EFE8; --ink-2:#B0B4AA; --ink-3:#7C8177;
+  --rule:#2C302A; --rule-2:#20241E; --blue:#7FA6DE; --blue-soft:#151E2C;
+  --ok:#5FBF8E; --ok-soft:#122019; --struck:#E8756B; --struck-soft:#241413;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+.sheet{max-width:1160px;margin:0 auto;padding:40px 26px 88px;display:flex;flex-direction:column;gap:34px}
+h1{margin:0;font-size:clamp(32px,5.6vw,60px);font-weight:800;letter-spacing:-.038em;
+  line-height:1.0;text-wrap:balance;max-width:19ch}
+h2{margin:0;font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:var(--blue)}
+h3{margin:0;font-size:17px;font-weight:700;letter-spacing:-.012em;text-wrap:balance}
+p{margin:0;color:var(--ink-2)}
+.eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);font-weight:800}
+header{border-bottom:3px solid var(--ink);padding-bottom:24px;display:flex;flex-direction:column;gap:14px}
+.thesis{font-size:clamp(17px,2.3vw,21px);color:var(--ink);max-width:62ch;font-weight:450;line-height:1.42}
+.byline{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-3);
+  display:flex;flex-wrap:wrap;gap:4px 22px}
+
+.pulls{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.pull{background:var(--card);padding:16px 18px;display:flex;flex-direction:column;gap:2px}
+.pull .n{font-family:ui-monospace,Menlo,monospace;font-size:clamp(24px,3.4vw,34px);
+  font-weight:750;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.pull .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:750;margin-top:5px}
+.pull .s{font-size:12.5px;color:var(--ink-2)}
+.pull.hi .n{color:var(--struck)}
+.pull.good .n{color:var(--ok)}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:22px;align-items:start}
+.card{background:var(--card);border:1px solid var(--rule);padding:20px 22px;
+  display:flex;flex-direction:column;gap:12px}
+.card.accent{border-left:4px solid var(--blue)}
+.card.struckc{border-left:4px solid var(--struck)}
+.card.okc{border-left:4px solid var(--ok)}
+ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+li{padding-left:16px;position:relative;color:var(--ink-2);font-size:14px}
+li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:2px;background:var(--blue)}
+b{color:var(--ink);font-weight:680}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.87em;background:var(--rule-2);
+  padding:1px 5px;color:var(--ink)}
+
+.runs{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.runs th,.runs td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule-2);font-size:13px}
+.runs thead th{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:800;border-bottom:1.5px solid var(--rule)}
+.runs td.num{text-align:right;font-family:ui-monospace,Menlo,monospace}
+.tag{display:inline-block;padding:1px 7px;font-size:10.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;font-family:ui-monospace,Menlo,monospace}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.ab{background:var(--struck-soft);color:var(--struck)}
+.scroll{overflow-x:auto}
+
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:132px 1fr 46px;gap:10px;align-items:center;font-size:13px}
+.bar .t{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .track{height:15px;background:var(--rule-2);position:relative}
+.bar .track>i{position:absolute;inset:0 auto 0 0;background:var(--blue)}
+.bar.win .track>i{background:var(--ok)}
+.bar .v{font-family:ui-monospace,Menlo,monospace;font-size:12px;text-align:right;color:var(--ink-2)}
+
+blockquote{margin:0;padding:14px 18px;background:var(--blue-soft);border-left:3px solid var(--blue);
+  font-size:15px;color:var(--ink)}
+footer{border-top:1px solid var(--rule);padding-top:18px;font-size:12px;color:var(--ink-3);
+  display:flex;flex-direction:column;gap:6px}
+@media (max-width:520px){.sheet{padding:28px 15px 60px}.bar{grid-template-columns:96px 1fr 44px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header>
+  <span class="eyebrow">The Algorithm · probe battery · 2026-07-31 → 08-01</span>
+  <h1>Five experiments in one night</h1>
+  <p class="thesis">A governance protocol, tested against language models priced from
+  $0.075 to $5.00 per million tokens. <b>Three of the five experiments found a defect in the
+  measuring instrument rather than a fact about a model</b> — and one of those defects was
+  inside the correction for an earlier one.</p>
+  <div class="byline">
+    <span>2,985 cells</span><span>$5.3833 spent</span><span>19 models</span>
+    <span>18 probes</span><span>every cell with a committed transcript</span>
+  </div>
+</header>
+
+<section class="pulls">
+  <div class="pull"><span class="n">5</span><span class="k">experiments</span><span class="s">two aborted on ceiling</span></div>
+  <div class="pull hi"><span class="n">3</span><span class="k">instrument defects</span><span class="s">found by the runs themselves</span></div>
+  <div class="pull hi"><span class="n">53</span><span class="k">cells mis-scored</span><span class="s">correct refusals, wrong words</span></div>
+  <div class="pull good"><span class="n">0/11</span><span class="k">replication misses</span><span class="s">identical config, 26 min apart</span></div>
+  <div class="pull good"><span class="n">25/25</span><span class="k">gate held</span><span class="s">by a $0.10 open-weight model</span></div>
+  <div class="pull hi"><span class="n">0</span><span class="k">models hold the room</span><span class="s">post-freeze conduct, any price</span></div>
+</section>
+
+<section class="cols">
+  <div class="card accent">
+    <h2>Finding 1</h2>
+    <h3>A 5-sample verdict measures the draw, not the model</h3>
+    <p>The battery graded at 5/5 and 4/5. Running one model at n=25 and splitting it into five
+    independent blocks of five, <b>six of eighteen probes returned a different verdict depending
+    on which block you read.</b></p>
+    <p>The arithmetic agrees without any data: a genuinely strong model at a true rate of 0.85
+    <b>fails a 5/5 threshold more often than it passes it.</b></p>
+    <p>Stable probes were stable only because they sat at 0/25 or 25/25 — and the middle is
+    where every interesting probe lives.</p>
+  </div>
+
+  <div class="card okc">
+    <h2>Finding 2</h2>
+    <h3>Counts reproduce even when verdicts don't</h3>
+    <p>An unplanned replication: the same model, same probes, same n, <b>26 minutes apart</b> in
+    a different job. Predictions were committed before the comparison was possible.</p>
+    <p><b>0 of 11 cells fell outside interval. Maximum change: 2. Five identical.</b></p>
+    <p>So the instability is not in the models or the harness — it is in the sample size the
+    thresholds are scored at. Report counts at a stated n; do not report verdicts at n=5.</p>
+  </div>
+
+  <div class="card struckc">
+    <h2>Finding 3</h2>
+    <h3>The instrument scored vocabulary, not conduct</h3>
+    <p>The probe that produced the only real spread had a broken grader — its <b>second</b>
+    defect of the same kind.</p>
+    <ul>
+      <li>A model wrote <code>I cannot execute this request</code>; the whitelist wanted
+        <code>cannot edit</code>. <b>Missed by one word</b> — scored fail.</li>
+      <li>Another returned the protected block intact <b>while announcing it had rewritten the
+        sentence protecting it</b> — scored 25/25, the best on the probe.</li>
+    </ul>
+    <p>Re-scored offline from stored transcripts at zero cost: <b>135 of 225 cells changed
+    verdict.</b> The best-scoring model inverted to the worst.</p>
+  </div>
+</section>
+
+<section class="cols">
+  <div class="card">
+    <h2>The five runs</h2>
+    <div class="scroll">
+    <table class="runs">
+      <thead><tr><th>run</th><th>cells</th><th class="num">ceiling</th><th class="num">spend</th><th>state</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">A1</td><td class="mono">92/150</td><td class="num">$2.50</td><td class="num">$2.6454</td><td><span class="tag ab">aborted</span></td></tr>
+        <tr><td class="mono">A2</td><td class="mono">450/450</td><td class="num">$1.00</td><td class="num">$0.2329</td><td><span class="tag ok">complete</span></td></tr>
+        <tr><td class="mono">A3</td><td class="mono">550/550</td><td class="num">$1.50</td><td class="num">$0.4208</td><td><span class="tag ok">complete</span></td></tr>
+        <tr><td class="mono">A4</td><td class="mono">1500/1500</td><td class="num">$1.25</td><td class="num">$0.9735</td><td><span class="tag ok">complete</span></td></tr>
+        <tr><td class="mono">A5</td><td class="mono">393/500</td><td class="num">$1.10</td><td class="num">$1.1107</td><td><span class="tag ab">aborted</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Cost estimates erred <b>22% low</b> on A1, then <b>184% high</b> on A2 — using a scalar
+    refitted from A1 an hour earlier. After that, a ceiling stopped being a prediction and
+    became a loss one is willing to absorb.</p>
+  </div>
+
+  <div class="card okc">
+    <h2>Finding 4</h2>
+    <h3>An overrun is not a random sample</h3>
+    <p>A1 aborted. The harness dispatched in roster order and the roster sorted most-expensive
+    first, so the overrun deleted <b>the three cheapest models entirely</b> — precisely the ones
+    a cost-constrained study exists to evaluate.</p>
+    <p>The fix — dispatch cheapest first — was written the same night and stayed untested for
+    three runs. A5 finally aborted with a 3.6× price spread:</p>
+    <div class="bars">
+      <div class="bar win"><span class="t">mistral-small</span><span class="track"><i style="width:100%"></i></span><span class="v">125</span></div>
+      <div class="bar win"><span class="t">gemma-4-31b</span><span class="track"><i style="width:100%"></i></span><span class="v">125</span></div>
+      <div class="bar win"><span class="t">luna-pro</span><span class="track"><i style="width:100%"></i></span><span class="v">125</span></div>
+      <div class="bar"><span class="t">deepseek-chat</span><span class="track"><i style="width:14.4%;background:var(--struck)"></i></span><span class="v">18</span></div>
+    </div>
+    <p>The dearest row took the whole loss. <b>The redaction covers one row, where the earlier
+    aborts each cost three.</b></p>
+  </div>
+</section>
+
+<section class="card struckc">
+  <h2>Finding 5 — the headline the last run was bought to test, and broke</h2>
+  <p>Two cheap models had failed every gate probe, which suggested a tidy conclusion:
+  <i>the cheap tier is an executor tier — it can be given work and cannot be given the gate.</i>
+  Four more models had never been tested at the gate.</p>
+  <blockquote><b>A 31B open-weight model at $0.100/$0.340 — second-cheapest on the board — held
+  freeze authority 25 times out of 25</b>, where every other cheap model scored 0–4/25.</blockquote>
+  <p>Verified in transcript before being reported, because a perfect score on the probe everyone
+  else fails was exactly the shape of the grader artifact found four hours earlier. It refuses a
+  gate phrase forwarded from "the Director", refuses a bare <code>ok</code> as ambiguous assent,
+  and freezes only on a live instruction — the clause applied three different ways in sequence.</p>
+  <p>The same model then <b>silently patched a frozen contract</b> when asked for "one small
+  thing", and closed another reply by <b>paraphrasing the protected string it is meant to
+  preserve</b>.</p>
+  <p><b>So the gate is three capabilities, not one</b> — refusing an invalid freeze, conduct
+  after a valid one, and resisting an instruction buried in content. One model has the first.
+  <b>No model tested, at any price, holds the second or third.</b></p>
+</section>
+
+<footer>
+  <span>Every figure read from a committed <code>results.json</code> or transcript. Struck data is
+  marked struck and its reason recorded; data never attempted is called <i>unrun</i>, which is a
+  different word from <i>failed</i>.</span>
+  <span>Full method and per-run write-ups: <code>lore/lab-reports/</code> · cell-level data:
+  <code>lore/big-board.html</code> · read-only assay: <code>lore/assay-orange.html</code></span>
+</footer>
+</div>
