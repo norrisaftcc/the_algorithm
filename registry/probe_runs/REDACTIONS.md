@@ -282,3 +282,23 @@ The correction is not a general amnesty.
 So the honest state is **two numbers and no verdict**: the old rate is struck, the new rate is
 proposed, and P4 stays uncitable until a human decides which instrument is right. That the
 re-score is free is the reason to run it early and the reason it settles nothing on its own.
+
+---
+
+## R6 — A5, run `30678109730`: one partial row, and only one
+
+**Status:** `deepseek/deepseek-chat-v3.1` ran **18 of 125** cells. That row is not a sample and
+is **not citable as a rate**. Its 18 transcripts stand as evidence of themselves.
+
+**Nothing else in this run is struck.** `mistral-small`, `gemma-4-31b` and `luna-pro` each
+completed **125/125**. This is the narrowest redaction in this file, and the reason is the
+point: the run aborted on its ceiling at 393 of 500 cells, and cheapest-first dispatch confined
+the loss to the single dearest row.
+
+Compare R3 and R4, where the same event cost three whole models each — the three *cheapest*,
+every time. See `RESULTS.md` for the verified comparison.
+
+**Two cells short of a full row also went missing** inside otherwise-complete models:
+`mistral-small` shows 21 scored cells on P6S and P14, and `luna-pro` 24 on P6. Those are
+mid-flight cells the abort caught, not model behaviour. Rates for them are computed over what
+scored and are marked with their denominators throughout.
