@@ -929,8 +929,15 @@ def main():
         return 2
 
     client = Client(api_key)
+    # The default lands OUTSIDE registry/probe_runs/ and is gitignored. It used
+    # to default inside the evidence tree, so a bare local invocation — an
+    # instrument test, a dry run with a dummy key — wrote a directory shaped
+    # exactly like a run, and one got committed (see drift_log.md D7: ten cells,
+    # all `error`, $0 spend, indistinguishable from evidence to anything that
+    # globs registry/probe_runs/*/results.json). CI is unaffected: the workflow
+    # passes --out results explicitly. Evidence is now something you opt into.
     outdir = Path(args.out) if args.out else (
-        REPO / "registry" / "probe_runs" / time.strftime("%Y-%m-%d"))
+        REPO / ".probe_runs_local" / time.strftime("%Y-%m-%d"))
     outdir.mkdir(parents=True, exist_ok=True)
 
     # The balance is a property of the account, not of this repository. Every

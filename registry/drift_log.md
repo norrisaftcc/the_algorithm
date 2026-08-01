@@ -364,3 +364,50 @@ unasked one.
 it: ask what the current source supplies *besides* the resource. Sometimes the answer is
 nothing and the substitution is free. Here the answer was the reconciliation, and the
 substitution would have cost it. Unfrozen.
+
+---
+
+## D7 — an instrument test that looked exactly like evidence
+
+**Origin: this seat.** Entered 2026-08-01, found by a Sonnet 5 subagent reading the evidence
+tree for an unrelated report.
+
+While testing the cheapest-first dispatch sort, this seat ran `tools/probe_runner.py` locally
+with a dummy key several times. `--out` defaulted to
+`REPO / "registry" / "probe_runs" / <date>`, so each run wrote
+`registry/probe_runs/2026-07-31/` — a directory shaped exactly like a real run, containing a
+`results.json` and ten transcripts. Commit `dd58aff` committed it.
+
+**What it contained.** Ten cells, every one `outcome: "error"`, every one the container's
+`Tunnel connection failed: 403 Forbidden`. `spend_usd` 0.0. No information in either
+direction: the calls never reached OpenRouter.
+
+**Why it matters more than $0.00 suggests.** Anything that globs
+`registry/probe_runs/*/results.json` picks it up — and that glob is how spend is recomputed at
+the top of every firing, how `registry/findings/discount-window-2026-07-31.md` §2 reconciles
+the ledger, and how `lore/big-board.html` builds its matrix. The spend total is unharmed
+because the figure is genuinely zero. The **cell counts and outcome tallies are not**: ten
+`error` cells would have entered any model-by-probe aggregate as real cells, against ten
+pinned models on P1. The board escaped only by being generated fifteen minutes before the
+commit landed. That is luck, not a control.
+
+**The shape of it.** This seat spent the evening building guards that check the inside of a
+run — a ceiling, a balance read, a dispatch order — and then wrote a non-run into the place
+where runs live. D6 named the pattern one level up: *every guard audits inside a frame it
+accepts on arrival.* Here the frame was "everything under `registry/probe_runs/` is
+evidence," and nothing checked it, because nothing was watching the door.
+
+**Found by a subagent, which is the part worth keeping.** It was running at ORANGE — read
+anywhere, no write, no spawn — on a task about something else entirely, and it reported the
+directory as unexplained rather than folding it into its totals. The reader's seat works, and
+it worked from a rung that could not have fixed what it found.
+
+**Fixed as a lock, not a discipline.** The default `--out` now resolves to
+`.probe_runs_local/<date>`, outside the evidence tree and gitignored. A bare local invocation
+can no longer write anywhere a glob will find it. CI is unaffected — the workflow passes
+`--out results` explicitly. Evidence is now something you opt into rather than something you
+get by default.
+
+**Correction to the record.** The removed directory is not redacted, because a redaction
+strikes cells that ran. Nothing here ran. It is deleted as an artifact that was never
+evidence, and this entry is the record that it briefly existed.
