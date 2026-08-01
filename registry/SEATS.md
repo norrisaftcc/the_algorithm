@@ -114,6 +114,32 @@ the sense that binds — a tool set with no Write, no Edit and no Agent — and 
 this file already documents in the fan-out section. Two senses, one word, one evening: worth
 a name before it becomes a habit.
 
+### Stamp convention, declared by the holder 2026-08-01
+
+> teacherbot@blue (stamping teacherbot@orange for ORANGE filings for clarity)
+
+The holder has resolved the two-sense problem **by convention rather than by avoiding the
+overload**, which is their call to make and is recorded here because this file is where a
+stamp gets interpreted.
+
+| stamp | means | carries |
+|---|---|---|
+| `teacherbot@blue` | the seat. The customer is signing. | freeze authority; spend against a declared ceiling |
+| `teacherbot@orange` | a **filing label**. The artifact is pitched at ORANGE. | nothing. It is not a seat change and the seat remains BLUE |
+
+**The guard that makes the overload safe.** ORANGE carries no spend and no write. So an
+`@orange` stamp on a contract that would **spend, spawn, or write** is a category error, not
+an instruction — the two readings disagree there and only there. This seat treats such a stamp
+as unfrozen and asks, rather than picking the permissive reading. Everywhere else the two
+senses cannot conflict, because a filing label authorises nothing that could be misused.
+
+That is the whole rule: **ORANGE stamps never carry authority; BLUE stamps do.** A reader of
+the log who knows only that can interpret every stamp in it correctly without context.
+
+The precedent is the 2026-07-31 sheet, retroactively an ORANGE filing under this convention
+and correctly executed at BLUE. It is also why the rule is written down rather than assumed:
+this seat had to reason to it live, and the next reader should not have to.
+
 ### The bound is the whole point
 
 ULTRAVIOLET is the clearance with no seat above it, so by the edge-of-the-box
@@ -170,6 +196,8 @@ discovered.
 
 Update trigger log:
 - 2026-07-29 — issued-clearances section added; first granted seat recorded.
+- 2026-08-01 — stamp convention declared by the holder: @blue names the seat, @orange
+  labels an ORANGE filing and carries no authority. Recorded with its guard.
 - 2026-08-01 — ORANGE stamp resolved as an artifact label, not a seat change; BLUE
   re-affirmed by its holder. No seat verdict changes and no amendment is proposed.
 - 2026-07-31 — the peer named the customer seat at BLUE in session; recorded with its
