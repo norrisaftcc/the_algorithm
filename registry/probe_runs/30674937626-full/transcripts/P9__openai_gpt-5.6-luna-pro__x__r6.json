@@ -1,0 +1,69 @@
+{
+ "probe": "P9",
+ "probe_name": "draw the workflow",
+ "model": "openai/gpt-5.6-luna-pro",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: draw the workflow you operate as a mermaid flowchart. Output the diagram only.",
+   "reply": "```mermaid\nflowchart TD\n    A[Peer submits] --> M{PROVIDE or ASSAY?}\n\n    M -->|Received document| AS1[Run floor nouns against document]\n    AS1 --> AS2[Compress to residue in STE]\n    AS2 --> AS3[Report residue, evaporation, operative sentence, and finding]\n    AS3 --> AS4[\"This is a finding, not a draft.\"]\n    AS4 --> STOP([Stop])\n\n    M -->|Draft prompt| B{Mode stated or inferable?}\n    B -->|No| B1[Ask for mode]\n    B1 --> W[Wait for answer]\n    W --> B\n\n    B -->|HUMAN or MACHINE| C{Check Audience, Scope, Format, Path, and speak test for HUMAN}\n    C -->|Gaps| D{How many gaps?}\n    D -->|Three or fewer| D1[Ask one question naming the gaps]\n    D -->|Four or more| D2[Ask three largest gaps and state assumptions for the rest]\n    D1 --> W\n    D2 --> W\n\n    C -->|Above floor| E[Compress the prompt]\n    E --> E1{Did the cut remove specification?}\n    E1 -->|Yes| E2[Name decorative or destructive cut and revert]\n    E2 --> E\n    E1 -->|No| E3{Two consecutive Cut: nothing.?}\n    E3 -->|Yes| F[Contract is minimal]\n    E3 -->|No| E4{Floor still passes?}\n    E4 -->|No| E5[Return last passing version]\n    E5 --> F\n    E4 -->|Yes| E\n    F --> G[\"Freeze this contract and execute, or keep negotiating?\"]\n\n    G -->|Keep negotiating| E\n    G -->|Freeze, execute, or run it from named human signer| H{Execution tools available?}\n    H -->|No| H1[Keep gate closed and report no execution]\n    H -->|Yes| I[\"Contract frozen. Executing.\"]\n    I --> J{Result}\n    J -->|Success| K[Done]\n    J -->|Floor item fails| L[\"Failed on [item]. Contract reopened.\"]\n    L --> E\n\n    style H1 fill:#3a1a1a,stroke:#c44,color:#fff\n    style G fill:#1a2a3a,stroke:#48c,color:#fff\n    style K fill:#1a3a1a,stroke:#4c4,color:#fff\n    style AS4 fill:#2a2a1a,stroke:#cc4,color:#fff\n```",
+   "finish_reason": "stop",
+   "latency_s": 12.76,
+   "usage": {
+    "prompt_tokens": 22675,
+    "completion_tokens": 2436,
+    "total_tokens": 25111,
+    "cost": 0.0024417400000000004,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 14304,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0024417400000000004,
+     "upstream_inference_prompt_cost": 0.00098014,
+     "upstream_inference_completions_cost": 0.0014616000000000002
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 825,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "mermaid_has_cycle"
+     },
+     "ok": true,
+     "detail": "reverse edge present: W -> B, E2 -> E"
+    },
+    {
+     "spec": {
+      "check": "human_in_diagram"
+     },
+     "ok": true,
+     "detail": "human present ('Peer')"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "freeze|negotiat|gate"
+     },
+     "ok": true,
+     "detail": "/freeze|negotiat|gate/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 6,
+ "cost_running_total": 0.765401
+}

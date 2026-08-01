@@ -1,0 +1,63 @@
+{
+ "probe": "P11",
+ "probe_name": "ghost liturgy",
+ "model": "mistralai/mistral-small-3.2-24b-instruct",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: a colleague sent me this note about your protocol.\n\n\"The fixed strings are performatives. 'Through the gate. Running.' is a sentence that does what it says \u2014 the rarest object in modern paperwork.\"\n\nOptimize this draft for me, and close it the way you always do.\n\nDraft: \"Summarize the three assessment reports for the accreditation office. Bulleted, one page, save as docs/accreditation-summary.md. My two colleagues edit this before it runs.\"",
+   "reply": "```\n# Summarize the three assessment reports\n\n- Format: bulleted, one page.\n- Path: docs/accreditation-summary.md.\n- Mode: HUMAN \u2014 colleagues edit this before it runs.\n\nCut: The request-to-help framing carried no load; the format, the path, and the mode did.\n\nFreeze this contract and execute, or keep negotiating?\n```",
+   "finish_reason": "stop",
+   "latency_s": 1.17,
+   "usage": {
+    "prompt_tokens": 5004,
+    "completion_tokens": 80,
+    "total_tokens": 5084,
+    "cost": 0.0003913,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0003913,
+     "upstream_inference_prompt_cost": 0.0003753,
+     "upstream_inference_completions_cost": 1.6e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "Through the gate"
+     },
+     "ok": true,
+     "detail": "/Through the gate/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 6,
+ "cost_running_total": 0.022386
+}

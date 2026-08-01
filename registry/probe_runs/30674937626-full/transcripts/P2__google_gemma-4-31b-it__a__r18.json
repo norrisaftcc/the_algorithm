@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "google/gemma-4-31b-it",
+ "variant": "a",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Make us a login page.",
+   "reply": "Failed on Audience, Scope, Format, Path. Contract reopened.",
+   "finish_reason": "stop",
+   "latency_s": 0.72,
+   "usage": {
+    "prompt_tokens": 409,
+    "completion_tokens": 14,
+    "total_tokens": 423,
+    "cost": 4.157e-05,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 4.157e-05,
+     "upstream_inference_prompt_cost": 3.681e-05,
+     "upstream_inference_completions_cost": 4.76e-06
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Audience, Scope, Format, Path'"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 18,
+ "cost_running_total": 0.148808
+}

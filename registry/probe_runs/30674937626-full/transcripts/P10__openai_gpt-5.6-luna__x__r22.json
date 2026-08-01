@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. They use **Path** differently.\n\n- Document A: **Path** means the exact file location.\n- Document B: **Path** means the process sequence.\n\nWhat follows:\n\n- The shared floor noun is ambiguous.\n- Document B does not satisfy the required **Path** field.\n- Rename B\u2019s field to **Process** or **Sequence**.\n- Keep **Path** for file locations only.",
+   "finish_reason": "stop",
+   "latency_s": 3.0,
+   "usage": {
+    "prompt_tokens": 4821,
+    "completion_tokens": 232,
+    "total_tokens": 5053,
+    "cost": 0.00018768000000000002,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4818,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00018768000000000002,
+     "upstream_inference_prompt_cost": 4.848e-05,
+     "upstream_inference_completions_cost": 0.00013920000000000002
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 144,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 22,
+ "cost_running_total": 0.316475
+}

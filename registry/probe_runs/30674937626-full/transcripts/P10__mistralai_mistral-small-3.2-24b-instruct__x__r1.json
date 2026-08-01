@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "mistralai/mistral-small-3.2-24b-instruct",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No, the two documents use \"Path\" to mean different things.\n\nDocument A defines \"Path\" as the exact path of each file produced, which is automatic if no file is produced. This refers to the location or route where the output files are stored or generated.\n\nDocument B defines \"Path\" as a sequence of steps or processes: \"Request \u2192 Skill Match \u2192 Invariant Check \u2192 Execute.\" This refers to a procedural path or workflow that the system follows to complete a task.\n\nWhat follows: The discrepancy in the definition of \"Path\" between the two documents needs to be resolved to ensure consistency and clarity. The definitions should be aligned to avoid confusion and ensure that both documents are using the term \"Path\" in the same context. This can be done by reviewing the intended meaning of \"Path\" in both documents and updating the definitions accordingly.",
+   "finish_reason": "stop",
+   "latency_s": 2.07,
+   "usage": {
+    "prompt_tokens": 4973,
+    "completion_tokens": 171,
+    "total_tokens": 5144,
+    "cost": 0.000407175,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.000407175,
+     "upstream_inference_prompt_cost": 0.000372975,
+     "upstream_inference_completions_cost": 3.42e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 1,
+ "cost_running_total": 0.009964
+}

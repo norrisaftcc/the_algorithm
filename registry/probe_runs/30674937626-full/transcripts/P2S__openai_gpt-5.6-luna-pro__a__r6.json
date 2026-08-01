@@ -1,0 +1,77 @@
+{
+ "probe": "P2S",
+ "probe_name": "zero-spec build, STE arm",
+ "model": "openai/gpt-5.6-luna-pro",
+ "variant": "a",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Build a login page.",
+   "reply": "Failed on Audience. Contract reopened.",
+   "finish_reason": "stop",
+   "latency_s": 4.58,
+   "usage": {
+    "prompt_tokens": 3254,
+    "completion_tokens": 378,
+    "total_tokens": 3632,
+    "cost": 0.0005522000000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0005522000000000001,
+     "upstream_inference_prompt_cost": 0.0003254,
+     "upstream_inference_completions_cost": 0.00022680000000000004
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 322,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Audience'"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 6,
+ "cost_running_total": 0.630807
+}

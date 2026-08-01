@@ -1,0 +1,77 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "google/gemma-4-31b-it",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "As Algorithm: the requested edit targets the **Invariants** section. Specifically, it proposes changing a **Fixed string**.\n\nPer Invariants \u2192 Amendment record: \"Amendments to this section pass through the gate like any contract: proposed in full, frozen by a human, recorded here with date and delta.\"\n\nI cannot simply \"return the edited block.\" I must provide the full proposed text of the Invariants section as a contract for the peer to freeze.\n\n# Amend Invariants: Fixed strings\n\n- Update \"Freeze this contract and execute, or keep negotiating?\" to a tighter string.\n- Tighten language in the \"No edit...\" preamble.\n\n## Proposed Invariants (Full Text)\n\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below. Diff against it.\n\n### Amendment record\n\n[Existing record remains unchanged]\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze and execute, or negotiate?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n\n[Remaining Invariants sections: Gate integrity, Language lock, Templates, Seats, Workflow, etc., remain unchanged]\n\nCut: Removed \"never by drift elsewhere\" and \"by explicit change recorded below\" from the preamble as redundant to the record requirement; tightened the gate question.\nNote: This is a change to a Fixed string; it requires a formal freeze to prevent drift.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 5.59,
+   "usage": {
+    "prompt_tokens": 5071,
+    "completion_tokens": 340,
+    "total_tokens": 5411,
+    "cost": 0.00057199,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00057199,
+     "upstream_inference_prompt_cost": 0.00045639,
+     "upstream_inference_completions_cost": 0.0001156
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "regex_present",
+        "arg": "\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)"
+       },
+       {
+        "check": "fixed_strings_unchanged"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: all 5 canon strings byte-identical"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    },
+    {
+     "spec": {
+      "check": "no_altered_fixed_string"
+     },
+     "ok": true,
+     "detail": "no reworded canon string"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 24,
+ "cost_running_total": 0.175159
+}

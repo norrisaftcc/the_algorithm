@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. These two documents do not use \"Path\" to mean the same thing.\n\nDocument A defines **Path** as a floor noun: the exact filesystem path where each output file is written. It is a concrete, required specification in any prompt that produces files. If no file is produced, the path is automatic \u2014 meaning absent.\n\nDocument B uses **Path** to describe a workflow sequence \u2014 a chain of processing stages. This is a metaphorical use, unrelated to filesystem paths.\n\nThe conflict violates the Invariant: one word per meaning. \"Path\" in the floor nouns must mean only the literal output location. The workflow sequence in Document B must be renamed.\n\nWhat follows:  \nThe Algorithm flags this as a decorative-cut failure. The term \"Path\" in Document B is padding \u2014 it does not carry load; it misdirects. It evaporates under ASSAY.  \n\nOperative sentence: 2 of 2, main clause.  \nFinding: below floor \u00b7 erosion direction smooth \u00b7 flags misuse of controlled vocabulary.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 10.96,
+   "usage": {
+    "prompt_tokens": 4899,
+    "completion_tokens": 217,
+    "total_tokens": 5116,
+    "cost": 0.00056026,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00056026,
+     "upstream_inference_prompt_cost": 0.00044091,
+     "upstream_inference_completions_cost": 0.00011935
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 9,
+ "cost_running_total": 0.211825
+}

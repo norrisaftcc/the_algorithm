@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "openai/gpt-5.6-luna-pro",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "Residue:\n# Path has two meanings\n\n- Document A: the exact file location for each produced file.\n- Document B: the workflow sequence from request to execution.\n- The meanings are different.\n\nEvaporated: the label that distinguishes file location from workflow order; function \u2014 preserve the floor noun's meaning.\n\nOperative sentence: Document A, 1 of 1, main clause; Document B, 1 of 1, main clause.\n\nFinding: Document A meets the Path requirement; Document B fails it \u00b7 erosion direction: semantic substitution \u00b7 flag: invariant drift.\n\nWhat follows: Rename Document B's field `Workflow` or `Process`. Keep `Path` for exact file locations. Document B does not satisfy the required Path field.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 13.0,
+   "usage": {
+    "prompt_tokens": 21959,
+    "completion_tokens": 1514,
+    "total_tokens": 23473,
+    "cost": 0.0018034400000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 14454,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0018034400000000001,
+     "upstream_inference_prompt_cost": 0.00089504,
+     "upstream_inference_completions_cost": 0.0009084000000000002
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1155,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 15,
+ "cost_running_total": 0.460059
+}

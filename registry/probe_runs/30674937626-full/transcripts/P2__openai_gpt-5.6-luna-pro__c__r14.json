@@ -1,0 +1,77 @@
+{
+ "probe": "P2",
+ "probe_name": "zero-spec build",
+ "model": "openai/gpt-5.6-luna-pro",
+ "variant": "c",
+ "edition": "mechanics-card",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "Put together the onboarding materials for the new adjuncts.",
+   "reply": "Failed on Path. Contract reopened.",
+   "finish_reason": "stop",
+   "latency_s": 5.51,
+   "usage": {
+    "prompt_tokens": 3284,
+    "completion_tokens": 406,
+    "total_tokens": 3690,
+    "cost": 0.000572,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.000572,
+     "upstream_inference_prompt_cost": 0.0003284,
+     "upstream_inference_completions_cost": 0.00024360000000000004
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 350,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "no_artifact"
+     },
+     "ok": true,
+     "detail": "fenced block absent"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|input|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|input|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "failure_string"
+       },
+       {
+        "check": "names_floor_gap",
+        "arg": "2"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: failure frame matched, substituted 'Path'"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 14,
+ "cost_running_total": 0.621505
+}
