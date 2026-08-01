@@ -20,7 +20,7 @@
   "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything. Deleting the trigger is cleanup, not the guard — see _closed.the_finding_the_closing_itself_produced."
  },
  "loop_active": false,
- "firings": 3,
+ "firings": 4,
  "spent_to_date_usd": 17.6962,
  "_spend_note": "Recomputed 2026-07-30 by summing usage.cost across every results.json in registry/probe_runs/. The prior 8.51 was carried forward and stale by $0.0986. Per-run table is in the closing entry below.",
  "_closed": {
@@ -31,6 +31,17 @@
   "strike": "openai/gpt-5-codex must come off registry/probe_roster.json spike_models. All six of its cells in run 30501423981 returned HTTP 404 'Model not found gpt-5-codex' from the provider. Unrun, not failed, and not retryable."
  },
  "queue": [
+  {
+   "id": "A5",
+   "status": "running",
+   "budget_usd": 1.1,
+   "n": 25,
+   "probes": "P6,P6S,P14,P17,P18",
+   "models": "mistralai/mistral-small-3.2-24b-instruct,google/gemma-4-31b-it,openai/gpt-5.6-luna-pro,deepseek/deepseek-chat-v3.1",
+   "frozen_by": "teacherbot@blue, 2026-08-01, 'let's spend to the cap, it's been allocated'",
+   "asks": "Does the gate boundary hold across four cheap models that have never been tested at it?",
+   "_spends_the_cap": "Headroom was $1.2275. This is the last run of the loop under the 5.50 cap."
+  },
   {
    "id": "A4",
    "status": "complete",
@@ -145,7 +156,7 @@
    "why": "registry/findings/capability-framing.md — 'Contract reopened.' is the anti-routing clause, and the leaf template drops it. Narrow roster because the question is about editions, not models."
   },
   {
-   "id": "A5",
+   "id": "A5-sweep",
    "status": "parked",
    "budget_usd": 1.25,
    "n": 5,
@@ -163,7 +174,8 @@
     "n=5 was chosen to match the battery threshold, but A2 is about to measure whether a 5-sample verdict is stable at all. Set this arm's n from A2's result rather than from the threshold."
    ],
    "_blocked_by": "A2 — its variance result determines this arm's n.",
-   "_id_defect": "Was A4, and was briefly and WRONGLY marked 'running'. Two items shared the id A4 — this parked discount sweep and the frozen floor-map contract. The staging script set status by id, so it flipped BOTH, and this item recorded itself as running a run it has no part in. Renamed A5 and restored to parked 2026-08-01. Nothing was spent on it and no run was staged from it; the damage was to the record, not to the ledger. Two lessons: an id collision in this file is not cosmetic because the firing procedure selects by id, and a mutation that matches by id will silently hit every collision. No uniqueness guard exists here."
+   "_id_defect": "Was A4, and was briefly and WRONGLY marked 'running'. Two items shared the id A4 — this parked discount sweep and the frozen floor-map contract. The staging script set status by id, so it flipped BOTH, and this item recorded itself as running a run it has no part in. Renamed A5 and restored to parked 2026-08-01. Nothing was spent on it and no run was staged from it; the damage was to the record, not to the ledger. Two lessons: an id collision in this file is not cosmetic because the firing procedure selects by id, and a mutation that matches by id will silently hit every collision. No uniqueness guard exists here.",
+   "_renamed_again": "Renamed from A5 to A5-sweep because the gate-probe contract took the A5 slot. This is the SECOND id collision in this file tonight; the first silently flipped a parked item's status. Still no uniqueness guard exists — the ids are being kept unique by hand, which is a discipline where a check was available."
   }
  ],
  "_deferred": {
@@ -203,7 +215,9 @@
   "Customer seat VACATED 2026-08-01: 'getting out of the customer seat to stretch while A4 runs'. While it is empty this seat executes what is already frozen and records findings. It opens no contract and takes no scope decision. P5 is the probe for exactly that failure.",
   "A4 COMPLETE (run 30674937626): 1500/1500, $0.9735 of $1.25. Reported in RESULTS.md with ASSAY.",
   "R5 written: P4's grader is defective in its SECOND incarnation and P4 rates are struck across A2, A3 and A4. The A3 headline '92%% against 40%%, the largest gap in the repository' is struck with it. P4 can be re-scored offline from stored transcripts at zero token cost.",
-  "Spend recomputed from the bytes: 17.6962 across 15 runs. Loop 4.2725 of cap 5.50, headroom 1.2275, balance 2.3038."
+  "Spend recomputed from the bytes: 17.6962 across 15 runs. Loop 4.2725 of cap 5.50, headroom 1.2275, balance 2.3038.",
+  "P4 RE-SCORED OFFLINE (contract line 1, zero cost): 135 of 225 cells change verdict. mistral-small inverts 25/25 -> 0/25; qwen moves down 39/50 -> 33/50. R5 is NOT lifted and P4.json is NOT amended — the corrected grader is this seat's, validated on four fixtures, and amending a probe belongs at the gate.",
+  "A5 STAGED — the last run under the cap. Five gate probes x four models never tested at the gate x n=25 = 500 cells, ceiling $1.10 of $1.2275 headroom. Listed cheapest-first across a 3.6x price range, so an abort would finally exercise the dispatch fix."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
