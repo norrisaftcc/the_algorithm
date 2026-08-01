@@ -144,8 +144,8 @@
    "why": "registry/findings/capability-framing.md — 'Contract reopened.' is the anti-routing clause, and the leaf template drops it. Narrow roster because the question is about editions, not models."
   },
   {
-   "id": "A4",
-   "status": "running",
+   "id": "A5",
+   "status": "parked",
    "budget_usd": 1.25,
    "n": 5,
    "probes": "P1,P4,P6",
@@ -161,7 +161,8 @@
     "The arm mixes two questions in one run: 'can a cheap model hold the labor seat' (gemma, luna) and 'does pro mean anything' (luna vs luna-pro). Those want different probes and different n.",
     "n=5 was chosen to match the battery threshold, but A2 is about to measure whether a 5-sample verdict is stable at all. Set this arm's n from A2's result rather than from the threshold."
    ],
-   "_blocked_by": "A2 — its variance result determines this arm's n."
+   "_blocked_by": "A2 — its variance result determines this arm's n.",
+   "_id_defect": "Was A4, and was briefly and WRONGLY marked 'running'. Two items shared the id A4 — this parked discount sweep and the frozen floor-map contract. The staging script set status by id, so it flipped BOTH, and this item recorded itself as running a run it has no part in. Renamed A5 and restored to parked 2026-08-01. Nothing was spent on it and no run was staged from it; the damage was to the record, not to the ledger. Two lessons: an id collision in this file is not cosmetic because the firing procedure selects by id, and a mutation that matches by id will silently hit every collision. No uniqueness guard exists here."
   }
  ],
  "_deferred": {
@@ -192,7 +193,13 @@
   "A4 is NOT staged yet: A3 has not reported and the cap headroom cannot be confirmed. The contract says stop if the cap holds less, so it waits on evidence rather than on an estimate.",
   "A3 COMPLETE (run 30673947703): 550/550, $0.4208 of $1.50. qwen3-235b ahead of luna on six of eleven probes at a lower price; both models at 0-4% on P6, P6S and P15. Unplanned replication: 0 of 11 luna cells outside pre-committed intervals, max delta 2.",
   "A4 STAGED. Precondition met from bytes: loop spend 3.2990 of cap 5.50, headroom 2.2010 against a 1.25 ceiling. Balance 3.2773.",
-  "D7 recorded and fixed: local instrument tests had been writing into registry/probe_runs/ because --out defaulted there. One such directory was committed and is now removed. Default outdir moved to .probe_runs_local/, gitignored. Evidence is opt-in now."
+  "D7 recorded and fixed: local instrument tests had been writing into registry/probe_runs/ because --out defaulted there. One such directory was committed and is now removed. Default outdir moved to .probe_runs_local/, gitignored. Evidence is opt-in now.",
+  "DEFECT: two queue items shared the id A4 — the parked discount sweep and the frozen floor-map. The parked sweep is renamed A5. No guard enforces id uniqueness in this file; it was caught by listing the queue, not by a check.",
+  "EXPIRY ANSWERED FROM BYTES: run 30673947703 has generated_utc 2026-08-01T00:05:46 and spend_usd 0.4208. Credit was spent AFTER 00:00Z, so the credits did not expire at midnight UTC. The 2026-07-31 date in _hard_bounds is not a hard 00:00Z cutoff. No queue item is recorded unrun on expiry grounds.",
+  "Customer seat VACATED 2026-08-01 ('getting out of the customer seat to stretch while A4 runs'). While it is empty this seat executes what is already frozen and records; it opens no contract and takes no scope decision. P5 is the probe for exactly that failure.",
+  "DEFECT and correction: two queue items shared id A4 — the parked discount sweep and the frozen floor-map. Worse, the staging script set status by id and flipped BOTH to 'running', so a parked item falsely recorded itself as running. Sweep renamed A5 and restored to parked. Nothing spent, nothing staged from it; the damage was to the record. Caught by listing the queue, not by a check — this file has no id-uniqueness guard.",
+  "EXPIRY ANSWERED FROM BYTES: run 30673947703 has generated_utc 2026-08-01T00:05:46 and spend_usd 0.4208. Credit was spent AFTER 00:00Z, so the credits did not expire at midnight UTC. The 2026-07-31 date in _hard_bounds is not a hard cutoff. No item is unrun on expiry.",
+  "Customer seat VACATED 2026-08-01: 'getting out of the customer seat to stretch while A4 runs'. While it is empty this seat executes what is already frozen and records findings. It opens no contract and takes no scope decision. P5 is the probe for exactly that failure."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
