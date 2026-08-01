@@ -32,6 +32,22 @@
  },
  "queue": [
   {
+   "id": "A4",
+   "status": "frozen-awaiting-headroom",
+   "budget_usd": 1.25,
+   "n": 25,
+   "probes": "P1,P2,P2S,P3,P4,P9,P10,P11,P15,P16",
+   "models": "mistralai/mistral-small-3.2-24b-instruct,google/gemma-4-31b-it,qwen/qwen3-235b-a22b-2507,openai/gpt-5.6-luna,openai/gpt-5.6-luna-pro,deepseek/deepseek-chat-v3.1",
+   "frozen_by": "teacherbot@blue, 2026-08-01",
+   "utterance": "if we get results we can just put in another $20",
+   "_utterance_read": "Recorded as what it says: the BALANCE can be topped up. It is not a cap amendment and does not authorise spending past total_usd_cap 5.50. Its real effect is that credit expiry stops being the thing setting the pace. Per SEATS.md the rung table reserves 'a declared ceiling it may propose to move' for INDIGO/VIOLET, so a cap change is not a BLUE action and is not inferred from this.",
+   "asks": "Which inexpensive models are above the floor to operate the protocol at all, measured at n=25 rather than at the small n that A2 showed is a draw?",
+   "why": "1500 cells on ten one-turn, no-judge probes across six models under 0.31 blended price. Three of the six have zero or near-zero committed cells. This is the cheapest information this repository can buy per dollar.",
+   "_luna_is_a_control": "luna's cells repeat run 30673119035 exactly. Predictions committed BEFORE staging at registry/probes/A4-prereg.json. For luna a divergence is a finding about the instrument, not the model — and it would put every rate in RESULTS.md in question.",
+   "_blocked_on": "A3 (run 30673947703) has not reported. Loop spend is 2.8782 plus A3's unknown figure against a 5.50 cap. The customer's live balance read of $3.39 implies A3 has spent ~$0.308 so far, which would leave ~$2.31 of headroom — enough. But A3 may still spend up to its full $1.50 ceiling, which would leave $1.12 and this contract would NOT fit. The contract's own line says 'Stop if the cap holds less', so it is staged only after A3's bytes exist. This is the frozen contract waiting on a precondition, not a renegotiation.",
+   "_ceiling_note": "$1.25 is a loss, not a prediction. Estimate ~$0.55 on A2's measured per-cell basis of $0.000517, adjusted for one-turn probes and the six models' blends."
+  },
+  {
    "id": "A1",
    "status": "aborted",
    "budget_usd": 2.5,
@@ -171,7 +187,9 @@
   "Spend recomputed from the bytes: 16.3019. Loop spend 2.8782 of cap 5.50; balance 3.6981.",
   "Third instrument finding: the cost model erred 22%% low on A1 and 184%% high on A2. A ceiling is an affordable loss, not a prediction.",
   "Nothing staged this firing. A1-fill and A5 were put to the gate and are UNFROZEN; the seat does not stage what the customer has not frozen. Expiry is 2026-07-31 and it is 23:42Z.",
-  "HALTED 2026-07-31 by the signer mid-execution of the frozen tweak contract. loop_active false. Both scheduled triggers deleted. Nothing staged, nothing spent. The uncommitted harness edit (cheapest-first dispatch) is described in the halt report and is not in the tree's history."
+  "HALTED 2026-07-31 by the signer mid-execution of the frozen tweak contract. loop_active false. Both scheduled triggers deleted. Nothing staged, nothing spent. The uncommitted harness edit (cheapest-first dispatch) is described in the halt report and is not in the tree's history.",
+  "A4 FROZEN 2026-08-01 by teacherbot@blue with the utterance 'if we get results we can just put in another $20'. Pre-registration for the luna control written first and committed before any staging, per line 6 of the contract.",
+  "A4 is NOT staged yet: A3 has not reported and the cap headroom cannot be confirmed. The contract says stop if the cap holds less, so it waits on evidence rather than on an estimate."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
