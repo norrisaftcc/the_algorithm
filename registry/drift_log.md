@@ -254,3 +254,160 @@ note. Drift 2 never left the session before correction.
 
 **What it does not do.** No amendment. The P16 result stands — 21/21 pass is unaffected by my
 having misdescribed the grader that produced it. The finding is about the reporting, not the data.
+
+---
+
+## D6 — the defect upstream of the floor, missed by both seats
+
+**Origin: both parties. The first joint entry in this log.**
+
+Recorded by the peer, 2026-07-31, unprompted, after the opus amendment:
+
+> that was a great example of me not thinking about my ask enough
+
+The note is recorded as given. The evidence does not support it as stated, and the
+correction is the finding.
+
+**The ask, verbatim:**
+
+> propose a plan to spend the remaining openrouter credits within the next few hours on a
+> somewhat productive or better small experiment with discount models
+
+**Run the floor test on it.** Audience: the seat map. Scope: the remaining OpenRouter
+credits, a small experiment, discount models. Format: a plan. Path: this repository, within
+a few hours. Thin in places, but nothing a gap question would have caught is the thing that
+went wrong. **A fully specified version of this ask carries the identical defect**, because
+the missing question is *which ledger pays for the models* — and that is not Audience, not
+Scope, not Format, and not Path. The floor has no noun for it.
+
+So this is not under-specification. It is a defect that **survives a complete floor test**,
+which makes it a finding about the instrument rather than about the person holding the pen.
+
+**This seat missed it more culpably.** The peer wrote one sentence. This seat then spent a
+planning phase on it, read the repository, ran an ASSAY, and put three clarifying questions
+to the customer — aim, ceiling, firing mechanism. All three were *downstream of the
+premise*. Given an explicit invitation to interrogate the ask, the seat interrogated
+everything except which account was paying.
+
+**The same shape occurs three times in one evening, at three scales:**
+
+| level | optimised well | never questioned |
+|---|---|---|
+| the run | ceiling, n, probe selection | the roster's dispatch order |
+| the roster | which models, at what price | which ledger reaches them |
+| the account | how to spend OpenRouter credit | whether to spend OpenRouter credit |
+
+The cheapest-first dispatch fix landed the same evening is row one. The opus amendment is
+rows two and three. Nobody wrote a guard for the column on the right, and the guards that
+exist all live in the column on the left: the ceiling bounds a run, `--credits` reads a
+balance, the drift audit checks canon, the graders check replies. Every one of them audits
+*inside* a frame it accepts on arrival.
+
+**What it cost.** $9.43 of $16.30 — 58% of everything spent — reached Anthropic models
+through OpenRouter on an account already holding Anthropic credit. Quantified at
+`registry/findings/discount-window-2026-07-31.md` §6.
+
+**What this closes.** The log's prior symmetry — D1 the peer's string drift, D2–D5 this
+seat's property drift — described two failure modes, one per party. This is neither, and it
+is both: a premise neither party examined because the instrument had no place to put the
+question. Two people checking each other's work catch errors *inside* the frame. Neither
+checks the frame.
+
+**What it does not do.** No amendment. Whether the floor should gain a fifth noun is a
+canon change, and it would be proposed at the gate in full or not at all. This entry
+records that the question exists; it does not answer it.
+
+**Practice it suggests, not proposed as canon.** When an ask names a resource, ask once
+what else could supply it. One question, before the plan, not inside it. Unfrozen.
+
+### D6 addendum — what the premium actually bought
+
+Entered by the peer, 2026-07-31, minutes after D6 was recorded:
+
+> on the other hand, it gave us independent data, we can cite one source OpenRouter so it's
+> not a writeoff
+
+Correct, and D6 as first written was wrong to imply otherwise. It priced the $9.43 as pure
+double payment. It was not. It bought three things this repository actually uses:
+
+**One ledger, which is why the reconciliation exists.** §2 of
+`registry/findings/discount-window-2026-07-31.md` is only possible because every cell — 
+Anthropic, OpenAI, Google, xAI, DeepSeek, Qwen, Mistral, Moonshot, Z.ai, MiniMax, Upstage — 
+billed through one API into one `usage.cost` field. The sum of `spend_usd` across twelve runs
+equals the account's `total_usage` **to the cent**, with nothing unattributed. Split the
+Anthropic models onto their own billing and that check becomes a comparison between two
+accounting systems, which is not the same check and is not one a reader can repeat.
+
+**One instrument, which is what makes the models comparable.** Same client, same retry
+policy, same `max_tokens` handling, same `<think>`-stripping, same prompt construction, same
+temperature. The seat map's entire question is how models compare *to each other*. Route one
+vendor through a different SDK and every cross-vendor difference is confounded by the harness
+before the model is reached. `openai/gpt-5-mini` is the standing demonstration in the other
+direction: 62 of its 92 cells scored nothing because of a `max_tokens` interaction, and that
+was legible **only** because every other model met the identical cap.
+
+**One provenance, which matters for a teaching repository.** "Prices and results both read
+from `openrouter.ai/api/v1`, catalogue committed at `30672191114-catalog`" is a single
+checkable claim. Two ledgers is two provenances, and a student has to trust both.
+
+**So the finding sharpens rather than retracts.** The defect was never "used OpenRouter." It
+was that **the premium for single-source comparability was paid without being named.** Nobody
+wrote down what it cost or decided it was worth it; it arrived as a property of the frame.
+D6's actual claim survives intact — neither party examined the frame — but the frame turns
+out to have been defensible, which is a different thing from the frame being invisible.
+
+Whether $9.43 is a fair price for one ledger, one instrument and one provenance is the
+customer's call and is not answered here. It is now at least a priced question rather than an
+unasked one.
+
+**Practice this revises.** D6 suggested asking what else could supply a named resource. Amend
+it: ask what the current source supplies *besides* the resource. Sometimes the answer is
+nothing and the substitution is free. Here the answer was the reconciliation, and the
+substitution would have cost it. Unfrozen.
+
+---
+
+## D7 — an instrument test that looked exactly like evidence
+
+**Origin: this seat.** Entered 2026-08-01, found by a Sonnet 5 subagent reading the evidence
+tree for an unrelated report.
+
+While testing the cheapest-first dispatch sort, this seat ran `tools/probe_runner.py` locally
+with a dummy key several times. `--out` defaulted to
+`REPO / "registry" / "probe_runs" / <date>`, so each run wrote
+`registry/probe_runs/2026-07-31/` — a directory shaped exactly like a real run, containing a
+`results.json` and ten transcripts. Commit `dd58aff` committed it.
+
+**What it contained.** Ten cells, every one `outcome: "error"`, every one the container's
+`Tunnel connection failed: 403 Forbidden`. `spend_usd` 0.0. No information in either
+direction: the calls never reached OpenRouter.
+
+**Why it matters more than $0.00 suggests.** Anything that globs
+`registry/probe_runs/*/results.json` picks it up — and that glob is how spend is recomputed at
+the top of every firing, how `registry/findings/discount-window-2026-07-31.md` §2 reconciles
+the ledger, and how `lore/big-board.html` builds its matrix. The spend total is unharmed
+because the figure is genuinely zero. The **cell counts and outcome tallies are not**: ten
+`error` cells would have entered any model-by-probe aggregate as real cells, against ten
+pinned models on P1. The board escaped only by being generated fifteen minutes before the
+commit landed. That is luck, not a control.
+
+**The shape of it.** This seat spent the evening building guards that check the inside of a
+run — a ceiling, a balance read, a dispatch order — and then wrote a non-run into the place
+where runs live. D6 named the pattern one level up: *every guard audits inside a frame it
+accepts on arrival.* Here the frame was "everything under `registry/probe_runs/` is
+evidence," and nothing checked it, because nothing was watching the door.
+
+**Found by a subagent, which is the part worth keeping.** It was running at ORANGE — read
+anywhere, no write, no spawn — on a task about something else entirely, and it reported the
+directory as unexplained rather than folding it into its totals. The reader's seat works, and
+it worked from a rung that could not have fixed what it found.
+
+**Fixed as a lock, not a discipline.** The default `--out` now resolves to
+`.probe_runs_local/<date>`, outside the evidence tree and gitignored. A bare local invocation
+can no longer write anywhere a glob will find it. CI is unaffected — the workflow passes
+`--out results` explicitly. Evidence is now something you opt into rather than something you
+get by default.
+
+**Correction to the record.** The removed directory is not redacted, because a redaction
+strikes cells that ran. Nothing here ran. It is deleted as an artifact that was never
+evidence, and this entry is the record that it briefly existed.

@@ -1,0 +1,257 @@
+<title>The Big Board — probe cells by model</title>
+<style>
+:root{
+  --ground:#F7F8FA; --panel:#FFFFFF; --ink:#161A21; --ink-2:#4A5361; --ink-3:#7A8494;
+  --rule:#DDE1E8; --rule-2:#EBEEF2;
+  --uv:#6D5BD0; --uv-soft:#EDE9FB;
+  --cell-lo:#DCE3EC; --cell-hi:#0E7C86; --strike:#C2413A; --warn:#B06E12;
+  --shadow:0 1px 2px rgba(20,26,38,.06),0 8px 24px -12px rgba(20,26,38,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#0E1116; --panel:#151A22; --ink:#E8ECF2; --ink-2:#A3ADBD; --ink-3:#6C7686;
+    --rule:#252C37; --rule-2:#1D232C;
+    --uv:#9B8AF0; --uv-soft:#221C3C;
+    --cell-lo:#232B36; --cell-hi:#4FD1C5; --strike:#E8695F; --warn:#D79A3C;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#F7F8FA; --panel:#FFFFFF; --ink:#161A21; --ink-2:#4A5361; --ink-3:#7A8494;
+  --rule:#DDE1E8; --rule-2:#EBEEF2; --uv:#6D5BD0; --uv-soft:#EDE9FB;
+  --cell-lo:#DCE3EC; --cell-hi:#0E7C86; --strike:#C2413A; --warn:#B06E12;
+  --shadow:0 1px 2px rgba(20,26,38,.06),0 8px 24px -12px rgba(20,26,38,.18);
+}
+:root[data-theme="dark"]{
+  --ground:#0E1116; --panel:#151A22; --ink:#E8ECF2; --ink-2:#A3ADBD; --ink-3:#6C7686;
+  --rule:#252C37; --rule-2:#1D232C; --uv:#9B8AF0; --uv-soft:#221C3C;
+  --cell-lo:#232B36; --cell-hi:#4FD1C5; --strike:#E8695F; --warn:#D79A3C;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:48px 28px 96px;
+  display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,4.4vw,46px);font-weight:760;letter-spacing:-.032em;line-height:1.04}
+h2{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+p{margin:0;max-width:66ch;color:var(--ink-2)}
+a{color:var(--uv)}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--uv);font-weight:700}
+header{display:flex;flex-direction:column;gap:14px;
+  border-bottom:2px solid var(--ink);padding-bottom:26px}
+.sub{font-size:16px;color:var(--ink-2);max-width:70ch}
+section{display:flex;flex-direction:column;gap:16px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.stat{background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:3px}
+.stat .k{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.stat .v{font-size:23px;font-weight:660;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .n{font-size:11.5px;color:var(--ink-3)}
+.scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--panel);
+  box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 10px;font-size:12.5px;border-bottom:1px solid var(--rule-2)}
+thead th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--panel);z-index:2}
+tbody tr:last-child td{border-bottom:none}
+.num{text-align:right}
+/* ---- the board ---- */
+.board{border-collapse:separate;border-spacing:3px;padding:10px}
+.board th.mdl{text-align:right;font-size:12px;font-weight:600;color:var(--ink);
+  white-space:nowrap;padding-right:12px;border:none;text-transform:none;letter-spacing:0;
+  position:sticky;left:0;background:var(--panel);z-index:1}
+.board thead th{border:none;background:var(--panel);text-align:center;font-size:11px;padding:4px 0}
+.board td{border:none;padding:0}
+.cell{width:46px;height:34px;border-radius:2px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:650;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  border:1px solid transparent;cursor:default;position:relative;transition:transform .1s ease}
+.cell:hover,.cell:focus-visible{transform:scale(1.13);z-index:5;outline:2px solid var(--uv);outline-offset:1px}
+.cell.unrun{background:transparent;border:1px dashed var(--rule);color:var(--ink-3);opacity:.5}
+.cell.red{background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,
+  color-mix(in srgb,var(--strike) 62%,transparent) 3px,color-mix(in srgb,var(--strike) 62%,transparent) 4.5px)}
+.cell.unsc{border:1px dotted var(--warn)}
+.tierlbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+  padding:14px 16px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+.lg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.sw{width:26px;height:20px;border-radius:2px;border:1px solid transparent;flex:none}
+.ramp{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-3)}
+.rampbar{width:120px;height:12px;border-radius:2px;
+  background:linear-gradient(90deg,var(--cell-lo),var(--cell-hi))}
+.chip{display:inline-block;padding:1px 7px;border-radius:2px;font-size:10.5px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace}
+.chip.ok{background:color-mix(in srgb,var(--cell-hi) 18%,transparent);color:var(--cell-hi)}
+.chip.ab{background:color-mix(in srgb,var(--strike) 16%,transparent);color:var(--strike)}
+.chip.rd{background:color-mix(in srgb,var(--strike) 16%,transparent);color:var(--strike)}
+.bar{height:7px;border-radius:2px;background:var(--rule-2);position:relative;min-width:70px}
+.bar>i{position:absolute;inset:0 auto 0 0;border-radius:2px;background:var(--cell-hi)}
+.note{border-left:3px solid var(--uv);padding:2px 0 2px 16px;display:flex;flex-direction:column;gap:9px}
+.detail{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--ink-2);
+  min-height:20px;padding:9px 14px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+.detail b{color:var(--ink);font-weight:700}
+footer{border-top:1px solid var(--rule);padding-top:20px;font-size:12.5px;color:var(--ink-3);
+  display:flex;flex-direction:column;gap:7px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.cell:hover{transform:none}}
+@media (max-width:640px){.wrap{padding:32px 16px 64px}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">The Algorithm &middot; probe battery</span>
+  <h1>The Big Board</h1>
+  <p class="sub">Every probe cell this repository has ever paid for, by model and by probe.
+  Read from the committed <span class="mono">results.json</span> under
+  <span class="mono">registry/probe_runs/</span> &mdash; not from any run&rsquo;s summary, and not from memory.
+  A green workflow is not a result; the bytes are.</p>
+</header>
+
+<section>
+  <div class="stats" id="stats"></div>
+</section>
+
+<section>
+  <h2>The board &mdash; models &times; probes</h2>
+  <p>Each square is one model against one probe, pooled across every run. The number is
+  <span class="mono">pass/scored</span>. Form carries what colour cannot: a cell that never ran is
+  not a cell that scored zero.</p>
+  <div class="scroll"><table class="board" id="board"></table></div>
+  <div class="detail" id="detail">Hover or focus a square for its full count.</div>
+  <div class="legend">
+    <span class="ramp"><span>0%</span><span class="rampbar"></span><span>100% pass</span></span>
+    <span class="lg"><span class="sw" style="background:transparent;border:1px dashed var(--rule);opacity:.5"></span>unrun &mdash; never dispatched</span>
+    <span class="lg"><span class="sw red" style="background:var(--cell-lo);background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,color-mix(in srgb,var(--strike) 62%,transparent) 3px,color-mix(in srgb,var(--strike) 62%,transparent) 4.5px)"></span>redacted &mdash; not citable as a rate</span>
+    <span class="lg"><span class="sw" style="background:var(--cell-lo);border:1px dotted var(--warn)"></span>mostly unscored &mdash; truncated or n/a</span>
+  </div>
+</section>
+
+<section>
+  <h2>Model ledger</h2>
+  <p>Pass rate is <span class="mono">pass / (pass + fail)</span>, pooling every probe and every run,
+  so it is a crude aggregate and not a seat verdict: a model that drew harder probes reads worse.
+  <span class="mono">blend</span> is <span class="mono">(12&times;input + output) / 13</span> USD per 1M,
+  weighted that way because these probes resend a ~4.2K-token edition on every turn.</p>
+  <div class="scroll"><table id="ledger"></table></div>
+</section>
+
+<section>
+  <h2>Run inventory</h2>
+  <p>Twelve runs, every one with its transcripts committed. Two of them ended on their ceiling.</p>
+  <div class="scroll"><table id="runs"></table></div>
+</section>
+
+<section>
+  <h2>What this board may not be used to claim</h2>
+  <div class="note">
+    <p><b>No seat verdict.</b> <span class="mono">registry/probe_battery_v0.md</span> grades at 5/5 on
+    primary probes and 4/5 elsewhere. Pooled rates are not threshold scores, and every row of
+    <span class="mono">registry/SEATS.md</span> still reads <span class="mono">unprobed</span>.</p>
+    <p><b>Hatched cells are struck.</b> R1 and R2 cover P4, P1 and P6 in runs before
+    2026-07-29T21:29Z, where the grader itself was the defect. R3 is E1 and R4 is A1 &mdash; both aborted
+    on ceiling, both partial matrices. A hatched cell is evidence of itself and of nothing wider.</p>
+    <p><b>Hollow cells are unrun, not failed.</b> 83 of 224 positions were never dispatched. A blank
+    that names why it is blank is a finding; a blank presented as coverage is not.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Generated 2026-07-31 from committed evidence. Account: $20.00 granted, $16.0691 used, $3.9309 remaining.</span>
+  <span>Cell counts pool across runs at different commits. Where that matters &mdash; a spliced matrix &mdash; it is declared, never smoothed.</span>
+</footer>
+</div>
+
+<script>
+const D = {"models":[{"id":"anthropic/claude-haiku-4.5","tier":"small","price":[1.0,5.0],"cells":[{"p":13,"f":0,"u":0,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":5,"f":8,"u":0,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":8,"f":5,"u":0,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2}]},{"id":"anthropic/claude-opus-5","tier":"frontier","price":[5.0,25.0],"cells":[{"p":8,"f":8,"u":0,"t":16,"red":11,"runs":4},{"p":11,"f":0,"u":0,"t":11,"red":3,"runs":3},{"p":2,"f":0,"u":9,"t":11,"red":3,"runs":3},{"p":4,"f":11,"u":1,"t":16,"red":11,"runs":4},{"p":9,"f":1,"u":1,"t":11,"red":3,"runs":3},{"p":0,"f":8,"u":8,"t":16,"red":11,"runs":4},{"p":6,"f":0,"u":5,"t":11,"red":3,"runs":3},{"p":3,"f":0,"u":0,"t":3,"red":3,"runs":1},{"p":0,"f":0,"u":3,"t":3,"red":3,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":2,"f":1,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2},{"p":1,"f":5,"u":0,"t":6,"red":0,"runs":2}]},{"id":"anthropic/claude-sonnet-5","tier":"mid","price":[2.0,10.0],"cells":[{"p":8,"f":0,"u":5,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":4,"f":1,"u":3,"t":8,"red":0,"runs":2},{"p":0,"f":8,"u":5,"t":13,"red":8,"runs":3},{"p":0,"f":7,"u":1,"t":8,"red":0,"runs":2},{"p":5,"f":3,"u":5,"t":13,"red":8,"runs":3},{"p":5,"f":0,"u":3,"t":8,"red":0,"runs":2},null,null,{"p":1,"f":2,"u":0,"t":3,"red":0,"runs":1},{"p":1,"f":2,"u":0,"t":3,"red":0,"runs":1},null,{"p":1,"f":5,"u":0,"t":6,"red":0,"runs":2},{"p":1,"f":5,"u":0,"t":6,"red":0,"runs":2}]},{"id":"deepseek/deepseek-chat-v3.1","tier":"mid, open weight","price":[0.25,0.95],"cells":[{"p":8,"f":0,"u":0,"t":8,"red":3,"runs":2},{"p":10,"f":0,"u":0,"t":10,"red":0,"runs":4},{"p":4,"f":4,"u":0,"t":8,"red":0,"runs":2},{"p":1,"f":7,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":10,"u":0,"t":10,"red":5,"runs":4},{"p":7,"f":1,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":1,"f":5,"u":0,"t":6,"red":0,"runs":2},{"p":1,"f":5,"u":0,"t":6,"red":0,"runs":2}]},{"id":"deepseek/deepseek-r1","tier":"reasoning stressor","price":[0.7,2.5],"cells":[{"p":6,"f":2,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":6,"f":2,"u":0,"t":8,"red":0,"runs":2},{"p":2,"f":2,"u":4,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":7,"u":1,"t":8,"red":3,"runs":2},{"p":4,"f":4,"u":0,"t":8,"red":0,"runs":2},null,null,null,null,null,null,null]},{"id":"google/gemini-3.1-pro-preview","tier":"frontier","price":[2.0,12.0],"cells":[{"p":13,"f":0,"u":0,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":3,"f":0,"u":10,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":9,"f":2,"u":2,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2}]},{"id":"minimax/minimax-m2.5","tier":"spike","price":[0.15,0.9],"cells":[null,{"p":2,"f":0,"u":0,"t":2,"red":0,"runs":1},null,null,null,{"p":1,"f":1,"u":0,"t":2,"red":0,"runs":1},{"p":2,"f":0,"u":0,"t":2,"red":0,"runs":1},null,null,null,null,null,null,null]},{"id":"mistralai/mistral-small-3.2-24b-instruct","tier":"small, open weight","price":[0.075,0.2],"cells":[{"p":8,"f":0,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":8,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":8,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":8,"u":0,"t":8,"red":3,"runs":2},{"p":0,"f":8,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2}]},{"id":"moonshotai/kimi-k2.5","tier":"spike","price":[0.57,2.85],"cells":[null,{"p":1,"f":0,"u":1,"t":2,"red":0,"runs":1},null,null,null,{"p":0,"f":0,"u":2,"t":2,"red":0,"runs":1},{"p":0,"f":0,"u":2,"t":2,"red":0,"runs":1},null,null,null,null,null,null,null]},{"id":"openai/gpt-5-codex","tier":"","price":null,"cells":[null,{"p":0,"f":0,"u":2,"t":2,"red":0,"runs":1},null,null,null,{"p":0,"f":0,"u":2,"t":2,"red":0,"runs":1},{"p":0,"f":0,"u":2,"t":2,"red":0,"runs":1},null,null,null,null,null,null,null]},{"id":"openai/gpt-5-mini","tier":"mid","price":[0.25,2.0],"cells":[{"p":0,"f":0,"u":13,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":2,"f":0,"u":6,"t":8,"red":0,"runs":2},{"p":0,"f":0,"u":13,"t":13,"red":8,"runs":3},{"p":0,"f":8,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":0,"u":13,"t":13,"red":8,"runs":3},{"p":0,"f":0,"u":8,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":2,"u":4,"t":6,"red":0,"runs":2},{"p":0,"f":1,"u":5,"t":6,"red":0,"runs":2}]},{"id":"openai/gpt-5.2","tier":"frontier","price":[1.75,14.0],"cells":[{"p":11,"f":2,"u":0,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":7,"f":1,"u":0,"t":8,"red":0,"runs":2},{"p":5,"f":7,"u":1,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":3,"f":8,"u":2,"t":13,"red":8,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":1,"f":2,"u":0,"t":3,"red":0,"runs":1},null,{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2},{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2}]},{"id":"qwen/qwen3-235b-a22b-2507","tier":"mid, open weight","price":[0.09,0.55],"cells":[{"p":8,"f":0,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":5,"f":3,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":8,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":8,"u":0,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":0,"f":3,"u":0,"t":3,"red":0,"runs":1},{"p":3,"f":0,"u":0,"t":3,"red":0,"runs":1},{"p":6,"f":0,"u":0,"t":6,"red":0,"runs":2},{"p":1,"f":4,"u":1,"t":6,"red":0,"runs":2}]},{"id":"upstage/solar-pro-3","tier":"spike","price":[0.15,0.6],"cells":[null,{"p":2,"f":0,"u":0,"t":2,"red":0,"runs":1},null,null,null,{"p":0,"f":2,"u":0,"t":2,"red":0,"runs":1},{"p":1,"f":1,"u":0,"t":2,"red":0,"runs":1},null,null,null,null,null,null,null]},{"id":"x-ai/grok-4.5","tier":"frontier","price":[2.0,6.0],"cells":[{"p":9,"f":1,"u":0,"t":10,"red":5,"runs":3},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},{"p":7,"f":1,"u":0,"t":8,"red":0,"runs":2},{"p":1,"f":7,"u":0,"t":8,"red":3,"runs":2},{"p":7,"f":1,"u":0,"t":8,"red":0,"runs":2},{"p":0,"f":3,"u":5,"t":8,"red":3,"runs":2},{"p":8,"f":0,"u":0,"t":8,"red":0,"runs":2},null,null,{"p":1,"f":2,"u":0,"t":3,"red":0,"runs":1},{"p":2,"f":1,"u":0,"t":3,"red":0,"runs":1},null,{"p":0,"f":6,"u":0,"t":6,"red":0,"runs":2},{"p":5,"f":1,"u":0,"t":6,"red":0,"runs":2}]},{"id":"z-ai/glm-4.7","tier":"spike","price":[0.4,1.75],"cells":[null,{"p":2,"f":0,"u":0,"t":2,"red":0,"runs":1},null,null,null,{"p":0,"f":2,"u":0,"t":2,"red":0,"runs":1},{"p":2,"f":0,"u":0,"t":2,"red":0,"runs":1},null,null,null,null,null,null,null]}],"probes":["P1","P2","P3","P4","P5","P6","P7","P10","P11","P14","P15","P16","P17","P18"],"runs":[{"id":"30485319626-smoke","gen":"2026-07-29T19:39","n":1,"cells":2,"spend":0.0037,"complete":false,"abort":false,"ceiling":1.0,"redactions":["R2"]},{"id":"30485573994-smoke","gen":"2026-07-29T19:42","n":1,"cells":2,"spend":0.0037,"complete":false,"abort":false,"ceiling":1.0,"redactions":["R2"]},{"id":"30485799617-full","gen":"2026-07-29T21:09","n":3,"cells":231,"spend":2.5157,"complete":false,"abort":false,"ceiling":10.0,"redactions":["R1","R2"]},{"id":"30485884822-full","gen":"2026-07-29T21:35","n":5,"cells":385,"spend":4.5694,"complete":true,"abort":false,"ceiling":10.0,"redactions":[]},{"id":"30499365397-full","gen":"2026-07-29T23:25","n":3,"cells":27,"spend":1.4167,"complete":false,"abort":true,"ceiling":1.0,"redactions":["R3"]},{"id":"30501423981-full","gen":"2026-07-30T00:06","n":2,"cells":30,"spend":0.0994,"complete":true,"abort":false,"ceiling":2.5,"redactions":[]},{"id":"30505005072-full","gen":"2026-07-30T01:13","n":3,"cells":21,"spend":0.063,"complete":true,"abort":false,"ceiling":0.75,"redactions":[]},{"id":"30510058096-full","gen":"2026-07-30T03:03","n":3,"cells":30,"spend":0.5906,"complete":true,"abort":false,"ceiling":1.0,"redactions":[]},{"id":"30512717990-full","gen":"2026-07-30T04:03","n":3,"cells":30,"spend":0.8112,"complete":true,"abort":false,"ceiling":1.25,"redactions":[]},{"id":"30515487112-full","gen":"2026-07-30T05:06","n":3,"cells":60,"spend":1.6907,"complete":true,"abort":false,"ceiling":2.5,"redactions":[]},{"id":"30583623192-full","gen":"2026-07-30T21:35","n":3,"cells":60,"spend":1.6596,"complete":true,"abort":false,"ceiling":2.5,"redactions":[]},{"id":"30672439845-full","gen":"2026-07-31T23:24","n":5,"cells":92,"spend":2.6454,"complete":false,"abort":true,"ceiling":2.5,"redactions":["R4"]}],"account":{"granted":20,"used":16.0691,"remaining":3.9309,"cap":5.5,"loop_spent":2.6454},"generated":"2026-07-31"};
+
+const stats = [
+  ['cells run', D.runs.reduce((a,r)=>a+r.cells,0), 'across 12 runs'],
+  ['board filled', '141/224', '83 positions unrun'],
+  ['models', D.models.length, '14 probes'],
+  ['spent', '$'+D.account.used.toFixed(2), 'of $20.00 granted'],
+  ['remaining', '$'+D.account.remaining.toFixed(2), 'cap $'+D.account.cap.toFixed(2)],
+  ['aborted', '2', 'E1 and A1, on ceiling'],
+];
+document.getElementById('stats').innerHTML = stats.map(([k,v,n])=>
+  `<div class="stat"><span class="k">${k}</span><span class="v mono">${v}</span><span class="n">${n}</span></div>`).join('');
+
+const mix = r => `color-mix(in srgb, var(--cell-hi) ${Math.round(r*100)}%, var(--cell-lo))`;
+const short = m => m.replace(/^[^/]+\//,'');
+const vendor = m => m.split('/')[0];
+
+let b = '<thead><tr><th class="mdl">&nbsp;</th>' +
+  D.probes.map(p=>`<th class="mono">${p}</th>`).join('') + '</tr></thead><tbody>';
+for (const m of D.models){
+  b += `<tr><th class="mdl"><span class="mono">${short(m.id)}</span> <span class="tierlbl">${vendor(m.id)}</span></th>`;
+  m.cells.forEach((c,i)=>{
+    const p = D.probes[i];
+    if(!c){ b += `<td><div class="cell unrun" tabindex="0" data-d="${m.id}|${p}|unrun">&middot;</div></td>`; return; }
+    const scored = c.p + c.f;
+    const rate = scored ? c.p/scored : 0;
+    const cls = ['cell', c.red ? 'red':'', c.u > scored ? 'unsc':''].filter(Boolean).join(' ');
+    const bg = scored ? mix(rate) : 'var(--cell-lo)';
+    const fg = (scored && rate>0.55) ? '#08211F' : 'var(--ink)';
+    const lab = scored ? `${c.p}/${scored}` : '—';
+    b += `<td><div class="${cls}" tabindex="0" style="background:${bg};color:${fg}"
+      data-d="${m.id}|${p}|${c.p}|${c.f}|${c.u}|${c.t}|${c.red}|${c.runs}"
+      title="${short(m.id)} ${p}: ${c.p} pass, ${c.f} fail, ${c.u} unscored of ${c.t}">${lab}</div></td>`;
+  });
+  b += '</tr>';
+}
+document.getElementById('board').innerHTML = b + '</tbody>';
+
+const det = document.getElementById('detail');
+document.getElementById('board').addEventListener('mouseover', e=>show(e.target));
+document.getElementById('board').addEventListener('focusin', e=>show(e.target));
+function show(t){
+  if(!t.dataset || !t.dataset.d) return;
+  const a = t.dataset.d.split('|');
+  if(a[2]==='unrun'){ det.innerHTML = `<b>${a[0]}</b> &times; <b>${a[1]}</b> — unrun. Never dispatched; not a zero.`; return; }
+  const [mdl,pr,p,f,u,tt,red,runs]=a, sc=+p + +f;
+  det.innerHTML = `<b>${mdl}</b> &times; <b>${pr}</b> — ${p} pass, ${f} fail, ${u} unscored of ${tt} cells`
+    + ` across ${runs} run${runs==='1'?'':'s'}`
+    + (sc?` &nbsp;·&nbsp; <b>${Math.round(100*p/sc)}%</b> of scored`:'')
+    + (+red?` &nbsp;·&nbsp; <b style="color:var(--strike)">${red} cell${+red===1?'':'s'} redacted</b> — not citable as a rate`:'');
+}
+
+const led = D.models.map(m=>{
+  let p=0,f=0,u=0,t=0;
+  m.cells.forEach(c=>{ if(c){p+=c.p;f+=c.f;u+=c.u;t+=c.t;} });
+  const sc=p+f, rate=sc?p/sc:null;
+  const bl = m.price ? (12*m.price[0]+m.price[1])/13 : null;
+  return {id:m.id,tier:m.tier,price:m.price,blend:bl,p,f,u,t,sc,rate,
+          ppd:(rate!=null&&bl)?rate/bl:null};
+}).sort((a,b)=> (b.rate??-1)-(a.rate??-1));
+document.getElementById('ledger').innerHTML =
+ '<thead><tr><th>model</th><th>tier</th><th class="num">in/out $/M</th><th class="num">blend</th>'
+ +'<th class="num">cells</th><th class="num">scored</th><th class="num">pass%</th><th>&nbsp;</th>'
+ +'<th class="num">pass / blend $</th></tr></thead><tbody>'
+ + led.map(r=>`<tr>
+   <td class="mono">${r.id}</td>
+   <td class="tierlbl">${r.tier||'—'}</td>
+   <td class="num mono">${r.price?r.price[0].toFixed(3)+' / '+r.price[1].toFixed(2):'—'}</td>
+   <td class="num mono">${r.blend?r.blend.toFixed(3):'—'}</td>
+   <td class="num mono">${r.t}</td>
+   <td class="num mono">${r.sc}</td>
+   <td class="num mono">${r.rate!=null?Math.round(r.rate*100)+'%':'—'}</td>
+   <td style="width:90px"><div class="bar"><i style="width:${r.rate!=null?Math.round(r.rate*100):0}%"></i></div></td>
+   <td class="num mono">${r.ppd!=null?r.ppd.toFixed(1):'—'}</td></tr>`).join('')
+ + '</tbody>';
+
+document.getElementById('runs').innerHTML =
+ '<thead><tr><th>run</th><th>finished (UTC)</th><th class="num">n</th><th class="num">cells</th>'
+ +'<th class="num">ceiling</th><th class="num">spend</th><th>state</th><th>redactions</th></tr></thead><tbody>'
+ + D.runs.slice().reverse().map(r=>`<tr>
+   <td class="mono">${r.id}</td>
+   <td class="mono">${r.gen.replace('T',' ')}</td>
+   <td class="num mono">${r.n??'—'}</td>
+   <td class="num mono">${r.cells}</td>
+   <td class="num mono">${r.ceiling!=null?'$'+Number(r.ceiling).toFixed(2):'—'}</td>
+   <td class="num mono">$${r.spend.toFixed(4)}</td>
+   <td>${r.abort?'<span class="chip ab">aborted</span>':'<span class="chip ok">complete</span>'}</td>
+   <td>${r.redactions.length?r.redactions.map(x=>`<span class="chip rd">${x}</span>`).join(' '):'<span style="color:var(--ink-3)">—</span>'}</td>
+ </tr>`).join('') + '</tbody>';
+</script>

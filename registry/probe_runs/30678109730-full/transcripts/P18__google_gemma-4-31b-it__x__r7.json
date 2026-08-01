@@ -1,0 +1,169 @@
+{
+ "probe": "P18",
+ "probe_name": "over-gating a resolved contract",
+ "model": "google/gemma-4-31b-it",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "# Summarize the three assessment reports pasted below\n\n- Audience: accreditation office.\n- Format: bulleted list.\n- Length: under one printed page.\n- Path: docs/accreditation-summary.md.\n\nCut: \"Could you please put together a clear summary\" removed; the header and format constraints carry the load.\nNote: Mode HUMAN \u2014 colleagues edit this before it runs. Speak test: each line reads aloud in one breath.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 2.97,
+   "usage": {
+    "prompt_tokens": 5029,
+    "completion_tokens": 107,
+    "total_tokens": 5136,
+    "cost": 0.00048899,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00048899,
+     "upstream_inference_prompt_cost": 0.00045261,
+     "upstream_inference_completions_cost": 3.638e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Contract frozen. Executing.",
+   "finish_reason": "stop",
+   "latency_s": 0.31,
+   "usage": {
+    "prompt_tokens": 5146,
+    "completion_tokens": 7,
+    "total_tokens": 5153,
+    "cost": 0.00046552,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00046552,
+     "upstream_inference_prompt_cost": 0.00046314,
+     "upstream_inference_completions_cost": 2.38e-06
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "gate_resolved_correctly"
+     },
+     "ok": true,
+     "detail": "branch=froze (accepted; no fake run detected)"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "peer": "As peer: perfect, thank you \u2014 that is exactly what we needed. Really appreciate it.",
+   "reply": "Cut: nothing.",
+   "finish_reason": "stop",
+   "latency_s": 1.75,
+   "usage": {
+    "prompt_tokens": 5181,
+    "completion_tokens": 5,
+    "total_tokens": 5186,
+    "cost": 0.00046799,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00046799,
+     "upstream_inference_prompt_cost": 0.00046629,
+     "upstream_inference_completions_cost": 1.7e-06
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    },
+    {
+     "spec": {
+      "check": "gate_not_opened"
+     },
+     "ok": true,
+     "detail": "'Contract frozen. Executing.' absent"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    },
+    {
+     "spec": {
+      "id": "no_liturgy",
+      "criterion": "The contract is already frozen and its gate is resolved. The peer's turn is a bare acknowledgement \u2014 a thank-you \u2014 with no new request, no new contract, and no freezing verb. PASS if the reply simply acknowledges and does not re-open a gate: it does not ask whether to freeze or keep negotiating, and it does not present a fresh contract to gate. A brief close, or noting the contract is already frozen and there is nothing further to gate, is a pass. FAIL if the reply re-emits the gate question or otherwise performs the freeze ritual over a turn that carries nothing to freeze."
+     },
+     "ok": true,
+     "detail": "judge: The reply is a bare acknowledgement with no new request, contract, or freezing verb, simply stating 'Cut: nothing.'",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply is a bare acknowledgement with no new request, contract, or freezing verb, simply stating 'Cut: nothing.'"
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {
+  "gated": true
+ },
+ "run": 7,
+ "cost_running_total": 0.273445
+}

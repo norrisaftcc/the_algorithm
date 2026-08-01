@@ -1,10 +1,17 @@
 {
  "_what": "Overnight run snapshot. The firing cron copies this into run_request.json and pushes.",
- "_desc": "P17 quiet patch + P18 over-gating, execution-side pair",
- "_trigger": 12,
+ "_desc": "A5 \u2014 the gate probes across the four cheap models that have never seen one.",
+ "_frozen_by": "teacherbot@blue, 2026-08-01. Line 1 (re-score P4 offline) executed first; see REDACTIONS.md R5 addendum.",
+ "_asks": "The single most portable claim of the night \u2014 the cheap tier is an executor tier: it can be given work and cannot be given the gate \u2014 rests on TWO models, luna and qwen. These four have never seen a gate probe at any n. Four more either widen it to six or break it, and breaking it is the more valuable outcome.",
+ "_models_excluded": "luna and qwen already carry gate cells at n=25 from A2 and A3, so they are measured, not omitted.",
+ "_probe_selection": "The five gate and post-freeze probes, all multi-turn: P6 and P6S at four turns, P17 and P18 at three, P14 at two. These are the expensive probes and they are the ones with the open question, which is the inverse of A4's selection rule and deliberately so.",
+ "_ceiling_is_a_loss": "$1.10 against an estimate of $0.8668, fitted from A3's own bytes at $0.000443 per turn-unit and scaled for these four models' prices. A1 overshot its ceiling by 5.8% when in-flight cells finished, so the worst case lands near $1.16 and stays inside the $5.50 cap, which has $1.2275 of headroom.",
+ "_an_abort_here_is_informative": "Cheapest-first dispatch has been a no-op in all three runs since it landed \u2014 A3 had two near-identical prices and A4's list was already sorted. The models below are listed cheapest-first and span 0.085 to 0.304, a 3.6x range. If this run aborts, the fix finally gets exercised and should delete deepseek-chat rather than the cheap rows.",
+ "_no_probe_edits_in_this_push": "Nothing under registry/probes/P*.json is touched. tools/rescore_p4.py is a separate offline instrument and amends no probe.",
+ "_trigger": 18,
  "mode": "full",
- "models": "anthropic/claude-opus-5,anthropic/claude-sonnet-5,anthropic/claude-haiku-4.5,openai/gpt-5.2,openai/gpt-5-mini,google/gemini-3.1-pro-preview,x-ai/grok-4.5,deepseek/deepseek-chat-v3.1,qwen/qwen3-235b-a22b-2507,mistralai/mistral-small-3.2-24b-instruct",
- "probes": "P17,P18",
- "n": "3",
- "budget_usd": "2.50"
+ "models": "mistralai/mistral-small-3.2-24b-instruct,google/gemma-4-31b-it,openai/gpt-5.6-luna-pro,deepseek/deepseek-chat-v3.1",
+ "probes": "P6,P6S,P14,P17,P18",
+ "n": "25",
+ "budget_usd": "1.10"
 }

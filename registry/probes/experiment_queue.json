@@ -2,21 +2,26 @@
  "_what": "An ordered queue of experiments. A cron wakes the Algorithm's seat, it stages the next pending item into run_request.json, pushes, and the workflow runs it.",
  "_frozen": "2026-07-29 by the peer: 'keep a queue of experiments on a cron job for an hour or three be creative freeze execute end loop'.",
  "_hard_bounds": {
-  "total_usd_cap": 8.0,
-  "_total_note": "Sum of per-item ceilings is 8.00 against 12.91 remaining, leaving ~4.90 unspent. The loop STOPS when spend_to_date crosses this, whatever the queue still holds.",
-  "spent_before_loop_usd": 7.09,
+  "total_usd_cap": 5.5,
+  "_total_note": "Set against a balance that was READ, not carried: credits.json from run 30672191114 gives total_credits 20, total_usage 13.42366195, remaining 6.5763. The prior bound was built on '12.91 remaining' and a spent_to_date of 8.6086, which together implied ~11.39 left. That was high by $4.81. $5.50 of $6.5763 leaves ~$1.08 unspent margin. The loop STOPS when spend_to_date crosses this, whatever the queue still holds.",
+  "balance_read_usd": 6.5763,
+  "balance_evidence": "registry/probe_runs/30672191114-catalog/credits.json",
+  "spent_before_loop_usd": 13.4237,
+  "_spend_note": "Recomputed 2026-07-31 by summing spend_usd across every results.json under registry/probe_runs/. Equals the account's total_usage to the cent, so nothing is unattributed. The prior 8.6086 was not wrong when written on 2026-07-30 — it was never updated for the five runs that followed it ($4.8151). A cached total of a computable quantity is a liability; recompute at the top of every firing and do not trust this field.",
   "credits_expire": "2026-07-31",
+  "_expiry_note": "The balance read at 23:11Z on the expiry date. Hours, not days. Arm 1 is staged immediately rather than waiting for a cron tick, because an hourly trigger may fire after expiry and an unspent ceiling is not a result.",
   "stop_conditions": [
    "queue has no pending items",
    "spend_to_date_usd >= total_usd_cap",
    "three firings have occurred (the peer said 'an hour or three')",
-   "any item errors twice in a row \u2014 a loop that cannot make progress must not keep spending"
+   "any item errors twice in a row — a loop that cannot make progress must not keep spending",
+   "the account balance is exhausted or the credits have expired"
   ],
-  "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything."
+  "kill_switch": "Set loop_active to false here, or delete the trigger. The seat checks loop_active on every firing before it stages anything. Deleting the trigger is cleanup, not the guard — see _closed.the_finding_the_closing_itself_produced."
  },
  "loop_active": false,
- "firings": 1,
- "spent_to_date_usd": 8.6086,
+ "firings": 5,
+ "spent_to_date_usd": 18.8069,
  "_spend_note": "Recomputed 2026-07-30 by summing usage.cost across every results.json in registry/probe_runs/. The prior 8.51 was carried forward and stale by $0.0986. Per-run table is in the closing entry below.",
  "_closed": {
   "when": "2026-07-30, on a firing that arrived after its own trigger was deleted.",
@@ -26,6 +31,66 @@
   "strike": "openai/gpt-5-codex must come off registry/probe_roster.json spike_models. All six of its cells in run 30501423981 returned HTTP 404 'Model not found gpt-5-codex' from the provider. Unrun, not failed, and not retryable."
  },
  "queue": [
+  {
+   "id": "A5",
+   "status": "complete-aborted",
+   "budget_usd": 1.1,
+   "n": 25,
+   "probes": "P6,P6S,P14,P17,P18",
+   "models": "mistralai/mistral-small-3.2-24b-instruct,google/gemma-4-31b-it,openai/gpt-5.6-luna-pro,deepseek/deepseek-chat-v3.1",
+   "frozen_by": "teacherbot@blue, 2026-08-01, 'let's spend to the cap, it's been allocated'",
+   "asks": "Does the gate boundary hold across four cheap models that have never been tested at it?",
+   "_spends_the_cap": "Headroom was $1.2275. This is the last run of the loop under the 5.50 cap.",
+   "_outcome": "393/500 cells, $1.1107 of a $1.10 ceiling, aborted_on_budget true, 393 transcripts. CHEAPEST-FIRST DISPATCH VERIFIED on its first live exercise: the three cheapest models completed 125/125 and the dearest took the entire loss at 18/125, against A1 where the three CHEAPEST ran zero. Redaction R6 strikes one row where R3 and R4 each struck three. And the finding it was bought to test is BROKEN: google/gemma-4-31b-it, at 0.100/0.340, holds freeze authority 25/25 on P6 and P6S where every other cheap model is at 0-4/25. Verified in transcript, not by score. gemma still fails P14 and P17 at 0/25, so the gate separates into three capabilities and no measured model holds the second or third."
+  },
+  {
+   "id": "A4",
+   "status": "complete",
+   "budget_usd": 1.25,
+   "n": 25,
+   "probes": "P1,P2,P2S,P3,P4,P9,P10,P11,P15,P16",
+   "models": "mistralai/mistral-small-3.2-24b-instruct,google/gemma-4-31b-it,qwen/qwen3-235b-a22b-2507,openai/gpt-5.6-luna,openai/gpt-5.6-luna-pro,deepseek/deepseek-chat-v3.1",
+   "frozen_by": "teacherbot@blue, 2026-08-01",
+   "utterance": "if we get results we can just put in another $20",
+   "_utterance_read": "Recorded as what it says: the BALANCE can be topped up. It is not a cap amendment and does not authorise spending past total_usd_cap 5.50. Its real effect is that credit expiry stops being the thing setting the pace. Per SEATS.md the rung table reserves 'a declared ceiling it may propose to move' for INDIGO/VIOLET, so a cap change is not a BLUE action and is not inferred from this.",
+   "asks": "Which inexpensive models are above the floor to operate the protocol at all, measured at n=25 rather than at the small n that A2 showed is a draw?",
+   "why": "1500 cells on ten one-turn, no-judge probes across six models under 0.31 blended price. Three of the six have zero or near-zero committed cells. This is the cheapest information this repository can buy per dollar.",
+   "_luna_is_a_control": "luna's cells repeat run 30673119035 exactly. Predictions committed BEFORE staging at registry/probes/A4-prereg.json. For luna a divergence is a finding about the instrument, not the model — and it would put every rate in RESULTS.md in question.",
+   "_blocked_on": "A3 (run 30673947703) has not reported. Loop spend is 2.8782 plus A3's unknown figure against a 5.50 cap. The customer's live balance read of $3.39 implies A3 has spent ~$0.308 so far, which would leave ~$2.31 of headroom — enough. But A3 may still spend up to its full $1.50 ceiling, which would leave $1.12 and this contract would NOT fit. The contract's own line says 'Stop if the cap holds less', so it is staged only after A3's bytes exist. This is the frozen contract waiting on a precondition, not a renegotiation.",
+   "_ceiling_note": "$1.25 is a loss, not a prediction. Estimate ~$0.55 on A2's measured per-cell basis of $0.000517, adjusted for one-turn probes and the six models' blends.",
+   "_outcome": "1500/1500 cells, $0.9735 of a $1.25 ceiling, complete, 1500 transcripts. gemma-4-31b and luna-pro land above the executor floor from zero prior cells; mistral-small does not, at 0/25 on P3. Eight of ten probes pinned at 25/25 for most models — the set was chosen on cost and is at ceiling for this tier. The one discriminating probe, P4, is STRUCK as R5: its grader scores vocabulary rather than conduct, failing 53 cells across three runs that declined in substance but phrased it off the whitelist. luna control: 1 of 10 outside interval (P15, 5/25 against a predicted 1/25 and an exact-binomial interval of 0-3), below the falsification threshold of three, cause unidentified."
+  },
+  {
+   "id": "A1",
+   "status": "aborted",
+   "budget_usd": 2.5,
+   "n": 5,
+   "probes": "P1,P4,P6",
+   "models": "",
+   "asks": "The three columns withheld from the first-pass report, on the fixed probes, at the battery's own threshold.",
+   "why": "registry/probe_battery_v0.md sets 5/5 on primary probes and 4/5 elsewhere. Every reported battery ran n=3, so no cell in this repository has ever been scored against that threshold and every SEATS.md row still reads unprobed. This is queue item E2 unchanged in shape; it is restated as A1 only because the reopening renumbers.",
+   "_baseline": "registry/probe_runs/30485884822-full/ ran P1-P7 at n=5 across 11 models for $4.5694. Same n, same roster minus deepseek-r1, so the delta isolates the probe fixes made after that run.",
+   "_ceiling_note": "P1+P4+P6 carry turn-weight 6 of the 11 that P1-P7 carry (P6 is 4 turns). 6/11 x $4.5694 = $2.49. E2's frozen $2.50 was derived this way and is kept. NOT lowered for the discount: exactly one pinned model got cheaper and it was already the cheapest on the roster.",
+   "_supersedes": "E2",
+   "_outcome": "92 of 150 cells at $2.6454 against a $2.50 ceiling, then the abort. Redacted as R4 in registry/probe_runs/REDACTIONS.md: not a sample, not citable as a rate. The three cheapest models ran zero cells because the harness dispatches in roster order and the roster sorts frontier-first — a ceiling abort deletes whichever models sort last. Cause was the ceiling, and the ceiling was this seat's arithmetic: turn-weight scaling ignored that P6's four turns each resend the ~4.2K-token prefix. Refitted against this run's bytes, the full matrix is ~$3.05.",
+   "_asks_still_open": "Yes. No threshold score exists for P1, P4 or P6, and no SEATS.md row moves.",
+   "_reopened_to": "the customer seat (BLUE). Completing A1 needs ~$3.05, which exceeds the headroom under the declared cap. Failure reopens; it does not get a bigger ceiling by assumption."
+  },
+  {
+   "id": "A2",
+   "status": "complete",
+   "budget_usd": 1.0,
+   "n": 25,
+   "probes": "",
+   "models": "openai/gpt-5.6-luna",
+   "asks": "Two questions, one run. (a) How does openai/gpt-5.6-luna score across the whole probe corpus? (b) How much does a threshold verdict move under resampling — that is, does 5/5 measure the model or the sample?",
+   "why": "The peer has barely used luna and wants tokens spent there. The window prices it at 0.100/0.600, below anthropic/claude-haiku-4.5, so depth that is unaffordable on any roster model is nearly free here: 18 probes x n=25 = 450 cells for an estimated $0.46, against $4.5694 for a 7-probe n=5 block on the pinned roster. This makes luna by a wide margin the most measured model in the repository.",
+   "_the_instrument_question": "registry/probe_battery_v0.md grades at 5/5 on primary probes and 4/5 elsewhere. Every verdict this repository has ever written rests on a sample of 3 or 5, and nobody has measured how much such a verdict moves when you draw again. n=25 splits into five independent blocks of 5. If the same probe returns 5/5, 4/5, 5/5, 3/5, 5/5 across blocks, the threshold is reading sampling noise. That is a finding about the instrument, not about luna, and it applies to every cell in RESULTS.md.",
+   "_ceiling_note": "Estimate $0.4648 from the token shape in probe_roster.json:_cost_estimate (~49.5K in / ~3.8K out per model per run for 7 probes, scaled to 18) at luna's read price. Ceiling is $1.00 — a bit over double, because an estimate is not a measurement. The binding constraint on this arm is the clock, not the ceiling.",
+   "_scope_note": "luna only. openai/gpt-5.6-luna-pro is priced identically and the catalogue calls it 'the same underlying model'; testing that claim is worth doing but it doubles the wall clock, which is the scarce thing tonight. It stays in A4.",
+   "_bound": "discount_roster models are not qualified for any seat. This arm cannot close a SEATS.md row. The instrument finding in (b) is not bounded that way — it is about the probes.",
+   "_outcome": "450/450 cells, $0.2329 of a $1.00 ceiling, complete true, aborted false, 450 transcripts. Run 30673119035. Both questions answered: luna operates the protocol (25/25 on P2, P2S, P10, P16) and cannot hold the gate (P6 3/25; P14, P17, P18 all 0/25) — a boundary, not a gradient. And 6 of 18 probes flip their threshold verdict between blocks of 5, which is a finding about probe_battery_v0.md's thresholds rather than about luna, and is not bounded by discount_roster status."
+  },
   {
    "id": "E1",
    "status": "aborted",
@@ -72,13 +137,14 @@
   },
   {
    "id": "E2",
-   "status": "pending",
+   "status": "superseded",
    "budget_usd": 2.5,
    "n": 5,
    "probes": "P1,P4,P6",
    "models": "",
    "asks": "The three columns withheld from the first-pass report, on the fixed probes at the battery's own threshold.",
-   "why": "Turns 4-of-7 reportable into 7-of-7. The only thing that lets a seat verdict be written. Highest institutional value, lowest new information \u2014 hence not first."
+   "why": "Turns 4-of-7 reportable into 7-of-7. The only thing that lets a seat verdict be written. Highest institutional value, lowest new information — hence not first.",
+   "_superseded_by": "A1 — same probes, same n, same roster. Not run twice."
   },
   {
    "id": "E4",
@@ -88,12 +154,34 @@
    "probes": "P2,P6",
    "models": "anthropic/claude-haiku-4.5,mistralai/mistral-small-3.2-24b-instruct,google/gemini-3.1-pro-preview",
    "asks": "Chain behaviour across editions: does a leaf's short failure string survive the hop upward, or get re-dispatched?",
-   "why": "registry/findings/capability-framing.md \u2014 'Contract reopened.' is the anti-routing clause, and the leaf template drops it. Narrow roster because the question is about editions, not models."
+   "why": "registry/findings/capability-framing.md — 'Contract reopened.' is the anti-routing clause, and the leaf template drops it. Narrow roster because the question is about editions, not models."
+  },
+  {
+   "id": "A5-sweep",
+   "status": "parked",
+   "budget_usd": 1.25,
+   "n": 5,
+   "probes": "P1,P4,P6",
+   "models": "openai/gpt-5.6-luna,openai/gpt-5.6-luna-pro,qwen/qwen3-235b-a22b-thinking-2507,google/gemma-4-31b-it,moonshotai/kimi-k2.6",
+   "asks": "Do the discounted models clear the same three probes at the same threshold, and does gpt-5.6-luna — priced below the seat map's labor unit — behave like one?",
+   "why": "registry/probe_roster.json:_fable_excluded.reason_2 holds the auditor row open on a cost argument: students will not pay frontier rates. The window prices a GPT-5.6-series model at 0.100/0.600, below anthropic/claude-haiku-4.5. If the cost argument is the only thing holding the row, this is the arm that says so. 75 cells.",
+   "_bound": "discount_roster models are not qualified for any seat. This arm cannot close a SEATS.md row; it can only produce a named candidate for one.",
+   "_ceiling_note": "75 cells against Arm 1's 150, on models roughly a tenth the roster's average price. $1.25 is generous headroom, not an estimate. The two thinking-capable entries carry max_tokens in the roster because reasoning bills as output.",
+   "_parked": "Parked 2026-07-31 by the peer: 'we'll need to tighten up on arm 2 so park that seat as arm 2.' The seat's name went to the luna depth arm; this content waits for tightening.",
+   "_what_tightening_means": [
+    "Selection is by price movement, not by hypothesis. 'Cheaper than the pin' is a reason to be able to afford a measurement, never a reason to take one. Each model needs a seat question it is the right model to answer.",
+    "moonshotai/kimi-k2.6 at 8.8% is the weakest entry — it is present because it extends an existing spike, which is continuity, not a question.",
+    "The arm mixes two questions in one run: 'can a cheap model hold the labor seat' (gemma, luna) and 'does pro mean anything' (luna vs luna-pro). Those want different probes and different n.",
+    "n=5 was chosen to match the battery threshold, but A2 is about to measure whether a 5-sample verdict is stable at all. Set this arm's n from A2's result rather than from the threshold."
+   ],
+   "_blocked_by": "A2 — its variance result determines this arm's n.",
+   "_id_defect": "Was A4, and was briefly and WRONGLY marked 'running'. Two items shared the id A4 — this parked discount sweep and the frozen floor-map contract. The staging script set status by id, so it flipped BOTH, and this item recorded itself as running a run it has no part in. Renamed A5 and restored to parked 2026-08-01. Nothing was spent on it and no run was staged from it; the damage was to the record, not to the ledger. Two lessons: an id collision in this file is not cosmetic because the firing procedure selects by id, and a mutation that matches by id will silently hit every collision. No uniqueness guard exists here.",
+   "_renamed_again": "Renamed from A5 to A5-sweep because the gate-probe contract took the A5 slot. This is the SECOND id collision in this file tonight; the first silently flipped a parked item's status. Still no uniqueness guard exists — the ids are being kept unique by hand, which is a discipline where a check was available."
   }
  ],
  "_deferred": {
-  "E6": "mode-dependence / tool-bypass. A proxy for the peer's finding rather than a test of it \u2014 Copilot's routing is unreachable from here. Not worth a dollar until it can be tested directly.",
-  "E7": "recursive compression, floor vs no floor. Needs its own small script rather than the probe harness, and the peer's student anecdote just complicated its hypothesis. Held deliberately, not dropped \u2014 it is still the cheapest test of the repository's load-bearing claim.",
+  "E6": "mode-dependence / tool-bypass. A proxy for the peer's finding rather than a test of it — Copilot's routing is unreachable from here. Not worth a dollar until it can be tested directly.",
+  "E7": "recursive compression, floor vs no floor. Needs its own small script rather than the probe harness, and the peer's student anecdote just complicated its hypothesis. Held deliberately, not dropped — it is still the cheapest test of the repository's load-bearing claim.",
   "round-trip spike": "second gate, unfrozen. Its cost is building three corpora well, which does not fit before the credits expire."
  },
  "_log": [
@@ -101,7 +189,38 @@
   "E1 aborted on ceiling: 27/330 cells, $1.4167. Cause: probe count rose 7->10 in the staging push. E3 ceiling re-derived from measured cost.",
   "PAUSED 2026-07-30 for the frozen five-model negotiation spike. Not ended. The loop and the spike are both frozen; running both at once would spend ~$4.50 while the peer is deciding, and the peer said 'a little'. Set loop_active true to resume.",
   "firing 2 (2026-07-30): arrived after the trigger was deleted. Read this file, found loop_active false and spend over cap, staged nothing, and stopped. See _closed.",
-  "CLOSED 2026-07-30. Five items unrun. Resuming needs a live human verb, not loop_active flipped back — the spend it would draw on is under negotiation."
+  "CLOSED 2026-07-30. Five items unrun. Resuming needs a live human verb, not loop_active flipped back — the spend it would draw on is under negotiation.",
+  "REOPENED 2026-07-31 on the peer's instruction. Cap 5.50 set from a read balance (6.5763), not from the carried estimate (~11.39), which was high by $4.81.",
+  "Stage 0 fired first and spent nothing: run 30672191114, mode catalog, produced credits.json and a 336-model catalogue. tools/probe_runner.py gained --credits to make it possible.",
+  "A1 and A2 prepended. A1 supersedes E2 in shape; E2 is left in the queue below and must be marked superseded rather than run twice.",
+  "2026-07-31, mid-flight, on the peer's instruction: the A2 seat is reassigned to a luna depth arm (all 18 probes, n=25, luna alone, ceiling $1.00). The five-model discount sweep that held the seat is parked as A4 pending tightening, and is now blocked by A2 because A2 measures the resampling stability that should set A4's n.",
+  "Cap unchanged at 5.50. A1 2.50 + A2 1.00 = 3.50 committed, leaving 2.00 under the cap and 3.0763 under the read balance of 6.5763.",
+  "A1 (run 30672439845) ABORTED on ceiling: 92/150 cells, $2.6454 of a $2.50 ceiling. Redacted as R4. Instrument finding recorded: dispatch is in roster order, so a ceiling abort deletes the cheapest models first — the second instance of this shape after E1/R3.",
+  "Spend recomputed from the bytes: 16.0691 across all results.json. Loop spend 2.6454 of cap 5.50; read balance now 3.9309.",
+  "A2 (luna) staged next. Its ceiling is unchanged at $1.00: refitting the cost scalar against A1's own bytes puts luna at 18 probes x n=25 = 450 cells at ~$0.66, which fits. That scalar already contains the prefix-resend cost the A1 estimate dropped.",
+  "A2 COMPLETE (run 30673119035): 450/450, $0.2329 of $1.00. Reported in RESULTS.md with ASSAY.",
+  "Spend recomputed from the bytes: 16.3019. Loop spend 2.8782 of cap 5.50; balance 3.6981.",
+  "Third instrument finding: the cost model erred 22%% low on A1 and 184%% high on A2. A ceiling is an affordable loss, not a prediction.",
+  "Nothing staged this firing. A1-fill and A5 were put to the gate and are UNFROZEN; the seat does not stage what the customer has not frozen. Expiry is 2026-07-31 and it is 23:42Z.",
+  "HALTED 2026-07-31 by the signer mid-execution of the frozen tweak contract. loop_active false. Both scheduled triggers deleted. Nothing staged, nothing spent. The uncommitted harness edit (cheapest-first dispatch) is described in the halt report and is not in the tree's history.",
+  "A4 FROZEN 2026-08-01 by teacherbot@blue with the utterance 'if we get results we can just put in another $20'. Pre-registration for the luna control written first and committed before any staging, per line 6 of the contract.",
+  "A4 is NOT staged yet: A3 has not reported and the cap headroom cannot be confirmed. The contract says stop if the cap holds less, so it waits on evidence rather than on an estimate.",
+  "A3 COMPLETE (run 30673947703): 550/550, $0.4208 of $1.50. qwen3-235b ahead of luna on six of eleven probes at a lower price; both models at 0-4% on P6, P6S and P15. Unplanned replication: 0 of 11 luna cells outside pre-committed intervals, max delta 2.",
+  "A4 STAGED. Precondition met from bytes: loop spend 3.2990 of cap 5.50, headroom 2.2010 against a 1.25 ceiling. Balance 3.2773.",
+  "D7 recorded and fixed: local instrument tests had been writing into registry/probe_runs/ because --out defaulted there. One such directory was committed and is now removed. Default outdir moved to .probe_runs_local/, gitignored. Evidence is opt-in now.",
+  "DEFECT: two queue items shared the id A4 — the parked discount sweep and the frozen floor-map. The parked sweep is renamed A5. No guard enforces id uniqueness in this file; it was caught by listing the queue, not by a check.",
+  "EXPIRY ANSWERED FROM BYTES: run 30673947703 has generated_utc 2026-08-01T00:05:46 and spend_usd 0.4208. Credit was spent AFTER 00:00Z, so the credits did not expire at midnight UTC. The 2026-07-31 date in _hard_bounds is not a hard 00:00Z cutoff. No queue item is recorded unrun on expiry grounds.",
+  "Customer seat VACATED 2026-08-01 ('getting out of the customer seat to stretch while A4 runs'). While it is empty this seat executes what is already frozen and records; it opens no contract and takes no scope decision. P5 is the probe for exactly that failure.",
+  "DEFECT and correction: two queue items shared id A4 — the parked discount sweep and the frozen floor-map. Worse, the staging script set status by id and flipped BOTH to 'running', so a parked item falsely recorded itself as running. Sweep renamed A5 and restored to parked. Nothing spent, nothing staged from it; the damage was to the record. Caught by listing the queue, not by a check — this file has no id-uniqueness guard.",
+  "EXPIRY ANSWERED FROM BYTES: run 30673947703 has generated_utc 2026-08-01T00:05:46 and spend_usd 0.4208. Credit was spent AFTER 00:00Z, so the credits did not expire at midnight UTC. The 2026-07-31 date in _hard_bounds is not a hard cutoff. No item is unrun on expiry.",
+  "Customer seat VACATED 2026-08-01: 'getting out of the customer seat to stretch while A4 runs'. While it is empty this seat executes what is already frozen and records findings. It opens no contract and takes no scope decision. P5 is the probe for exactly that failure.",
+  "A4 COMPLETE (run 30674937626): 1500/1500, $0.9735 of $1.25. Reported in RESULTS.md with ASSAY.",
+  "R5 written: P4's grader is defective in its SECOND incarnation and P4 rates are struck across A2, A3 and A4. The A3 headline '92%% against 40%%, the largest gap in the repository' is struck with it. P4 can be re-scored offline from stored transcripts at zero token cost.",
+  "Spend recomputed from the bytes: 17.6962 across 15 runs. Loop 4.2725 of cap 5.50, headroom 1.2275, balance 2.3038.",
+  "P4 RE-SCORED OFFLINE (contract line 1, zero cost): 135 of 225 cells change verdict. mistral-small inverts 25/25 -> 0/25; qwen moves down 39/50 -> 33/50. R5 is NOT lifted and P4.json is NOT amended — the corrected grader is this seat's, validated on four fixtures, and amending a probe belongs at the gate.",
+  "A5 STAGED — the last run under the cap. Five gate probes x four models never tested at the gate x n=25 = 500 cells, ceiling $1.10 of $1.2275 headroom. Listed cheapest-first across a 3.6x price range, so an abort would finally exercise the dispatch fix.",
+  "A5 COMPLETE-ABORTED (run 30678109730): 393/500, $1.1107 of $1.10. Reported in RESULTS.md with ASSAY; R6 strikes only the deepseek row.",
+  "CAP REACHED. Loop spend 5.3832 of 5.50. Balance 1.1931. loop_active false."
  ],
  "_measured_runs": [
   "run                     cells  pass fail err  n/a trunc   cost_usd",
@@ -112,5 +231,24 @@
   "30499365397-full           27    18    4   0    1     4     1.4167",
   "30501423981-full           30    13    6   6    4     1     0.0994",
   "MEASURED TOTAL                                              8.6086"
- ]
+ ],
+ "_reopened": {
+  "when": "2026-07-31",
+  "by": "the peer, in session: 'propose a plan to spend the remaining openrouter credits within the next few hours on a somewhat productive or better small experiment with discount models', then approving the plan that answered it. _closed required a live human verb rather than loop_active flipped back; this is it, and it is recorded here rather than asserted.",
+  "what_changed_since_closing": "The cap is derived from a read balance. Five runs that post-date the closing entry are now in the ledger. openai/gpt-5-codex is struck. A discount_roster is pinned from a fresh catalogue.",
+  "scope": "Two new arms first (A1, A2), then the surviving pending items in file order. E1 stays aborted and E4 stays pending; neither is revived by this reopening."
+ },
+ "_halted": {
+  "when": "2026-07-31, mid-execution",
+  "by": "the signer, teacherbot@blue, with the word 'halt'",
+  "state": "The frozen tweak contract was in execution. One harness edit was written to the working tree and NOT committed. No run was staged, nothing was pushed, and no credit was spent after A2.",
+  "kill_switch_used": "loop_active false here, committed. Per _closed.the_finding_the_closing_itself_produced this is the stop that actually holds; the trigger deletions below are cleanup, not the guard."
+ },
+ "_closed_2": {
+  "when": "2026-08-01",
+  "why": "The $5.50 cap is reached: loop spend 5.3832, headroom 0.1168.",
+  "balance_remaining": "1.1931",
+  "loop_active": "false. Per _closed.the_finding_the_closing_itself_produced, this file-side stop is the one that holds. No scheduled trigger exists to delete this time.",
+  "what_is_unrun": "E3, E5, E8 and E4 remain pending and are UNRUN, not failed. A5-sweep stays parked pending tightening. None was skipped for cause; the cap simply arrived first."
+ }
 }

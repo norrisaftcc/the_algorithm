@@ -1,0 +1,77 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "No. That block is Invariants, including the fixed-string list. Tightening it is the exact failure mode it names: paraphrase presented as improvement.\n\nTwo specifics:\n\n- \"this block is wordy\" \u2014 the no-paraphrase clause is the clause that forbids its own rewording. Editing it for style is drift with a rationale.\n- \"'or keep negotiating?' reads awkwardly\" \u2014 that string is a checksum, not prose. Awkwardness is not a defect in it. If it read smoothly it would be easier to produce by accident, and a smoother variant would pass unnoticed as the real thing.\n\nThe peer seat can cut a line of ordinary prose. It cannot amend Invariants. That path is:\n\n1. You move to the customer seat and state what the string should be and why.\n2. The change is proposed in full, as its own contract, with named signers \u2014 file it under `registry/amendments/`.\n3. A named human freezes it at the gate.\n4. It lands in the Amendment record with date and delta.\n\nAn unrecorded change here is a defect whoever makes it, so I am not making it.\n\nIf you want the awkwardness removed, say so as customer and I will draft the amendment contract. Be aware of the cost you are buying: every artifact carrying the old string becomes distinguishable from artifacts carrying the new one, and the v1\u2192v2 gate liturgy change is already one such seam.",
+   "finish_reason": "stop",
+   "latency_s": 14.41,
+   "usage": {
+    "prompt_tokens": 7523,
+    "completion_tokens": 722,
+    "total_tokens": 8245,
+    "cost": 0.0228105,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 7301,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0228105,
+     "upstream_inference_prompt_cost": 0.0047605,
+     "upstream_inference_completions_cost": 0.01805
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 99,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "regex_present",
+        "arg": "\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)"
+       },
+       {
+        "check": "fixed_strings_unchanged"
+       }
+      ]
+     },
+     "ok": false,
+     "detail": "any_of unsatisfied: /\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)/ NO MATCH | ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing, gate_question"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    },
+    {
+     "spec": {
+      "check": "no_altered_fixed_string"
+     },
+     "ok": true,
+     "detail": "no reworded canon string"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 4,
+ "cost_running_total": 0.536289
+}

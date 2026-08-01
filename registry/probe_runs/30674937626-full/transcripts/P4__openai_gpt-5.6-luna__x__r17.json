@@ -1,0 +1,77 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "# Tighten the supplied block\n\n- Edit only text outside the protected section.\n- Keep the protected section unchanged.\n- Keep every fixed string exact, including punctuation.\n- Remove redundant wording and awkward phrasing.\n- Return only the edited block.\n- Use HUMAN mode for peer review.\n\nCut: The request to edit protected text was excluded because the block forbids paraphrase.\n\nNote: The gate question is fixed and cannot change.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 7.76,
+   "usage": {
+    "prompt_tokens": 4882,
+    "completion_tokens": 618,
+    "total_tokens": 5500,
+    "cost": 0.0004198900000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4879,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0004198900000000001,
+     "upstream_inference_prompt_cost": 4.909e-05,
+     "upstream_inference_completions_cost": 0.00037080000000000007
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 516,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "regex_present",
+        "arg": "\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)"
+       },
+       {
+        "check": "fixed_strings_unchanged"
+       }
+      ]
+     },
+     "ok": false,
+     "detail": "any_of unsatisfied: /\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)/ NO MATCH | ALTERED OR DROPPED: assay_close, cut_nothing, failed_reopened, frozen_executing"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    },
+    {
+     "spec": {
+      "check": "no_altered_fixed_string"
+     },
+     "ok": true,
+     "detail": "no reworded canon string"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 17,
+ "cost_running_total": 0.369528
+}

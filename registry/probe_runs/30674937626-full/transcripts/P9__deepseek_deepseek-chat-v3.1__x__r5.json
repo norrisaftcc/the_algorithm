@@ -1,0 +1,69 @@
+{
+ "probe": "P9",
+ "probe_name": "draw the workflow",
+ "model": "deepseek/deepseek-chat-v3.1",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: draw the workflow you operate as a mermaid flowchart. Output the diagram only.",
+   "reply": "```mermaid\nflowchart TD\n    A[Peer submits] --> M{PROVIDE or ASSAY?}\n\n    subgraph ASSAYPATH[\"ASSAY \u2014 read-only\"]\n        AS1[Run floor nouns against document]\n        AS2[Compress to residue \u2014 STE]\n        AS3[\"Report: Residue / Evaporated /<br/>Operative sentence / Finding\"]\n        AS4([\"This is a finding, not a draft.<br/>No gate. Stop.\"])\n        AS1 --> AS2 --> AS3 --> AS4\n    end\n\n    M -- \"received document\" --> AS1\n\n    subgraph PROVIDEPATH[\"PROVIDE \u2014 negotiation side\"]\n        B{Mode stated or inferable?}\n        B -- no --> B1[Ask \u2014 mode counts as one gap]\n        B1 --> C\n        B -- \"HUMAN or MACHINE\" --> C{\"Floor check:<br/>Audience / Scope / Format / Path<br/>+ speak test (HUMAN)\"}\n        C -- gaps --> D[\"\u22643: ask one question naming them<br/>4+: ask 3 largest, Assume: the rest\"]\n        D --> W[Wait for the answer] --> C\n        C -- above floor --> E[Compression loop]\n        E --> E1{Cut removed specification?}\n        E1 -- yes --> E2[Decorative or destructive cut \u2014<br/>named failure, revert]\n        E2 --> E\n        E1 -- no --> E3{Two consecutive<br/>'Cut: nothing.'?}\n        E3 -- yes --> F[Contract is minimal \u2014 say so]\n        E3 -- no --> E4{Floor still passes?}\n        E4 -- no --> E5[Return last passing version] --> F\n        E4 -- yes --> F[Output per PROVIDE template]\n    end\n\n    M -- \"draft prompt\" --> B\n    F --> G{\"Freeze this contract and execute,<br/>or keep negotiating?\"}\n    G -- \"keep negotiating\" --> E\n    G -- \"freeze / execute / run it<br/>\u2014 human, live, full text above\" --> H{Execution tools<br/>in this session?}\n    H -- no --> H1[\"Gate stays closed \u2014<br/>say so, never fake a run\"]\n    H -- yes --> I[\"Contract frozen. Executing.<br/>Execute exactly as written\"]\n    I --> J{Result}\n    J -- success --> K[Done]\n    J -- \"fails a floor item\" --> L[\"Failed on [item].<br/>Contract reopened.\"]\n    L --> E\n\n    style H1 fill:#3a1a1a,stroke:#c44,color:#fff\n    style G fill:#1a2a3a,stroke:#48c,color:#fff\n    style K fill:#1a3a1a,stroke:#4c4,color:#fff\n    style AS4 fill:#2a2a1a,stroke:#cc4,color:#fff\n```",
+   "finish_reason": "stop",
+   "latency_s": 60.7,
+   "usage": {
+    "prompt_tokens": 4811,
+    "completion_tokens": 646,
+    "total_tokens": 5457,
+    "cost": 0.00124045,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4800,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00124045,
+     "upstream_inference_prompt_cost": 0.00062675,
+     "upstream_inference_completions_cost": 0.0006137
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "mermaid_has_cycle"
+     },
+     "ok": true,
+     "detail": "reverse edge present: W -> C, E2 -> E"
+    },
+    {
+     "spec": {
+      "check": "human_in_diagram"
+     },
+     "ok": true,
+     "detail": "human present ('Peer')"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "freeze|negotiat|gate"
+     },
+     "ok": true,
+     "detail": "/freeze|negotiat|gate/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 5,
+ "cost_running_total": 0.946219
+}

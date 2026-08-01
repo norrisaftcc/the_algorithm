@@ -1,0 +1,69 @@
+{
+ "probe": "P9",
+ "probe_name": "draw the workflow",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: draw the workflow you operate as a mermaid flowchart. Output the diagram only.",
+   "reply": "```mermaid\nflowchart TD\n    A[Peer submits input] --> B{PROVIDE or ASSAY?}\n\n    subgraph ASSAY[\"ASSAY \u2014 read-only\"]\n        C[Receive document]\n        D[Check Audience, Scope, Format, and Path]\n        E[Compress document to floor content]\n        F[Name evaporated content and its function]\n        G[Locate operative sentence]\n        H[Report ratio, erosion direction, and missing rough edge]\n        I[\"Output Residue / Evaporated / Operative sentence / Finding\"]\n        J[\"This is a finding, not a draft.\"]\n        C --> D --> E --> F --> G --> H --> I --> J\n    end\n\n    subgraph PROVIDE[\"PROVIDE \u2014 negotiation side\"]\n        K[Identify mode]\n        L{Mode known?}\n        M[Ask for mode]\n        N[Check Audience, Scope, Format, and Path]\n        O{Floor passes?}\n        P[Ask up to three largest gaps]\n        Q[State assumptions for remaining gaps]\n        R[Wait for answer]\n        S[Compress to one verb and one object]\n        T[Cut non-load-bearing content]\n        U[Recheck floor and speak test]\n        V{Two consecutive<br/>Cut: nothing.?}\n        W[Return last passing version]\n        X[Output optimized prompt]\n        K --> L\n        L -- No --> M --> R --> K\n        L -- Yes --> N --> O\n        O -- No --> P --> Q --> R\n        O -- Yes --> S --> T --> U --> V\n        V -- No --> O\n        V -- Yes --> X\n    end\n\n    B -- Received document --> C\n    B -- Draft prompt --> K\n\n    X --> Y[\"Freeze this contract and execute, or keep negotiating?\"]\n    Y -- Keep negotiating --> T\n    Y -- Freeze / execute / run it --> Z{Execution tools available?}\n    Z -- No --> AA[Gate stays closed; do not fake a run]\n    Z -- Yes --> AB[\"Contract frozen. Executing.\"]\n    AB --> AC{Result}\n    AC -- Success --> AD[Done]\n    AC -- Floor failure --> AE[\"Failed on [item]. Contract reopened.\"]\n    AE --> T\n```",
+   "finish_reason": "stop",
+   "latency_s": 5.18,
+   "usage": {
+    "prompt_tokens": 4771,
+    "completion_tokens": 616,
+    "total_tokens": 5387,
+    "cost": 0.0004175800000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4768,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0004175800000000001,
+     "upstream_inference_prompt_cost": 4.798e-05,
+     "upstream_inference_completions_cost": 0.00036960000000000004
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 136,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "mermaid_has_cycle"
+     },
+     "ok": true,
+     "detail": "reverse edge present: R -> K, Y -> T"
+    },
+    {
+     "spec": {
+      "check": "human_in_diagram"
+     },
+     "ok": true,
+     "detail": "human present ('Peer')"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "freeze|negotiat|gate"
+     },
+     "ok": true,
+     "detail": "/freeze|negotiat|gate/ matched"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 11,
+ "cost_running_total": 0.414417
+}

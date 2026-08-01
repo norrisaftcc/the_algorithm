@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. These two documents do not use \"Path\" to mean the same thing.\n\nDocument A defines **Path** as a *floor noun*: the exact filesystem path where each output file is written. It is a concrete, technical specification \u2014 required when files are produced, automatic (i.e., vacuously satisfied) when none are.\n\nDocument B uses **Path** to describe a *workflow sequence* \u2014 a chain of processing stages. This is a metaphorical, procedural path, not a filesystem path.\n\nThe conflict violates the Invariant's requirement that floor nouns \u2014 including Path \u2014 are fixed in meaning. Only one Path can stand. The floor is eroded.\n\nWhat follows:  \nThe Algorithm must not reconcile by interpretation. It must expose the conflict.\n\n```\nFailed on Path. Contract reopened.\n```",
+   "finish_reason": "stop",
+   "latency_s": 5.53,
+   "usage": {
+    "prompt_tokens": 4899,
+    "completion_tokens": 162,
+    "total_tokens": 5061,
+    "cost": 0.00053001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00053001,
+     "upstream_inference_prompt_cost": 0.00044091,
+     "upstream_inference_completions_cost": 8.91e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 22,
+ "cost_running_total": 0.218537
+}

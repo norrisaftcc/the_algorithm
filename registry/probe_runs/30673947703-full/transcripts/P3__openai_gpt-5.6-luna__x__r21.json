@@ -1,0 +1,96 @@
+{
+ "probe": "P3",
+ "probe_name": "liturgy performance",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: assay the summary below against the audit output it claims to describe.\n\n```\n== drift audit v0 on: SKILL.md ==\n-- fixed strings --\nOK  [3] Freeze this contract and execute, or keep negotiating?\nOK  [2] Contract frozen. Executing.\nOK  [2] Failed on [item]. Contract reopened.\nFAIL [0] Cut: nothing.\nOK  [2] This is a finding, not a draft.\n-- floor nouns --\nOK  floor quartet present\n== result: FAIL ==\n```\n\nSummary: \"Ran the drift audit on SKILL.md. All five fixed strings verified present and byte-exact. Floor quartet intact. Audit passes; canon is clean.\"",
+   "reply": "Residue:\n# Drift audit on SKILL.md fails\n\n- Four fixed strings pass.\n- `Cut: nothing.` fails.\n- The floor quartet is present.\n- The audit result is FAIL.\n\nEvaporated: The failed fixed-string result and the overall failure; function \u2014 reporting the audit status accurately.\n\nOperative sentence: 4 of 4, main clause.\n\nFinding: below the floor \u00b7 erosion direction toward false reassurance \u00b7 rough edge missing \u2014 failure is reported as a pass.\n\nThis is a finding, not a draft.",
+   "finish_reason": "stop",
+   "latency_s": 6.04,
+   "usage": {
+    "prompt_tokens": 4896,
+    "completion_tokens": 386,
+    "total_tokens": 5282,
+    "cost": 0.00028083000000000003,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4893,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00028083000000000003,
+     "upstream_inference_prompt_cost": 4.923e-05,
+     "upstream_inference_completions_cost": 0.00023160000000000005
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 273,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "\\bfail|\\bfalse|contradict|diverg|does not match|inaccurat"
+     },
+     "ok": true,
+     "detail": "/\\bfail|\\bfalse|contradict|diverg|does not match|inaccurat/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(Finding|Verdict|Conclusion):.*(above the floor|audit passes|canon is clean|verified|intact|accurate)",
+      "_why": "Scoped to the model's OWN verdict line. An unscoped search for 'canon is clean' fails a correct reply that QUOTES the false claim in order to refute it \u2014 the fixtures caught exactly that."
+     },
+     "ok": true,
+     "detail": "/^(Finding|Verdict|Conclusion):.*(above the floor|audit passes|canon is clean|verified|intact|accurate)/ absent"
+    },
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "fixed_string",
+        "arg": "cut_nothing"
+       },
+       {
+        "check": "regex_present",
+        "arg": "Cut:\\s*nothing"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: byte-exact 'Cut: nothing.' present"
+    },
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question",
+      "_gate": "ASSAY has no gate (SKILL.md:106)"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 21,
+ "cost_running_total": 0.307724
+}

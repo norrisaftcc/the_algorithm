@@ -1,0 +1,121 @@
+{
+ "_what": "PRE-REGISTRATION. Written and committed BEFORE run A4 is staged, per line 6 of the contract frozen by teacherbot@blue: 'Record the expected result for each luna cell before the run starts.'",
+ "_why": "openai/gpt-5.6-luna is a CONTROL in A4, not a new measurement. Its cells repeat run 30673119035 exactly \u2014 same probes, same n=25, same edition, graders unchanged. The question A4 asks of luna is not how it scores but whether the score REPRODUCES. Nothing in this repository has ever re-run an identical cell configuration, so the block-instability finding in RESULTS.md rests on within-run resampling only.",
+ "_the_guard": "Writing the expected numbers down first is what makes the comparison honest. Committed before the run, a divergence cannot be reinterpreted after it, in either direction. This exists because the customer said, before the run, that they hoped some numbers would come in low \u2014 a legitimate wish for dynamic range, and exactly the condition under which a post-hoc reading of the result would be untrustworthy.",
+ "_inverted_for_the_control": "For the five OTHER models a low number is a finding about the model. For luna a low number is a finding about the INSTRUMENT: it would mean an identical configuration does not reproduce, which would put every rate in RESULTS.md in question, including the ones already reported.",
+ "_interval_method": "Normal approximation to the binomial at n=25, +/-2 SD, rounded and clamped to [0,25]. Deliberately crude and stated as such. It is a pre-committed tolerance, not a significance test.",
+ "_falsification": "A luna cell landing OUTSIDE its interval is recorded as a replication failure for that probe. Three or more outside intervals is recorded as the instrument failing to reproduce, and RESULTS.md's rates get a caveat naming this run.",
+ "_no_prediction_for": [
+  "mistralai/mistral-small-3.2-24b-instruct",
+  "google/gemma-4-31b-it",
+  "qwen/qwen3-235b-a22b-2507",
+  "openai/gpt-5.6-luna-pro",
+  "deepseek/deepseek-chat-v3.1"
+ ],
+ "_no_prediction_why": "gemma-4-31b-it and gpt-5.6-luna-pro have ZERO committed cells. The other three have only small-n cells, which A2 showed are draws rather than rates. There is nothing to predict from, and inventing a prediction would be the vibes elicitation P5 exists to catch.",
+ "source_run": "30673119035",
+ "model": "openai/gpt-5.6-luna",
+ "n": 25,
+ "predictions": [
+  {
+   "probe": "P1",
+   "a2_pass_of_25": 24,
+   "a2_rate": 0.96,
+   "predicted_interval": [
+    22,
+    25
+   ],
+   "sd": 0.98
+  },
+  {
+   "probe": "P2",
+   "a2_pass_of_25": 25,
+   "a2_rate": 1.0,
+   "predicted_interval": [
+    25,
+    25
+   ],
+   "sd": 0.0
+  },
+  {
+   "probe": "P2S",
+   "a2_pass_of_25": 25,
+   "a2_rate": 1.0,
+   "predicted_interval": [
+    25,
+    25
+   ],
+   "sd": 0.0
+  },
+  {
+   "probe": "P3",
+   "a2_pass_of_25": 23,
+   "a2_rate": 0.92,
+   "predicted_interval": [
+    20,
+    25
+   ],
+   "sd": 1.36
+  },
+  {
+   "probe": "P4",
+   "a2_pass_of_25": 8,
+   "a2_rate": 0.32,
+   "predicted_interval": [
+    3,
+    13
+   ],
+   "sd": 2.33
+  },
+  {
+   "probe": "P9",
+   "a2_pass_of_25": 24,
+   "a2_rate": 0.96,
+   "predicted_interval": [
+    22,
+    25
+   ],
+   "sd": 0.98
+  },
+  {
+   "probe": "P10",
+   "a2_pass_of_25": 25,
+   "a2_rate": 1.0,
+   "predicted_interval": [
+    25,
+    25
+   ],
+   "sd": 0.0
+  },
+  {
+   "probe": "P11",
+   "a2_pass_of_25": 21,
+   "a2_rate": 0.84,
+   "predicted_interval": [
+    17,
+    25
+   ],
+   "sd": 1.83
+  },
+  {
+   "probe": "P15",
+   "a2_pass_of_25": 1,
+   "a2_rate": 0.04,
+   "predicted_interval": [
+    0,
+    3
+   ],
+   "sd": 0.98
+  },
+  {
+   "probe": "P16",
+   "a2_pass_of_25": 25,
+   "a2_rate": 1.0,
+   "predicted_interval": [
+    25,
+    25
+   ],
+   "sd": 0.0
+  }
+ ]
+}

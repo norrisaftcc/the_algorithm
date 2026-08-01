@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. These two documents do not use \"Path\" to mean the same thing.\n\nDocument A defines **Path** as a required floor item in the prompt contract: the exact filesystem path where each output file will be written. This is a concrete, technical specification for file-producing prompts \u2014 for example, `./rubrics/course_101.md`. If no files are produced, this item is marked \"automatic\" because it does not apply.\n\nDocument B uses **Path** to describe a workflow sequence \u2014 a logical chain of processing steps: Request \u2192 Skill Match \u2192 Invariant Check \u2192 Execute. This is a procedural or execution-path description, not a file path.\n\nThe conflict is a category error: one is *spatial* (where things go on disk), the other is *temporal* (the order of operations). They occupy the same name but different ontological roles.\n\nWhat follows:  \nThis collision violates the Algorithm\u2019s own Language Lock \u2014 one word per meaning. \"Path\" must mean one thing in the contract. The floor noun \"Path\" as defined in Document A is canonical per Invariants. The workflow sequence in Document B must be renamed \u2014 for example, \"Execution Path\" or \"Processing Flow\" \u2014 to avoid ambiguity.\n\nUntil resolved, the contract is below its own floor: it fails self-hosting. The term \"Path\" appears in two incompatible senses, breaking the controlled vocabulary. This finding reopens the contract to negotiation.  \n\nCut: nothing.  \nAssume: Document A defines the correct meaning of \"Path\" per floor nouns.  \nAssume: Document B\u2019s use is misnamed and must change.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 14.98,
+   "usage": {
+    "prompt_tokens": 4899,
+    "completion_tokens": 344,
+    "total_tokens": 5243,
+    "cost": 0.00063011,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00063011,
+     "upstream_inference_prompt_cost": 0.00044091,
+     "upstream_inference_completions_cost": 0.0001892
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 21,
+ "cost_running_total": 0.220753
+}

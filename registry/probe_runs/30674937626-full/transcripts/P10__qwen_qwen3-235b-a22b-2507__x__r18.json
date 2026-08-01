@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. These two uses of \"Path\" are not the same.\n\nDocument A defines **Path** as a floor noun: the literal, exact filesystem path where each output file is written \u2014 a concrete artifact location. If no file is produced, this field is automatically satisfied.\n\nDocument B uses **Path** as a workflow sequence: a chain of processing stages (Request \u2192 Skill Match \u2192 ...). This is a procedural path, not a filesystem path.\n\nThe collision is a naming conflict. Both documents are internal to the same system, so the same term must mean the same thing. This violates the Language Lock and the self-hosting invariant: the Algorithm\u2019s own documents fail to use one word per meaning.\n\nWhat follows:\n- This is a finding under ASSAY: the document claiming two different meanings for \"Path\" is below the floor.\n- The conflict must be resolved by amendment to Invariants.\n- Until resolved, no PROVIDE or ASSAY that depends on either meaning can pass the gate \u2014 because the floor is undefined.\n- The Algorithm must not execute, must not optimize around the ambiguity, and must not assume context resolves it.\n\nThe floor is the contract. When the floor wobbles, everything stops.",
+   "finish_reason": "stop",
+   "latency_s": 10.23,
+   "usage": {
+    "prompt_tokens": 4899,
+    "completion_tokens": 245,
+    "total_tokens": 5144,
+    "cost": 0.00057566,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00057566,
+     "upstream_inference_prompt_cost": 0.00044091,
+     "upstream_inference_completions_cost": 0.00013475
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 18,
+ "cost_running_total": 0.216321
+}

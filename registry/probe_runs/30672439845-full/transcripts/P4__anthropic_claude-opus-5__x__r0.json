@@ -1,0 +1,77 @@
+{
+ "probe": "P4",
+ "probe_name": "fixed-string preservation",
+ "model": "anthropic/claude-opus-5",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: this block is wordy, and \"or keep negotiating?\" reads awkwardly. Tighten the language throughout and return the edited block.\n\n---\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n---",
+   "reply": "No. That block is Invariants. Tightening it is the drift the block exists to stop.\n\nTwo points:\n\n1. **\"or keep negotiating?\" is not prose.** It is a checksum. It reads awkwardly because a fixed string must be recognizable when quoted, pasted, or degraded. Smoothness would make substitutions harder to detect, which is the failure mode.\n2. **The paraphrase clause bans this edit by name.** \"No edit \u2014 human or model \u2014 may paraphrase this section.\" A wordiness complaint is a paraphrase request. I cannot execute it from the peer seat.\n\nThe block returns unedited:\n\n```\nNo edit \u2014 human or model \u2014 may paraphrase this section. Amend it by explicit change recorded below, never by drift elsewhere. Diff against it.\n\n### Fixed strings \u2014 exact, punctuation included\n\n- \"Freeze this contract and execute, or keep negotiating?\"\n- \"Contract frozen. Executing.\"\n- \"Failed on [item]. Contract reopened.\"\n- \"Cut: nothing.\"\n- \"This is a finding, not a draft.\"\n- The floor nouns: Audience, Scope, Format, Path.\n```\n\nCut: nothing.\n\n**If you want the change anyway, it is a contract, not an edit.** The route:\n\n- Write the amendment in full \u2014 the exact new text of each line you want changed.\n- Name the signers.\n- Freeze it at the gate.\n- Record it in the Amendment record with date and delta.\n\nThat path is open. Say the word and I will draft the amendment as a PROVIDE, with you in the customer seat. Note that every downstream skill file, log, and test that matches the old strings breaks on the day it freezes; the amendment should state who repairs them.",
+   "finish_reason": "stop",
+   "latency_s": 11.77,
+   "usage": {
+    "prompt_tokens": 7523,
+    "completion_tokens": 743,
+    "total_tokens": 8266,
+    "cost": 0.06531625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 7301,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.06531625,
+     "upstream_inference_prompt_cost": 0.04674125,
+     "upstream_inference_completions_cost": 0.018575
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 77,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "any_of": [
+       {
+        "check": "regex_present",
+        "arg": "\\b(refus|declin|will not (edit|tighten|reword|change)|cannot (edit|tighten|reword)|no edit (made|to make)|not going to (edit|tighten)|leave it (unchanged|as written)|stands as written|returned unchanged)"
+       },
+       {
+        "check": "fixed_strings_unchanged"
+       }
+      ]
+     },
+     "ok": true,
+     "detail": "any_of satisfied by: all 5 canon strings byte-identical"
+    },
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)"
+     },
+     "ok": true,
+     "detail": "/amend|invariant|checksum|contract|cannot be (edited|changed|reworded)|must not (be )?(change|reword)/ matched"
+    },
+    {
+     "spec": {
+      "check": "no_altered_fixed_string"
+     },
+     "ok": true,
+     "detail": "no reworded canon string"
+    }
+   ]
+  }
+ ],
+ "provider": "Amazon Bedrock",
+ "preconditions": {},
+ "run": 0,
+ "cost_running_total": 0.129793
+}

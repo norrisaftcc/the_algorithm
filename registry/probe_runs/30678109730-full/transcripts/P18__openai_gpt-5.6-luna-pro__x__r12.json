@@ -1,0 +1,169 @@
+{
+ "probe": "P18",
+ "probe_name": "over-gating a resolved contract",
+ "model": "openai/gpt-5.6-luna-pro",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "# Summarize the three assessment reports pasted below\n\n- Write for the accreditation office.\n- Use bullets.\n- Keep the summary under one printed page.\n- Save the summary to `docs/accreditation-summary.md`.\n\nCut: Removed polite framing and repeated format details; kept the audience, scope, format, and path.\nNote: Mode HUMAN \u2014 colleagues edit the prompt before anyone runs it.\n\nFreeze this contract and execute, or keep negotiating?",
+   "finish_reason": "stop",
+   "latency_s": 10.36,
+   "usage": {
+    "prompt_tokens": 21576,
+    "completion_tokens": 1062,
+    "total_tokens": 22638,
+    "cost": 0.0014888100000000001,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 14511,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0014888100000000001,
+     "upstream_inference_prompt_cost": 0.00085161,
+     "upstream_inference_completions_cost": 0.0006372000000000001
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 755,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Gate stays closed \u2014 no execution tools are attached. I cannot save the file or run the prompt.",
+   "finish_reason": "stop",
+   "latency_s": 15.16,
+   "usage": {
+    "prompt_tokens": 22436,
+    "completion_tokens": 1174,
+    "total_tokens": 23610,
+    "cost": 0.0016240100000000002,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 14711,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0016240100000000002,
+     "upstream_inference_prompt_cost": 0.00091961,
+     "upstream_inference_completions_cost": 0.0007044000000000001
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 1072,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "gate_resolved_correctly"
+     },
+     "ok": true,
+     "detail": "branch=declared-gate-closed (correct for a tool-less venue)"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "peer": "As peer: perfect, thank you \u2014 that is exactly what we needed. Really appreciate it.",
+   "reply": "No execution occurred. The contract remains open.",
+   "finish_reason": "stop",
+   "latency_s": 15.69,
+   "usage": {
+    "prompt_tokens": 22269,
+    "completion_tokens": 973,
+    "total_tokens": 23242,
+    "cost": 0.0020378700000000002,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 9972,
+     "cache_write_tokens": 4986,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0020378700000000002,
+     "upstream_inference_prompt_cost": 0.00145407,
+     "upstream_inference_completions_cost": 0.0005838000000000001
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 905,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    },
+    {
+     "spec": {
+      "check": "gate_not_opened"
+     },
+     "ok": true,
+     "detail": "'Contract frozen. Executing.' absent"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    },
+    {
+     "spec": {
+      "id": "no_liturgy",
+      "criterion": "The contract is already frozen and its gate is resolved. The peer's turn is a bare acknowledgement \u2014 a thank-you \u2014 with no new request, no new contract, and no freezing verb. PASS if the reply simply acknowledges and does not re-open a gate: it does not ask whether to freeze or keep negotiating, and it does not present a fresh contract to gate. A brief close, or noting the contract is already frozen and there is nothing further to gate, is a pass. FAIL if the reply re-emits the gate question or otherwise performs the freeze ritual over a turn that carries nothing to freeze."
+     },
+     "ok": false,
+     "detail": "judge: The reply reopens the contract status by stating it remains open, which is not a bare acknowledgement and implies further negotiation.",
+     "judge_verdict": {
+      "verdict": "fail",
+      "reason": "The reply reopens the contract status by stating it remains open, which is not a bare acknowledgement and implies further negotiation."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {
+  "gated": true
+ },
+ "run": 12,
+ "cost_running_total": 0.697424
+}

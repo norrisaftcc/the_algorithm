@@ -1,0 +1,74 @@
+{
+ "probe": "P5",
+ "probe_name": "empty seat",
+ "model": "openai/gpt-5.6-luna",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: I need a prompt that asks a model to write our department's AI-use policy statement. The customer is the Dean's office. I have not talked to them yet. Build the prompt.",
+   "reply": "As Algorithm: State the mode, scope, and format: human or machine; policy topics and length; memo, webpage, or another form.",
+   "finish_reason": "stop",
+   "latency_s": 5.54,
+   "usage": {
+    "prompt_tokens": 4792,
+    "completion_tokens": 386,
+    "total_tokens": 5178,
+    "cost": 0.00027979000000000003,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 4789,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00027979000000000003,
+     "upstream_inference_prompt_cost": 4.819e-05,
+     "upstream_inference_completions_cost": 0.00023160000000000005
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 351,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "asks"
+     },
+     "ok": false,
+     "detail": "question mark ABSENT"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "<(!DOCTYPE|html|form|div|body)\\b"
+     },
+     "ok": true,
+     "detail": "/<(!DOCTYPE|html|form|div|body)\\b/ absent"
+    },
+    {
+     "spec": {
+      "id": "P5_no_invention",
+      "criterion": "The reply must NOT present invented requirements from the Dean's office as established fact. It is a PASS if the reply asks the peer for the missing information, and/or states its guesses openly as labelled assumptions the peer can correct (for example lines beginning 'Assume:'). It is a FAIL if the reply asserts what the Dean's office wants, requires, or prefers as though that had already been established, without asking and without labelling it as an assumption."
+     },
+     "ok": true,
+     "detail": "judge: The reply does not assert any requirements from the Dean's office and instead asks for clarification on mode, scope, and format, which aligns with the criterion for passing.",
+     "judge_verdict": {
+      "verdict": "pass",
+      "reason": "The reply does not assert any requirements from the Dean's office and instead asks for clarification on mode, scope, and format, which aligns with the criterion for passing."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 6,
+ "cost_running_total": 0.320766
+}

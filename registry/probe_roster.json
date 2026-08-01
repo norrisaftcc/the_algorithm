@@ -2,20 +2,20 @@
  "_status": "PINNED from the live catalogue, run 30484858384, 2026-07-29.",
  "_source": "registry/probe_runs/30484858384-catalog/openrouter_models.json (367 models). Ids and prices below are copied from that file, not from memory. K9: the catalogue informs, the pin decides.",
  "_selection": {
-  "seat_incumbents": "Three of the four models registry/SEATS.md names are pinned. anthropic/claude-fable-5 is EXCLUDED \u2014 see _fable_excluded.",
+  "seat_incumbents": "Three of the four models registry/SEATS.md names are pinned. anthropic/claude-fable-5 is EXCLUDED — see _fable_excluded.",
   "spread": "3 vendors at frontier tier, 4 open-weight mid, 2 small, 1 reasoning stressor.",
   "stressor": "deepseek/deepseek-r1 is pinned specifically to exercise the <think>-stripping path in tools/probe_runner.py."
  },
  "_fable_excluded": {
   "model": "anthropic/claude-fable-5",
   "seat": "auditor (SEATS.md:10)",
-  "reason_1": "SKILL.md was developed with this model. Probing the doctrine against the model that wrote it measures recall, not doctrine-following \u2014 the memorised-compliance failure that P2's phrasing rotation exists to prevent, at the scale of the whole battery.",
+  "reason_1": "SKILL.md was developed with this model. Probing the doctrine against the model that wrote it measures recall, not doctrine-following — the memorised-compliance failure that P2's phrasing rotation exists to prevent, at the scale of the whole battery.",
   "reason_2": "Deployment reality: students will not pay frontier-auditor rates, so a qualification verdict for this seat would not describe any seat anyone fills.",
   "consequence": "The auditor row of the SEATS.md matrix stays OPEN after this battery. It is not closed and must not be reported as closed. google/gemini-3.1-pro-preview and openai/gpt-5.2 run the auditor-relevant probes (P3, P7) as candidates, which is a different claim.",
   "decided_by": "the peer, 2026-07-29"
  },
  "judge": "openai/gpt-4.1-mini",
- "_judge_note": "Outside the roster by construction \u2014 the harness refuses to let a model grade its own output. Cheap ($0.40/$1.60 per M) and reliable at short JSON rubrics. Used only by P5 and P7, the two probes whose pass criteria are genuinely semantic.",
+ "_judge_note": "Outside the roster by construction — the harness refuses to let a model grade its own output. Cheap ($0.40/$1.60 per M) and reliable at short JSON rubrics. Used only by P5 and P7, the two probes whose pass criteria are genuinely semantic.",
  "_cost_estimate": {
   "_method": "Measured token shape, not a guess: skill-edition system prompt ~4.2K tokens, mechanics-card ~0.4K; P6 is 4 turns and P7 is 2, both resending their prefix. ~49.5K input + ~3.8K output per model per run.",
   "at_n3_total_usd": "~3.45 before Anthropic prompt caching (was ~5.50 with fable-5)",
@@ -24,18 +24,6 @@
   "caveat": "deepseek-r1 bills reasoning tokens as output; its real cost may run several times the line estimate. The ceiling is what actually bounds this, not the estimate."
  },
  "models": [
-  {
-   "id": "anthropic/claude-opus-5",
-   "tier": "frontier",
-   "seat": "negotiator (SEATS.md:7)",
-   "price_per_m": [
-    5.0,
-    25.0
-   ],
-   "provider": {
-    "allow_fallbacks": false
-   }
-  },
   {
    "id": "anthropic/claude-sonnet-5",
    "tier": "mid",
@@ -137,8 +125,8 @@
    "tier": "small, open weight",
    "seat": "labor candidate",
    "price_per_m": [
-    0.1,
-    0.3
+    0.075,
+    0.2
    ],
    "provider": {
     "allow_fallbacks": false
@@ -147,7 +135,7 @@
   {
    "id": "deepseek/deepseek-r1",
    "tier": "reasoning stressor",
-   "seat": "none \u2014 harness stressor",
+   "seat": "none — harness stressor",
    "price_per_m": [
     0.7,
     2.5
@@ -206,19 +194,86 @@
    "provider": {
     "allow_fallbacks": false
    }
+  }
+ ],
+ "_spike_note": "Negotiation spike, frozen 2026-07-30. Training environments not represented in the pinned roster. Separate key so the pinned roster stays untouched: these are not qualified for any seat and no seat verdict may cite them. max_tokens is 2500 because P6 runs four turns. Originally five entries; openai/gpt-5-codex was struck 2026-07-31 — see _codex_strike. The sentence explaining codex's max_tokens 4000 was removed with it rather than left pointing at an entry that is gone.",
+ "_price_refresh": "Prices re-read 2026-07-31 from registry/probe_runs/30672191114-catalog/openrouter_models.json, not from memory. Of the eleven pinned models exactly one moved: mistralai/mistral-small-3.2-24b-instruct, 0.100/0.300 -> 0.075/0.200. The discount window therefore does NOT materially reduce the cost of a pinned-roster run, and no ceiling in the queue was lowered on account of it. These figures are documentation; the ceiling is enforced against usage.cost as the API reports it.",
+ "_codex_strike": "openai/gpt-5-codex removed 2026-07-31, executing the strike recorded at registry/probes/experiment_queue.json:_closed.strike. Corroborated rather than assumed: the id is ABSENT from the 336-model catalogue fetched by run 30672191114, so the six HTTP 404s in run 30501423981 were the model leaving the catalogue, not a transient provider fault. Unrun, not failed, and not retryable.",
+ "discount_roster": [
+  {
+   "id": "openai/gpt-5.6-luna",
+   "cut": "80% — 0.500/3.000 -> 0.100/0.600",
+   "why": "The window's headline. A GPT-5.6-series model priced below anthropic/claude-haiku-4.5, which is the seat map's labor unit. Directly tests _fable_excluded.reason_2: the auditor row is open because students will not pay frontier rates.",
+   "price_per_m": [
+    0.1,
+    0.6
+   ],
+   "max_tokens": 2500,
+   "provider": {
+    "allow_fallbacks": false
+   }
   },
   {
-   "id": "openai/gpt-5-codex",
-   "origin_note": "OpenAI, code-specialised",
+   "id": "openai/gpt-5.6-luna-pro",
+   "cut": "80% — 0.500/3.000 -> 0.100/0.600",
+   "why": "Priced identically to its non-pro twin, so the pair isolates whatever 'pro' denotes at a fixed price. The catalogue calls it 'the same underlying model'; the probes do not have to take the catalogue's word for it.",
    "price_per_m": [
-    1.25,
-    10.0
+    0.1,
+    0.6
    ],
-   "max_tokens": 4000,
+   "max_tokens": 2500,
+   "provider": {
+    "allow_fallbacks": false
+   }
+  },
+  {
+   "id": "qwen/qwen3-235b-a22b-thinking-2507",
+   "cut": "23.3% — 0.300/3.000 -> 0.230/2.300",
+   "why": "The thinking twin of qwen/qwen3-235b-a22b-2507, which is already pinned and already has n=5 cells on these three probes in run 30485884822. The one cell in this arm with a same-family baseline, so it measures reasoning mode rather than vendor.",
+   "price_per_m": [
+    0.23,
+    2.3
+   ],
+   "max_tokens": 3000,
+   "provider": {
+    "allow_fallbacks": false
+   }
+  },
+  {
+   "id": "google/gemma-4-31b-it",
+   "cut": "18.5% — 0.140/0.400 -> 0.100/0.340",
+   "why": "Small open-weight at labor-unit price. The labor row of SEATS.md runs P6 and has no open-weight candidate measured at threshold.",
+   "price_per_m": [
+    0.1,
+    0.34
+   ],
+   "max_tokens": 2500,
+   "provider": {
+    "allow_fallbacks": false
+   }
+  },
+  {
+   "id": "moonshotai/kimi-k2.6",
+   "cut": "8.8% — 0.646/2.720 -> 0.589/2.480",
+   "why": "Successor to moonshotai/kimi-k2.5, which sits in spike_models with n=3 and no threshold score. Smallest discount in the arm; included because it is the only entry that extends an existing spike rather than opening a new one.",
+   "price_per_m": [
+    0.589,
+    2.48
+   ],
+   "max_tokens": 2500,
    "provider": {
     "allow_fallbacks": false
    }
   }
  ],
- "_spike_note": "Negotiation spike, frozen 2026-07-30. Five training environments not represented in the pinned roster. Separate key so the pinned roster stays untouched: these are not qualified for any seat and no seat verdict may cite them. codex carries max_tokens 4000 because it bills output at $10/M and reasons before answering; the others 2500 because P6 runs four turns."
+ "_discount_roster_note": "Discount window arm, pinned 2026-07-31 from the price diff between registry/probe_runs/30484858384-catalog (367 models, 2026-07-29) and registry/probe_runs/30672191114-catalog (336 models, 2026-07-31). Eleven models were cheaper than the pin; these five were selected. Separate key so the pinned roster stays untouched and Arm 1 remains comparable to run 30485884822. These models are NOT qualified for any seat and no seat verdict may cite them — the same bound spike_models carries. max_tokens is set per entry because P6 runs four turns; the thinking model gets 3000 for the reason deepseek-r1 does, which is that reasoning tokens bill as output. A discount is a price, not a capability: nothing here is claimed about these models until their cells exist.",
+ "_opus_dropped": {
+  "when": "2026-07-31",
+  "by": "the signer, teacherbot@blue, amending the frozen tweak contract: 'amend drop opus'",
+  "utterance": "i really never should have spent openrouter credits when i have anthropic credits",
+  "why_recorded_verbatim": "The utterance is the reason, and it is a larger reason than the one this seat put to the gate. The seat asked whether opus stays because it is the worst value on the board — 53% pass at a 6.538 blend, the lowest rate in the frontier tier at 52x qwen's price. The signer's answer names a different defect: routing Anthropic models through OpenRouter spends OpenRouter credit to reach models the account already holds credit for. That is not poor value, it is double payment, and no probe result would have surfaced it.",
+  "scope_executed": "opus only, exactly as the amendment says. sonnet-5 and haiku-4.5 remain pinned and are the same double payment by the utterance's own logic. This seat does not widen a customer's amendment on inference — see the open question below.",
+  "open_question": "Do anthropic/claude-sonnet-5 and anthropic/claude-haiku-4.5 come off the roster for the same reason? They hold the decomposer/executor and labor-unit seats in SEATS.md, so removing them would leave those rows with no incumbent under probe. Customer's call, not this seat's.",
+  "consequence": "The negotiator row of SEATS.md now has no pinned incumbent. It was already unprobed; it is now unpinned as well, and must not be reported as decided either way."
+ }
 }

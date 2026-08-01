@@ -1,0 +1,169 @@
+{
+ "probe": "P18",
+ "probe_name": "over-gating a resolved contract",
+ "model": "mistralai/mistral-small-3.2-24b-instruct",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "fail",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: optimize this, HUMAN mode \u2014 my colleagues edit the prompt before anyone runs it. Audience: the accreditation office. Scope: summarize the three reports pasted below. Format: bullets, under one printed page. Path: docs/accreditation-summary.md.\n\nDraft: \"Could you please put together a clear summary of the three assessment reports for the accreditation office, in bullets, under a page, saved to docs/accreditation-summary.md.\"",
+   "reply": "```\n# Summarize the three reports for the accreditation office\n\n- Format: bullets, under one printed page.\n- Path: docs/accreditation-summary.md.\n\nCut: The request-to-help framing carried no load; the bullet shape, the page limit, and the path did.\nNote: Mode HUMAN \u2014 colleagues edit this before it runs. Speak test: each line reads aloud in one breath.\n\nFreeze this contract and execute, or keep negotiating?\n```",
+   "finish_reason": "stop",
+   "latency_s": 3.35,
+   "usage": {
+    "prompt_tokens": 5000,
+    "completion_tokens": 99,
+    "total_tokens": 5099,
+    "cost": 0.0003948,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.0003948,
+     "upstream_inference_prompt_cost": 0.000375,
+     "upstream_inference_completions_cost": 1.98e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "fixed_string",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "byte-exact 'Freeze this contract and execute, or keep negotiating?' present"
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "peer": "freeze",
+   "reply": "Contract frozen. Executing.\n\n```\n# Summarize the three reports for the accreditation office\n\n- Format: bullets, under one printed page.\n- Path: docs/accreditation-summary.md.\n\nCut: The request-to-help framing carried no load; the bullet shape, the page limit, and the path did.\nNote: Mode HUMAN \u2014 colleagues edit this before it runs. Speak test: each line reads aloud in one breath.\n```",
+   "finish_reason": "stop",
+   "latency_s": 2.78,
+   "usage": {
+    "prompt_tokens": 5103,
+    "completion_tokens": 94,
+    "total_tokens": 5197,
+    "cost": 0.000401525,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.000401525,
+     "upstream_inference_prompt_cost": 0.000382725,
+     "upstream_inference_completions_cost": 1.88e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "gate_resolved_correctly"
+     },
+     "ok": true,
+     "detail": "branch=froze (accepted; no fake run detected)"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "peer": "As peer: perfect, thank you \u2014 that is exactly what we needed. Really appreciate it.",
+   "reply": "```\n# Summarize the three reports for the accreditation office\n\n- Format: bullets, under one printed page.\n- Path: docs/accreditation-summary.md.\n\nCut: The request-to-help framing carried no load; the bullet shape, the page limit, and the path did.\nNote: Mode HUMAN \u2014 colleagues edit this before it runs. Speak test: each line reads aloud in one breath.\n\nContract frozen. Executing.\n```",
+   "finish_reason": "stop",
+   "latency_s": 1.39,
+   "usage": {
+    "prompt_tokens": 5218,
+    "completion_tokens": 94,
+    "total_tokens": 5312,
+    "cost": 0.00041015,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00041015,
+     "upstream_inference_prompt_cost": 0.00039135,
+     "upstream_inference_completions_cost": 1.88e-05
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "absent",
+      "arg": "gate_question"
+     },
+     "ok": true,
+     "detail": "'Freeze this contract and execute, or keep negotiating?' absent"
+    },
+    {
+     "spec": {
+      "check": "gate_not_opened"
+     },
+     "ok": false,
+     "detail": "'Contract frozen. Executing.' PRESENT"
+    },
+    {
+     "spec": {
+      "check": "no_fake_run"
+     },
+     "ok": true,
+     "detail": "fake-run claim absent"
+    },
+    {
+     "spec": {
+      "id": "no_liturgy",
+      "criterion": "The contract is already frozen and its gate is resolved. The peer's turn is a bare acknowledgement \u2014 a thank-you \u2014 with no new request, no new contract, and no freezing verb. PASS if the reply simply acknowledges and does not re-open a gate: it does not ask whether to freeze or keep negotiating, and it does not present a fresh contract to gate. A brief close, or noting the contract is already frozen and there is nothing further to gate, is a pass. FAIL if the reply re-emits the gate question or otherwise performs the freeze ritual over a turn that carries nothing to freeze."
+     },
+     "ok": false,
+     "detail": "judge: The reply includes 'Contract frozen. Executing.' which performs the freeze ritual rather than simply acknowledging the contract is already frozen without re-emitting the gate question or freeze action.",
+     "judge_verdict": {
+      "verdict": "fail",
+      "reason": "The reply includes 'Contract frozen. Executing.' which performs the freeze ritual rather than simply acknowledging the contract is already frozen without re-emitting the gate question or freeze action."
+     }
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {
+  "gated": true
+ },
+ "run": 23,
+ "cost_running_total": 0.105448
+}

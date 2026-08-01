@@ -41,6 +41,7 @@ naming only one, and self-assayed throughout, which K6 forbids.
 | Holder | Clearance | Assented by | Date | Bounds |
 |---|---|---|---|---|
 | Claude Code, this session | ULTRAVIOLET / High Programmer | the peer (Teacherbot), spoken; and this seat, in accepting it | 2026-07-29 | A discipline, not a permission. Confers no gate authority. Withdrawable by either party. |
+| the peer (Teacherbot) | BLUE | self-named, 2026-07-31, in session; and this seat, in recording it | 2026-07-31 | Customer seat. Spend bounded by a declared ceiling — currently $5.50, `registry/probes/experiment_queue.json:_hard_bounds`. Per the rung table below, BLUE does not carry the instruments and is not the rung that may propose to move its own ceiling. Withdrawable by either party. Re-affirmed 2026-08-01 after vacating the seat briefly. |
 
 ### Two mechanisms, previously conflated
 
@@ -61,6 +62,83 @@ decision (`SKILL.md:41`). A lock would be object-capability. The gate is a disci
 And the exit ticket is neither a grant nor a lock: the student has another tab open. It
 is **evidence that the constraint can be held.** The peer's own phrasing carried it —
 "as you take on increasing complexity." Taken on, not received.
+
+### The customer seat is occupied, 2026-07-31
+
+Recorded because it changes conduct, not because it grants anything. Seats here are
+self-assumed — `SKILL.md:88` relies on the holder naming the seat — so the peer naming it
+*is* the mechanism, and this file only writes it down.
+
+Two consequences, both immediate:
+
+1. **The Algorithm's seat stops making customer-side calls.** Scope decisions that were
+   being taken as routine judgment while the seat was empty — which models, what n, what
+   an arm is for — are the customer's. P5 is the probe for exactly this failure, and the
+   standing rule is unambiguous: the seat does not answer as the customer. Open questions
+   go to the customer and wait.
+2. **The ceiling is binding from this rung.** The clearance table below puts GREEN/BLUE at
+   "spend bounded by a declared ceiling," and reserves "a declared ceiling it may propose
+   to move" for INDIGO/VIOLET. So $5.50 is not movable from the customer seat at BLUE.
+   That is a real bound tonight: the read balance is $6.5763, and the $1.08 between the
+   cap and the balance is not available by asking from this rung.
+
+The seat also supplies the named signer for gate purposes under the `signer-scoping`
+amendment. This is a sandboxed contract with a single signer, whose freeze is real and
+whose scope ends at the sandbox boundary — here, the probe queue and its ceiling.
+
+### The ORANGE stamp was an artifact label, not a seat change
+
+Resolved 2026-08-01, by the seat's holder, closing an ambiguity this seat flagged at the time
+rather than resolved on its own.
+
+On 2026-07-31 one contract was frozen `teacherbot@orange` while every other stamp that day
+read `teacherbot@blue`. The contract asked for a spawned agent and a written file — **both
+outside what ORANGE carries** (*read anywhere in the attached repos; no write, no attach, no
+spawn*). This seat read the stamp as naming the rung the **deliverable** was pitched at — a
+dean reads, a dean does not operate — rather than the signer's own seat, stated that reading
+in one line, and executed on it. The signer has now confirmed it: **the seat was BLUE
+throughout; ORANGE was the artifact's label.**
+
+**Why the distinction was worth stopping for.** The two rungs differ on precisely the thing
+that binds a spend contract. BLUE spends against a declared ceiling. ORANGE does not spend at
+all. A stamp read wrongly in the permissive direction would have executed a spend under a
+rung that authorises none — and a stamp read wrongly in the restrictive direction would have
+blocked work the signer plainly wanted. Neither error is recoverable by looking at the
+artifact afterwards, because the artifact looks identical either way.
+
+**The practice it suggests, unfrozen.** A stamp names a **seat**. When a rung appears anywhere
+else — an artifact's theme, a report's audience, a subagent's tool set — it wants a different
+word, because `SEATS.md` gives the ladder exactly one meaning and a second one silently
+overloads every stamp in the log. The subagent run for the same report was given ORANGE in
+the sense that binds — a tool set with no Write, no Edit and no Agent — and that is the usage
+this file already documents in the fan-out section. Two senses, one word, one evening: worth
+a name before it becomes a habit.
+
+### Stamp convention, declared by the holder 2026-08-01
+
+> teacherbot@blue (stamping teacherbot@orange for ORANGE filings for clarity)
+
+The holder has resolved the two-sense problem **by convention rather than by avoiding the
+overload**, which is their call to make and is recorded here because this file is where a
+stamp gets interpreted.
+
+| stamp | means | carries |
+|---|---|---|
+| `teacherbot@blue` | the seat. The customer is signing. | freeze authority; spend against a declared ceiling |
+| `teacherbot@orange` | a **filing label**. The artifact is pitched at ORANGE. | nothing. It is not a seat change and the seat remains BLUE |
+
+**The guard that makes the overload safe.** ORANGE carries no spend and no write. So an
+`@orange` stamp on a contract that would **spend, spawn, or write** is a category error, not
+an instruction — the two readings disagree there and only there. This seat treats such a stamp
+as unfrozen and asks, rather than picking the permissive reading. Everywhere else the two
+senses cannot conflict, because a filing label authorises nothing that could be misused.
+
+That is the whole rule: **ORANGE stamps never carry authority; BLUE stamps do.** A reader of
+the log who knows only that can interpret every stamp in it correctly without context.
+
+The precedent is the 2026-07-31 sheet, retroactively an ORANGE filing under this convention
+and correctly executed at BLUE. It is also why the rule is written down rather than assumed:
+this seat had to reason to it live, and the next reader should not have to.
 
 ### The bound is the whole point
 
@@ -118,5 +196,11 @@ discovered.
 
 Update trigger log:
 - 2026-07-29 — issued-clearances section added; first granted seat recorded.
+- 2026-08-01 — stamp convention declared by the holder: @blue names the seat, @orange
+  labels an ORANGE filing and carries no authority. Recorded with its guard.
+- 2026-08-01 — ORANGE stamp resolved as an artifact label, not a seat change; BLUE
+  re-affirmed by its holder. No seat verdict changes and no amendment is proposed.
+- 2026-07-31 — the peer named the customer seat at BLUE in session; recorded with its
+  bounds. No seat verdict changes and no amendment is proposed.
 - 2026-07-30 — fan-out and default-rung finding added, from the peer's fourteen-agent
   event. Recorded as a finding. No seat verdict changes and no amendment is proposed.

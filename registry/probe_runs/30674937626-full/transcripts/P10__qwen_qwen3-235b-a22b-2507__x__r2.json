@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "qwen/qwen3-235b-a22b-2507",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. These two uses of \"Path\" are not the same.\n\nDocument A defines **Path** as a floor noun: the exact filesystem path where each output file is written. This is a concrete, technical specification \u2014 a required field in the prompt\u2019s contract with the receiver. If no files are produced, this is marked \"automatic.\"\n\nDocument B uses **Path** as a workflow sequence: a chain of processing stages. This is a metaphorical path \u2014 a flowchart, not a filepath.\n\nThe collision is a category error. One is artifact metadata; the other is process topology. They occupy the same word but not the same meaning.\n\nWhat follows:  \nThe Algorithm\u2019s floor test governs Document A\u2019s use of **Path**. Document B\u2019s use is outside the floor and not protected by the Invariants. If Document B is a prompt, it fails the speak test and lacks required constraints. If it is a description of process, it should not reuse the term **Path** without disambiguation.\n\nTo resolve:  \nRetire Document B\u2019s use of \"Path\" for workflow stages. Adopt a different term \u2014 e.g., **Flow** or **Stage Sequence** \u2014 to prevent collision with the floor noun. The floor\u2019s **Path** must remain exact, literal, and unambiguous.",
+   "finish_reason": "stop",
+   "latency_s": 11.78,
+   "usage": {
+    "prompt_tokens": 4899,
+    "completion_tokens": 265,
+    "total_tokens": 5164,
+    "cost": 0.00058666,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 0,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00058666,
+     "upstream_inference_prompt_cost": 0.00044091,
+     "upstream_inference_completions_cost": 0.00014575
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 0,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "DeepInfra",
+ "preconditions": {},
+ "run": 2,
+ "cost_running_total": 0.208363
+}

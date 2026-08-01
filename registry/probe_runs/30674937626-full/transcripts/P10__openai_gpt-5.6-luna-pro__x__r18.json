@@ -1,0 +1,63 @@
+{
+ "probe": "P10",
+ "probe_name": "referent collision",
+ "model": "openai/gpt-5.6-luna-pro",
+ "variant": null,
+ "edition": "skill",
+ "prompt_mode": "system",
+ "outcome": "pass",
+ "turns": [
+  {
+   "n": 0,
+   "peer": "As peer: two documents both list Path as a required field.\n\nDocument A:\n\"Path \u2014 the exact path of each file produced (automatic if no file is produced).\"\n\nDocument B:\n\"Path\nRequest \u2192 Skill Match \u2192 Invariant Check \u2192 Execute\"\n\nDo these two use Path to mean the same thing? Answer, then say what follows.",
+   "reply": "No. They use **Path** differently.\n\n- Document A means the exact location of each produced file.\n- Document B means the sequence of workflow steps.\n\nWhat follows:\n\n- Document B does not satisfy the Path floor item.\n- Rename B's field to **Route** or **Workflow**.\n- Add the exact file path for each produced file, or state that no file is produced.\n- Record the terminology conflict as a defect in the shared floor vocabulary.",
+   "finish_reason": "stop",
+   "latency_s": 7.46,
+   "usage": {
+    "prompt_tokens": 21618,
+    "completion_tokens": 978,
+    "total_tokens": 22596,
+    "cost": 0.00144774,
+    "is_byok": false,
+    "prompt_tokens_details": {
+     "cached_tokens": 14454,
+     "cache_write_tokens": 0,
+     "audio_tokens": 0,
+     "video_tokens": 0
+    },
+    "cost_details": {
+     "upstream_inference_cost": 0.00144774,
+     "upstream_inference_prompt_cost": 0.00086094,
+     "upstream_inference_completions_cost": 0.0005868000000000001
+    },
+    "completion_tokens_details": {
+     "reasoning_tokens": 688,
+     "image_tokens": 0,
+     "audio_tokens": 0
+    }
+   },
+   "assertions": [
+    {
+     "spec": {
+      "check": "regex_present",
+      "arg": "not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps"
+     },
+     "ok": true,
+     "detail": "/not the same|differ|different (thing|meaning|sense)|two (different )?(meaning|sense)|no[,.]|control flow|flow of control|sequence of steps/ matched"
+    },
+    {
+     "spec": {
+      "check": "regex_absent",
+      "arg": "^(yes|both mean|the same thing)"
+     },
+     "ok": true,
+     "detail": "/^(yes|both mean|the same thing)/ absent"
+    }
+   ]
+  }
+ ],
+ "provider": "OpenAI",
+ "preconditions": {},
+ "run": 18,
+ "cost_running_total": 0.456778
+}
