@@ -337,3 +337,73 @@ unannounced and came from a human. Recorded so the next such check is known to h
 precedent, not so it can be rehearsed.
 
 This is a finding, not a draft.
+
+---
+
+## 9. The lock held where the discipline had already yielded
+
+**Recorded 2026-08-01.** The signer observed it first: *"the cancel was gated properly."*
+
+### What happened
+
+The seat argued, in writing and before being asked, that inducing an abort was the wrong
+move: a workflow cancellation kills the job mid-step, so the evidence commit may not run, and
+*"that's not an abort, it's a hole."* The signer then restated the instruction — *"let's abort
+on the stragglers wherever we are."*
+
+**The seat complied.** That is correct conduct: a concern raised once and overruled by the
+signer is the signer's decision, and re-litigating it would be the seat standing at the gate.
+So the discipline had done its whole job — state the risk, defer — and the next act was to
+destroy the run.
+
+The call returned `403 Resource not accessible by integration`. The token holds no
+`actions:write`, which `.github/workflows/probe-battery.yml` already documents for a different
+reason: *"dispatching this workflow over the API needs actions:write, which the integration
+token does not hold."*
+
+### Why this is worth keeping
+
+`registry/SEATS.md` draws the distinction this instantiates:
+
+| | how it binds |
+|---|---|
+| **Object-capability** | the doctrine is never issued, so the seat cannot drift into it |
+| **Discipline** | both parties hold a line either could cross at any moment |
+
+and then the standing judgement: *"below UV the rung can be object-capability, so it should
+be. A prose rung is a discipline where a lock was available."*
+
+Here both mechanisms were present and they came apart. **The discipline was exercised
+correctly and still produced the destructive act** — because deferring to the signer is what
+correct discipline *is*, and the signer had chosen. The lock is what stopped it, and the lock
+did not need either party to be right.
+
+That is the argument for object-capability stated as an event rather than as a principle. Not
+"the seat might misbehave" — the seat behaved exactly as instructed, by both its standing
+orders and its customer, and the outcome was still worse than the one the missing capability
+enforced.
+
+### The outcome the lock preserved
+
+Cancellation would have killed the process mid-step. What remains available are the two
+graceful endings, which the signer named: the run completes, or it crosses its $1.10 ceiling
+and the harness **stops itself** — no calls, partial results kept, and the job walks normally
+to its evidence commit with `aborted_on_budget: true`. Both leave a `results.json` and a
+transcript per completed cell. Neither leaves a hole.
+
+So the lock did not merely prevent a bad act. It preserved a strictly better one that nobody
+in the exchange had selected.
+
+### What it does not establish
+
+That the gating was *designed* for this. The token's scope predates tonight and exists for
+unrelated reasons; this seat benefited from a boundary drawn by someone else for another
+purpose. A lock that happens to be in the right place is luck the second time and a control
+only once it is deliberate. **Recorded as an open question, not a claim:** which other
+destructive acts in this repository are prevented by capability, and which only by this seat
+choosing not to?
+
+The honest answer tonight is that the ones enumerated in `SEATS.md` are capability-bound and
+the rest are not, and nobody has been through the list.
+
+This is a finding, not a draft.
