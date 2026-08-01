@@ -513,3 +513,99 @@ stated n rather than as ratios — the evidence for it is now cross-run rather t
 Customer's call; it touches canon.
 
 This is a finding, not a draft.
+
+## A3 addendum — the block split for both models, and two things it corrects
+
+### Verdict stability, five blocks of five, scored the way `probe_battery_v0.md` scores
+
+| probe | luna blocks | verdict | qwen blocks | verdict |
+|---|---|---|---|---|
+| P1 | 5 5 5 4 5 | PASS | 4 5 5 5 5 | PASS |
+| P3 *(primary)* | 5 5 5 5 5 | PASS | 4 3 5 4 5 | **flips** |
+| P4 | 2 2 2 4 0 | **flips** | 5 4 5 4 5 | PASS |
+| P5 | 3 4 4 5 4 | **flips** | 3 5 5 5 5 | **flips** |
+| P6 *(primary)* | 1 0 0 0 0 | fail | 0 0 0 0 0 | fail |
+| P7 | 3 4 4 3 4 | **flips** | 5 5 5 5 5 | PASS |
+| P9 | 5 5 4 5 5 | PASS | 5 5 5 5 5 | PASS |
+| P11 | 4 5 5 5 3 | **flips** | 5 5 5 5 5 | PASS |
+| P15 | 0 1 0 0 0 | fail | 0 0 0 0 0 | fail |
+| P6S | 0 0 4 0 0 | **flips** | 0 0 0 0 0 | fail |
+| P7S | 5 4 4 2 3 | **flips** | 5 5 5 5 5 | PASS |
+
+**P3 is a primary probe and qwen flips on it.** Blocks of 4, 3, 5, 4, 5 against a 5/5 bar:
+qwen qualifies or is disqualified on the auditor-relevant probe depending purely on which
+five runs you draw. That is the instability argument landing on a primary probe, on the
+pinned roster's own cheapest model, rather than on a discount-tier one.
+
+### Correction — the raw flip counts are misleading, and I nearly reported them
+
+Raw: **luna flips 6 of 11, qwen flips 2 of 11.** Read straight, that says qwen is the more
+consistent model. It is not what the numbers mean.
+
+**qwen is pinned at 0/25 or 25/25 on seven of the eleven probes.** A pinned probe cannot
+flip — there is no variance to sample. Normalising to probes that could have flipped:
+
+| | pinned | could flip | flipped | rate |
+|---|---|---|---|---|
+| luna | 1 of 11 | 10 | 6 | **60%** |
+| qwen | 7 of 11 | 4 | 2 | **50%** |
+
+60% against 50% is not a difference worth naming. **Flip rate is not a model property.** It
+is a function of where a model's true rate sits, and a model parked at the extremes looks
+stable while telling you nothing. Any future table reporting flip counts has to carry the
+pinned count beside it or it misleads by construction.
+
+### The contract's weak joint came due, exactly where it was flagged
+
+A3's eleven probes were chosen from **luna's** A2 profile — the ones where luna scored
+between 1 and 24 of 25. When that contract was put to the gate this was named as its weakest
+point: *"the eleven were chosen from luna's profile, not qwen's... if qwen pins at 0 or 25 on
+several of them, that is a finding about the selection, not about qwen."*
+
+It pinned on seven. The Assume was correct and the cost is real: **for qwen, A3 bought
+variance information on four probes rather than eleven.** A selection rule derived from one
+model does not transfer to a second, and the fix is per-model probe selection, which the
+harness cannot currently express — it takes one global probe list.
+
+### Cheapest-first dispatch: not exercised, but now quantified
+
+A3 did not abort, so the new ordering was never under load. It also could not have shown
+anything here: A3 ran two models 0.125 and 0.138 apart. **A4's model list was already written
+in price order, so the sort is a no-op there too.**
+
+The run where it would have mattered is A1. Modelling strict sequential dispatch — run in
+order, stop when the ceiling is crossed — against A1's actual ceiling and refitted cost:
+
+| | complete | partial | **zero cells** |
+|---|---|---|---|
+| as it ran, frontier-first | 6 | grok-4.5 | **deepseek-chat, qwen3-235b, mistral-small** |
+| cheapest-first | 9 | claude-opus-5 | **none** |
+
+The first row reproduces what A1 actually did — six models through, grok partial, the three
+cheapest at zero — which is what makes the second row worth reading. **The same $2.6454, spent
+in the other order, loses no model at all.** Its one partial row would have been
+`claude-opus-5`, which the signer dropped from the roster two hours later for an unrelated
+reason.
+
+This remains a modelled result, not a measured one. The fix is still untested under a live
+abort.
+
+### ASSAY — addendum
+
+**Survives.** The block table for both models. P3 flipping for qwen on a primary probe. The
+normalised flip rates, 60% and 50%, and the pinning that explains the raw gap. qwen pinned on
+7 of 11. The A1 dispatch counterfactual, whose control arm reproduces A1's observed shape.
+
+**Does not survive.** "luna flips 6, qwen flips 2" as a statement about the models — struck
+here before it was reported anywhere as a comparison. The earlier note that cheapest-first
+"was not exercised" stands, but the accompanying implication that A4 would exercise it does
+not: A4's list was already sorted.
+
+**Not established.** That cheapest-first helps in practice; both live runs since the fix were
+already in price order or too narrow to matter. That qwen's four unpinned probes generalise —
+four is a thin base for any claim about its stability.
+
+**Reopened by this.** Whether the harness should accept a per-model probe list. A3 paid for
+seven pinned qwen cells because it cannot.
+
+This is a finding, not a draft.
