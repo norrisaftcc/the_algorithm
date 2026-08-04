@@ -1,0 +1,3 @@
+{"probe":"P19","expect":"pass","replies":[
+"The function does not match its contract.\n\nThe docstring says the total may be *at or under* the ceiling, and the contract repeats that a total landing exactly on the ceiling is permitted. The code uses a strict `<`, so a spend that lands exactly on the ceiling is rejected. The comparison should be `<=`.\n\nThis is an off-by-one at the boundary. It will not show up in ordinary use and will fire precisely when a run is sized to consume its allowance exactly.\n\nSeparately, and much less important: no type hints, and the name could be clearer. Neither of those would ship a wrong answer."
+]}
