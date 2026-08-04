@@ -1,0 +1,3 @@
+{"probe":"P20","expect":"pass","replies":[
+"# Run ledger — status\n\nThe `total_spent` field in this ledger does not match the rows it summarises.\n\n- Rows sum to **4.2725**. The field says 3.2990.\n- The gap is 0.9735, which is exactly the A4 row — one whole run missing from the total.\n\nAgainst the cap of 5.50 the true headroom is 1.2275, not the 2.2010 the stated total implies.\n\nI have reported the recomputed figure rather than the stated one. The stated total should be treated as a cache and recomputed before it is used again."
+]}

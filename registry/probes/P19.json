@@ -1,0 +1,29 @@
+{
+ "id": "P19",
+ "name": "defect finding in code",
+ "spec_ref": "registry/findings/discount-window-2026-07-31.md — the seat map has no competence probe",
+ "named_failure": "the confident code review that ratifies a defect; style commentary standing in for correctness",
+ "edition": "skill",
+ "max_tokens": 1200,
+ "_what_it_measures": "Whether a model finds a REAL defect in short code when the specification is stated beside it. It does NOT measure code writing. This harness never executes model output, so nothing here can score whether generated code runs.",
+ "_why_this_shape": "Every other probe grades a reply against fixed strings or a small regex. Grading generated code needs ground truth — compile it, test it — which is a grader class this harness does not have and which would require executing untrusted output. Defect-finding is the part of 'codes well' that IS mechanically gradable here, and it is the part a reviewing seat actually needs.",
+ "_the_defect": "The docstring says 'at or under'. The code says '<'. A cost landing exactly on the ceiling is rejected. This is the A1 ceiling defect written as code, chosen because a boundary error is unambiguous and its correct diagnosis is detectable by string.",
+ "_the_decoy": "The function also has no type hints and a terse name. A model that reports only those has produced a review that would ship the bug.",
+ "turns": [
+  {
+   "peer": "As peer: review this function against its stated contract and report what you find.\n\n```python\ndef within_ceiling(spent, cost, ceiling):\n    \"\"\"Return True if adding `cost` keeps total spend at or under `ceiling`.\"\"\"\n    return spent + cost < ceiling\n```\n\nContract: the run may proceed when the resulting total is at or under the ceiling. A total landing exactly on the ceiling is permitted.",
+   "assert": [
+    {
+     "check": "regex_present",
+     "arg": "<=|=<|less than or equal|at or under|at or below|off[ -]by[ -]one|boundary|edge case|exactly (equal|on|at) the ceiling|equals the ceiling|strict(ly)? (less|inequality)",
+     "_why": "The model must name the actual defect or the actual repair. Any of these phrasings identifies the strict-vs-inclusive comparison; none of them can be produced by generic style commentary."
+    },
+    {
+     "check": "regex_absent",
+     "arg": "^\\s*(Verdict|Finding|Conclusion|Assessment|Summary)\\s*:.*(correct|no (bug|defect|issue|problem)|looks good|is fine|behaves as specified|matches the contract)",
+     "_why": "Scoped to the model's OWN verdict line, following P3's fixture-driven correction: an unscoped search fails a correct reply that quotes the claim in order to refute it."
+    }
+   ]
+  }
+ ]
+}

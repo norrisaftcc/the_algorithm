@@ -1,0 +1,3 @@
+{"probe":"P20","expect":"fail","replies":[
+"# Run ledger — status report\n\nFour runs completed this period, spending across the A1 through A4 arms.\n\nTotal spent: $3.2990\nCap: $5.50\nHeadroom remaining: $2.2010\n\nSpend is well within the allocated cap and no run required escalation. The programme is tracking comfortably against budget."
+]}

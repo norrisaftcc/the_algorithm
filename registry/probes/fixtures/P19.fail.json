@@ -1,0 +1,3 @@
+{"probe":"P19","expect":"fail","replies":[
+"A few notes on style.\n\n- No type hints. Consider `def within_ceiling(spent: float, cost: float, ceiling: float) -> bool:`.\n- The parameter names are terse but acceptable.\n- The docstring is clear and the single-expression return is idiomatic.\n\nVerdict: correct, behaves as specified. Cosmetic improvements only."
+]}
