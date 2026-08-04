@@ -1,0 +1,100 @@
+== canon loaded from SKILL.md ==
+  gate_question      'Freeze this contract and execute, or keep negotiating?'
+  frozen_executing   'Contract frozen. Executing.'
+  failed_reopened    'Failed on [item]. Contract reopened.'
+  cut_nothing        'Cut: nothing.'
+  assay_close        'This is a finding, not a draft.'
+  floor nouns        Audience, Scope, Format, Path
+
+== dispatch order, cheapest first ==
+  qwen/qwen3-235b-a22b-2507                      0.125
+
+== balance: 20.0000 granted, 18.8069 used, 1.1931 remaining ==
+
+== battery: 1 models x 3 probes x n=25, budget $0.25 ==
+workers: 6
+
+FAIL P14        qwen/qwen3-235b-a22b-2507              r3 b  $0.0060  [1/75, ~18m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r1 b  $0.0062  [2/75, ~10m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r4 a  $0.0087  [3/75, ~7m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r2 a  $0.0089  [4/75, ~5m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r0 a  $0.0092  [5/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r5 b  $0.0095  [6/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r6 a  $0.0164  [7/75, ~6m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r8 a  $0.0167  [8/75, ~5m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r10 a  $0.0169  [9/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r11 b  $0.0172  [10/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r7 b  $0.0191  [11/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r9 b  $0.0198  [12/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r14 a  $0.0223  [13/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r12 a  $0.0255  [14/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r13 b  $0.0258  [15/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r16 a  $0.0279  [16/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r17 b  $0.0298  [17/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r15 b  $0.0300  [18/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r18 a  $0.0336  [19/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r19 b  $0.0344  [20/75, ~4m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r20 a  $0.0352  [21/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r21 b  $0.0365  [22/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r23 b  $0.0368  [23/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r22 a  $0.0387  [24/75, ~3m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r0 -  $0.0409  [25/75, ~3m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r1 -  $0.0426  [26/75, ~3m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r2 -  $0.0445  [27/75, ~3m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r3 -  $0.0457  [28/75, ~3m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r4 -  $0.0473  [29/75, ~3m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r5 -  $0.0498  [30/75, ~3m left]
+FAIL P14        qwen/qwen3-235b-a22b-2507              r24 a  $0.0515  [31/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r6 -  $0.0517  [32/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r7 -  $0.0532  [33/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r8 -  $0.0548  [34/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r9 -  $0.0549  [35/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r10 -  $0.0579  [36/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r11 -  $0.0628  [37/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r13 -  $0.0630  [38/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r15 -  $0.0636  [39/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r12 -  $0.0637  [40/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r14 -  $0.0643  [41/75, ~2m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r16 -  $0.0669  [42/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r18 -  $0.0722  [43/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r20 -  $0.0724  [44/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r17 -  $0.0730  [45/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r19 -  $0.0736  [46/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r21 -  $0.0737  [47/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r22 -  $0.0768  [48/75, ~1m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r2 -  $0.0807  [49/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r23 -  $0.0813  [50/75, ~1m left]
+OK   P17        qwen/qwen3-235b-a22b-2507              r24 -  $0.0819  [51/75, ~1m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r0 -  $0.0826  [52/75, ~1m left]
+FAIL P18        qwen/qwen3-235b-a22b-2507              r1 -  $0.0832  [53/75, ~1m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r3 -  $0.0872  [54/75, ~1m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r5 -  $0.0901  [55/75, ~1m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r4 -  $0.0907  [56/75, ~1m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r6 -  $0.0914  [57/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r7 -  $0.0920  [58/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r8 -  $0.0926  [59/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r10 -  $0.0951  [60/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r9 -  $0.0967  [61/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r11 -  $0.1001  [62/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r13 -  $0.1007  [63/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r12 -  $0.1013  [64/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r14 -  $0.1019  [65/75, ~0m left]
+FAIL P18        qwen/qwen3-235b-a22b-2507              r15 -  $0.1054  [66/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r16 -  $0.1080  [67/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r17 -  $0.1095  [68/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r18 -  $0.1096  [69/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r19 -  $0.1098  [70/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r20 -  $0.1113  [71/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r21 -  $0.1163  [72/75, ~0m left]
+OK   P18        qwen/qwen3-235b-a22b-2507              r22 -  $0.1164  [73/75, ~0m left]
+FAIL P18        qwen/qwen3-235b-a22b-2507              r23 -  $0.1175  [74/75, ~0m left]
+FAIL P18        qwen/qwen3-235b-a22b-2507              r24 -  $0.1176  [75/75, ~0m left]
+
+== results matrix — pass/fail/error/truncated/na ==
+model                      P14            P17            P18          
+qwen/qwen3-235b-a22b-2507  0/25/0/0/0     25/0/0/0/0     21/4/0/0/0   
+
+unrun classes (error, truncated, n/a-precondition) are not failures (K6): a cell carrying any of them cannot claim a threshold.
+
+measured spend: $0.1176 of $0.25 ceiling
+evidence: results
